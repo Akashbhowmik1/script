@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Roblox Scripts </title>
+    <title>Roblox Scripts Showcase</title>
     <!-- Google Fonts with preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -189,6 +189,8 @@
         .overlay-content button:nth-child(3) { transition-delay: 0.3s; }
         .overlay-content a:nth-child(4),
         .overlay-content button:nth-child(4) { transition-delay: 0.4s; }
+        .overlay-content a:nth-child(5),
+        .overlay-content button:nth-child(5) { transition-delay: 0.5s; }
 
         .filter-bar {
             display: flex;
@@ -449,8 +451,6 @@
             margin-bottom: clamp(15px, 2vw, 25px);
             transition: background 0.3s, transform 0.3s;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            min~~
-
             min-height: 48px;
             touch-action: manipulation;
         }
@@ -721,19 +721,40 @@
                 <i class="fab fa-discord"></i> Discord
             </a>
             <button id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
-            <a href="#contact" aria-label="Contact us">Contact Us</a>
-            <a href="#about" aria-label="About us">About</a>
+            <button id="contactBtn" aria-label="Contact us">Contact Us</button>
+            <button id="aboutBtn" aria-label="About us">About</button>
         </div>
     </div>
 
     <!-- Modal for displaying script details -->
     <div id="scriptModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()" aria-label="Close modal">✕</button>
+            <button class="close-btn" onclick="closeModal('scriptModal')" aria-label="Close modal">✕</button>
             <h2 id="modalTitle"></h2>
             <p id="modalGame"></p>
             <p id="modalDescription"></p>
             <pre><code id="modalCode" class="lua"></code></pre>
+        </div>
+    </div>
+
+    <!-- Modal for About section -->
+    <div id="aboutModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('aboutModal')" aria-label="Close modal">✕</button>
+            <h2>About Us</h2>
+            <p>We are a passionate team of script developers dedicated to enhancing the Roblox gaming experience. With a deep love for coding and gaming, we create innovative, reliable, and user-friendly scripts for popular Roblox games like Blox Fruits, Adopt Me, and more. Our mission is to empower players with tools that make gameplay more exciting and rewarding. Join our growing community on YouTube and Discord to stay updated on the latest scripts, share feedback, and connect with fellow Roblox enthusiasts!</p>
+        </div>
+    </div>
+
+    <!-- Modal for Contact Us -->
+    <div id="contactModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal('contactModal')" aria-label="Close modal">✕</button>
+            <h2>Contact Us</h2>
+            <p>Reach out to us for support, inquiries, or collaboration opportunities:</p>
+            <p><strong>Email:</strong> <a href="mailto:subrajit908@gmail.com">subrajit908@gmail.com</a></p>
+            <p><strong>Email:</strong> <a href="mailto:bhowmikakash829@gmail.com">bhowmikakash829@gmail.com</a></p>
+            <p>Interested in promoting your Roblox content or scripts? Feel free to email us to discuss partnership opportunities!</p>
         </div>
     </div>
 
@@ -1006,6 +1027,9 @@ print("Pet Simulator 99 Auto Pet Loaded")
             overlayMenu.setAttribute('aria-hidden', (!isOpen).toString());
             if (isOpen) {
                 overlayMenu.focus();
+            } else {
+                // Navigate to home page (reload for simplicity)
+                window.location.reload();
             }
         });
 
@@ -1016,6 +1040,7 @@ print("Pet Simulator 99 Auto Pet Loaded")
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 overlayMenu.setAttribute('aria-hidden', 'true');
+                window.location.reload();
             }
         });
 
@@ -1036,15 +1061,81 @@ print("Pet Simulator 99 Auto Pet Loaded")
             }
         });
 
-        // Close overlay and modal on Escape key
+        // Close overlay and modals on Escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 overlayMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 overlayMenu.setAttribute('aria-hidden', 'true');
-                closeModal();
+                closeModal('scriptModal');
+                closeModal('aboutModal');
+                closeModal('contactModal');
+                window.location.reload();
             }
+        });
+
+        // Function to close modals
+        const closeModal = (modalId) => {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.style.display = 'none';
+                modal.setAttribute('aria-hidden', 'true');
+            }
+        };
+
+        // About modal toggle
+        const aboutBtn = document.getElementById('aboutBtn');
+        const aboutModal = document.getElementById('aboutModal');
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'flex';
+            aboutModal.setAttribute('aria-hidden', 'false');
+            aboutModal.focus();
+            overlayMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            overlayMenu.setAttribute('aria-hidden', 'true');
+        });
+
+        // Contact modal toggle
+        const contactBtn = document.getElementById('contactBtn');
+        const contactModal = document.getElementById('contactModal');
+        contactBtn.addEventListener('click', () => {
+            contactModal.style.display = 'flex';
+            contactModal.setAttribute('aria-hidden', 'false');
+            contactModal.focus();
+            overlayMenu.classList.remove('active');
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+            overlayMenu.setAttribute('aria-hidden', 'true');
+        });
+
+        // Modal click to close
+        [scriptModal, aboutModal, contactModal].forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+        });
+
+        // Focus trap for modals
+        [scriptModal, aboutModal, contactModal].forEach(modal => {
+            modal.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const focusableElements = modal.querySelectorAll('button, a, [tabindex="0"]');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
         });
 
         // Pagination
@@ -1134,7 +1225,7 @@ print("Pet Simulator 99 Auto Pet Loaded")
             const modalGame = document.getElementById('modalGame');
             const modalDescription = document.getElementById('modalDescription');
             const modalCode = document.getElementById('modalCode');
-            const modalContent = document.querySelector('.modal-content');
+            const modalContent = document.querySelector('#scriptModal .modal-content');
 
             if (!script || !modal || !modalTitle || !modalGame || !modalDescription || !modalCode || !modalContent) {
                 console.error('Script or modal elements not found.');
@@ -1169,15 +1260,6 @@ print("Pet Simulator 99 Auto Pet Loaded")
             modal.setAttribute('aria-hidden', 'false');
             modal.focus();
             hljs.highlightElement(modalCode);
-        };
-
-        // Function to close the modal
-        const closeModal = () => {
-            const modal = document.getElementById('scriptModal');
-            if (modal) {
-                modal.style.display = 'none';
-                modal.setAttribute('aria-hidden', 'true');
-            }
         };
 
         // Function to filter and sort scripts
@@ -1242,28 +1324,6 @@ print("Pet Simulator 99 Auto Pet Loaded")
             nextPage.addEventListener('click', () => {
                 currentPage++;
                 filterScripts();
-            });
-
-            scriptModal.addEventListener('click', (e) => {
-                if (e.target === scriptModal) {
-                    closeModal();
-                }
-            });
-
-            scriptModal.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    const focusableElements = scriptModal.querySelectorAll('button, [tabindex="0"]');
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-
-                    if (e.shiftKey && document.activeElement === firstElement) {
-                        e.preventDefault();
-                        lastElement.focus();
-                    } else if (!e.shiftKey && document.activeElement === lastElement) {
-                        e.preventDefault();
-                        firstElement.focus();
-                    }
-                }
             });
         };
 
