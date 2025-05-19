@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roblox Scripts Showcase</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fira+Code&display=swap" rel="stylesheet">
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai-sublime.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
+    <style>
+        body {
+    font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1e1e2f 0%, #2a2a3f 100%);
+    color: #e6e6fa;
+    line-height: 2;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    background-attachment: fixed;
+}
+
+.container {
+    max-width: 1600px; /* Wider container for a grander layout */
+    margin: 0 auto;
+    padding: 50px 30px; /* Increased padding */
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #5ab0ff; /* Brighter blue for more impact */
+    font-size: 4em; /* Larger title */
+    margin-bottom: 50px;
+    text-shadow: 0 0 20px rgba(90, 176, 255, 0.8), 0 0 30px rgba(90, 176, 255, 0.5);
+    letter-spacing: 1.5px;
+    font-weight: 700;
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Wider gap */
+    flex-wrap: wrap;
+    margin: 40px 0;
+    background: rgba(45, 45, 68, 0.4); /* Slightly more opaque glassmorphism */
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px); /* Glassmorphism effect */
+    border: 1px solid rgba(90, 176, 255, 0.2);
+}
+
+#searchInput, #gameFilter {
+    padding: 18px; /* Larger padding */
+    font-size: 20px; /* Larger font */
+    border: 2px solid rgba(90, 176, 255, 0.4);
+    border-radius: 12px;
+    background: rgba(45, 45, 68, 0.5);
+    color: #e6e6fa;
+    width: 100%;
+    max-width: 400px; /* Wider inputs */
+    transition: all 0.4s ease;
+    box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+#searchInput:focus, #gameFilter:focus {
+    outline: none;
+    background: rgba(58, 58, 92, 0.6);
+    border-color: #5ab0ff;
+    box-shadow: 0 0 15px rgba(90, 176, 255, 0.7);
+    transform: scale(1.02);
+}
+
+.scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); /* Larger cards */
+    gap: 40px; /* More spacious grid */
+    padding: 30px 0;
+}
+
+.script-card {
+    background: linear-gradient(145deg, #2a2a3f 0%, #3c3c5c 100%);
+    border-radius: 16px; /* Softer corners */
+    padding: 30px; /* More padding */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(90, 176, 255, 0.2);
+}
+
+.script-card:hover {
+    transform: translateY(-12px) scale(1.03); /* More pronounced lift */
+    box-shadow: 0 12px 30px rgba(90, 176, 255, 0.6);
+}
+
+.script-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px; /* Thicker accent */
+    background: linear-gradient(to right, #5ab0ff, #8ccbff);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.script-card:hover::before {
+    opacity: 1;
+}
+
+.script-card h3 {
+    margin: 0 0 20px;
+    color: #5ab0ff;
+    font-size: 1.8em; /* Larger title */
+    letter-spacing: 0.8px;
+    font-weight: 600;
+}
+
+.script-card p {
+    margin: 0 0 20px;
+    font-size: 1.1em; /* Larger text */
+    color: #c0c0d8;
+    line-height: 1.8;
+}
+
+.script-card button {
+    background: linear-gradient(90deg, #5ab0ff, #8ccbff);
+    color: white;
+    border: none;
+    padding: 14px 24px; /* Larger button */
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    transition: background 0.4s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.script-card button:hover {
+    background: linear-gradient(90deg, #4a90e2, #7ab0ff);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(90, 176, 255, 0.7);
+}
+
+#noResults {
+    text-align: center;
+    display: none;
+    color: #a0a0b8;
+    font-size: 1.6em; /* Larger text */
+    margin: 40px 0;
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85); /* Darker overlay */
+    z-index: 2000; /* Higher z-index */
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #2a2a3f 0%, #3c3c5c 100%);
+    border-radius: 20px; /* Larger corners */
+    max-width: 1000px; /* Wider modal */
+    width: 92%;
+    max-height: 90vh; /* Taller modal */
+    overflow-y: auto;
+    padding: 40px; /* More padding */
+    box-shadow: 0 0 40px rgba(90, 176, 255, 0.5);
+    position: relative;
+    animation: slideIn 0.5s ease-out;
+    border: 1px solid rgba(90, 176, 255, 0.3);
+}
+
+.modal-content h2 {
+    color: #5ab0ff;
+    margin: 0 0 25px;
+    font-size: 2.5em; /* Larger title */
+    text-shadow: 0 0 12px rgba(90, 176, 255, 0.4);
+    font-weight: 700;
+}
+
+.modal-content p {
+    color: #c0c0d8;
+    margin: 0 0 25px;
+    font-size: 1.2em; /* Larger text */
+    line-height: 1.9;
+}
+
+.modal-content pre {
+    background: #1e1e2f;
+    padding: 25px;
+    border-radius: 12px;
+    overflow-x: auto;
+    font-size: 1.1em; /* Larger code */
+    box-shadow: inset 0 3px 12px rgba(0, 0, 0, 0.4);
+}
+
+.modal-content code {
+    font-family: 'Fira Code', 'Consolas', monospace;
+}
+
+.close-btn {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    background: linear-gradient(90deg, #ff6666, #ff8888);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px; /* Larger button */
+    height: 48px;
+    cursor: pointer;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s, transform 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.close-btn:hover {
+    background: linear-gradient(90deg, #e05555, #ee7777);
+    transform: rotate(180deg); /* More dramatic rotation */
+}
+
+.loading {
+    text-align: center;
+    color: #5ab0ff;
+    font-size: 1.4em;
+    padding: 25px;
+    animation: pulse 1.5s infinite;
+}
+
+.copy-btn {
+    background: linear-gradient(90deg, #5ab0ff, #8ccbff);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    transition: background 0.4s, transform 0.3s;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.copy-btn:hover {
+    background: linear-gradient(90deg, #4a90e2, #7ab0ff);
+    transform: translateY(-3px);
+}
+
+.copy-btn:focus {
+    outline: none;
+    box-shadow: 0 0 15px rgba(90, 176, 255, 0.7);
+}
+
+@media (max-width: 1024px) {
+    .container {
+        padding: 30px 15px;
+    }
+    .filter-bar {
+        gap: 15px;
+        padding: 15px;
+    }
+    #searchInput, #gameFilter {
+        max-width: 350px;
+        font-size: 18px;
+    }
+    .scripts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    .modal-content {
+        width: 95%;
+        padding: 30px;
+    }
+    h1 {
+        font-size: 3.5em;
+    }
+}
+
+@media (max-width: 768px) {
+    .filter-bar {
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+    #searchInput, #gameFilter {
+        max-width: 100%;
+        font-size: 16px;
+    }
+    .scripts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    .modal-content {
+        padding: 20px;
+    }
+    h1 {
+        font-size: 3em;
+    }
+}
+
+@media (max-width: 480px) {
+    .script-card {
+        padding: 20px;
+    }
+    .script-card h3 {
+        font-size: 1.6em;
+    }
+    .script-card button {
+        padding: 12px 16px;
+        font-size: 1em;
+    }
+    .modal-content h2 {
+        font-size: 2em;
+    }
+    .modal-content p {
+        font-size: 1.1em;
+    }
+    .modal-content pre {
+        font-size: 1em;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(-70px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 15px rgba(90, 176, 255, 0.6), 0 0 25px rgba(90, 176, 255, 0.3); }
+    to { text-shadow: 0 0 25px rgba(90, 176, 255, 0.8), 0 0 35px rgba(90, 176, 255, 0.5); }
+}
+
+@keyframes pulse {
+    0% { opacity: 0.5; }
+    50% { opacity: 1; }
+    100% { opacity: 0.5; }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Roblox Scripts Showcase</h1>
+        <div class="filter-bar">
+            <input type="text" id="searchInput" placeholder="Search scripts (e.g., Blox Fruit Script)">
+            <select id="gameFilter">
+                <option value="">All Games</option>
+                <option value="Blox Fruits">Blox Fruits</option>
+                <option value="Adopt Me">Adopt Me</option>
+                <option value="Brookhaven">Brookhaven</option>
+                <option value="Arsenal">Arsenal</option>
+                <option value="Tower of Hell">Tower of Hell</option>
+                <option value="Jailbreak">Jailbreak</option>
+                <option value="Murder Mystery 2">Murder Mystery 2</option>
+                <option value="Phantom Forces">Phantom Forces</option>
+                <option value="Anime Fighting Simulator">Anime Fighting Simulator</option>
+                <option value="Pet Simulator X">Pet Simulator X</option>
+                <option value="Dead Rails">Dead Rails</option>
+                <option value="Blue Lock Rivals">Blue Lock Rivals</option>
+                <option value="Arise Crossover">Arise Crossover</option>
+                <option value="Doors">Doors</option>
+                <option value="Fish">Fish</option>
+                <option value="Forsaken">Forsaken</option>
+                <option value="Tower Defense Simulator">Tower Defense Simulator</option>
+                <option value="The Strongest Battlegrounds">The Strongest Battlegrounds</option>
+                <option value="Fisch">Fisch</option>
+                <option value="Jujutsu Shenanigans">Jujutsu Shenanigans</option>
+                <option value="Realistic Street Soccer">Realistic Street Soccer</option>
+                <option value="Bubble Gum Simulator">Bubble Gum Simulator</option>
+                <option value="Anime Vanguards">Anime Vanguards</option>
+                <option value="Anime Rangers X">Anime Rangers X</option>
+                <option value="Attack on Titan Revolution">Attack on Titan Revolution</option>
+                <option value="Blade Ball">Blade Ball</option>
+                <option value="Pet Simulator 99">Pet Simulator 99</option>
+            </select>
+        </div>
+        <div id="noResults">No scripts found.</div>
+        <div class="scripts-grid" id="scriptsGrid"></div>
+    </div>
+
+    <!-- Modal for displaying script details -->
+    <div id="scriptModal" class="modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <h2 id="modalTitle"></h2>
+            <p id="modalGame"></p>
+            <p id="modalDescription"></p>
+            <pre><code id="modalCode" class="lua"></code></pre>
+        </div>
+    </div>
+
+    <script>
+      // Initialize highlight.js
+document.addEventListener('DOMContentLoaded', () => {
+    hljs.highlightAll();
+});
+
+// Sample script data with categories
+const scripts = [
+    {
+        name: "Blox Fruit Auto Farm",
+        game: "Blox Fruits",
+        category: "Adventure",
+        description: "A script for Blox Fruits with auto-farm and stats boost.",
+        code: `-- Blox Fruits Auto Farm Script
+print("Blox Fruit Auto Farm Loaded")
+local player = game.Players.LocalPlayer
+-- Add your script code here`
+    },
+    {
+        name: "Adopt Me Pet Collector",
+        game: "Adopt Me",
+        category: "Simulation",
+        description: "A script for Adopt Me with pet auto-collect.",
+        code: `-- Adopt Me Pet Collector Script
+print("Adopt Me Pet Collector Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Brookhaven Money Hack",
+        game: "Brookhaven",
+        category: "Roleplay",
+        description: "A script for Brookhaven to boost in-game currency.",
+        code: `-- Brookhaven Money Hack Script
+print("Brookhaven Money Hack Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Dead Rails Resource Collector",
+        game: "Dead Rails",
+        category: "Adventure",
+        description: "A script for Dead Rails to automate resource gathering.",
+        code: `-- Dead Rails Resource Collector Script
+print("Dead Rails Resource Collector Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Blue Lock Rivals Skill Boost",
+        game: "Blue Lock Rivals",
+        category: "Sports",
+        description: "A script for Blue Lock Rivals to enhance player skills.",
+        code: `-- Blue Lock Rivals Skill Boost Script
+print("Blue Lock Rivals Skill Boost Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Arise Crossover Auto Quest",
+        game: "Arise Crossover",
+        category: "Adventure",
+        description: "A script for Arise Crossover to automate quest completion.",
+        code: `-- Arise Crossover Auto Quest Script
+print("Arise Crossover Auto Quest Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Doors Speedrun Hack",
+        game: "Doors",
+        category: "Horror",
+        description: "A script for Doors to speed up navigation through levels.",
+        code: `-- Doors Speedrun Hack Script
+print("Doors Speedrun Hack Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Fish Auto Catch",
+        game: "Fish",
+        category: "Simulation",
+        description: "A script for Fish to automate catching fish.",
+        code: `-- Fish Auto Catch Script
+print("Fish Auto Catch Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Forsaken Auto Battle",
+        game: "Forsaken",
+        category: "Action",
+        description: "A script for Forsaken to automate combat sequences.",
+        code: `-- Forsaken Auto Battle Script
+print("Forsaken Auto Battle Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Tower Defense Simulator Auto Wave",
+        game: "Tower Defense Simulator",
+        category: "Strategy",
+        description: "A script for Tower Defense Simulator to automate wave defense.",
+        code: `-- Tower Defense Simulator Auto Wave Script
+print("Tower Defense Simulator Auto Wave Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "The Strongest Battlegrounds Combo Hack",
+        game: "The Strongest Battlegrounds",
+        category: "Fighting",
+        description: "A script for The Strongest Battlegrounds to optimize combat combos.",
+        code: `-- The Strongest Battlegrounds Combo Hack Script
+print("The Strongest Battlegrounds Combo Hack Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Fisch Resource Farm",
+        game: "Fisch",
+        category: "Simulation",
+        description: "A script for Fisch to automate resource collection.",
+        code: `-- Fisch Resource Farm Script
+print("Fisch Resource Farm Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Jujutsu Shenanigans Auto Skill",
+        game: "Jujutsu Shenanigans",
+        category: "Fighting",
+        description: "A script for Jujutsu Shenanigans to automate skill usage.",
+        code: `-- Jujutsu Shenanigans Auto Skill Script
+print("Jujutsu Shenanigans Auto Skill Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Realistic Street Soccer Trick Boost",
+        game: "Realistic Street Soccer",
+        category: "Sports",
+        description: "A script for Realistic Street Soccer to enhance trick performance.",
+        code: `-- Realistic Street Soccer Trick Boost Script
+print("Realistic Street Soccer Trick Boost Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Bubble Gum Simulator Auto Bubble",
+        game: "Bubble Gum Simulator",
+        category: "Simulation",
+        description: "A script for Bubble Gum Simulator to automate bubble collection.",
+        code: `-- Bubble Gum Simulator Auto Bubble Script
+print("Bubble Gum Simulator Auto Bubble Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Anime Vanguards Auto Mission",
+        game: "Anime Vanguards",
+        category: "Adventure",
+        description: "A script for Anime Vanguards to automate mission completion.",
+        code: `-- Anime Vanguards Auto Mission Script
+print("Anime Vanguards Auto Mission Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Anime Rangers X Auto Grind",
+        game: "Anime Rangers X",
+        category: "Adventure",
+        description: "A script for Anime Rangers X to automate grinding tasks.",
+        code: `-- Anime Rangers X Auto Grind Script
+print("Anime Rangers X Auto Grind Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Attack on Titan Revolution Titan Slayer",
+        game: "Attack on Titan Revolution",
+        category: "Action",
+        description: "A script for Attack on Titan Revolution to optimize titan slaying.",
+        code: `-- Attack on Titan Revolution Titan Slayer Script
+print("Attack on Titan Revolution Titan Slayer Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Blade Ball Auto Dodge",
+        game: "Blade Ball",
+        category: "Sports",
+        description: "A script for Blade Ball to automate dodging mechanics.",
+        code: `-- Blade Ball Auto Dodge Script
+print("Blade Ball Auto Dodge Loaded")
+-- Add your script code here`
+    },
+    {
+        name: "Pet Simulator 99 Auto Pet",
+        game: "Pet Simulator 99",
+        category: "Simulation",
+        description: "A script for Pet Simulator 99 to automate pet collection.",
+        code: `-- Pet Simulator 99 Auto Pet Script
+print("Pet Simulator 99 Auto Pet Loaded")
+-- Add your script code here`
+    },
+];
+
+// Utility function to debounce input events
+const debounce = (func, delay) => {
+    let timeoutId;
+    return (...args) => {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(null, args), delay);
+    };
+};
+
+// Function to create a script card
+const createScriptCard = (script) => {
+    const scriptCard = document.createElement('div');
+    scriptCard.className = 'script-card';
+    scriptCard.setAttribute('role', 'article');
+    scriptCard.innerHTML = `
+        <h3>${script.name}</h3>
+        <p><strong>Game:</strong> ${script.game}</p>
+        <p><strong>Category:</strong> ${script.category}</p>
+        <p>${script.description}</p>
+        <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}">View Code</button>
+    `;
+    return scriptCard;
+};
+
+// Function to display scripts with loading state
+const displayScripts = (scriptsToShow) => {
+    const scriptsGrid = document.getElementById('scriptsGrid');
+    const noResults = document.getElementById('noResults');
+
+    if (!scriptsGrid || !noResults) {
+        console.error('Required DOM elements not found.');
+        return;
+    }
+
+    // Add loading state
+    scriptsGrid.style.opacity = '0.5';
+    scriptsGrid.innerHTML = '<div class="loading">Loading scripts...</div>';
+
+    // Simulate async operation (e.g., fetching data)
+    setTimeout(() => {
+        scriptsGrid.innerHTML = '';
+        scriptsGrid.style.opacity = '1';
+
+        if (scriptsToShow.length === 0) {
+            noResults.style.display = 'block';
+            return;
+        }
+
+        noResults.style.display = 'none';
+        const fragment = document.createDocumentFragment();
+        scriptsToShow.forEach(script => {
+            fragment.appendChild(createScriptCard(script));
+        });
+        scriptsGrid.appendChild(fragment);
+    }, 300); // Short delay for loading effect
+};
+
+// Function to show script code in modal
+const showCode = (scriptName) => {
+    const script = scripts.find(s => s.name === scriptName);
+    const modal = document.getElementById('scriptModal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalGame = document.getElementById('modalGame');
+    const modalDescription = document.getElementById('modalDescription');
+    const modalCode = document.getElementById('modalCode');
+    const modalContent = document.querySelector('.modal-content');
+
+    if (!script || !modal || !modalTitle || !modalGame || !modalDescription || !modalCode || !modalContent) {
+        console.error('Script or modal elements not found.');
+        alert(`Script '${scriptName}' not found or modal elements missing.`);
+        return;
+    }
+
+    modalTitle.textContent = script.name;
+    modalGame.innerHTML = `<strong>Game:</strong> ${script.game} <br><strong>Category:</strong> ${script.category}`;
+    modalDescription.textContent = script.description;
+    modalCode.textContent = script.code;
+
+    // Add Copy Code button
+    let copyButton = modalContent.querySelector('.copy-btn');
+    if (!copyButton) {
+        copyButton = document.createElement('button');
+        copyButton.className = 'copy-btn';
+        copyButton.textContent = 'Copy Code';
+        copyButton.setAttribute('aria-label', 'Copy script code');
+        modalContent.insertBefore(copyButton, modalContent.querySelector('pre'));
+    }
+
+    copyButton.onclick = () => {
+        navigator.clipboard.writeText(script.code)
+            .then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => { copyButton.textContent = 'Copy Code'; }, 2000);
+            })
+            .catch(err => console.error('Failed to copy code:', err));
+    };
+
+    modal.style.display = 'flex';
+    modal.setAttribute('aria-hidden', 'false');
+    modal.focus();
+    hljs.highlightElement(modalCode);
+};
+
+// Function to close the modal
+const closeModal = () => {
+    const modal = document.getElementById('scriptModal');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.setAttribute('aria-hidden', 'true');
+    }
+};
+
+// Function to filter scripts
+const filterScripts = () => {
+    const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
+    const selectedGame = document.getElementById('gameFilter')?.value || '';
+
+    const filteredScripts = scripts.filter(script => {
+        const matchesSearch = script.name.toLowerCase().includes(searchTerm) ||
+                             script.game.toLowerCase().includes(searchTerm) ||
+                             script.category.toLowerCase().includes(searchTerm);
+        const matchesGame = selectedGame === '' || script.game === selectedGame;
+        return matchesSearch && matchesGame;
+    });
+
+    displayScripts(filteredScripts);
+};
+
+// Initialize event listeners
+const initEventListeners = () => {
+    const searchInput = document.getElementById('searchInput');
+    const gameFilter = document.getElementById('gameFilter');
+    const scriptModal = document.getElementById('scriptModal');
+
+    if (!searchInput || !gameFilter || !scriptModal) {
+        console.error('Required DOM elements for event listeners not found.');
+        return;
+    }
+
+    // Debounced search input
+    const debouncedFilter = debounce(filterScripts, 300);
+    searchInput.addEventListener('input', debouncedFilter);
+    gameFilter.addEventListener('change', filterScripts);
+
+    // Close modal on click outside
+    scriptModal.addEventListener('click', (e) => {
+        if (e.target === scriptModal) {
+            closeModal();
+        }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Keyboard navigation for modal
+    scriptModal.addEventListener('keydown', (e) => {
+        if (e.key === 'Tab') {
+            const focusableElements = scriptModal.querySelectorAll('button, [tabindex="0"]');
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.shiftKey && document.activeElement === firstElement) {
+                e.preventDefault();
+                lastElement.focus();
+            } else if (!e.shiftKey && document.activeElement === lastElement) {
+                e.preventDefault();
+                firstElement.focus();
+            }
+        }
+    });
+};
+
+// Initialize the app
+const init = () => {
+    try {
+        initEventListeners();
+        displayScripts(scripts);
+    } catch (error) {
+        console.error('Initialization failed:', error);
+    }
+};
+
+// Run initialization
+init();
+    </script>
+</body>
+</html>
