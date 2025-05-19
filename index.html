@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Roblox Scripts Showcase</title>
+    <title>Roblox Scripts </title>
     <!-- Google Fonts with preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/monokai-sublime.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
+    <!-- Font Awesome for social media icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
             --primary-color: #5ab0ff;
@@ -22,6 +24,21 @@
             --background-dark: #1e1e2f;
             --background-light: #2a2a3f;
             --card-bg: #3c3c5c;
+            --social-bg: #ff4d4d;
+            --social-hover: #ff6666;
+        }
+
+        [data-theme="light"] {
+            --primary-color: #0057b8;
+            --secondary-color: #4d94ff;
+            --text-color: #1a1a1a;
+            --secondary-text: #4a4a4a;
+            --background-dark: #f0f4f8;
+            --background-light: #e1e7ef;
+            --card-bg: #ffffff;
+            --no-results-color: #666;
+            --social-bg: #d43f3f;
+            --social-hover: #e05555;
         }
 
         * {
@@ -48,15 +65,40 @@
             z-index: 1;
         }
 
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: clamp(20px, 4vw, 40px);
+            flex-wrap: wrap;
+            gap: clamp(10px, 2vw, 20px);
+        }
+
         h1 {
             text-align: center;
             color: var(--primary-color);
             font-size: clamp(2.5em, 6vw, 4em);
-            margin-bottom: clamp(20px, 5vw, 50px);
             text-shadow: 0 0 20px rgba(90, 176, 255, 0.8), 0 0 30px rgba(90, 176, 255, 0.5);
             letter-spacing: 1.5px;
             font-weight: 700;
             animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: clamp(15px, 2vw, 20px);
+            flex-wrap: wrap;
+        }
+
+        #themeToggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: clamp(1.5em, 3vw, 2em);
+            cursor: pointer;
+            min-height: 44px;
+            touch-action: manipulation;
         }
 
         .filter-bar {
@@ -76,7 +118,7 @@
             z-index: 1000;
         }
 
-        #searchInput, #gameFilter {
+        #searchInput, #gameFilter, #categoryFilter, #sortFilter {
             padding: clamp(12px, 2vw, 18px);
             font-size: clamp(16px, 2.5vw, 20px);
             border: 2px solid rgba(90, 176, 255, 0.4);
@@ -84,19 +126,27 @@
             background: rgba(45, 45, 68, 0.5);
             color: var(--text-color);
             width: 100%;
-            max-width: clamp(300px, 45vw, 400px);
+            max-width: clamp(250px, 40vw, 300px);
             transition: all 0.4s ease;
             box-shadow: inset 0 3px 8px rgba(0, 0, 0, 0.3);
             -webkit-appearance: none;
             appearance: none;
         }
 
-        #searchInput:focus, #gameFilter:focus {
+        #searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
             outline: none;
             background: rgba(58, 58, 92, 0.6);
             border-color: var(--primary-color);
             box-shadow: 0 0 15px rgba(90, 176, 255, 0.7);
             transform: scale(1.02);
+        }
+
+        .favorite-toggle {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-color);
+            font-size: clamp(14px, 2vw, 16px);
         }
 
         .scripts-grid {
@@ -153,6 +203,12 @@
             line-height: 1.8;
         }
 
+        .script-card .buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
         .script-card button {
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             color: white;
@@ -164,14 +220,24 @@
             font-weight: 600;
             transition: background 0.4s, transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-            min-height: 48px; /* Touch-friendly size */
+            min-height: 48px;
             touch-action: manipulation;
+        }
+
+        .script-card button.favorite-btn {
+            background: linear-gradient(90deg, #ff4d4d, #ff6666);
+            min-width: 48px;
+            padding: clamp(10px, 2vw, 14px);
         }
 
         .script-card button:hover, .script-card button:focus {
             background: linear-gradient(90deg, #4a90e2, #7ab0ff);
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(90, 176, 255, 0.7);
+        }
+
+        .script-card button.favorite-btn:hover, .script-card button.favorite-btn:focus {
+            background: linear-gradient(90deg, #e04343, #ee5555);
         }
 
         #noResults {
@@ -181,6 +247,37 @@
             font-size: clamp(1.2em, 3vw, 1.6em);
             margin: clamp(20px, 4vw, 40px) 0;
             animation: fadeIn 0.6s ease-in-out;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin: clamp(20px, 4vw, 40px) 0;
+        }
+
+        .pagination button {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: clamp(0.9em, 2vw, 1em);
+            font-weight: 600;
+            min-height: 44px;
+            touch-action: manipulation;
+        }
+
+        .pagination button:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+
+        .pagination span {
+            color: var(--text-color);
+            font-size: clamp(1em, 2vw, 1.1em);
         }
 
         .modal {
@@ -301,6 +398,33 @@
             box-shadow: 0 0 15px rgba(90, 176, 255, 0.7);
         }
 
+        .social-links {
+            display: flex;
+            gap: clamp(10px, 1.5vw, 15px);
+            align-items: center;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(90deg, var(--social-bg), var(--social-hover));
+            color: white;
+            text-decoration: none;
+            padding: clamp(8px, 1.5vw, 10px) clamp(12px, 2vw, 16px);
+            border-radius: 8px;
+            font-size: clamp(0.8em, 1.8vw, 0.9em);
+            font-weight: 600;
+            transition: background 0.4s, transform 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            min-height: 40px;
+        }
+
+        .social-links a:hover, .social-links a:focus {
+            background: linear-gradient(90deg, var(--social-hover), var(--social-bg));
+            transform: translateY(-3px);
+        }
+
         /* Media Queries */
         @media (max-width: 1200px) {
             .container {
@@ -312,13 +436,21 @@
         }
 
         @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .header-right {
+                justify-content: center;
+                width: 100%;
+            }
             .filter-bar {
                 flex-direction: column;
                 align-items: stretch;
                 padding: 15px;
                 top: 0;
             }
-            #searchInput, #gameFilter {
+            #searchInput, #gameFilter, #categoryFilter, #sortFilter {
                 max-width: 100%;
             }
             .scripts-grid {
@@ -331,6 +463,10 @@
             }
             h1 {
                 font-size: clamp(2em, 5vw, 3em);
+            }
+            .social-links {
+                flex-direction: column;
+                align-items: center;
             }
         }
 
@@ -383,6 +519,11 @@
                 font-size: 0.9em;
                 min-height: 44px;
             }
+            .social-links a {
+                padding: 8px 12px;
+                font-size: 0.8em;
+                min-height: 36px;
+            }
         }
 
         @media (min-width: 1920px) {
@@ -417,6 +558,9 @@
                 transform: none;
             }
             .copy-btn:hover, .copy-btn:focus {
+                transform: none;
+            }
+            .social-links a:hover, .social-links a:focus {
                 transform: none;
             }
         }
@@ -466,7 +610,20 @@
 </head>
 <body>
     <div class="container">
-        <h1>Roblox Scripts Showcase</h1>
+        <header>
+            <h1>Roblox Scripts Showcase</h1>
+            <div class="header-right">
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@YourChannelName" target="_blank" aria-label="Visit our YouTube channel">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
+                    <a href="https://discord.gg/YourDiscordInvite" target="_blank" aria-label="Join our Discord server">
+                        <i class="fab fa-discord"></i> Discord
+                    </a>
+                </div>
+                <button id="themeToggle" aria-label="Toggle theme">🌙</button>
+            </div>
+        </header>
         <div class="filter-bar">
             <input type="text" id="searchInput" placeholder="Search scripts (e.g., Blox Fruit Script)" aria-label="Search scripts">
             <select id="gameFilter" aria-label="Filter by game">
@@ -499,9 +656,34 @@
                 <option value="Blade Ball">Blade Ball</option>
                 <option value="Pet Simulator 99">Pet Simulator 99</option>
             </select>
+            <select id="categoryFilter" aria-label="Filter by category">
+                <option value="">All Categories</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Simulation">Simulation</option>
+                <option value="Roleplay">Roleplay</option>
+                <option value="Sports">Sports</option>
+                <option value="Horror">Horror</option>
+                <option value="Action">Action</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Fighting">Fighting</option>
+            </select>
+            <select id="sortFilter" aria-label="Sort scripts">
+                <option value="alphabetical">Alphabetical</option>
+                <option value="popularity">Most Popular</option>
+                <option value="newest">Newest</option>
+            </select>
+            <label class="favorite-toggle">
+                <input type="checkbox" id="showFavorites" aria-label="Show favorite scripts only">
+                Favorites Only
+            </label>
         </div>
         <div id="noResults" role="alert">No scripts found.</div>
         <div class="scripts-grid" id="scriptsGrid"></div>
+        <div class="pagination">
+            <button id="prevPage" disabled aria-label="Previous page">Previous</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage" aria-label="Next page">Next</button>
+        </div>
     </div>
 
     <!-- Modal for displaying script details -->
@@ -521,7 +703,7 @@
             hljs.highlightAll();
         });
 
-        // Sample script data with categories
+        // Sample script data with off
         const scripts = [
             {
                 name: "Blox Fruit Auto Farm",
@@ -531,7 +713,9 @@
                 code: `-- Blox Fruits Auto Farm Script
 print("Blox Fruit Auto Farm Loaded")
 local player = game.Players.LocalPlayer
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 100,
+                dateAdded: "2025-05-01"
             },
             {
                 name: "Adopt Me Pet Collector",
@@ -540,7 +724,9 @@ local player = game.Players.LocalPlayer
                 description: "A script for Adopt Me with pet auto-collect.",
                 code: `-- Adopt Me Pet Collector Script
 print("Adopt Me Pet Collector Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 90,
+                dateAdded: "2025-04-15"
             },
             {
                 name: "Brookhaven Money Hack",
@@ -549,7 +735,9 @@ print("Adopt Me Pet Collector Loaded")
                 description: "A script for Brookhaven to boost in-game currency.",
                 code: `-- Brookhaven Money Hack Script
 print("Brookhaven Money Hack Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 85,
+                dateAdded: "2025-03-20"
             },
             {
                 name: "Dead Rails Resource Collector",
@@ -558,7 +746,9 @@ print("Brookhaven Money Hack Loaded")
                 description: "A script for Dead Rails to automate resource gathering.",
                 code: `-- Dead Rails Resource Collector Script
 print("Dead Rails Resource Collector Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 70,
+                dateAdded: "2025-05-10"
             },
             {
                 name: "Blue Lock Rivals Skill Boost",
@@ -567,7 +757,9 @@ print("Dead Rails Resource Collector Loaded")
                 description: "A script for Blue Lock Rivals to enhance player skills.",
                 code: `-- Blue Lock Rivals Skill Boost Script
 print("Blue Lock Rivals Skill Boost Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 65,
+                dateAdded: "2025-04-25"
             },
             {
                 name: "Arise Crossover Auto Quest",
@@ -576,7 +768,9 @@ print("Blue Lock Rivals Skill Boost Loaded")
                 description: "A script for Arise Crossover to automate quest completion.",
                 code: `-- Arise Crossover Auto Quest Script
 print("Arise Crossover Auto Quest Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 60,
+                dateAdded: "2025-05-05"
             },
             {
                 name: "Doors Speedrun Hack",
@@ -585,7 +779,9 @@ print("Arise Crossover Auto Quest Loaded")
                 description: "A script for Doors to speed up navigation through levels.",
                 code: `-- Doors Speedrun Hack Script
 print("Doors Speedrun Hack Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 75,
+                dateAdded: "2025-04-10"
             },
             {
                 name: "Fish Auto Catch",
@@ -594,7 +790,9 @@ print("Doors Speedrun Hack Loaded")
                 description: "A script for Fish to automate catching fish.",
                 code: `-- Fish Auto Catch Script
 print("Fish Auto Catch Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 55,
+                dateAdded: "2025-03-15"
             },
             {
                 name: "Forsaken Auto Battle",
@@ -603,7 +801,9 @@ print("Fish Auto Catch Loaded")
                 description: "A script for Forsaken to automate combat sequences.",
                 code: `-- Forsaken Auto Battle Script
 print("Forsaken Auto Battle Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 80,
+                dateAdded: "2025-05-12"
             },
             {
                 name: "Tower Defense Simulator Auto Wave",
@@ -612,7 +812,9 @@ print("Forsaken Auto Battle Loaded")
                 description: "A script for Tower Defense Simulator to automate wave defense.",
                 code: `-- Tower Defense Simulator Auto Wave Script
 print("Tower Defense Simulator Auto Wave Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 85,
+                dateAdded: "2025-04-20"
             },
             {
                 name: "The Strongest Battlegrounds Combo Hack",
@@ -621,7 +823,9 @@ print("Tower Defense Simulator Auto Wave Loaded")
                 description: "A script for The Strongest Battlegrounds to optimize combat combos.",
                 code: `-- The Strongest Battlegrounds Combo Hack Script
 print("The Strongest Battlegrounds Combo Hack Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 95,
+                dateAdded: "2025-05-08"
             },
             {
                 name: "Fisch Resource Farm",
@@ -630,7 +834,9 @@ print("The Strongest Battlegrounds Combo Hack Loaded")
                 description: "A script for Fisch to automate resource collection.",
                 code: `-- Fisch Resource Farm Script
 print("Fisch Resource Farm Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 60,
+                dateAdded: "2025-04-05"
             },
             {
                 name: "Jujutsu Shenanigans Auto Skill",
@@ -639,7 +845,9 @@ print("Fisch Resource Farm Loaded")
                 description: "A script for Jujutsu Shenanigans to automate skill usage.",
                 code: `-- Jujutsu Shenanigans Auto Skill Script
 print("Jujutsu Shenanigans Auto Skill Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 70,
+                dateAdded: "2025-05-03"
             },
             {
                 name: "Realistic Street Soccer Trick Boost",
@@ -648,7 +856,9 @@ print("Jujutsu Shenanigans Auto Skill Loaded")
                 description: "A script for Realistic Street Soccer to enhance trick performance.",
                 code: `-- Realistic Street Soccer Trick Boost Script
 print("Realistic Street Soccer Trick Boost Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 65,
+                dateAdded: "2025-04-12"
             },
             {
                 name: "Bubble Gum Simulator Auto Bubble",
@@ -657,7 +867,9 @@ print("Realistic Street Soccer Trick Boost Loaded")
                 description: "A script for Bubble Gum Simulator to automate bubble collection.",
                 code: `-- Bubble Gum Simulator Auto Bubble Script
 print("Bubble Gum Simulator Auto Bubble Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 75,
+                dateAdded: "2025-03-25"
             },
             {
                 name: "Anime Vanguards Auto Mission",
@@ -666,7 +878,9 @@ print("Bubble Gum Simulator Auto Bubble Loaded")
                 description: "A script for Anime Vanguards to automate mission completion.",
                 code: `-- Anime Vanguards Auto Mission Script
 print("Anime Vanguards Auto Mission Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 80,
+                dateAdded: "2025-05-06"
             },
             {
                 name: "Anime Rangers X Auto Grind",
@@ -675,7 +889,9 @@ print("Anime Vanguards Auto Mission Loaded")
                 description: "A script for Anime Rangers X to automate grinding tasks.",
                 code: `-- Anime Rangers X Auto Grind Script
 print("Anime Rangers X Auto Grind Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 70,
+                dateAdded: "2025-04-18"
             },
             {
                 name: "Attack on Titan Revolution Titan Slayer",
@@ -684,7 +900,9 @@ print("Anime Rangers X Auto Grind Loaded")
                 description: "A script for Attack on Titan Revolution to optimize titan slaying.",
                 code: `-- Attack on Titan Revolution Titan Slayer Script
 print("Attack on Titan Revolution Titan Slayer Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 85,
+                dateAdded: "2025-05-09"
             },
             {
                 name: "Blade Ball Auto Dodge",
@@ -693,18 +911,54 @@ print("Attack on Titan Revolution Titan Slayer Loaded")
                 description: "A script for Blade Ball to automate dodging mechanics.",
                 code: `-- Blade Ball Auto Dodge Script
 print("Blade Ball Auto Dodge Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 90,
+                dateAdded: "2025-04-22"
             },
             {
                 name: "Pet Simulator 99 Auto Pet",
                 game: "Pet Simulator 99",
                 category: "Simulation",
-                description: "A script for Pet Simulator 99 to automate pet collection.",
+                description: "osta script for Pet Simulator 99 to automate pet collection.",
                 code: `-- Pet Simulator 99 Auto Pet Script
 print("Pet Simulator 99 Auto Pet Loaded")
--- Add your script code here`
+-- Add your script code here`,
+                popularity: 95,
+                dateAdded: "2025-05-11"
             },
         ];
+
+        // Favorites management
+        let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+        const isFavorite = (scriptName) => favorites.includes(scriptName);
+
+        const toggleFavorite = (scriptName) => {
+            if (isFavorite(scriptName)) {
+                favorites = favorites.filter(name => name !== scriptName);
+            } else {
+                favorites.push(scriptName);
+            }
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            filterScripts();
+        };
+
+        // Theme toggle
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.body.setAttribute('data-theme', currentTheme);
+            themeToggle.textContent = currentTheme === 'light' ? '🌙' : '☀️';
+            localStorage.setItem('theme', currentTheme);
+        });
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
+
+        // Pagination
+        let currentPage = 1;
+        const scriptsPerPage = 10;
 
         // Utility function to debounce input events
         const debounce = (func, delay) => {
@@ -725,7 +979,12 @@ print("Pet Simulator 99 Auto Pet Loaded")
                 <p><strong>Game:</strong> ${script.game}</p>
                 <p><strong>Category:</strong> ${script.category}</p>
                 <p>${script.description}</p>
-                <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}">View Code</button>
+                <div class="buttons">
+                    <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}">View Code</button>
+                    <button class="favorite-btn" onclick="toggleFavorite('${script.name}')" aria-label="${isFavorite(script.name) ? 'Remove from' : 'Add to'} favorites">
+                        ${isFavorite(script.name) ? '❤️' : '🤍'}
+                    </button>
+                </div>
             `;
             return scriptCard;
         };
@@ -734,8 +993,11 @@ print("Pet Simulator 99 Auto Pet Loaded")
         const displayScripts = (scriptsToShow) => {
             const scriptsGrid = document.getElementById('scriptsGrid');
             const noResults = document.getElementById('noResults');
+            const prevPage = document.getElementById('prevPage');
+            const nextPage = document.getElementById('nextPage');
+            const pageInfo = document.getElementById('pageInfo');
 
-            if (!scriptsGrid || !noResults) {
+            if (!scriptsGrid || !noResults || !prevPage || !nextPage || !pageInfo) {
                 console.error('Required DOM elements not found.');
                 return;
             }
@@ -749,15 +1011,27 @@ print("Pet Simulator 99 Auto Pet Loaded")
 
                 if (scriptsToShow.length === 0) {
                     noResults.style.display = 'block';
+                    prevPage.disabled = true;
+                    nextPage.disabled = true;
+                    pageInfo.textContent = 'Page 0 of 0';
                     return;
                 }
 
                 noResults.style.display = 'none';
+                const start = (currentPage - 1) * scriptsPerPage;
+                const end = start + scriptsPerPage;
+                const paginatedScripts = scriptsToShow.slice(start, end);
+
                 const fragment = document.createDocumentFragment();
-                scriptsToShow.forEach(script => {
+                paginatedScripts.forEach(script => {
                     fragment.appendChild(createScriptCard(script));
                 });
                 scriptsGrid.appendChild(fragment);
+
+                const totalPages = Math.ceil(scriptsToShow.length / scriptsPerPage);
+                prevPage.disabled = currentPage === 1;
+                nextPage.disabled = currentPage === totalPages;
+                pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
             }, 300);
         };
 
@@ -815,18 +1089,31 @@ print("Pet Simulator 99 Auto Pet Loaded")
             }
         };
 
-        // Function to filter scripts
+        // Function to filter and sort scripts
         const filterScripts = () => {
             const searchTerm = (document.getElementById('searchInput')?.value || '').toLowerCase();
             const selectedGame = document.getElementById('gameFilter')?.value || '';
+            const selectedCategory = document.getElementById('categoryFilter')?.value || '';
+            const sortBy = document.getElementById('sortFilter')?.value || 'alphabetical';
+            const showFavorites = document.getElementById('showFavorites')?.checked || false;
 
-            const filteredScripts = scripts.filter(script => {
+            let filteredScripts = scripts.filter(script => {
                 const matchesSearch = script.name.toLowerCase().includes(searchTerm) ||
                                      script.game.toLowerCase().includes(searchTerm) ||
                                      script.category.toLowerCase().includes(searchTerm);
                 const matchesGame = selectedGame === '' || script.game === selectedGame;
-                return matchesSearch && matchesGame;
+                const matchesCategory = selectedCategory === '' || script.category === selectedCategory;
+                const matchesFavorites = !showFavorites || isFavorite(script.name);
+                return matchesSearch && matchesGame && matchesCategory && matchesFavorites;
             });
+
+            if (sortBy === 'popularity') {
+                filteredScripts.sort((a, b) => b.popularity - a.popularity);
+            } else if (sortBy === 'newest') {
+                filteredScripts.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
+            } else {
+                filteredScripts.sort((a, b) => a.name.localeCompare(b.name));
+            }
 
             displayScripts(filteredScripts);
         };
@@ -835,9 +1122,14 @@ print("Pet Simulator 99 Auto Pet Loaded")
         const initEventListeners = () => {
             const searchInput = document.getElementById('searchInput');
             const gameFilter = document.getElementById('gameFilter');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const sortFilter = document.getElementById('sortFilter');
+            const showFavorites = document.getElementById('showFavorites');
+            const prevPage = document.getElementById('prevPage');
+            const nextPage = document.getElementById('nextPage');
             const scriptModal = document.getElementById('scriptModal');
 
-            if (!searchInput || !gameFilter || !scriptModal) {
+            if (!searchInput || !gameFilter || !categoryFilter || !sortFilter || !showFavorites || !prevPage || !nextPage || !scriptModal) {
                 console.error('Required DOM elements for event listeners not found.');
                 return;
             }
@@ -845,6 +1137,21 @@ print("Pet Simulator 99 Auto Pet Loaded")
             const debouncedFilter = debounce(filterScripts, 300);
             searchInput.addEventListener('input', debouncedFilter);
             gameFilter.addEventListener('change', filterScripts);
+            categoryFilter.addEventListener('change', filterScripts);
+            sortFilter.addEventListener('change', filterScripts);
+            showFavorites.addEventListener('change', filterScripts);
+
+            prevPage.addEventListener('click', () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    filterScripts();
+                }
+            });
+
+            nextPage.addEventListener('click', () => {
+                currentPage++;
+                filterScripts();
+            });
 
             scriptModal.addEventListener('click', (e) => {
                 if (e.target === scriptModal) {
@@ -879,7 +1186,7 @@ print("Pet Simulator 99 Auto Pet Loaded")
         const init = () => {
             try {
                 initEventListeners();
-                displayScripts(scripts);
+                filterScripts();
             } catch (error) {
                 console.error('Initialization failed:', error);
             }
