@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Roblox Scripts Showcase</title>
+    <title>Roblox Scripts </title>
     <!-- Google Fonts with preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -26,6 +26,7 @@
             --card-bg: #2e2e4a;
             --social-bg: #ff4d4d;
             --social-hover: #ff6666;
+            --overlay-bg: rgba(0, 0, 0, 0.9);
         }
 
         [data-theme="light"] {
@@ -39,6 +40,7 @@
             --no-results-color: #666;
             --social-bg: #d43f3f;
             --social-hover: #e05555;
+            --overlay-bg: rgba(255, 255, 255, 0.9);
         }
 
         * {
@@ -88,19 +90,7 @@
             gap: clamp(20px, 3vw, 30px);
         }
 
-        #themeToggle {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: clamp(1.8em, 3vw, 2.2em);
-            cursor: pointer;
-            min-height: 48px;
-            min-width: 48px;
-            touch-action: manipulation;
-        }
-
         .hamburger {
-            display: none;
             background: none;
             border: none;
             color: var(--text-color);
@@ -109,26 +99,96 @@
             min-height: 48px;
             min-width: 48px;
             touch-action: manipulation;
+            transition: transform 0.3s ease;
         }
 
-        .nav-menu {
+        .hamburger.active {
+            transform: rotate(90deg);
+        }
+
+        .hamburger.active::before {
+            content: '✕';
+        }
+
+        .overlay-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay-bg);
             display: flex;
             align-items: center;
-            gap: clamp(20px, 3vw, 30px);
+            justify-content: center;
+            z-index: 3000;
+            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-y: auto;
         }
 
-        .nav-menu.active {
+        .overlay-menu.active {
+            right: 0;
+        }
+
+        .overlay-content {
             display: flex;
             flex-direction: column;
-            position: absolute;
-            top: 100px;
-            right: 20px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
+            align-items: center;
+            gap: clamp(20px, 4vw, 30px);
+            padding: clamp(30px, 5vw, 50px);
+            max-width: min(90%, 600px);
+            width: 100%;
         }
+
+        .overlay-content a, .overlay-content button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: var(--social-bg);
+            color: white;
+            text-decoration: none;
+            padding: clamp(14px, 2.5vw, 18px) clamp(30px, 5vw, 50px);
+            border-radius: 10px;
+            font-size: clamp(1.1em, 2.5vw, 1.3em);
+            font-weight: 600;
+            width: 100%;
+            max-width: 400px;
+            transition: background 0.3s, transform 0.3s, opacity 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            min-height: 56px;
+            touch-action: manipulation;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .overlay-content #themeToggle {
+            background: var(--primary-color);
+        }
+
+        .overlay-content a:hover, .overlay-content a:focus,
+        .overlay-content button:hover, .overlay-content button:focus {
+            background: var(--social-hover);
+            transform: translateY(-3px);
+        }
+
+        .overlay-content #themeToggle:hover, .overlay-content #themeToggle:focus {
+            background: var(--secondary-color);
+        }
+
+        .overlay-menu.active .overlay-content a,
+        .overlay-menu.active .overlay-content button {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .overlay-content a:nth-child(1),
+        .overlay-content button:nth-child(1) { transition-delay: 0.1s; }
+        .overlay-content a:nth-child(2),
+        .overlay-content button:nth-child(2) { transition-delay: 0.2s; }
+        .overlay-content a:nth-child(3),
+        .overlay-content button:nth-child(3) { transition-delay: 0.3s; }
+        .overlay-content a:nth-child(4),
+        .overlay-content button:nth-child(4) { transition-delay: 0.4s; }
 
         .filter-bar {
             display: flex;
@@ -389,6 +449,8 @@
             margin-bottom: clamp(15px, 2vw, 25px);
             transition: background 0.3s, transform 0.3s;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+            min~~
+
             min-height: 48px;
             touch-action: manipulation;
         }
@@ -396,35 +458,6 @@
         .copy-btn:hover, .copy-btn:focus {
             background: var(--secondary-color);
             transform: translateY(-2px);
-        }
-
-        .social-links {
-            display: flex;
-            gap: clamp(15px, 2vw, 20px);
-            align-items: center;
-        }
-
-        .social-links a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: var(--social-bg);
-            color: white;
-            text-decoration: none;
-            padding: clamp(12px, 2vw, 16px) clamp(40px, 6vw, 60px);
-            border-radius: 10px;
-            font-size: clamp(1em, 2vw, 1.2em);
-            font-weight: 600;
-            transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-height: 52px;
-            min-width: clamp(200px, 30vw, 300px);
-            justify-content: center;
-        }
-
-        .social-links a:hover, .social-links a:focus {
-            background: var(--social-hover);
-            transform: translateY(-3px);
         }
 
         /* Media Queries */
@@ -449,12 +482,6 @@
             .hamburger {
                 display: block;
             }
-            .nav-menu {
-                display: none;
-            }
-            .nav-menu.active {
-                display: flex;
-            }
             .filter-bar {
                 flex-direction: column;
                 align-items: stretch;
@@ -476,16 +503,13 @@
             h1 {
                 font-size: clamp(1.8em, 5vw, 2.5em);
             }
-            .social-links {
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
+            .overlay-content {
+                padding: 20px;
             }
-            .social-links a {
-                width: 100%;
-                max-width: 400px;
-                min-width: 0;
+            .overlay-content a, .overlay-content button {
                 padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 30px);
+                font-size: clamp(1em, 2vw, 1.2em);
+                min-height: 48px;
             }
         }
 
@@ -537,11 +561,6 @@
                 font-size: 0.95em;
                 min-height: 48px;
             }
-            .social-links a {
-                padding: 12px 20px;
-                font-size: 1em;
-                min-height: 48px;
-            }
         }
 
         @media (min-width: 1920px) {
@@ -578,8 +597,12 @@
             .copy-btn:hover, .copy-btn:focus {
                 transform: none;
             }
-            .social-links a:hover, .social-links a:focus {
+            .overlay-menu {
+                transition: none;
+            }
+            .overlay-content a, .overlay-content button {
                 transform: none;
+                opacity: 1;
             }
         }
 
@@ -602,16 +625,19 @@
             #noResults {
                 color: #ccc;
             }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            .overlay-menu {
+                background: #000;
+            }
         }
 
         @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            from { right: -100%; }
+            to { right: 0; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -620,18 +646,7 @@
         <header>
             <h1>Roblox Scripts Showcase</h1>
             <div class="header-right">
-                <button class="hamburger" aria-label="Toggle menu">☰</button>
-                <div class="nav-menu">
-                    <div class="social-links">
-                        <a href="https://www.youtube.com/@YourChannelName" target="_blank" aria-label="Visit our YouTube channel">
-                            <i class="fab fa-youtube"></i> YouTube
-                        </a>
-                        <a href="https://discord.gg/YourDiscordInvite" target="_blank" aria-label="Join our Discord server">
-                            <i class="fab fa-discord"></i> Discord
-                        </a>
-                    </div>
-                    <button id="themeToggle" aria-label="Toggle theme">🌙</button>
-                </div>
+                <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">☰</button>
             </div>
         </header>
         <div class="filter-bar">
@@ -693,6 +708,21 @@
             <button id="prevPage" disabled aria-label="Previous page">Previous</button>
             <span id="pageInfo"></span>
             <button id="nextPage" aria-label="Next page">Next</button>
+        </div>
+    </div>
+
+    <!-- Overlay Menu -->
+    <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
+        <div class="overlay-content">
+            <a href="https://www.youtube.com/@YourChannelName" target="_blank" aria-label="Visit our YouTube channel">
+                <i class="fab fa-youtube"></i> YouTube
+            </a>
+            <a href="https://discord.gg/YourDiscordInvite" target="_blank" aria-label="Join our Discord server">
+                <i class="fab fa-discord"></i> Discord
+            </a>
+            <button id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
+            <a href="#contact" aria-label="Contact us">Contact Us</a>
+            <a href="#about" aria-label="About us">About</a>
         </div>
     </div>
 
@@ -966,17 +996,54 @@ print("Pet Simulator 99 Auto Pet Loaded")
         document.body.setAttribute('data-theme', savedTheme);
         themeToggle.textContent = savedTheme === 'light' ? '🌙' : '☀️';
 
-        // Hamburger menu toggle
+        // Overlay menu toggle
         const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        const overlayMenu = document.getElementById('overlayMenu');
         hamburger.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+            const isOpen = overlayMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen.toString());
+            overlayMenu.setAttribute('aria-hidden', (!isOpen).toString());
+            if (isOpen) {
+                overlayMenu.focus();
+            }
         });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!navMenu.contains(e.target) && !hamburger.contains(e.target)) {
-                navMenu.classList.remove('active');
+        // Close overlay when clicking outside
+        overlayMenu.addEventListener('click', (e) => {
+            if (e.target === overlayMenu) {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        // Focus trap for overlay menu
+        overlayMenu.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusableElements = overlayMenu.querySelectorAll('a, button');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        });
+
+        // Close overlay and modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+                closeModal();
             }
         });
 
@@ -1180,13 +1247,6 @@ print("Pet Simulator 99 Auto Pet Loaded")
             scriptModal.addEventListener('click', (e) => {
                 if (e.target === scriptModal) {
                     closeModal();
-                }
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeModal();
-                    navMenu.classList.remove('active');
                 }
             });
 
