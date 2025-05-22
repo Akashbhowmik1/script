@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Roblox Scripts </title>
+    <title>Roblox Scripts</title>
     <!-- Google Fonts with preload for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -110,21 +110,26 @@
         }
 
         .hamburger {
-            background: none;
-            border: none;
-            color: var(--text-color);
-            font-size: clamp(1.8em, 3vw, 2.2em);
-            cursor: pointer;
-            min-height: 48px;
-            min-width: 48px;
-            touch-action: manipulation;
-            transition: transform 0.3s ease;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
+
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: clamp(1.8em, 3vw, 2.2em);
+    cursor: pointer;
+    min-height: 48px;
+    min-width: 48px;
+    touch-action: manipulation;
+    transition: transform 0.3s ease;
+    position: absolute;           /* ✅ ADDED */
+    top: 20px;                 /* ✅ ADDED */
+    right: 20px;               /* ✅ ADDED */
+    z-index: 999;              /* ✅ ADDED */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 
         .hamburger span {
             width: 30px;
@@ -231,7 +236,7 @@
         .filter-bar {
             display: flex;
             justify-content: center;
-            gap: clamp(15px, 2vw, 20px); /* Reduced gap for mobile */
+            gap: clamp(15px, 2vw, 20px);
             flex-wrap: wrap;
             margin: clamp(20px, 4vw, 40px) 0;
             background: linear-gradient(135deg, rgba(45, 45, 68, 0.5), rgba(30, 30, 50, 0.5));
@@ -240,24 +245,23 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(90, 176, 255, 0.2);
-            /* Removed position: sticky and related properties */
         }
 
         #searchInput, #gameFilter, #categoryFilter, #sortFilter {
-            padding: clamp(12px, 2vw, 16px); /* Adjusted padding for touch */
-            font-size: clamp(14px, 2vw, 16px); /* Slightly smaller font for mobile */
+            padding: clamp(12px, 2vw, 16px);
+            font-size: clamp(14px, 2vw, 16px);
             border: 1px solid rgba(90, 176, 255, 0.4);
             border-radius: 10px;
             background: rgba(45, 45, 68, 0.6);
             color: var(--text-color);
             width: 100%;
-            max-width: clamp(250px, 45vw, 300px); /* Adjusted max-width */
+            max-width: clamp(250px, 45vw, 300px);
             transition: all 0.3s ease;
             box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
             -webkit-appearance: none;
             appearance: none;
-            min-height: 44px; /* Smaller min-height for mobile */
-            touch-action: manipulation; /* Improve touch responsiveness */
+            min-height: 44px;
+            touch-action: manipulation;
         }
 
         #searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
@@ -336,7 +340,7 @@
             font-weight: 600;
             transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            min-height: 44px; /* Adjusted for mobile */
+            min-height: 44px;
             touch-action: manipulation;
         }
 
@@ -368,7 +372,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 15px; /* Adjusted for mobile */
+            gap: 15px;
             margin: clamp(20px, 4vw, 40px) 0;
         }
 
@@ -376,7 +380,7 @@
             background: var(--primary-color);
             color: white;
             border: none;
-            padding: 10px 20px; /* Adjusted for mobile */
+            padding: 10px 20px;
             border-radius: 8px;
             cursor: pointer;
             font-size: clamp(0.9em, 2vw, 1.1em);
@@ -468,7 +472,7 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 44px; /* Adjusted for mobile */
+            width: 44px;
             height: 44px;
             cursor: pointer;
             font-size: clamp(1.1em, 2vw, 1.3em);
@@ -521,6 +525,7 @@
             min-height: 44px;
             touch-action: manipulation;
         }
+        
 
         .copy-btn:hover, .copy-btn:focus {
             background: var(--secondary-color);
@@ -531,7 +536,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Media Queries */
         @media (max-width: 1200px) {
             .container {
                 max-width: 95%;
@@ -558,7 +562,7 @@
             #searchInput, #gameFilter, #categoryFilter, #sortFilter {
                 max-width: 100%;
                 min-height: 48px;
-                font-size: 15px; /* Adjusted for mobile readability */
+                font-size: 15px;
                 padding: 12px;
             }
             .favorite-toggle {
@@ -670,7 +674,6 @@
             }
         }
 
-        /* Reduced motion for accessibility */
         @media (prefers-reduced-motion: reduce) {
             *, *:before, *:after {
                 animation: none !important;
@@ -698,7 +701,6 @@
             }
         }
 
-        /* High contrast mode */
         @media (prefers-contrast: high) {
             body {
                 background: #000;
@@ -734,13 +736,100 @@
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .executor-button {
+  background: linear-gradient(135deg, #000000, #0d6efd); /* Black to Blue */
+  color: #ffffff;
+  border: none;
+  padding: 14px 30px;
+  font-size: 17px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.executor-button::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, #0d6efd55 10%, transparent 70%);
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.4s, transform 0.6s;
+}
+
+.executor-button:hover::before {
+  opacity: 1;
+  transform: rotate(0deg) scale(1.1);
+}
+
+.executor-button:hover {
+  box-shadow: 0 0 20px #0d6efd, 0 0 30px #0d6efd;
+  transform: translateY(-2px);
+}
+
+.executor-button:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 10px #0d6efd;
+}
+.top-center-text {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%; /* Makes it broader — adjust as needed */
+  max-width: 500px; /* Prevents it from getting too wide on large screens */
+  text-align: center;
+  font-size: 26px;
+  font-weight: 600;
+  font-family: 'Segoe UI', sans-serif;
+  color: #00bfff;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 16px 32px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 191, 255, 0.3);
+  backdrop-filter: blur(6px);
+  z-index: 998;
+}
+
+.top-center-text {
+  opacity: 0;
+  animation: fadeInTop 1s forwards;
+}
+
+@keyframes fadeInTop {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+
+
     </style>
 </head>
 <body>
+    <div class="top-center-text">Scripts Hub</div>
+
     <div class="container">
         <header>
-            <h1>Roblox Scripts Showcase</h1>
-            <div class="header-right">
+           
+            <div class="header-right"> 
+                <a href="exexutor.html" target="_blank">
+  <button class="executor-button">Executors</button>
+</a>
+
                 <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -776,9 +865,8 @@
                 <option value="Bubble Gum Simulator">Bubble Gum Simulator</option>
                 <option value="Anime Vanguards">Anime Vanguards</option>
                 <option value="Anime Rangers X">Anime Rangers X</option>
-                <option value="Attack on Titan Revolution">Attack on Titan Revolution</option>
-                <option value="Blade Ball">Blade Ball</option>
-                <option value="Pet Simulator 99">Pet Simulator 99</option>
+                <option value="Attack on Titan RevolutionZ">Attack on Titan RevolutionZ</option>
+                <option value="Grow a Garden">Grow a Garden</option>
             </select>
             <select id="categoryFilter" aria-label="Filter by category">
                 <option value="">All Categories</option>
@@ -790,6 +878,10 @@
                 <option value="Action">Action</option>
                 <option value="Strategy">Strategy</option>
                 <option value="Fighting">Fighting</option>
+                <option value="Parkour">Parkour </option>
+                <option value="Open World">Open World</option>
+
+
             </select>
             <select id="sortFilter" aria-label="Sort scripts">
                 <option value="alphabetical">Alphabetical</option>
@@ -813,10 +905,10 @@
     <!-- Overlay Menu -->
     <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
         <div class="overlay-content">
-            <a href="https://www.youtube.com/@YourChannelName" target="_blank" aria-label="Visit our YouTube channel">
+            <a href="https://www.youtube.com/@ScriptFarmer" target="_blank" aria-label="Visit our YouTube channel">
                 <i class="fab fa-youtube"></i> YouTube
             </a>
-            <a href="https://discord.gg/YourDiscordInvite" target="_blank" aria-label="Join our Discord server">
+            <a href="https://discord.gg/pVhzpNuN" target="_blank" aria-label="Join our Discord server">
                 <i class="fab fa-discord"></i> Discord
             </a>
             <button id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
@@ -863,17 +955,14 @@
             hljs.highlightAll();
         });
 
-        // Sample script data (unchanged)
+        // Sample script data with added Grow a Garden script
         const scripts = [
             {
                 name: "Blox Fruit Auto Farm",
                 game: "Blox Fruits",
                 category: "Adventure",
                 description: "A script for Blox Fruits with auto-farm and stats boost.",
-                code: `-- Blox Fruits Auto Farm Script
-print("Blox Fruit Auto Farm Loaded")
-local player = game.Players.LocalPlayer
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))`,
                 popularity: 100,
                 dateAdded: "2025-05-01"
             },
@@ -882,9 +971,7 @@ local player = game.Players.LocalPlayer
                 game: "Adopt Me",
                 category: "Simulation",
                 description: "A script for Adopt Me with pet auto-collect.",
-                code: `-- Adopt Me Pet Collector Script
-print("Adopt Me Pet Collector Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/JusticeValley/Antarctic-Hub/main/New.lua", true))()`,
                 popularity: 90,
                 dateAdded: "2025-04-15"
             },
@@ -893,9 +980,7 @@ print("Adopt Me Pet Collector Loaded")
                 game: "Brookhaven",
                 category: "Roleplay",
                 description: "A script for Brookhaven to boost in-game currency.",
-                code: `-- Brookhaven Money Hack Script
-print("Brookhaven Money Hack Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Sander-XY-35845"))()`,
                 popularity: 85,
                 dateAdded: "2025-03-20"
             },
@@ -904,9 +989,7 @@ print("Brookhaven Money Hack Loaded")
                 game: "Dead Rails",
                 category: "Adventure",
                 description: "A script for Dead Rails to automate resource gathering.",
-                code: `-- Dead Rails Resource Collector Script
-print("Dead Rails Resource Collector Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ArdyBotzz/NatHub/refs/heads/master/NatHub.lua"))()`,
                 popularity: 70,
                 dateAdded: "2025-05-10"
             },
@@ -915,9 +998,7 @@ print("Dead Rails Resource Collector Loaded")
                 game: "Blue Lock Rivals",
                 category: "Sports",
                 description: "A script for Blue Lock Rivals to enhance player skills.",
-                code: `-- Blue Lock Rivals Skill Boost Script
-print("Blue Lock Rivals Skill Boost Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ultik-max/Isisis/refs/heads/main/Protected_9713416812708883.txt"))()`,
                 popularity: 65,
                 dateAdded: "2025-04-25"
             },
@@ -926,9 +1007,7 @@ print("Blue Lock Rivals Skill Boost Loaded")
                 game: "Arise Crossover",
                 category: "Adventure",
                 description: "A script for Arise Crossover to automate quest completion.",
-                code: `-- Arise Crossover Auto Quest Script
-print("Arise Crossover Auto Quest Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()`,
                 popularity: 60,
                 dateAdded: "2025-05-05"
             },
@@ -937,31 +1016,17 @@ print("Arise Crossover Auto Quest Loaded")
                 game: "Doors",
                 category: "Horror",
                 description: "A script for Doors to speed up navigation through levels.",
-                code: `-- Doors Speedrun Hack Script
-print("Doors Speedrun Hack Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua `,
                 popularity: 75,
                 dateAdded: "2025-04-10"
             },
-            {
-                name: "Fish Auto Catch",
-                game: "Fish",
-                category: "Simulation",
-                description: "A script for Fish to automate catching fish.",
-                code: `-- Fish Auto Catch Script
-print("Fish Auto Catch Loaded")
--- Add your script code here`,
-                popularity: 55,
-                dateAdded: "2025-03-15"
-            },
+           
             {
                 name: "Forsaken Auto Battle",
                 game: "Forsaken",
                 category: "Action",
                 description: "A script for Forsaken to automate combat sequences.",
-                code: `-- Forsaken Auto Battle Script
-print("Forsaken Auto Battle Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/sigmaboy-sigma-boy/sigmaboy-sigma-boy/refs/heads/main/StaminaSettings.ESP.PIDC.raw"))()`,
                 popularity: 80,
                 dateAdded: "2025-05-12"
             },
@@ -970,9 +1035,7 @@ print("Forsaken Auto Battle Loaded")
                 game: "Tower Defense Simulator",
                 category: "Strategy",
                 description: "A script for Tower Defense Simulator to automate wave defense.",
-                code: `-- Tower Defense Simulator Auto Wave Script
-print("Tower Defense Simulator Auto Wave Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
                 popularity: 85,
                 dateAdded: "2025-04-20"
             },
@@ -981,9 +1044,7 @@ print("Tower Defense Simulator Auto Wave Loaded")
                 game: "The Strongest Battlegrounds",
                 category: "Fighting",
                 description: "A script for The Strongest Battlegrounds to optimize combat combos.",
-                code: `-- The Strongest Battlegrounds Combo Hack Script
-print("The Strongest Battlegrounds Combo Hack Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/yes1nt/yes/refs/heads/main/CHAINSAW%20MAN/Chainsaw%20Man%20(Obfuscated).txt"))()`,
                 popularity: 95,
                 dateAdded: "2025-05-08"
             },
@@ -992,9 +1053,7 @@ print("The Strongest Battlegrounds Combo Hack Loaded")
                 game: "Fisch",
                 category: "Simulation",
                 description: "A script for Fisch to automate resource collection.",
-                code: `-- Fisch Resource Farm Script
-print("Fisch Resource Farm Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()`,
                 popularity: 60,
                 dateAdded: "2025-04-05"
             },
@@ -1003,9 +1062,7 @@ print("Fisch Resource Farm Loaded")
                 game: "Jujutsu Shenanigans",
                 category: "Fighting",
                 description: "A script for Jujutsu Shenanigans to automate skill usage.",
-                code: `-- Jujutsu Shenanigans Auto Skill Script
-print("Jujutsu Shenanigans Auto Skill Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
                 popularity: 70,
                 dateAdded: "2025-05-03"
             },
@@ -1014,31 +1071,37 @@ print("Jujutsu Shenanigans Auto Skill Loaded")
                 game: "Realistic Street Soccer",
                 category: "Sports",
                 description: "A script for Realistic Street Soccer to enhance trick performance.",
-                code: `-- Realistic Street Soccer Trick Boost Script
-print("Realistic Street Soccer Trick Boost Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Realistic-Street-Soccer-rayan-s-hub-SOlARA-SUPORT-39402"))()`,
                 popularity: 65,
-                dateAdded: "2025-04-12"
+                dateAdded: "2025-04-12",
             },
             {
                 name: "Bubble Gum Simulator Auto Bubble",
                 game: "Bubble Gum Simulator",
                 category: "Simulation",
-                description: "A script for Bubble Gum Simulator to automate bubble collection.",
-                code: `-- Bubble Gum Simulator Auto Bubble Script
-print("Bubble Gum Simulator Auto Bubble Loaded")
--- Add your script code here`,
+                description: "A script for Bubble Gumcom",
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
+                popularity: 95 ,
+                dateAdded: 2025-4-12 ,
+
+
+                } 
+                ,
+                {
+                name: "Grow a Garden Auto Harvest",
+                game: "Grow a Garden",
+                category : "Simulation",
+                description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
+                code: ` loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))() ` ,
                 popularity: 75,
-                dateAdded: "2025-03-25"
+                dateAdded: "2025-05-15"
             },
             {
                 name: "Anime Vanguards Auto Mission",
                 game: "Anime Vanguards",
                 category: "Adventure",
                 description: "A script for Anime Vanguards to automate mission completion.",
-                code: `-- Anime Vanguards Auto Mission Script
-print("Anime Vanguards Auto Mission Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/godor1010/godor/refs/heads/main/anime_vanguards_'))()`,
                 popularity: 80,
                 dateAdded: "2025-05-06"
             },
@@ -1047,9 +1110,7 @@ print("Anime Vanguards Auto Mission Loaded")
                 game: "Anime Rangers X",
                 category: "Adventure",
                 description: "A script for Anime Rangers X to automate grinding tasks.",
-                code: `-- Anime Rangers X Auto Grind Script
-print("Anime Rangers X Auto Grind Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/yu/refs/heads/main/tu"))();`,
                 popularity: 70,
                 dateAdded: "2025-04-18"
             },
@@ -1058,9 +1119,7 @@ print("Anime Rangers X Auto Grind Loaded")
                 game: "Attack on Titan Revolution",
                 category: "Action",
                 description: "A script for Attack on Titan Revolution to optimize titan slaying.",
-                code: `-- Attack on Titan Revolution Titan Slayer Script
-print("Attack on Titan Revolution Titan Slayer Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/zerunquist/TekkitAotr/refs/heads/main/main"))()`,
                 popularity: 85,
                 dateAdded: "2025-05-09"
             },
@@ -1069,9 +1128,7 @@ print("Attack on Titan Revolution Titan Slayer Loaded")
                 game: "Blade Ball",
                 category: "Sports",
                 description: "A script for Blade Ball to automate dodging mechanics.",
-                code: `-- Blade Ball Auto Dodge Script
-print("Blade Ball Auto Dodge Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotRox1/Trevous-Hub/refs/heads/main/blade-ball.lua"))`,
                 popularity: 90,
                 dateAdded: "2025-04-22"
             },
@@ -1080,13 +1137,86 @@ print("Blade Ball Auto Dodge Loaded")
                 game: "Pet Simulator 99",
                 category: "Simulation",
                 description: "A script for Pet Simulator 99 to automate pet collection.",
-                code: `-- Pet Simulator 99 Auto Pet Script
-print("Pet Simulator 99 Auto Pet Loaded")
--- Add your script code here`,
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/SlamminPig/6FootScripts/main/Scripts/PetSimulator99.lua'))()`,
                 popularity: 95,
                 dateAdded: "2025-05-11"
             },
+             {
+                name: "Arsenal aim bot",
+                game: "Arsenal",
+                category: "Action",
+                description: "A script for Arsenal to  Silent Aimbot Wallbang ",
+                code: ` loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Express-Hub-Free-Universal-GUI-V6-30568"))() `,
+                popularity: 80,
+                dateAdded: "2025-05-11"
+            },
+             {
+                name: "Tower Of Hell speed hack",
+                game: "Tower of Hell",
+                category: "Parkour",
+                description: "A script for Tower Of Hell walk speed jump bost ",
+                code: ` loadstring(game:HttpGet("https://gist.githubusercontent.com/BloxiYT/85f97364b6367baac677e109488c9905/raw/c2972a2b892c4193509ddb2fe1ba3061435e1a8a/gistfile1.txt"))() `,
+                popularity: 80,
+                dateAdded: "2025-05-11",
+            },
+             {
+                name: "Jailbreak Auto Rob ",
+                game: "Jailbreak",
+                category: "Open World",
+                description: "A script for Jailbreak   ",
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/BlitzIsKing/UniversalFarm/main/Loader/Regular'))()`,
+                popularity:90,
+                dateAdded: "2025-05-11",
+            },
+            {
+    name: "Murder Mystery 2 Auto Win",
+    game: "Murder Mystery 2",
+    category: "Action",
+    description: "A script for Murder Mystery 2 to automatically win rounds.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CycleScripts/Official/refs/heads/main/freemium"))()`,
+    popularity: 85,
+    dateAdded: "2025-05-20",
+            },
+            {
+    name: "Phantom Forces Aimbot",
+    game: "Phantom Forces",
+    category: "Action",
+    description: "A script for Phantom Forces to assist with aiming and shooting.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/main/homohack.lua"))()`,
+    popularity: 90,
+    dateAdded: "2025-05-20",  
+},
+       {
+    name: "Anime Fighting Simulator Auto Train",
+    game: "Anime Fighting Simulator",
+    category: "Fighting",
+    description: "A script for Anime Fighting Simulator to automate training and power-ups.",
+    code: `loadstring(game:HttpGet("https://rawscripts.net/raw/DIMENSION-6-Anime-Fighting-Simulator-Data-Roll-back-7000"))()`,
+    popularity: 95,
+    dateAdded: "2025-05-21",
+},
+
+       {
+    name: "Pet Simulator X Auto Farm",
+    game: "Pet Simulator X",
+    category: "Simulation",
+    description: "A script for Pet Simulator X to automate pet collection and farming.",
+    code: `loadstring(game:HttpGet’https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua’)()`,
+    popularity: 90,
+    dateAdded: "2025-05-21",
+},  
+
+
+
+    
+
+            
+
+
+
         ];
+
+        
 
         // Favorites management
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -1198,7 +1328,7 @@ print("Pet Simulator 99 Auto Pet Loaded")
             overlayMenu.setAttribute('aria-hidden', 'true');
         });
 
-        // Contact modal toggle
+        // Contact canopyModal toggle
         const contactBtn = document.getElementById('contactBtn');
         const contactModal = document.getElementById('contactModal');
         contactBtn.addEventListener('click', () => {
@@ -1241,7 +1371,7 @@ print("Pet Simulator 99 Auto Pet Loaded")
 
         // Pagination
         let currentPage = 1;
-        const scriptsPerPage = 10;
+        const scriptsPerPage =40;
 
         // Utility function to debounce input events
         const debounce = (func, delay) => {
@@ -1474,6 +1604,8 @@ print("Pet Simulator 99 Auto Pet Loaded")
 
         // Run initialization
         init();
+
+        
     </script>
 </body>
 </html>
