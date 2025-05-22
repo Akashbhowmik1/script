@@ -1,835 +1,986 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Roblox Scripts</title>
-    <!-- Google Fonts with preload for performance -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <title>Scripts Hub</title>
+    <!-- Poppins Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Highlight.js for syntax highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
-     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2476381655745049"
-     crossorigin="anonymous"></script>
-    <!-- Font Awesome for social media icons -->
+    <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        :root {
-            --primary-color: #3b82f6;
-            --secondary-color: #60a5fa;
-            --text-color: #ffffff;
-            --secondary-text: #d1d5db;
-            --no-results-color: #9ca3af;
-            --background-dark: #111827;
-            --background-light: #1f2937;
-            --card-bg: #1f2937;
-            --social-bg: #ef4444;
-            --social-hover: #f87171;
-            --overlay-bg: rgba(0, 0, 0, 0.95);
-            --email-color: #ef4444;
-        }
+       :root {
+    --primary: #00ffcc;
+    --primary-dark: #00d1aa;
+    --secondary: #ff00ff;
+    --accent: #ffcc00;
+    --dark: #0a0a0a;
+    --light: #ffffff;
+    --glass: rgba(255, 255, 255, 0.1);
+    --glass-hover: rgba(255, 255, 255, 0.15);
+    --glass-dark: rgba(0, 0, 0, 0.4);
+    --status-online: #4ade80;
+    --status-offline: #f87171;
+    --status-maintenance: #fbbf24;
+    --blur: 12px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --glow: 0 0 15px rgba(0, 255, 204, 0.6);
+}
 
-        [data-theme="light"] {
-            --primary-color: #2563eb;
-            --secondary-color: #3b82f6;
-            --text-color: #1f2937;
-            --secondary-text: #4b5563;
-            --background-dark: #f3f4f6;
-            --background-light: #e5e7eb;
-            --card-bg: #ffffff;
-            --no-results-color: #6b7280;
-            --social-bg: #dc2626;
-            --social-hover: #ef4444;
-            --overlay-bg: rgba(255, 255, 255, 0.95);
-            --email-color: #dc2626;
-        }
+html[data-theme="light"] {
+    --primary: #00d1aa;
+    --primary-dark: #00a389;
+    --dark: #f5f5f5;
+    --light: #0a0a0a;
+    --glass: rgba(0, 0, 0, 0.05);
+    --glass-hover: rgba(0, 0, 0, 0.1);
+    --glass-dark: rgba(255, 255, 255, 0.9);
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* Improvement: Added fallback fonts for better compatibility */
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
 
-        body {
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-light) 100%);
-            color: var(--text-color);
-            line-height: 1.8;
-            min-height: 100vh;
-            overflow-x: hidden;
-            font-size: clamp(16px, 2.5vw, 18px);
-            position: relative;
-        }
+body {
+    background-color: var(--dark);
+    color: var(--light);
+    line-height: 1.8;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-size: clamp(16px, 2.5vw, 18px);
+    position: relative;
+}
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.3;
-            z-index: 0;
-        }
+/* Improvement: Scoped touch-action to specific interactive elements */
+button, input[type="button"], input[type="submit"], select {
+    touch-action: manipulation;
+}
 
-        .container {
-            max-width: min(95%, 1400px);
-            margin: 0 auto;
-            padding: clamp(30px, 5vw, 60px) clamp(15px, 3vw, 40px);
-            position: relative;
-            z-index: 1;
-        }
+.bg-animation {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    overflow: hidden;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: clamp(30px, 5vw, 50px);
-            flex-wrap: wrap;
-            gap: clamp(15px, 2vw, 25px);
-        }
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    /* Note: High blur values may impact performance on low-end devices; consider reducing if needed */
+    filter: blur(80px);
+    opacity: 0.4;
+    /* Note: Continuous animation may affect performance; consider pausing when out of viewport */
+    animation: float 20s infinite ease-in-out alternate;
+}
 
-        h1 {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: clamp(2.2em, 5vw, 3.5em);
-            letter-spacing: 1.2px;
-            font-weight: 700;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
+.blob1 {
+    width: 600px;
+    height: 600px;
+    background: var(--primary);
+    top: -300px;
+    right: -200px;
+    animation-delay: 0s;
+}
 
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: clamp(20px, 3vw, 30px);
-        }
+.blob2 {
+    width: 500px;
+    height: 500px;
+    background: var(--secondary);
+    bottom: -250px;
+    left: -150px;
+    animation-delay: -5s;
+}
 
-        .hamburger {
+.blob3 {
+    width: 450px;
+    height: 450px;
+    background: var(--accent);
+    top: 40%;
+    right: 20%;
+    animation-delay: -10s;
+}
 
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.3; }
+    50% { transform: translate(50px, -30px) scale(1.1); opacity: 0.5; }
+    100% { transform: translate(-30px, 40px) scale(0.9); opacity: 0.3; }
+}
+
+.container {
+    max-width: min(95%, 1400px);
+    margin: 0 auto;
+    padding: clamp(30px, 5vw, 60px) clamp(15px, 3vw, 40px);
+    position: relative;
+    z-index: 1;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: clamp(30px, 5vw, 50px);
+    flex-wrap: wrap;
+    gap: clamp(15px, 2vw, 25px);
+    animation: fadeIn 1s ease-out;
+}
+
+.top-center-text {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: min(80%, 700px);
+    text-align: center;
+    font-size: clamp(22px, 3.5vw, 34px);
+    font-weight: 600;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 0.15rem 0.3rem;
+    border-radius: 3px;
+    box-shadow: var(--shadow);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    z-index: 998;
+    animation: fadeInTop 1s forwards;
+}
+
+@keyframes fadeInTop {
+    from { opacity: 0; transform: translate(-50%, -20px); }
+    to { opacity: 1; transform: translate(-50%, 0); }
+}
+/* Modified: Enhanced text visibility and background contrast for filter options */
+#searchInput, #gameFilter, #categoryFilter, #sortFilter {
+    padding: clamp(12px, 2vw, 16px);
+    font-size: clamp(14px, 2vw, 16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    background: var(--glass);
+    color: var(--light);
+    width: 100%;
+    max-width: clamp(250px, 45vw, 300px);
+    transition: var(--transition);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-height: 44px;
+    /* Fix: Ensure select elements have a pointer cursor for better UX */
+    cursor: pointer;
+}
+
+/* Fix: Style <option> elements to ensure text visibility */
+#gameFilter option, #categoryFilter option, #sortFilter option {
+    color: var(--light);
+    background: var(--dark); /* Use --dark for option background to ensure contrast */
+    font-size: clamp(14px, 2vw, 16px);
+    padding: 8px; /* Improve option readability */
+}
+
+/* Fix: Ensure focus state maintains text visibility */
+#searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.3);
+    color: var(--light); /* Reinforce text color on focus */
+}
+
+/* Fix: Adjust placeholder color for consistency */
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Modified: Light theme adjustments for better contrast */
+html[data-theme="light"] #searchInput, 
+html[data-theme="light"] #gameFilter, 
+html[data-theme="light"] #categoryFilter, 
+html[data-theme="light"] #sortFilter {
+    background: rgba(0, 0, 0, 0.1); /* Fix: Increase opacity for better contrast in light theme */
+}
+
+/* Fix: Ensure option text is visible in light theme */
+html[data-theme="light"] #gameFilter option, 
+html[data-theme="light"] #categoryFilter option, 
+html[data-theme="light"] #sortFilter option {
+    color: var(--light); /* #0a0a0a in light theme */
+    background: var(--dark); /* #f5f5f5 in light theme */
+}
+
+/* Modified: Light theme placeholder */
+html[data-theme="light"] #searchInput::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: clamp(20px, 3vw, 30px);
+}
+
+.executor-button {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: var(--dark);
+    border: none;
+    padding: 14px 28px;
+    text-align: center;
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    min-height: 48px;
+}
+
+.executor-button:hover, .executor-button:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+.hamburger {
     background: none;
     border: none;
-    color: var(--text-color);
+    color: var(--light);
     font-size: clamp(1.8em, 3vw, 2.2em);
     cursor: pointer;
     min-height: 48px;
     min-width: 48px;
-    touch-action: manipulation;
-    transition: transform 0.3s ease;
-    position: absolute;           /* ✅ ADDED */
-    top: 20px;                 /* ✅ ADDED */
-    right: 20px;               /* ✅ ADDED */
-    z-index: 999;              /* ✅ ADDED */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-
-        .hamburger span {
-            width: 30px;
-            height: 3px;
-            background: var(--text-color);
-            margin: 3px 0;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
-
-        .overlay-menu {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--overlay-bg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 3000;
-            transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow-y: auto;
-        }
-
-        .overlay-menu.active {
-            right: 0;
-        }
-
-        .overlay-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: clamp(20px, 4vw, 30px);
-            padding: clamp(30px, 5vw, 50px);
-            max-width: min(90%, 600px);
-            width: 100%;
-        }
-
-        .overlay-content a, .overlay-content button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: var(--social-bg);
-            color: white;
-            text-decoration: none;
-            padding: clamp(14px, 2.5vw, 18px) clamp(30px, 5vw, 50px);
-            border-radius: 10px;
-            font-size: clamp(1.1em, 2.5vw, 1.3em);
-            font-weight: 600;
-            width: 100%;
-            max-width: 400px;
-            transition: background 0.3s, transform 0.3s, opacity 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            min-height: 56px;
-            touch-action: manipulation;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-
-        .overlay-content #themeToggle {
-            background: var(--primary-color);
-        }
-
-        .overlay-content a:hover, .overlay-content a:focus,
-        .overlay-content button:hover, .overlay-content button:focus {
-            background: var(--social-hover);
-            transform: translateY(-3px);
-        }
-
-        .overlay-content #themeToggle:hover, .overlay-content #themeToggle:focus {
-            background: var(--secondary-color);
-        }
-
-        .overlay-menu.active .overlay-content a,
-        .overlay-menu.active .overlay-content button {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .overlay-content a:nth-child(1),
-        .overlay-content button:nth-child(1) { transition-delay: 0.1s; }
-        .overlay-content a:nth-child(2),
-        .overlay-content button:nth-child(2) { transition-delay: 0.2s; }
-        .overlay-content a:nth-child(3),
-        .overlay-content button:nth-child(3) { transition-delay: 0.3s; }
-        .overlay-content a:nth-child(4),
-        .overlay-content button:nth-child(4) { transition-delay: 0.4s; }
-        .overlay-content a:nth-child(5),
-        .overlay-content button:nth-child(5) { transition-delay: 0.5s; }
-
-        .filter-bar {
-            display: flex;
-            justify-content: center;
-            gap: clamp(15px, 2vw, 20px);
-            flex-wrap: wrap;
-            margin: clamp(20px, 4vw, 40px) 0;
-            background: linear-gradient(135deg, rgba(45, 45, 68, 0.5), rgba(30, 30, 50, 0.5));
-            padding: clamp(15px, 2vw, 25px);
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(90, 176, 255, 0.2);
-        }
-
-        #searchInput, #gameFilter, #categoryFilter, #sortFilter {
-            padding: clamp(12px, 2vw, 16px);
-            font-size: clamp(14px, 2vw, 16px);
-            border: 1px solid rgba(90, 176, 255, 0.4);
-            border-radius: 10px;
-            background: rgba(45, 45, 68, 0.6);
-            color: var(--text-color);
-            width: 100%;
-            max-width: clamp(250px, 45vw, 300px);
-            transition: all 0.3s ease;
-            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
-            -webkit-appearance: none;
-            appearance: none;
-            min-height: 44px;
-            touch-action: manipulation;
-        }
-
-        #searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
-            outline: none;
-            background: rgba(58, 58, 92, 0.7);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 12px rgba(90, 176, 255, 0.6);
-        }
-
-        .favorite-toggle {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text-color);
-            font-size: clamp(14px, 2vw, 16px);
-            padding: clamp(10px, 2vw, 15px);
-        }
-
-        .favorite-toggle input {
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-        }
-
-        .scripts-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(clamp(300px, 32vw, 360px), 1fr));
-            gap: clamp(25px, 4vw, 50px);
-            padding: clamp(20px, 3vw, 40px) 0;
-        }
-
-        .script-card {
-            background: linear-gradient(145deg, var(--card-bg), rgba(90, 176, 255, 0.1));
-            border-radius: 12px;
-            padding: clamp(25px, 3vw, 35px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            position: relative;
-            border: 1px solid rgba(90, 176, 255, 0.2);
-        }
-
-        .script-card:hover, .script-card:focus-within {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(90, 176, 255, 0.5);
-        }
-
-        .script-card h3 {
-            margin: 0 0 clamp(12px, 2vw, 20px);
-            color: var(--primary-color);
-            font-size: clamp(1.5em, 3vw, 1.9em);
-            font-weight: 600;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .script-card p {
-            margin: 0 0 clamp(12px, 2vw, 20px);
-            font-size: clamp(0.95em, 2vw, 1.15em);
-            color: var(--secondary-text);
-            line-height: 1.7;
-        }
-
-        .script-card .buttons {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .script-card button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: clamp(0.95em, 2vw, 1.15em);
-            font-weight: 600;
-            transition: background 0.3s, transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            min-height: 44px;
-            touch-action: manipulation;
-        }
-
-        .script-card button.favorite-btn {
-            background: var(--social-bg);
-            min-width: 44px;
-            padding: clamp(12px, 2vw, 16px);
-        }
-
-        .script-card button:hover, .script-card button:focus {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(90, 176, 255, 0.6);
-        }
-
-        .script-card button.favorite-btn:hover, .script-card button.favorite-btn:focus {
-            background: var(--social-hover);
-        }
-
-        #noResults {
-            text-align: center;
-            display: none;
-            color: var(--no-results-color);
-            font-size: clamp(1.2em, 3vw, 1.6em);
-            margin: clamp(30px, 5vw, 50px) 0;
-        }
-
-        .pagination {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin: clamp(20px, 4vw, 40px) 0;
-        }
-
-        .pagination button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: clamp(0.9em, 2vw, 1.1em);
-            font-weight: 600;
-            min-height: 44px;
-            touch-action: manipulation;
-        }
-
-        .pagination button:disabled {
-            background: #6b7280;
-            cursor: not-allowed;
-        }
-
-        .pagination span {
-            color: var(--text-color);
-            font-size: clamp(0.9em, 2vw, 1.1em);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            overflow: auto;
-            padding: clamp(15px, 2vw, 25px);
-        }
-
-        .modal-content {
-            background: var(--card-bg);
-            border-radius: 12px;
-            max-width: min(95%, 900px);
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            padding: clamp(25px, 4vw, 35px);
-            box-shadow: 0 8px 30px rgba(90, 176, 255, 0.4);
-            position: relative;
-            border: 1px solid rgba(90, 176, 255, 0.2);
-        }
-
-        .modal-content h2 {
-            color: var(--primary-color);
-            margin: 0 0 clamp(15px, 3vw, 25px);
-            font-size: clamp(1.8em, 4vw, 2.2em);
-            font-weight: 700;
-        }
-
-        .modal-content p {
-            color: var(--secondary-text);
-            margin: 0 0 clamp(15px, 3vw, 25px);
-            font-size: clamp(1em, 2.5vw, 1.2em);
-            line-height: 1.8;
-        }
-
-        .modal-content a {
-            color: var(--email-color);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .modal-content a:hover {
-            text-decoration: underline;
-        }
-
-        .modal-content pre {
-            background: var(--background-dark);
-            padding: clamp(15px, 3vw, 25px);
-            border-radius: 10px;
-            overflow-x: auto;
-            font-size: clamp(0.9em, 2vw, 1.1em);
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-content code {
-            font-family: 'Fira Code', 'Consolas', monospace;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: clamp(15px, 2vw, 20px);
-            right: clamp(15px, 2vw, 20px);
-            background: var(--social-bg);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 44px;
-            height: 44px;
-            cursor: pointer;
-            font-size: clamp(1.1em, 2vw, 1.3em);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            touch-action: manipulation;
-        }
-
-        .close-btn:hover, .close-btn:focus {
-            background: var(--social-hover);
-            transform: rotate(90deg);
-        }
-
-        .loading {
-            text-align: center;
-            color: var(--primary-color);
-            font-size: clamp(1.2em, 2.5vw, 1.4em);
-            padding: clamp(20px, 3vw, 30px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .loading::before {
-            content: '';
-            width: 24px;
-            height: 24px;
-            border: 3px solid var(--primary-color);
-            border-top-color: transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        .copy-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: clamp(0.95em, 2vw, 1.15em);
-            font-weight: 600;
-            margin-bottom: clamp(15px, 2vw, 25px);
-            transition: background 0.3s, transform 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
-            min-height: 44px;
-            touch-action: manipulation;
-        }
-        
-
-        .copy-btn:hover, .copy-btn:focus {
-            background: var(--secondary-color);
-            transform: translateY(-2px);
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        @media (max-width: 1200px) {
-            .container {
-                max-width: 95%;
-            }
-            .scripts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            header {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .header-right {
-                width: 100%;
-                justify-content: flex-end;
-            }
-            .filter-bar {
-                flex-direction: column;
-                align-items: stretch;
-                padding: 15px;
-            }
-            #searchInput, #gameFilter, #categoryFilter, #sortFilter {
-                max-width: 100%;
-                min-height: 48px;
-                font-size: 15px;
-                padding: 12px;
-            }
-            .favorite-toggle {
-                justify-content: center;
-                padding: 10px;
-            }
-            .scripts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 20px;
-            }
-            .modal-content {
-                max-width: 95%;
-                padding: 20px;
-            }
-            h1 {
-                font-size: clamp(1.8em, 5vw, 2.5em);
-            }
-            .overlay-content {
-                padding: 20px;
-            }
-            .overlay-content a, .overlay-content button {
-                padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 30px);
-                font-size: clamp(1em, 2vw, 1.2em);
-                min-height: 48px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            body {
-                font-size: 14px;
-            }
-            .container {
-                padding: 15px;
-            }
-            .filter-bar {
-                padding: 10px;
-                gap: 10px;
-            }
-            #searchInput, #gameFilter, #categoryFilter, #sortFilter {
-                max-width: 100%;
-                min-height: 44px;
-                font-size: 14px;
-                padding: 10px;
-            }
-            .favorite-toggle {
-                font-size: 14px;
-                padding: 8px;
-            }
-            .scripts-grid {
-                grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            .script-card {
-                padding: 15px;
-            }
-            .script-card h3 {
-                font-size: 1.4em;
-            }
-            .script-card p {
-                font-size: 0.9em;
-            }
-            .script-card button {
-                padding: 10px 18px;
-                font-size: 0.9em;
-                min-height: 40px;
-            }
-            .modal-content h2 {
-                font-size: 1.5em;
-            }
-            .modal-content p {
-                font-size: 0.95em;
-            }
-            .modal-content pre {
-                font-size: 0.85em;
-                padding: 12px;
-            }
-            .close-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1em;
-            }
-            .copy-btn {
-                padding: 10px 18px;
-                font-size: 0.9em;
-                min-height: 40px;
-            }
-            .pagination button {
-                padding: 8px 16px;
-                font-size: 0.85em;
-                min-height: 40px;
-            }
-            .pagination span {
-                font-size: 0.85em;
-            }
-        }
-
-        @media (min-width: 1920px) {
-            .container {
-                max-width: 1600px;
-            }
-            h1 {
-                font-size: 4em;
-            }
-            .scripts-grid {
-                grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
-            }
-            .modal-content {
-                max-width: 1000px;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            *, *:before, *:after {
-                animation: none !important;
-                transition: none !important;
-            }
-            .script-card:hover, .script-card:focus-within {
-                transform: none;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-            }
-            .script-card button:hover, .script-card button:focus {
-                transform: none;
-            }
-            .close-btn:hover, .close-btn:focus {
-                transform: none;
-            }
-            .copy-btn:hover, .copy-btn:focus {
-                transform: none;
-            }
-            .overlay-menu {
-                transition: none;
-            }
-            .overlay-content a, .overlay-content button {
-                transform: none;
-                opacity: 1;
-            }
-        }
-
-        @media (prefers-contrast: high) {
-            body {
-                background: #000;
-                color: #fff;
-            }
-            .script-card, .modal-content {
-                background: #111;
-                border-color: #fff;
-            }
-            .script-card h3, .modal-content h2 {
-                color: #fff;
-            }
-            .script-card p, .modal-content p {
-                color: #ddd;
-            }
-            #noResults {
-                color: #ccc;
-            }
-            .overlay-menu {
-                background: #000;
-            }
-            .modal-content a {
-                color: #ff5555;
-            }
-        }
-
-        @keyframes slideIn {
-            from { right: -100%; }
-            to { right: 0; }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .executor-button {
-  background: linear-gradient(135deg, #000000, #0d6efd); /* Black to Blue */
-  color: #ffffff;
-  border: none;
-  padding: 14px 30px;
-  font-size: 17px;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  box-shadow: 0 0 10px rgba(13, 110, 253, 0.3);
-  position: relative;
-  overflow: hidden;
+.hamburger span {
+    width: 30px;
+    height: 3px;
+    background: var(--light);
+    margin: 3px 0;
+    transition: var(--transition);
 }
 
-.executor-button::before {
-  content: "";
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, #0d6efd55 10%, transparent 70%);
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.4s, transform 0.6s;
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
 }
 
-.executor-button:hover::before {
-  opacity: 1;
-  transform: rotate(0deg) scale(1.1);
-}
-
-.executor-button:hover {
-  box-shadow: 0 0 20px #0d6efd, 0 0 30px #0d6efd;
-  transform: translateY(-2px);
-}
-
-.executor-button:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 10px #0d6efd;
-}
-.top-center-text {
-  position: absolute;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60%; /* Makes it broader — adjust as needed */
-  max-width: 500px; /* Prevents it from getting too wide on large screens */
-  text-align: center;
-  font-size: 26px;
-  font-weight: 600;
-  font-family: 'Segoe UI', sans-serif;
-  color: #00bfff;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 16px 32px;
-  border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0, 191, 255, 0.3);
-  backdrop-filter: blur(6px);
-  z-index: 998;
-}
-
-.top-center-text {
-  opacity: 0;
-  animation: fadeInTop 1s forwards;
-}
-
-@keyframes fadeInTop {
-  from {
+.hamburger.active span:nth-child(2) {
     opacity: 0;
-    transform: translate(-50%, -20px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
 }
 
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
 
+/* Improvement: Added :focus state for accessibility */
+.hamburger:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
 
+.overlay-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--glass-dark); /* Note: Ensure --glass-dark is intended for fallback */
+    backdrop-filter: blur(var(--blur));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    border-left: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.overlay-menu.active {
+    right: 0;
+}
+
+.overlay-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(20px, 4vw, 30px);
+    padding: clamp(30px, 5vw, 50px);
+    max-width: min(90%, 600px);
+    width: 100%;
+}
+
+/* Improvement: Combined identical styles for a and button */
+.overlay-content a, .overlay-content button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: var(--dark);
+    text-decoration: none;
+    padding: clamp(14px, 2.5vw, 18px) clamp(30px, 5vw, 50px);
+    border-radius: 12px;
+    font-size: clamp(1.1em, 2.5vw, 1.3em);
+    font-weight: 600;
+    width: 100%;
+    max-width: 400px;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    min-height: 56px;
+}
+
+.overlay-content a:hover, .overlay-content a:focus,
+.overlay-content button:hover, .overlay-content button:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+.overlay-content #themeToggle {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--light);
+}
+
+.overlay-content #themeToggle:hover, .overlay-content #themeToggle:focus {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.overlay-menu.active .overlay-content a,
+.overlay-menu.active .overlay-content button {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Improvement: Simplified transition delays with nth-child */
+.overlay-content a:nth-child(n), .overlay-content button:nth-child(n) {
+    transition-delay: calc(0.1s * (var(--n) - 1));
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: center;
+    gap: clamp(15px, 2vw, 20px);
+    flex-wrap: wrap;
+    margin: clamp(20px, 4vw, 40px) 0;
+    background: var(--glass);
+    padding: clamp(15px, 2vw, 25px);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(var(--blur));
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideUp 0.8s ease-out;
+}
+
+#searchInput, #gameFilter, #categoryFilter, #sortFilter {
+    padding: clamp(12px, 2vw, 16px);
+    font-size: clamp(14px, 2vw, 16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50px;
+    background: var(--glass);
+    color: var(--light);
+    width: 100%;
+    max-width: clamp(250px, 45vw, 300px);
+    transition: var(--transition);
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
+    /* Improvement: Added vendor prefixes for appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    min-height: 44px;
+}
+
+#searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.3);
+}
+
+#searchInput::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.favorite-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--light);
+    font-size: clamp(14px, 2vw, 16px);
+    padding: clamp(10px, 2vw, 15px);
+    background: var(--glass);
+    border-radius: 50px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+}
+
+.favorite-toggle:hover {
+    background: var(--glass-hover);
+}
+
+.favorite-toggle input {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.scripts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(300px, 32vw, 360px), 1fr));
+    gap: clamp(25px, 4vw, 50px);
+    padding: clamp(20px, 3vw, 40px) 0;
+}
+
+.script-card {
+    background: var(--glass-dark);
+    border-radius: 15px;
+    padding: clamp(25px, 3vw, 35px);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    animation: slideUp 0.8s ease-out;
+}
+
+.script-card:hover, .script-card:focus-within {
+    transform: translateY(-10px);
+    box-shadow: var(--glow);
+    border-color: var(--primary);
+}
+
+.script-card h3 {
+    margin: 0 0 clamp(12px, 2vw, 20px);
+    font-size: clamp(1.5em, 3vw, 1.9em);
+    font-weight: 600;
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.script-card p {
+    margin: 0 0 clamp(12px, 2vw, 20px);
+    font-size: clamp(0.95em, 2vw, 1.15em);
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+}
+
+.script-card .buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.script-card button {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: var(--dark);
+    border: none;
+    padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: clamp(0.95em, 2vw, 1.15em);
+    font-weight: 600;
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    min-height: 44px;
+}
+
+.script-card button.favorite-btn {
+    background: #5865f2;
+    min-width: 44px;
+    padding: clamp(12px, 2vw, 16px);
+}
+
+.script-card button:hover, .script-card button:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+.script-card button.favorite-btn:hover, .script-card button.favorite-btn:focus {
+    background: #7289da;
+    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+}
+
+#noResults {
+    text-align: center;
+    display: none;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: clamp(1.2em, 3vw, 1.6em);
+    margin: clamp(30px, 5vw, 50px) 0;
+    animation: fadeIn 1s ease-out;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: clamp(20px, 4vw, 40px) 0;
+}
+
+.pagination button {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: var(--dark);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: clamp(0.9em, 2vw, 1.1em);
+    font-weight: 600;
+    min-height: 44px;
+    transition: var(--transition);
+}
+
+.pagination button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Improvement: Added :focus state for accessibility */
+.pagination button:hover, .pagination button:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+.pagination span {
+    color: var(--light);
+    font-size: clamp(0.9em, 2vw, 1.1em);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+    padding: clamp(15px, 2vw, 25px);
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.modal-content {
+    background: var(--glass-dark);
+    border-radius: 20px;
+    max-width: min(95%, 900px);
+    width: 100%;
+    max-height: 85vh;
+    overflow-y: auto;
+    padding: clamp(25px, 4vw, 35px);
+    box-shadow: var(--shadow);
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(var(--blur));
+}
+
+.modal-content h2 {
+    color: var(--primary);
+    margin: 0 0 clamp(15px, 3vw, 25px);
+    font-size: clamp(1.8em, 4vw, 2.2em);
+    font-weight: 700;
+}
+
+.modal-content p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 clamp(15px, 3vw, 25px);
+    font-size: clamp(1em, 2.5vw, 1.2em);
+    line-height: 1.8;
+}
+
+.modal-content a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.modal-content a:hover {
+    text-decoration: underline;
+}
+
+.modal-content pre {
+    background: var(--glass);
+    padding: clamp(15px, 3vw, 25px);
+    border-radius: 10px;
+    overflow-x: auto;
+    font-size: clamp(0.9em, 2vw, 1.1em);
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.modal-content code {
+    /* Improvement: Added fallback fonts for better compatibility */
+    font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+}
+
+.close-btn {
+    position: absolute;
+    top: clamp(15px, 2vw, 20px);
+    right: clamp(15px, 2vw, 20px);
+    background: #5865f2;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    font-size: clamp(1.1em, 2vw, 1.3em);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close-btn:hover, .close-btn:focus {
+    background: #7289da;
+    transform: rotate(90deg);
+    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+}
+
+.loading {
+    text-align: center;
+    color: var(--primary);
+    font-size: clamp(1.2em, 2.5vw, 1.4em);
+    padding: clamp(20px, 3vw, 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    animation: fadeIn 1s ease-out;
+}
+
+.loading::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+    border: 3px solid var(--primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.copy-btn {
+    background: linear-gradient(45deg, var(--primary), var(--primary-dark));
+    color: var(--dark);
+    border: none;
+    padding: clamp(12px, 2vw, 16px) clamp(20px, 3vw, 28px);
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: clamp(0.95em, 2vw, 1.15em);
+    font-weight: 600;
+    margin-bottom: clamp(15px, 2vw, 25px);
+    transition: var(--transition);
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    min-height: 44px;
+}
+
+.copy-btn:hover, .copy-btn:focus {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+html[data-theme="light"] .script-card p {
+    color: rgba(0, 0, 0, 0.7);
+}
+
+html[data-theme="light"] #noResults {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+html[data-theme="light"] .pagination span {
+    color: var(--light);
+}
+
+html[data-theme="light"] #searchInput::placeholder {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+@supports not (backdrop-filter: blur(3px)) {
+    .filter-bar, .overlay-menu, .modal-content, .top-center-text {
+        /* Note: Ensure --glass-dark is the intended fallback background */
+        backdrop-filter: none;
+        background: var(--glass-dark);
+    }
+}
+
+@media (max-width: 1200px) {
+    .container {
+        max-width: 95%;
+    }
+    .scripts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .header-right {
+        width: 100%;
+        justify-content: flex-end;
+    }
+    .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 15px;
+    }
+    #searchInput, #gameFilter, #categoryFilter, #sortFilter {
+        max-width: 100%;
+        min-height: 48px;
+        font-size: 15px;
+        padding: 12px;
+    }
+    .favorite-toggle {
+        justify-content: center;
+        padding: 10px;
+    }
+    .scripts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 20px;
+    }
+    .modal-content {
+        max-width: 95%;
+        padding: 20px;
+    }
+    .top-center-text {
+        font-size: clamp(18px, 3vw, 28px);
+    }
+    .overlay-content {
+        padding: 20px;
+    }
+    .overlay-content a, .overlay-content button {
+        padding: clamp(12px, 2vw, 16px) clamp(20px, 4vw, 30px);
+        font-size: clamp(1em, 2vw, 1.2em);
+        min-height: 48px;
+    }
+    .blob {
+        animation: none;
+        filter: blur(40px);
+        opacity: 0.2;
+    }
+    .filter-bar, .overlay-menu, .modal-content, .top-center-text {
+        backdrop-filter: none;
+        background: var(--glass-dark);
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 14px;
+    }
+    .container {
+        padding: 15px;
+    }
+    .filter-bar {
+        padding: 10px;
+        gap: 10px;
+    }
+    #searchInput, #gameFilter, #categoryFilter, #sortFilter {
+        max-width: 100%;
+        min-height: 44px;
+        font-size: 14px;
+        padding: 10px;
+    }
+    .favorite-toggle {
+        font-size: 14px;
+        padding: 8px;
+    }
+    .scripts-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    .script-card {
+        padding: 15px;
+    }
+    .script-card h3 {
+        font-size: 1.4em;
+    }
+    .script-card p {
+        font-size: 0.9em;
+    }
+    .script-card .buttons {
+        gap: 16px;
+    }
+    .script-card button {
+        padding: 10px 18px;
+        font-size: 0.9em;
+        min-height: 40px;
+        min-width: 120px;
+    }
+    .script-card button.favorite-btn {
+        min-width: 44px;
+    }
+    .modal-content h2 {
+        font-size: 1.5em;
+    }
+    .modal-content p {
+        font-size: 0.95em;
+    }
+    .modal-content pre {
+        font-size: 0.85em;
+        padding: 15px;
+    }
+    .close-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1em;
+    }
+    .copy-btn {
+        padding: 10px 18px;
+        font-size: 0.9em;
+        min-height: 40px;
+    }
+    .pagination button {
+        padding: 8px 16px;
+        font-size: 0.85em;
+        min-height: 40px;
+    }
+    .pagination span {
+        font-size: 0.85em;
+    }
+    .top-center-text {
+        width: 90%;
+        font-size: 18px;
+        padding: 12px 16px;
+    }
+    .executor-button {
+        width: 100%;
+        font-size: 16px;
+        padding: 16px;
+    }
+}
+
+@media (min-width: 1920px) {
+    .container {
+        max-width: 1600px;
+    }
+    .top-center-text {
+        font-size: 4em;
+    }
+    .scripts-grid {
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+    }
+    .modal-content {
+        max-width: 1000px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *:before, *:after {
+        animation: none !important;
+        transition: none !important;
+    }
+    .script-card:hover, .script-card:focus-within {
+        transform: none;
+        box-shadow: var(--shadow);
+    }
+    .script-card button:hover, .script-card button:focus {
+        transform: none;
+    }
+    .close-btn:hover, .close-btn:focus {
+        transform: none;
+    }
+    .copy-btn:hover, .copy-btn:focus {
+        transform: none;
+    }
+    .overlay-menu {
+        transition: none;
+    }
+    .overlay-content a, .overlay-content button {
+        transform: none;
+        opacity: 1;
+    }
+    .executor-button:hover {
+        transform: none;
+    }
+}
+
+@media (prefers-contrast: high) {
+    /* Accessibility: Enhanced contrast for better readability */
+    body {
+        background: #000;
+        color: #fff;
+    }
+    .script-card, .modal-content {
+        background: #111;
+        border-color: #fff;
+    }
+    .script-card h3, .modal-content h2 {
+        color: #fff;
+        -webkit-background-clip: unset;
+        background-clip: unset;
+    }
+    .script-card p, .modal-content p {
+        color: #ddd;
+    }
+    #noResults {
+        color: #ccc;
+    }
+    .overlay-menu {
+        background: #000;
+    }
+    .modal-content a {
+        color: var(--accent);
+    }
+}
     </style>
 </head>
 <body>
+    <div class="bg-animation">
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
+    </div>
+
     <div class="top-center-text">Scripts Hub</div>
 
     <div class="container">
         <header>
-           
-            <div class="header-right"> 
+            <div class="header-right">
                 <a href="exexutor.html" target="_blank">
-  <button class="executor-button">Executors</button>
-</a>
-
+                    <button class="executor-button"><i class="fas fa-code"></i> Executors</button>
+                </a>
                 <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
                     <span></span>
                     <span></span>
@@ -878,10 +1029,8 @@
                 <option value="Action">Action</option>
                 <option value="Strategy">Strategy</option>
                 <option value="Fighting">Fighting</option>
-                <option value="Parkour">Parkour </option>
+                <option value="Parkour">Parkour</option>
                 <option value="Open World">Open World</option>
-
-
             </select>
             <select id="sortFilter" aria-label="Sort scripts">
                 <option value="alphabetical">Alphabetical</option>
@@ -890,15 +1039,15 @@
             </select>
             <label class="favorite-toggle">
                 <input type="checkbox" id="showFavorites" aria-label="Show favorite scripts only">
-                Favorites Only
+                <i class="fas fa-heart"></i> Favorites Only
             </label>
         </div>
         <div id="noResults" role="alert">No scripts found.</div>
         <div class="scripts-grid" id="scriptsGrid"></div>
         <div class="pagination">
-            <button id="prevPage" disabled aria-label="Previous page">Previous</button>
+            <button id="prevPage" disabled aria-label="Previous page"><i class="fas fa-chevron-left"></i> Previous</button>
             <span id="pageInfo"></span>
-            <button id="nextPage" aria-label="Next page">Next</button>
+            <button id="nextPage" aria-label="Next page">Next <i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
 
@@ -911,16 +1060,16 @@
             <a href="https://discord.gg/pVhzpNuN" target="_blank" aria-label="Join our Discord server">
                 <i class="fab fa-discord"></i> Discord
             </a>
-            <button id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
-            <button id="contactBtn" aria-label="Contact us">Contact Us</button>
-            <button id="aboutBtn" aria-label="About us">About</button>
+            <button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i> Toggle Theme</button>
+            <button id="contactBtn" aria-label="Contact us"><i class="fas fa-envelope"></i> Contact Us</button>
+            <button id="aboutBtn" aria-label="About us"><i class="fas fa-info-circle"></i> About</button>
         </div>
     </div>
 
     <!-- Modal for displaying script details -->
     <div id="scriptModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('scriptModal')" aria-label="Close modal">✕</button>
+            <button class="close-btn" onclick="closeModal('scriptModal')" aria-label="Close modal"><i class="fas fa-times"></i></button>
             <h2 id="modalTitle"></h2>
             <p id="modalGame"></p>
             <p id="modalDescription"></p>
@@ -931,7 +1080,7 @@
     <!-- Modal for About section -->
     <div id="aboutModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('aboutModal')" aria-label="Close modal">✕</button>
+            <button class="close-btn" onclick="closeModal('aboutModal')" aria-label="Close modal"><i class="fas fa-times"></i></button>
             <h2>About Us</h2>
             <p>We are a passionate team of script developers dedicated to enhancing the Roblox gaming experience. With a deep love for coding and gaming, we create innovative, reliable, and user-friendly scripts for popular Roblox games like Blox Fruits, Adopt Me, and more. Our mission is to empower players with tools that make gameplay more exciting and rewarding. Join our growing community on YouTube and Discord to stay updated on the latest scripts, share feedback, and connect with fellow Roblox enthusiasts!</p>
         </div>
@@ -940,7 +1089,7 @@
     <!-- Modal for Contact Us -->
     <div id="contactModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('contactModal')" aria-label="Close modal">✕</button>
+            <button class="close-btn" onclick="closeModal('contactModal')" aria-label="Close modal"><i class="fas fa-times"></i></button>
             <h2>Contact Us</h2>
             <p>Reach out to us for support, inquiries, or collaboration opportunities:</p>
             <p><strong>Email:</strong> <a href="mailto:subrajit908@gmail.com">subrajit908@gmail.com</a></p>
@@ -955,7 +1104,7 @@
             hljs.highlightAll();
         });
 
-        // Sample script data with added Grow a Garden script
+        // Sample script data
         const scripts = [
             {
                 name: "Blox Fruit Auto Farm",
@@ -1016,11 +1165,10 @@
                 game: "Doors",
                 category: "Horror",
                 description: "A script for Doors to speed up navigation through levels.",
-                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua `,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua"))()`,
                 popularity: 75,
                 dateAdded: "2025-04-10"
             },
-           
             {
                 name: "Forsaken Auto Battle",
                 game: "Forsaken",
@@ -1035,7 +1183,7 @@
                 game: "Tower Defense Simulator",
                 category: "Strategy",
                 description: "A script for Tower Defense Simulator to automate wave defense.",
-                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
                 popularity: 85,
                 dateAdded: "2025-04-20"
             },
@@ -1062,7 +1210,7 @@
                 game: "Jujutsu Shenanigans",
                 category: "Fighting",
                 description: "A script for Jujutsu Shenanigans to automate skill usage.",
-                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
                 popularity: 70,
                 dateAdded: "2025-05-03"
             },
@@ -1073,26 +1221,23 @@
                 description: "A script for Realistic Street Soccer to enhance trick performance.",
                 code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Realistic-Street-Soccer-rayan-s-hub-SOlARA-SUPORT-39402"))()`,
                 popularity: 65,
-                dateAdded: "2025-04-12",
+                dateAdded: "2025-04-12"
             },
             {
                 name: "Bubble Gum Simulator Auto Bubble",
                 game: "Bubble Gum Simulator",
                 category: "Simulation",
-                description: "A script for Bubble Gumcom",
-                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
-                popularity: 95 ,
-                dateAdded: 2025-4-12 ,
-
-
-                } 
-                ,
-                {
+                description: "A script for Bubble Gum Simulator to automate bubble collection.",
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
+                popularity: 95,
+                dateAdded: "2025-04-12"
+            },
+            {
                 name: "Grow a Garden Auto Harvest",
                 game: "Grow a Garden",
-                category : "Simulation",
+                category: "Simulation",
                 description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
-                code: ` loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))() ` ,
+                code: `loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))()`,
                 popularity: 75,
                 dateAdded: "2025-05-15"
             },
@@ -1141,82 +1286,70 @@
                 popularity: 95,
                 dateAdded: "2025-05-11"
             },
-             {
+            {
                 name: "Arsenal aim bot",
                 game: "Arsenal",
                 category: "Action",
-                description: "A script for Arsenal to  Silent Aimbot Wallbang ",
-                code: ` loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Express-Hub-Free-Universal-GUI-V6-30568"))() `,
+                description: "A script for Arsenal to Silent Aimbot Wallbang.",
+                code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Express-Hub-Free-Universal-GUI-V6-30568"))()`,
                 popularity: 80,
                 dateAdded: "2025-05-11"
             },
-             {
+            {
                 name: "Tower Of Hell speed hack",
                 game: "Tower of Hell",
                 category: "Parkour",
-                description: "A script for Tower Of Hell walk speed jump bost ",
-                code: ` loadstring(game:HttpGet("https://gist.githubusercontent.com/BloxiYT/85f97364b6367baac677e109488c9905/raw/c2972a2b892c4193509ddb2fe1ba3061435e1a8a/gistfile1.txt"))() `,
+                description: "A script for Tower Of Hell walk speed jump boost.",
+                code: `loadstring(game:HttpGet("https://gist.githubusercontent.com/BloxiYT/85f97364b6367baac677e109488c9905/raw/c2972a2b892c4193509ddb2fe1ba3061435e1a8a/gistfile1.txt"))()`,
                 popularity: 80,
-                dateAdded: "2025-05-11",
+                dateAdded: "2025-05-11"
             },
-             {
-                name: "Jailbreak Auto Rob ",
+            {
+                name: "Jailbreak Auto Rob",
                 game: "Jailbreak",
                 category: "Open World",
-                description: "A script for Jailbreak   ",
+                description: "A script for Jailbreak.",
                 code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/BlitzIsKing/UniversalFarm/main/Loader/Regular'))()`,
-                popularity:90,
-                dateAdded: "2025-05-11",
+                popularity: 90,
+                dateAdded: "2025-05-11"
             },
             {
-    name: "Murder Mystery 2 Auto Win",
-    game: "Murder Mystery 2",
-    category: "Action",
-    description: "A script for Murder Mystery 2 to automatically win rounds.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CycleScripts/Official/refs/heads/main/freemium"))()`,
-    popularity: 85,
-    dateAdded: "2025-05-20",
+                name: "Murder Mystery 2 Auto Win",
+                game: "Murder Mystery 2",
+                category: "Action",
+                description: "A script for Murder Mystery 2 to automatically win rounds.",
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CycleScripts/Official/refs/heads/main/freemium"))()`,
+                popularity: 85,
+                dateAdded: "2025-05-20"
             },
             {
-    name: "Phantom Forces Aimbot",
-    game: "Phantom Forces",
-    category: "Action",
-    description: "A script for Phantom Forces to assist with aiming and shooting.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/main/homohack.lua"))()`,
-    popularity: 90,
-    dateAdded: "2025-05-20",  
-},
-       {
-    name: "Anime Fighting Simulator Auto Train",
-    game: "Anime Fighting Simulator",
-    category: "Fighting",
-    description: "A script for Anime Fighting Simulator to automate training and power-ups.",
-    code: `loadstring(game:HttpGet("https://rawscripts.net/raw/DIMENSION-6-Anime-Fighting-Simulator-Data-Roll-back-7000"))()`,
-    popularity: 95,
-    dateAdded: "2025-05-21",
-},
-
-       {
-    name: "Pet Simulator X Auto Farm",
-    game: "Pet Simulator X",
-    category: "Simulation",
-    description: "A script for Pet Simulator X to automate pet collection and farming.",
-    code: `loadstring(game:HttpGet’https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua’)()`,
-    popularity: 90,
-    dateAdded: "2025-05-21",
-},  
-
-
-
-    
-
-            
-
-
-
+                name: "Phantom Forces Aimbot",
+                game: "Phantom Forces",
+                category: "Action",
+                description: "A script for Phantom Forces to assist with aiming and shooting.",
+                code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/main/homohack.lua"))()`,
+                popularity: 90,
+                dateAdded: "2025-05-20"
+            },
+            {
+                name: "Anime Fighting Simulator Auto Train",
+                game: "Anime Fighting Simulator",
+                category: "Fighting",
+                description: "A script for Anime Fighting Simulator to automate training and power-ups.",
+                code: `loadstring(game:HttpGet("https://rawscripts.net/raw/DIMENSION-6-Anime-Fighting-Simulator-Data-Roll-back-7000"))()`,
+                popularity: 95,
+                dateAdded: "2025-05-21"
+            },
+            {
+                name: "Pet Simulator X Auto Farm",
+                game: "Pet Simulator X",
+                category: "Simulation",
+                description: "A script for Pet Simulator X to automate pet collection and farming.",
+                code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua'))()`,
+                popularity: 90,
+                dateAdded: "2025-05-21"
+            }
         ];
-
-        
 
         // Favorites management
         let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -1236,15 +1369,15 @@
         // Theme toggle
         const themeToggle = document.getElementById('themeToggle');
         themeToggle.addEventListener('click', () => {
-            const currentTheme = document.body.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            document.body.setAttribute('data-theme', currentTheme);
-            themeToggle.textContent = currentTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+            const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'light' ? 'moon' : 'sun'}"></i> ${currentTheme === 'light' ? 'Dark' : 'Light'} Mode`;
             localStorage.setItem('theme', currentTheme);
         });
 
         const savedTheme = localStorage.getItem('theme') || 'dark';
-        document.body.setAttribute('data-theme', savedTheme);
-        themeToggle.textContent = savedTheme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = `<i class="fas fa-${savedTheme === 'light' ? 'moon' : 'sun'}"></i> ${savedTheme === 'light' ? 'Dark' : 'Light'} Mode`;
 
         // Overlay menu toggle
         const hamburger = document.querySelector('.hamburger');
@@ -1305,7 +1438,6 @@
             if (modal) {
                 modal.style.display = 'none';
                 modal.setAttribute('aria-hidden', 'true');
-                // Return focus to the triggering element or body
                 const trigger = document.activeElement;
                 if (trigger && trigger.closest('.script-card, .overlay-content')) {
                     trigger.focus();
@@ -1328,7 +1460,7 @@
             overlayMenu.setAttribute('aria-hidden', 'true');
         });
 
-        // Contact canopyModal toggle
+        // Contact modal toggle
         const contactBtn = document.getElementById('contactBtn');
         const contactModal = document.getElementById('contactModal');
         contactBtn.addEventListener('click', () => {
@@ -1371,7 +1503,7 @@
 
         // Pagination
         let currentPage = 1;
-        const scriptsPerPage =40;
+        const scriptsPerPage = 40;
 
         // Utility function to debounce input events
         const debounce = (func, delay) => {
@@ -1393,9 +1525,9 @@
                 <p><strong>Category:</strong> ${script.category}</p>
                 <p>${script.description}</p>
                 <div class="buttons">
-                    <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}">View Code</button>
+                    <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}"><i class="fas fa-code"></i> View Code</button>
                     <button class="favorite-btn" onclick="toggleFavorite('${script.name}')" aria-label="${isFavorite(script.name) ? 'Remove from' : 'Add to'} favorites">
-                        ${isFavorite(script.name) ? '❤️' : '🤍'}
+                        ${isFavorite(script.name) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}
                     </button>
                 </div>
             `;
@@ -1416,7 +1548,7 @@
             }
 
             scriptsGrid.style.opacity = '0.5';
-            scriptsGrid.innerHTML = '<div class="loading">Loading scripts...</div>';
+            scriptsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading scripts...</div>';
 
             setTimeout(() => {
                 scriptsGrid.innerHTML = '';
@@ -1445,7 +1577,7 @@
                 prevPage.disabled = currentPage === 1;
                 nextPage.disabled = currentPage === totalPages;
                 pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-            }, 300);
+            }, 500);
         };
 
         // Function to show script code in modal
@@ -1473,7 +1605,7 @@
             if (!copyButton) {
                 copyButton = document.createElement('button');
                 copyButton.className = 'copy-btn';
-                copyButton.textContent = 'Copy Code';
+                copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
                 copyButton.setAttribute('aria-label', 'Copy script code');
                 modalContent.insertBefore(copyButton, modalContent.querySelector('pre'));
             }
@@ -1481,8 +1613,8 @@
             copyButton.onclick = () => {
                 navigator.clipboard.writeText(script.code)
                     .then(() => {
-                        copyButton.textContent = 'Copied!';
-                        setTimeout(() => { copyButton.textContent = 'Copy Code'; }, 2000);
+                        copyButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => { copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code'; }, 2000);
                     })
                     .catch(err => {
                         console.error('Failed to copy code:', err);
@@ -1537,7 +1669,7 @@
                 filteredScripts.sort((a, b) => a.name.localeCompare(b.name));
             }
 
-            currentPage = 1; // Reset to first page on filter change
+            currentPage = 1;
             displayScripts(filteredScripts);
         };
 
@@ -1563,7 +1695,6 @@
             sortFilter.addEventListener('change', filterScripts);
             showFavorites.addEventListener('change', filterScripts);
 
-            // Add touchstart event for mobile responsiveness
             searchInput.addEventListener('touchstart', (e) => {
                 e.target.focus();
             });
@@ -1602,10 +1733,7 @@
             }
         };
 
-        // Run initialization
         init();
-
-        
     </script>
 </body>
 </html>
