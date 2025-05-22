@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+   
     <title>Scripts Hub</title>
     <!-- Poppins Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1972,6 +1972,13 @@ html[data-theme="light"] #searchInput::placeholder {
         };
 
         init();
+              (function() {
+    var scale = window.innerWidth <= 768 ? 1.3 : 1.0;
+    var meta = document.createElement('meta');
+    meta.name = "viewport";
+    meta.content = "width=device-width, initial-scale=" + scale + ", maximum-scale=" + scale + ", user-scalable=no";
+    document.head.appendChild(meta);
+  })();
     </script>
 </body>
 </html>
