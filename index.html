@@ -2,7 +2,7 @@
 <html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scripts Hub</title>
     <!-- Poppins Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -129,12 +129,12 @@ header {
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    margin-bottom: clamp(80px, 10vw, 100px); /* Increased to prevent overlap with top-center-text */
+    margin-bottom: clamp(80px, 10vw, 100px);
     flex-wrap: wrap;
     gap: clamp(15px, 2vw, 25px);
     animation: fadeIn 1s ease-out;
     position: relative;
-    min-height: 60px; /* Ensure header has enough space */
+    min-height: 60px;
 }
 
 .top-center-text {
@@ -149,14 +149,21 @@ header {
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
-    color: transparent;
-    padding: 0.5rem 1rem; /* Increased padding for better visibility */
+    color: var(--primary);
+    padding: 0.5rem 1rem;
     border-radius: 8px;
     box-shadow: var(--shadow);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
     z-index: 998;
     animation: fadeInTop 1s forwards;
-    pointer-events: none; /* Prevent interaction to avoid blocking other elements */
+    pointer-events: none;
+}
+
+@supports not (background-clip: text) {
+    .top-center-text {
+        color: var(--primary);
+        background: none;
+    }
 }
 
 @keyframes fadeInTop {
@@ -222,7 +229,7 @@ html[data-theme="light"] #searchInput::placeholder {
     display: flex;
     align-items: center;
     gap: clamp(20px, 3vw, 30px);
-    flex-wrap: nowrap; /* Prevent wrapping to keep elements in place */
+    flex-wrap: nowrap;
 }
 
 .executor-button {
@@ -238,7 +245,7 @@ html[data-theme="light"] #searchInput::placeholder {
     transition: var(--transition);
     box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
     min-height: 48px;
-    min-width: 120px; /* Ensure button doesn't shrink too much */
+    min-width: 120px;
 }
 
 .executor-button:hover, .executor-button:focus {
@@ -258,7 +265,7 @@ html[data-theme="light"] #searchInput::placeholder {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative; /* Changed to relative to stay within header flow */
+    position: relative;
     z-index: 999;
 }
 
@@ -738,20 +745,21 @@ html[data-theme="light"] #searchInput::placeholder {
 
 @media (max-width: 768px) {
     header {
-        justify-content: flex-end; /* Keep header aligned to the right */
-        margin-bottom: clamp(80px, 12vw, 100px); /* Increased margin to avoid overlap */
-        padding-top: 60px; /* Add padding to account for top-center-text */
+        justify-content: flex-end;
+        margin-bottom: clamp(80px, 12vw, 100px);
+        padding-top: 60px;
     }
     .header-right {
-        width: auto; /* Allow natural width to prevent stretching */
+        width: auto;
         justify-content: flex-end;
         gap: clamp(15px, 2vw, 20px);
     }
     .top-center-text {
-        top: 10px; /* Adjusted to stay closer to top but not overlap */
+        top: 10px;
         font-size: clamp(18px, 3vw, 28px);
         padding: 0.5rem 1rem;
         width: 90%;
+        color: var(--primary);
     }
     .executor-button {
         font-size: clamp(14px, 2vw, 16px);
@@ -804,6 +812,58 @@ html[data-theme="light"] #searchInput::placeholder {
         backdrop-filter: none;
         background: var(--glass-dark);
     }
+    /* Additions for mobile responsiveness */
+    .blob1 {
+        width: 300px;
+        height: 300px;
+        top: -150px;
+        right: -100px;
+    }
+    .blob2 {
+        width: 250px;
+        height: 250px;
+        bottom: -125px;
+        left: -75px;
+    }
+    .blob3 {
+        width: 225px;
+        height: 225px;
+        top: 50%;
+        right: 10%;
+    }
+    .container {
+        padding: 15px;
+    }
+    .script-card {
+        padding: 15px;
+    }
+    .script-card h3 {
+        font-size: clamp(1.2em, 2.5vw, 1.5em);
+    }
+    .script-card p {
+        font-size: clamp(0.85em, 1.8vw, 1em);
+    }
+    .script-card button {
+        padding: 8px 16px;
+        font-size: clamp(0.85em, 1.8vw, 1em);
+        min-height: 36px;
+        min-width: 80px;
+    }
+    .script-card button.favorite-btn {
+        padding: 8px;
+        min-width: 36px;
+    }
+    #searchInput, #gameFilter, #categoryFilter, #sortFilter {
+        padding: 8px;
+        font-size: clamp(12px, 1.8vw, 14px);
+        min-height: 40px;
+    }
+    .executor-button {
+        padding: 8px 16px;
+        font-size: clamp(12px, 1.8vw, 14px);
+        min-height: 40px;
+        min-width: 80px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -814,7 +874,7 @@ html[data-theme="light"] #searchInput::placeholder {
         padding: 15px;
     }
     header {
-        margin-bottom: clamp(70px, 15vw, 90px); /* Adjusted for smaller screens */
+        margin-bottom: clamp(70px, 15vw, 90px);
         padding-top: 50px;
     }
     .top-center-text {
@@ -898,6 +958,175 @@ html[data-theme="light"] #searchInput::placeholder {
     }
     .pagination span {
         font-size: 0.85em;
+    }
+    /* Additions for mobile responsiveness */
+    .blob1 {
+        width: 200px;
+        height: 200px;
+        top: -100px;
+        right: -50px;
+    }
+    .blob2 {
+        width: 180px;
+        height: 180px;
+        bottom: -90px;
+        left: -40px;
+    }
+    .blob3 {
+        width: 150px;
+        height: 150px;
+        top: 60%;
+        right: 5%;
+    }
+    .container {
+        padding: 10px;
+    }
+    .script-card {
+        padding: 12px;
+    }
+    .script-card h3 {
+        font-size: clamp(1.1em, 2.2vw, 1.3em);
+    }
+    .script-card p {
+        font-size: clamp(0.8em, 1.6vw, 0.95em);
+    }
+    .script-card button {
+        padding: 6px 12px;
+        font-size: clamp(0.8em, 1.6vw, 0.9em);
+        min-height: 32px;
+        min-width: 70px;
+    }
+    .script-card button.favorite-btn {
+        padding: 6px;
+        min-width: 32px;
+    }
+    #searchInput, #gameFilter, #categoryFilter, #sortFilter {
+        padding: 6px;
+        font-size: clamp(11px, 1.6vw, 13px);
+        min-height: 36px;
+    }
+    .executor-button {
+        padding: 6px 12px;
+        font-size: clamp(11px, 1.6vw, 13px);
+        min-height: 36px;
+        min-width: 70px;
+    }
+    .hamburger {
+        font-size: clamp(1.5em, 2.5vw, 1.8em);
+        min-height: 40px;
+        min-width: 40px;
+    }
+    .hamburger span {
+        width: 24px;
+        height: 2px;
+        margin: 2px 0;
+    }
+}
+
+@media (max-width: 360px) {
+    body {
+        font-size: 12px;
+    }
+    .top-center-text {
+        top: 3px;
+        font-size: clamp(14px, 3.5vw, 20px);
+        padding: 0.3rem 0.6rem;
+        width: 98%;
+    }
+    .container {
+        padding: 8px;
+    }
+    .header-right {
+        gap: 10px;
+    }
+    .executor-button {
+        padding: 6px 10px;
+        font-size: clamp(10px, 1.5vw, 12px);
+        min-height: 32px;
+        min-width: 60px;
+    }
+    .hamburger {
+        top: 3px;
+        right: 3px;
+        font-size: clamp(1.3em, 2.2vw, 1.5em);
+        min-height: 36px;
+        min-width: 36px;
+    }
+    .hamburger span {
+        width: 20px;
+        height: 2px;
+        margin: 1.5px 0;
+    }
+    .filter-bar {
+        padding: 8px;
+        gap: 6px;
+    }
+    #searchInput, #gameFilter, #categoryFilter, #sortFilter {
+        padding: 5px;
+        font-size: clamp(10px, 1.5vw, 12px);
+        min-height: 32px;
+    }
+    .favorite-toggle {
+        font-size: 12px;
+        padding: 6px;
+    }
+    .scripts-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .script-card {
+        padding: 10px;
+    }
+    .script-card h3 {
+        font-size: clamp(1em, 2vw, 1.2em);
+    }
+    .script-card p {
+        font-size: clamp(0.75em, 1.5vw, 0.9em);
+    }
+    .script-card button {
+        padding: 5px 10px;
+        font-size: clamp(0.75em, 1.5vw, 0.85em);
+        min-height: 30px;
+        min-width: 60px;
+    }
+    .script-card button.favorite-btn {
+        padding: 5px;
+        min-width: 30px;
+    }
+    .modal-content {
+        padding: 15px;
+        max-width: 98%;
+    }
+    .modal-content h2 {
+        font-size: clamp(1.3em, 3vw, 1.5em);
+    }
+    .modal-content p {
+        font-size: clamp(0.8em, 1.5vw, 0.9em);
+    }
+    .modal-content pre {
+        font-size: clamp(0.7em, 1.5vw, 0.8em);
+        padding: 10px;
+    }
+    .close-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 1em;
+    }
+    .copy-btn {
+        padding: 5px 10px;
+        font-size: clamp(0.75em, 1.5vw, 0.85em);
+        min-height: 30px;
+    }
+    .pagination button {
+        padding: 6px 12px;
+        font-size: clamp(0.7em, 1.5vw, 0.8em);
+        min-height: 30px;
+    }
+    .pagination span {
+        font-size: clamp(0.7em, 1.5vw, 0.8em);
+    }
+    .blob {
+        display: none;
     }
 }
 
