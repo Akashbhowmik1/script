@@ -49,7 +49,6 @@ html[data-theme="light"] {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    /* Improvement: Added fallback fonts for better compatibility */
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
@@ -63,7 +62,6 @@ body {
     position: relative;
 }
 
-/* Improvement: Scoped touch-action to specific interactive elements */
 button, input[type="button"], input[type="submit"], select {
     touch-action: manipulation;
 }
@@ -81,10 +79,8 @@ button, input[type="button"], input[type="submit"], select {
 .blob {
     position: absolute;
     border-radius: 50%;
-    /* Note: High blur values may impact performance on low-end devices; consider reducing if needed */
     filter: blur(80px);
     opacity: 0.4;
-    /* Note: Continuous animation may affect performance; consider pausing when out of viewport */
     animation: float 20s infinite ease-in-out alternate;
 }
 
@@ -131,12 +127,14 @@ button, input[type="button"], input[type="submit"], select {
 
 header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
-    margin-bottom: clamp(30px, 5vw, 50px);
+    margin-bottom: clamp(80px, 10vw, 100px); /* Increased to prevent overlap with top-center-text */
     flex-wrap: wrap;
     gap: clamp(15px, 2vw, 25px);
     animation: fadeIn 1s ease-out;
+    position: relative;
+    min-height: 60px; /* Ensure header has enough space */
 }
 
 .top-center-text {
@@ -144,7 +142,7 @@ header {
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
-    width: min(80%, 700px);
+    width: min(80%, 500px);
     text-align: center;
     font-size: clamp(22px, 3.5vw, 34px);
     font-weight: 600;
@@ -152,19 +150,20 @@ header {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    padding: 0.15rem 0.3rem;
-    border-radius: 3px;
+    padding: 0.5rem 1rem; /* Increased padding for better visibility */
+    border-radius: 8px;
     box-shadow: var(--shadow);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
     z-index: 998;
     animation: fadeInTop 1s forwards;
+    pointer-events: none; /* Prevent interaction to avoid blocking other elements */
 }
 
 @keyframes fadeInTop {
     from { opacity: 0; transform: translate(-50%, -20px); }
     to { opacity: 1; transform: translate(-50%, 0); }
 }
-/* Modified: Enhanced text visibility and background contrast for filter options */
+
 #searchInput, #gameFilter, #categoryFilter, #sortFilter {
     padding: clamp(12px, 2vw, 16px);
     font-size: clamp(14px, 2vw, 16px);
@@ -180,48 +179,41 @@ header {
     -moz-appearance: none;
     appearance: none;
     min-height: 44px;
-    /* Fix: Ensure select elements have a pointer cursor for better UX */
     cursor: pointer;
 }
 
-/* Fix: Style <option> elements to ensure text visibility */
 #gameFilter option, #categoryFilter option, #sortFilter option {
     color: var(--light);
-    background: var(--dark); /* Use --dark for option background to ensure contrast */
+    background: var(--dark);
     font-size: clamp(14px, 2vw, 16px);
-    padding: 8px; /* Improve option readability */
+    padding: 8px;
 }
 
-/* Fix: Ensure focus state maintains text visibility */
 #searchInput:focus, #gameFilter:focus, #categoryFilter:focus, #sortFilter:focus {
     outline: none;
     border-color: var(--primary);
     box-shadow: 0 0 0 2px rgba(0, 255, 204, 0.3);
-    color: var(--light); /* Reinforce text color on focus */
+    color: var(--light);
 }
 
-/* Fix: Adjust placeholder color for consistency */
 #searchInput::placeholder {
     color: rgba(255, 255, 255, 0.6);
 }
 
-/* Modified: Light theme adjustments for better contrast */
 html[data-theme="light"] #searchInput, 
 html[data-theme="light"] #gameFilter, 
 html[data-theme="light"] #categoryFilter, 
 html[data-theme="light"] #sortFilter {
-    background: rgba(0, 0, 0, 0.1); /* Fix: Increase opacity for better contrast in light theme */
+    background: rgba(0, 0, 0, 0.1);
 }
 
-/* Fix: Ensure option text is visible in light theme */
 html[data-theme="light"] #gameFilter option, 
 html[data-theme="light"] #categoryFilter option, 
 html[data-theme="light"] #sortFilter option {
-    color: var(--light); /* #0a0a0a in light theme */
-    background: var(--dark); /* #f5f5f5 in light theme */
+    color: var(--light);
+    background: var(--dark);
 }
 
-/* Modified: Light theme placeholder */
 html[data-theme="light"] #searchInput::placeholder {
     color: rgba(0, 0, 0, 0.6);
 }
@@ -230,6 +222,7 @@ html[data-theme="light"] #searchInput::placeholder {
     display: flex;
     align-items: center;
     gap: clamp(20px, 3vw, 30px);
+    flex-wrap: nowrap; /* Prevent wrapping to keep elements in place */
 }
 
 .executor-button {
@@ -245,6 +238,7 @@ html[data-theme="light"] #searchInput::placeholder {
     transition: var(--transition);
     box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
     min-height: 48px;
+    min-width: 120px; /* Ensure button doesn't shrink too much */
 }
 
 .executor-button:hover, .executor-button:focus {
@@ -260,14 +254,12 @@ html[data-theme="light"] #searchInput::placeholder {
     cursor: pointer;
     min-height: 48px;
     min-width: 48px;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 999;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative; /* Changed to relative to stay within header flow */
+    z-index: 999;
 }
 
 .hamburger span {
@@ -290,7 +282,6 @@ html[data-theme="light"] #searchInput::placeholder {
     transform: rotate(-45deg) translate(7px, -7px);
 }
 
-/* Improvement: Added :focus state for accessibility */
 .hamburger:focus {
     outline: 2px solid var(--primary);
     outline-offset: 2px;
@@ -302,7 +293,7 @@ html[data-theme="light"] #searchInput::placeholder {
     right: -100%;
     width: 100%;
     height: 100%;
-    background: var(--glass-dark); /* Note: Ensure --glass-dark is intended for fallback */
+    background: var(--glass-dark);
     backdrop-filter: blur(var(--blur));
     display: flex;
     align-items: center;
@@ -327,7 +318,6 @@ html[data-theme="light"] #searchInput::placeholder {
     width: 100%;
 }
 
-/* Improvement: Combined identical styles for a and button */
 .overlay-content a, .overlay-content button {
     display: flex;
     align-items: center;
@@ -368,7 +358,6 @@ html[data-theme="light"] #searchInput::placeholder {
     transform: translateY(0);
 }
 
-/* Improvement: Simplified transition delays with nth-child */
 .overlay-content a:nth-child(n), .overlay-content button:nth-child(n) {
     transition-delay: calc(0.1s * (var(--n) - 1));
 }
@@ -399,7 +388,6 @@ html[data-theme="light"] #searchInput::placeholder {
     max-width: clamp(250px, 45vw, 300px);
     transition: var(--transition);
     box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.2);
-    /* Improvement: Added vendor prefixes for appearance */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -551,7 +539,6 @@ html[data-theme="light"] #searchInput::placeholder {
     pointer-events: none;
 }
 
-/* Improvement: Added :focus state for accessibility */
 .pagination button:hover, .pagination button:focus {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
@@ -633,7 +620,6 @@ html[data-theme="light"] #searchInput::placeholder {
 }
 
 .modal-content code {
-    /* Improvement: Added fallback fonts for better compatibility */
     font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
 }
 
@@ -736,7 +722,6 @@ html[data-theme="light"] #searchInput::placeholder {
 
 @supports not (backdrop-filter: blur(3px)) {
     .filter-bar, .overlay-menu, .modal-content, .top-center-text {
-        /* Note: Ensure --glass-dark is the intended fallback background */
         backdrop-filter: none;
         background: var(--glass-dark);
     }
@@ -753,17 +738,36 @@ html[data-theme="light"] #searchInput::placeholder {
 
 @media (max-width: 768px) {
     header {
-        flex-direction: column;
-        gap: 20px;
+        justify-content: flex-end; /* Keep header aligned to the right */
+        margin-bottom: clamp(80px, 12vw, 100px); /* Increased margin to avoid overlap */
+        padding-top: 60px; /* Add padding to account for top-center-text */
     }
     .header-right {
-        width: 100%;
+        width: auto; /* Allow natural width to prevent stretching */
         justify-content: flex-end;
+        gap: clamp(15px, 2vw, 20px);
+    }
+    .top-center-text {
+        top: 10px; /* Adjusted to stay closer to top but not overlap */
+        font-size: clamp(18px, 3vw, 28px);
+        padding: 0.5rem 1rem;
+        width: 90%;
+    }
+    .executor-button {
+        font-size: clamp(14px, 2vw, 16px);
+        padding: 12px 24px;
+        min-width: 100px;
+    }
+    .hamburger {
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
     .filter-bar {
         flex-direction: column;
         align-items: stretch;
         padding: 15px;
+        gap: 10px;
     }
     #searchInput, #gameFilter, #categoryFilter, #sortFilter {
         max-width: 100%;
@@ -782,9 +786,6 @@ html[data-theme="light"] #searchInput::placeholder {
     .modal-content {
         max-width: 95%;
         padding: 20px;
-    }
-    .top-center-text {
-        font-size: clamp(18px, 3vw, 28px);
     }
     .overlay-content {
         padding: 20px;
@@ -812,9 +813,28 @@ html[data-theme="light"] #searchInput::placeholder {
     .container {
         padding: 15px;
     }
+    header {
+        margin-bottom: clamp(70px, 15vw, 90px); /* Adjusted for smaller screens */
+        padding-top: 50px;
+    }
+    .top-center-text {
+        top: 5px;
+        font-size: clamp(16px, 4vw, 24px);
+        padding: 0.4rem 0.8rem;
+        width: 95%;
+    }
+    .executor-button {
+        font-size: 14px;
+        padding: 10px 20px;
+        min-width: 90px;
+    }
+    .hamburger {
+        top: 5px;
+        right: 5px;
+    }
     .filter-bar {
         padding: 10px;
-        gap: 10px;
+        gap: 8px;
     }
     #searchInput, #gameFilter, #categoryFilter, #sortFilter {
         max-width: 100%;
@@ -846,10 +866,10 @@ html[data-theme="light"] #searchInput::placeholder {
         padding: 10px 18px;
         font-size: 0.9em;
         min-height: 40px;
-        min-width: 120px;
+        min-width: 100px;
     }
     .script-card button.favorite-btn {
-        min-width: 44px;
+        min-width: 40px;
     }
     .modal-content h2 {
         font-size: 1.5em;
@@ -879,16 +899,6 @@ html[data-theme="light"] #searchInput::placeholder {
     .pagination span {
         font-size: 0.85em;
     }
-    .top-center-text {
-        width: 90%;
-        font-size: 18px;
-        padding: 12px 16px;
-    }
-    .executor-button {
-        width: 100%;
-        font-size: 16px;
-        padding: 16px;
-    }
 }
 
 @media (min-width: 1920px) {
@@ -896,7 +906,7 @@ html[data-theme="light"] #searchInput::placeholder {
         max-width: 1600px;
     }
     .top-center-text {
-        font-size: 4em;
+        font-size: clamp(36px, 4vw, 48px);
     }
     .scripts-grid {
         grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
@@ -937,7 +947,6 @@ html[data-theme="light"] #searchInput::placeholder {
 }
 
 @media (prefers-contrast: high) {
-    /* Accessibility: Enhanced contrast for better readability */
     body {
         background: #000;
         color: #fff;
