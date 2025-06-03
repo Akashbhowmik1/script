@@ -22,12 +22,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-       :root {
+    :root {
     --primary: #00ffcc;
     --primary-dark: #00d1aa;
     --secondary: #ff00ff;
     --accent: #ffcc00;
-    --dark: #0a0a0a;
+    --dark: #0a0a0a; /* Solid color instead of gradient */
     --light: #ffffff;
     --glass: rgba(255, 255, 255, 0.1);
     --glass-hover: rgba(255, 255, 255, 0.15);
@@ -39,8 +39,6 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     --glow: 0 0 15px rgba(0, 255, 204, 0.6);
-    --dark: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
-  --light: #f0f0f0;
 }
 
 html[data-theme="light"] {
@@ -67,6 +65,7 @@ body {
   animation: lights 15s ease infinite;
   color: var(--light);
   min-height: 100vh;
+  margin: 0;
   overflow-x: hidden;
   font-size: clamp(16px, 2.5vw, 18px);
   position: relative;
@@ -1325,7 +1324,7 @@ html[data-theme="light"] #searchInput::placeholder {
             <a href="https://www.youtube.com/@ScriptFarmer" target="_blank" aria-label="Visit our YouTube channel">
                 <i class="fab fa-youtube"></i> YouTube
             </a>
-            <a href="https://discord.gg/pVhzpNuN" target="_blank" aria-label="Join our Discord server">
+            <a href="http://discord.gg/7q2TvZ9GYX" target="_blank" aria-label="Join our Discord server">
                 <i class="fab fa-discord"></i> Discord
             </a>
             <button id="themeToggle" aria-label="Toggle theme"><i class="fas fa-moon"></i> Toggle Theme</button>
