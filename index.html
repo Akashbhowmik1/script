@@ -22,37 +22,62 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
-    :root {
-    --primary: #00ffcc;
-    --primary-dark: #00d1aa;
-    --secondary: #ff00ff;
-    --accent: #ffcc00;
-    --dark: #0a0a0a;
-    --light: #ffffff;
-    --glass: rgba(255, 255, 255, 0.1);
-    --glass-hover: rgba(255, 255, 255, 0.15);
-    --glass-dark: rgba(0, 0, 0, 0.4);
-    --status-online: #4ade80;
-    --status-offline: #f87171;
-    --status-maintenance: #fbbf24;
-    --blur: 12px;
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    --glow: 0 0 15px rgba(0, 255, 204, 0.6);
-    --dark: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
-  --light: #f0f0f0;
-}
 
-html[data-theme="light"] {
-    --primary: #00d1aa;
-    --primary-dark: #00a389;
-    --dark: #f5f5f5;
-    --light: #0a0a0a;
-    --glass: rgba(0, 0, 0, 0.05);
-    --glass-hover: rgba(0, 0, 0, 0.1);
-    --glass-dark: rgba(255, 255, 255, 0.9);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-}
+    :root {
+        --primary: #00ffcc;
+        --primary-dark: #00d1aa;
+        --secondary: #ff00ff;
+        --accent: #ffcc00;
+        --dark: #0a0a0a;
+        --light: #ffffff;
+        --glass: rgba(255, 255, 255, 0.1);
+        --glass-hover: rgba(255, 255, 255, 0.15);
+        --glass-dark: rgba(0, 0, 0, 0.4);
+        --status-online: #4ade80;
+        --status-offline: #f87171;
+        --status-maintenance: #fbbf24;
+        --blur: 12px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        --glow: 0 0 15px rgba(0, 255, 204, 0.6);
+    }
+
+    html[data-theme="light"] {
+        --primary: #00d1aa;
+        --primary-dark: #00a389;
+        --dark: #f5f5f5;
+        --light: #0a0a0a;
+        --glass: rgba(0, 0, 0, 0.05);
+        --glass-hover: rgba(0, 0, 0, 0.1);
+        --glass-dark: rgba(255, 255, 255, 0.9);
+        --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background-color: transparent;
+    }
+
+    html {
+        background-color: #0f0c29; /* Fix flicker */
+    }
+
+    body {
+        background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e);
+        background-size: 400% 400%;
+        animation: lights 15s ease infinite;
+        color: var(--light);
+        min-height: 100vh;
+        overflow-x: hidden;
+        font-size: clamp(16px, 2.5vw, 18px);
+        position: relative;
+        margin: 0;
+    }
+
+   
 
 * {
     box-sizing: border-box;
@@ -70,14 +95,22 @@ body {
   overflow-x: hidden;
   font-size: clamp(16px, 2.5vw, 18px);
   position: relative;
+  margin: 0;
 }
 
 
 @keyframes lights {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
+
 
 button, input[type="button"], input[type="submit"], select {
     touch-action: manipulation;
@@ -166,14 +199,6 @@ header {
     background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     background-clip: text;
-    color: var(--primary);
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    box-shadow: var(--shadow);
-    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
-    z-index: 998;
-    animation: fadeInTop 1s forwards;
-    pointer-events: none;
 }
 
 @supports not (background-clip: text) {
