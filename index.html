@@ -27,7 +27,7 @@
     --primary-dark: #00d1aa;
     --secondary: #ff00ff;
     --accent: #ffcc00;
-    --dark: #0a0a0a; /* Solid color instead of gradient */
+    --dark: #0a0a0a;
     --light: #ffffff;
     --glass: rgba(255, 255, 255, 0.1);
     --glass-hover: rgba(255, 255, 255, 0.15);
@@ -39,6 +39,8 @@
     --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     --glow: 0 0 15px rgba(0, 255, 204, 0.6);
+    --dark: radial-gradient(circle at top left, #0f0c29, #302b63, #24243e);
+  --light: #f0f0f0;
 }
 
 html[data-theme="light"] {
@@ -65,7 +67,6 @@ body {
   animation: lights 15s ease infinite;
   color: var(--light);
   min-height: 100vh;
-  margin: 0;
   overflow-x: hidden;
   font-size: clamp(16px, 2.5vw, 18px);
   position: relative;
