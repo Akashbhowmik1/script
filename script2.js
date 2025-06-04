@@ -244,23 +244,79 @@ const scripts = [
     }
 ];
 
-// Favorites management
 let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-const isFavorite = (scriptName) => favorites.includes(scriptName);
+const isFavorite = (scriptName) => {
+    if (typeof scriptName !== 'string' || !scriptName.trim()) {
+        console.warn('Invalid script name provided to isFavorite:', scriptName);
+        return false;
+    }
+    return favorites.includes(scriptName.trim());
+};
 
 const toggleFavorite = (scriptName) => {
-    if (isFavorite(scriptName)) {
+    if (typeof scriptName !== 'string' || !scriptName.trim()) {
+        console.warn('Invalid script name for toggleFavorite:', scriptName);
+        return;
+    }
+    scriptName = scriptName.trim();
+
+    // Check if script exists
+    const scriptExists = scripts.some(script => script.name === scriptName);
+    if (!scriptExists) {
+        console.warn(`Script '${scriptName}' not found in scripts array.`);
+        return;
+    }
+
+    // Toggle favorite state
+    const isCurrentlyFavorite = isFavorite(scriptName);
+    if (isCurrentlyFavorite) {
         favorites = favorites.filter(name => name !== scriptName);
     } else {
         favorites.push(scriptName);
     }
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+
+    // Update localStorage
+    try {
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    } catch (error) {
+        console.error('Failed to update localStorage:', error);
+        return;
+    }
+
+    // Update the specific favorite button
+    const favoriteButtons = document.querySelectorAll(`.favorite-btn[onclick="toggleFavorite('${scriptName}')"]`);
+    favoriteButtons.forEach(button => {
+        button.innerHTML = isCurrentlyFavorite ? '<i class="far fa-heart"></i>' : '<i class="fas fa-heart"></i>';
+        button.classList.toggle('favorited', !isCurrentlyFavorite);
+        button.setAttribute('aria-label', isCurrentlyFavorite ? `Add ${scriptName} to favorites` : `Remove ${scriptName} from favorites`);
+        button.classList.remove('animate');
+        void button.offsetWidth; // Trigger reflow
+        button.classList.add('animate');
+    });
+
+   // Refresh display only if favorites filter is active
+const showFavorites = document.getElementById('showFavorites');
+if (showFavorites && showFavorites.checked) {
     filterScripts();
+}
+
 };
 
-// Function to show script code in modal
-const showCode = (scriptName) => {
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.add('hide');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            modal.classList.remove('hide');
+        }, 300);
+    } else {
+        console.warn(`Modal with ID '${modalId}' not found.`);
+    }
+}
+
+function showCode(scriptName) {
     const script = scripts.find(s => s.name === scriptName);
     const modal = document.getElementById('scriptModal');
     const modalTitle = document.getElementById('modalTitle');
@@ -305,7 +361,7 @@ const showCode = (scriptName) => {
     modal.setAttribute('aria-hidden', 'false');
     modal.focus();
     hljs.highlightElement(modalCode);
-};
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     hljs.highlightAll();
@@ -375,21 +431,6 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal('contactModal');
         }
     });
-
-    // Function to close modals
-    const closeModal = (modalId) => {
-        const modal = document.getElementById(modalId);
-        if (modal) {
-            modal.style.display = 'none';
-            modal.setAttribute('aria-hidden', 'true');
-            const trigger = document.activeElement;
-            if (trigger && trigger.closest('.script-card, .overlay-content')) {
-                trigger.focus();
-            } else {
-                document.body.focus();
-            }
-        }
-    };
 
     // About modal toggle
     const aboutBtn = document.getElementById('aboutBtn');
@@ -470,7 +511,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p>${script.description}</p>
             <div class="buttons">
                 <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}"><i class="fas fa-code"></i> View Code</button>
-                <button class="favorite-btn" onclick="toggleFavorite('${script.name}')" aria-label="${isFavorite(script.name) ? 'Remove from' : 'Add to'} favorites">
+                <button class="favorite-btn${isFavorite(script.name) ? ' favorited' : ''}" onclick="toggleFavorite('${script.name}')" aria-label="${isFavorite(script.name) ? 'Remove from' : 'Add to'} favorites" data-script-name="${script.name}">
                     ${isFavorite(script.name) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}
                 </button>
             </div>
@@ -578,9 +619,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const showFavorites = document.getElementById('showFavorites');
         const prevPage = document.getElementById('prevPage');
         const nextPage = document.getElementById('nextPage');
+        const scriptsGrid = document.getElementById('scriptsGrid');
 
-        if (!searchInput || !gameFilter || !categoryFilter || !sortFilter || !showFavorites || !prevPage || !nextPage) {
-            console.error('Required DOM elements for event listeners not found.');
+        if (!searchInput || !gameFilter || !categoryFilter || !sortFilter || !showFavorites || !prevPage || !nextPage || !scriptsGrid) {
+            console.error('Search input field or DOM elements for event listeners not found.');
             return;
         }
 
@@ -591,16 +633,16 @@ document.addEventListener('DOMContentLoaded', () => {
         sortFilter.addEventListener('change', filterScripts);
         showFavorites.addEventListener('change', filterScripts);
 
-        searchInput.addEventListener('touchstart', (e) => {
-            e.target.focus();
+        searchInput.addEventListener('touchstart', () => {
+            searchInput.focus();
         });
         [gameFilter, categoryFilter, sortFilter].forEach(select => {
-            select.addEventListener('touchstart', (e) => {
-                e.target.focus();
+            select.addEventListener('touchstart', () => {
+                select.focus();
             });
         });
-        showFavorites.addEventListener('touchstart', (e) => {
-            e.target.focus();
+        showFavorites.addEventListener('touchstart', () => {
+            showFavorites.focus();
         });
 
         prevPage.addEventListener('click', () => {
@@ -612,9 +654,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         nextPage.addEventListener('click', () => {
-            currentPage++;
-            filterScripts();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentPage < Math.ceil(scripts.length / scriptsPerPage)) {
+                currentPage++;
+                filterScripts();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+
+        // Simplified event delegation for favorite buttons
+        scriptsGrid.addEventListener('click', (e) => {
+            const favoriteBtn = e.target.closest('.favorite-btn');
+            if (favoriteBtn) {
+                const scriptName = favoriteBtn.dataset.scriptName;
+                if (scriptName) {
+                    toggleFavorite(scriptName);
+                    e.stopPropagation();
+                    e.preventDefault(); // Prevent multiple triggers
+                } else {
+                    console.warn('No data-script-name found on favorite button.');
+                }
+            }
         });
     };
 
@@ -625,10 +684,8 @@ document.addEventListener('DOMContentLoaded', () => {
             filterScripts();
         } catch (error) {
             console.error('Initialization failed:', error);
-            alert('An error occurred while loading the page. Please refresh.');
         }
     };
 
     init();
 });
- 
