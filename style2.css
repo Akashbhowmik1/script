@@ -289,6 +289,27 @@ html[data-theme="light"] #searchInput::placeholder {
     -ms-transform: translate(-50%, calc(-50% + 5px));
     box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5);
 }
+.code-button {
+    background: linear-gradient(45deg, var(--primary, #00ffcc), var(--primary-dark, #00d1aa));
+    color: var(--dark, #0a0a0a);
+    border: none;
+    padding: 14px 28px;
+    text-align: center;
+    font-size: clamp(16px, 2vw, 18px);
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: var(--transition, all 0.3s ease), transform 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    min-height: 48px;
+    min-width: 120px;
+    position: absolute;
+    top: 160%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
 
 /* Hamburger menu */
 .hamburger {
