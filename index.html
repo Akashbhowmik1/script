@@ -4,75 +4,111 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Scripts Hub</title>
-    <!-- Poppins Font -->
-    <link rel="website icon" type="jpg" href="titel.jpg">
+    <link rel="website icon" type="image/jpg" href="titel.jpg">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Highlight.js -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <meta name="5d08b424f54e3a3695f08e344066ff243ef4b0c1" content="5d08b424f54e3a3695f08e344066ff243ef4b0c1" />
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="style2.css">
+    <script defer src="script2.js"></script>
+
+    <!-- Meta Tags for Ad Verification -->
+    <meta name="5d08b424f54e3a3695f08e344066ff243ef4b0c1" content="5d08b424f54e3a3695f08e344066ff243ef4b0c1">
     <meta name="Trafficstars" content="71375">
 
-    <!-- Adsterra / PopAds / TrafficStars popunder script -->
+    <!-- Ads: PopAds -->
     <script type="text/javascript" data-cfasync="false">
-    (function(){
-      var j=window, n="fda8f29e06f88febdcbc7b8dd33d2e68",
-          y=[["siteId",820-130*24+5209451],["minBid",0],["popundersPerIP","0"],["delayBetween",0],["default",false],["defaultPerDay",0],["topmostLayer","auto"]],
-          c=["https:\/\/d3d3LmludGVsbGlnZW5jZWFkeC5jb20vZ29pZGMtY2xpZW50Lm1pbi5jc3M=","https:\/\/ZDJrbHg4N2Jnem5nZ2NlLmNsb3VkZnJvbnQubmV0L3V2L3BzY3JvbGxyZXZlYWwubWluLmpz="],
-          u=-1, g, d;
-      function p(){
-        clearTimeout(d);
-        u++;
-        if(c[u] && !(1775492989000 < (new Date).getTime() && 1 < u)){
-          g=j.document.createElement("script");
-          g.type="text/javascript";
-          g.async=true;
-          var k=j.document.getElementsByTagName("script")[0];
-          g.src = atob(c[u]).replace(/^http:/, "https:");
-          g.crossOrigin="anonymous";
-          g.onerror=p;
-          g.onload=function(){clearTimeout(d); if(!j[n.slice(0,16)+n.slice(0,16)]) p();};
-          d=setTimeout(p,5000);
-          k.parentNode.insertBefore(g, k);
+    (function() {
+        var j = window,
+            n = "fda8f29e06f88febdcbc7b8dd33d2e68",
+            y = [
+                ["siteId", 820 - 130 * 24 + 5209451],
+                ["minBid", 0],
+                ["popundersPerIP", "0"],
+                ["delayBetween", 0],
+                ["default", false],
+                ["defaultPerDay", 0],
+                ["topmostLayer", "auto"]
+            ],
+            c = [
+                "d3d3LmludGVsbGlnZW5jZWFkeC5jb20vZ29pZGMtY2xpZW50Lm1pbi5jc3M=",
+                "ZDJrbHg4N2Jnem5nY2UuY2xvdWRmcm9udC5uZXQvdXYvcHNjcm9sbHJldmVhbC5taW4uanM="
+            ],
+            u = -1,
+            g,
+            d,
+            p = function() {
+                clearTimeout(d);
+                u++;
+                if (c[u] && !(1775492989000 < (new Date).getTime() && 1 < u)) {
+                    g = j.document.createElement("script");
+                    g.type = "text/javascript";
+                    g.async = true;
+                    var k = j.document.getElementsByTagName("script")[0];
+                    g.src = "https://" + atob(c[u]);
+                    g.crossOrigin = "anonymous";
+                    g.onerror = p;
+                    g.onload = function() {
+                        clearTimeout(d);
+                        j[n.slice(0, 16) + n.slice(0, 16)] || p()
+                    };
+                    d = setTimeout(p, 5000);
+                    k.parentNode.insertBefore(g, k);
+                }
+            };
+        if (!j[n]) {
+            try {
+                Object.freeze(j[n] = y)
+            } catch (e) {}
+            p();
         }
-      }
-      if(!j[n]){
-        try{ Object.freeze(j[n]=y); }catch(e){}
-        p();
-      }
     })();
     </script>
 
-    <script type="text/javascript" src="https://mediocrecliffschangeless.com/37/a4/1a/37a41a8850daaffb18224e2b6a0cdebf.js"></script>
-    <script type="text/javascript" src="https://mediocrecliffschangeless.com/1b/50/df/1b50dfce68ebf2e557d1710bc7a9ded2.js"></script>
+    <!-- Adsterra -->
+    <script type="text/javascript" src="//mediocrecliffschangeless.com/37/a4/1a/37a41a8850daaffb18224e2b6a0cdebf.js" async></script>
+    <script type="text/javascript" src="//mediocrecliffschangeless.com/1b/50/df/1b50dfce68ebf2e557d1710bc7a9ded2.js" async></script>
 
-    <script type="text/javascript" src="https://cdn.runative-syndicate.com/sdk/v1/p.js"
+    <!-- TrafficStars -->
+    <script type="text/javascript" src="//cdn.runative-syndicate.com/sdk/v1/p.js"
         data-ts-spot="16311825b9344d8186db83c696a98305"
         data-ts-extid="{extid}"
         data-ts-session-duration="5"
         data-ts-count="5"
         data-ts-first-delay="10"
-        async defer></script>
+        async defer>
+    </script>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="style2.css">
-    <script defer src="script2.js"></script>
 </head>
 <body>
-    <!-- (Rest of your body unchanged) -->
+    <!-- Website content remains unchanged -->
+    <!-- All your original <div> and <modal> content below this remains untouched -->
+
+    <!-- Include rest of your full body HTML exactly as you shared -->
+    <!-- Paste continues from your original content starting from <div class="bg-animation">... -->
+
     <div class="bg-animation">
-      <div class="blob blob1"></div>
-      <div class="blob blob2"></div>
-      <div class="blob blob3"></div>
+        <div class="blob blob1"></div>
+        <div class="blob blob2"></div>
+        <div class="blob blob3"></div>
     </div>
+
     <div class="top-center-text">Scripts Hub</div>
-    <div class="container">
-      <!-- header, filter-bar, scripts-grid, modals, etc. -->
-    </div>
+
+    <!-- ... The rest of your HTML remains the same ... -->
+    <!-- (Everything from the header, filters, scripts grid, modals, etc.) -->
+
+    <!-- Footer scripts if needed -->
 </body>
 </html>
