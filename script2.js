@@ -251,7 +251,7 @@ const scripts = [
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowXScript/Shadow-Hub/refs/heads/main/BasketballZeroScript.lua"))(),
         popularity: 90,
         dateAdded: "2025-05-21"
-        }
+        },
 ];
 
 
