@@ -1,4 +1,4 @@
-// Define scripts array once with corrected "Grow a Garden" entry
+// Define scripts array with corrected "Steal a brain root hack script" description
 const scripts = [
     {
         name: "Blox Fruit Auto Farm",
@@ -28,11 +28,10 @@ const scripts = [
         dateAdded: "2025-03-20"
     },
     {
-
         name: "Steal a brain root hack script",
         game: "Steal a brain root",
         category: "Simulation",
-        description: "A script for Adopt Me with pet auto-collect.",
+        description: "A script for Steal a brain root to automate resource collection and hacks.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/steal%20a%20brainrot"))()`,
         popularity: 90,
         dateAdded: "2025-04-15"
@@ -59,7 +58,7 @@ const scripts = [
         name: "Arise Crossover Auto Farm",
         game: "Arise Crossover",
         category: "Adventure",
-        description: "A script for Arise Crossover Auto farm.",
+        description: "A script for Arise Crossover to automate farming tasks.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()`,
         popularity: 60,
         dateAdded: "2025-05-05"
@@ -194,7 +193,7 @@ const scripts = [
         name: "Arsenal aim bot",
         game: "Arsenal",
         category: "Action",
-        description: "A script for Arsenal to Silent Aimbot Wallbang.",
+        description: "A script for Arsenal with silent aimbot and wallbang features.",
         code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Express-Hub-Free-Universal-GUI-V6-30568"))()`,
         popularity: 80,
         dateAdded: "2025-05-11"
@@ -203,16 +202,16 @@ const scripts = [
         name: "Tower Of Hell speed hack",
         game: "Tower of Hell",
         category: "Parkour",
-        description: "A script for Tower Of Hell walk speed jump boost.",
+        description: "A script for Tower of Hell to boost walk speed and jump power.",
         code: `loadstring(game:HttpGet("https://gist.githubusercontent.com/BloxiYT/85f97364b6367baac677e109488c9905/raw/c2972a2b892c4193509ddb2fe1ba3061435e1a8a/gistfile1.txt"))()`,
         popularity: 80,
         dateAdded: "2025-05-11"
     },
     {
-        name: "Jailbreak Auto Rob And More.",
+        name: "Jailbreak Auto Rob And More",
         game: "Jailbreak",
         category: "Open World",
-        description: "A script for Jailbreak.",
+        description: "A script for Jailbreak to automate robbing and other tasks.",
         code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/BlitzIsKing/UniversalFarm/main/Loader/Regular'))()`,
         popularity: 90,
         dateAdded: "2025-05-11"
@@ -281,6 +280,11 @@ try {
     console.error('Failed to load favorites from localStorage:', error);
 }
 
+/**
+ * Check if a script is in favorites
+ * @param {string} scriptName - Name of the script
+ * @returns {boolean} - True if the script is favorited
+ */
 const isFavorite = (scriptName) => {
     if (typeof scriptName !== 'string' || !scriptName.trim()) {
         console.warn('Invalid script name provided to isFavorite:', scriptName);
@@ -289,6 +293,10 @@ const isFavorite = (scriptName) => {
     return favorites.includes(scriptName.trim());
 };
 
+/**
+ * Toggle favorite status for a script
+ * @param {string} scriptName - Name of the script
+ */
 const toggleFavorite = (scriptName) => {
     if (typeof scriptName !== 'string' || !scriptName.trim()) {
         console.warn('Invalid script name for toggleFavorite:', scriptName);
@@ -302,8 +310,7 @@ const toggleFavorite = (scriptName) => {
         return;
     }
 
-    const isCurrentlyFavorite = isFavorite(scriptName);
-    if (isCurrentlyFavorite) {
+    if (isFavorite(scriptName)) {
         favorites = favorites.filter(name => name !== scriptName);
     } else {
         favorites.push(scriptName);
@@ -316,36 +323,45 @@ const toggleFavorite = (scriptName) => {
         return;
     }
 
-    const favoriteButtons = document.querySelectorAll(`.favorite-btn[data-script-name="${scriptName}"]`);
-    favoriteButtons.forEach(button => {
+    // Update all favorite buttons for this script
+    document.querySelectorAll(`.favorite-btn[data-script-name="${CSS.escape(scriptName)}"]`).forEach(button => {
         button.innerHTML = isFavorite(scriptName) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
         button.classList.toggle('favorited', isFavorite(scriptName));
         button.setAttribute('aria-label', isFavorite(scriptName) ? `Remove ${scriptName} from favorites` : `Add ${scriptName} to favorites`);
         button.classList.remove('animate');
-        void button.offsetWidth; // Trigger reflow
+        void button.offsetWidth; // Trigger reflow for animation
         button.classList.add('animate');
     });
 
+    // Refresh display if showing favorites
     const showFavorites = document.getElementById('showFavorites');
-    if (showFavorites && showFavorites.checked) {
+    if (showFavorites?.checked) {
         filterScripts();
     }
 };
 
+/**
+ * Close a modal with animation
+ * @param {string} modalId - ID of the modal to close
+ */
 function closeModal(modalId) {
     const modal = document.getElementById(modalId);
-    if (modal) {
-        modal.classList.add('hide');
-        setTimeout(() => {
-            modal.style.display = 'none';
-            modal.classList.remove('hide');
-            modal.setAttribute('aria-hidden', 'true');
-        }, 300);
-    } else {
+    if (!modal) {
         console.warn(`Modal with ID '${modalId}' not found.`);
+        return;
     }
+    modal.classList.add('hide');
+    setTimeout(() => {
+        modal.style.display = 'none';
+        modal.classList.remove('hide');
+        modal.setAttribute('aria-hidden', 'true');
+    }, 300);
 }
 
+/**
+ * Display script code in a modal
+ * @param {string} scriptName - Name of the script
+ */
 function showCode(scriptName) {
     const script = scripts.find(s => s.name === scriptName);
     const modal = document.getElementById('scriptModal');
@@ -366,6 +382,7 @@ function showCode(scriptName) {
     modalDescription.textContent = script.description;
     modalCode.textContent = script.code;
 
+    // Create or update copy button
     let copyButton = modalContent.querySelector('.copy-btn');
     if (!copyButton) {
         copyButton = document.createElement('button');
@@ -400,11 +417,16 @@ function showCode(scriptName) {
     }
 }
 
+/**
+ * Initialize the application on DOM load
+ */
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize syntax highlighting if available
     if (typeof hljs !== 'undefined') {
         hljs.highlightAll();
     }
 
+    // Theme toggle
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
         themeToggle.addEventListener('click', () => {
@@ -423,6 +445,7 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.innerHTML = `<i class="fas fa-${savedTheme === 'light' ? 'moon' : 'sun'}"></i> ${savedTheme === 'light' ? 'Dark' : 'Light'} Mode`;
     }
 
+    // Hamburger menu
     const hamburger = document.querySelector('.hamburger');
     const overlayMenu = document.getElementById('overlayMenu');
     if (hamburger && overlayMenu) {
@@ -462,9 +485,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Escape key handling
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
-            if (overlayMenu) {
+            if (overlayMenu && hamburger) {
                 overlayMenu.classList.remove('active');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
@@ -476,6 +500,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // About modal
     const aboutBtn = document.getElementById('aboutBtn');
     const aboutModal = document.getElementById('aboutModal');
     if (aboutBtn && aboutModal) {
@@ -492,6 +517,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Contact modal
     const contactBtn = document.getElementById('contactBtn');
     const contactModal = document.getElementById('contactModal');
     if (contactBtn && contactModal) {
@@ -508,6 +534,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Modal click and focus trap
     [document.getElementById('scriptModal'), aboutModal, contactModal].forEach(modal => {
         if (modal) {
             modal.addEventListener('click', (e) => {
@@ -534,6 +561,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    /**
+     * Debounce function to limit frequent calls
+     * @param {Function} func - Function to debounce
+     * @param {number} delay - Delay in milliseconds
+     * @returns {Function} - Debounced function
+     */
     const debounce = (func, delay) => {
         let timeoutId;
         return (...args) => {
@@ -542,6 +575,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
+    /**
+     * Create a script card element
+     * @param {Object} script - Script object
+     * @returns {HTMLElement} - Script card element
+     */
     const createScriptCard = (script) => {
         const scriptCard = document.createElement('div');
         scriptCard.className = 'script-card';
@@ -585,6 +623,10 @@ document.addEventListener('DOMContentLoaded', () => {
         return scriptCard;
     };
 
+    /**
+     * Display scripts with pagination
+     * @param {Array} scriptsToShow - Array of scripts to display
+     */
     const displayScripts = (scriptsToShow) => {
         const scriptsGrid = document.getElementById('scriptsGrid');
         const noResults = document.getElementById('noResults');
@@ -593,7 +635,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pageInfo = document.getElementById('pageInfo');
 
         if (!scriptsGrid || !noResults || !prevPage || !nextPage || !pageInfo) {
-            console.error('Required DOM elements not found.');
+            console.error('Required DOM elements for displayScripts not found.');
             return;
         }
 
@@ -630,6 +672,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    /**
+     * Filter and sort scripts based on user input
+     */
     const filterScripts = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
@@ -674,6 +719,9 @@ document.addEventListener('DOMContentLoaded', () => {
         displayScripts(filteredScripts);
     };
 
+    /**
+     * Initialize event listeners for filters and pagination
+     */
     const initEventListeners = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
@@ -685,7 +733,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scriptsGrid = document.getElementById('scriptsGrid');
 
         if (!searchInput || !gameFilter || !categoryFilter || !sortFilter || !showFavorites || !prevPage || !nextPage || !scriptsGrid) {
-            console.error('Search input field or DOM elements for event listeners not found.');
+            console.error('Required DOM elements for event listeners not found.');
             return;
         }
 
@@ -728,12 +776,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Helper function to get filtered scripts for pagination
+    /**
+     * Get filtered scripts for pagination
+     * @returns {Array} - Filtered scripts
+     */
     const filterScriptsData = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
         const categoryFilter = document.getElementById('categoryFilter');
         const showFavorites = document.getElementById('showFavorites');
+
+        if (!searchInput || !gameFilter || !categoryFilter || !showFavorites) {
+            return scripts;
+        }
 
         const searchTerm = searchInput.value.trim().toLowerCase();
         const selectedGame = gameFilter.value;
@@ -755,12 +810,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    /**
+     * Initialize the application
+     */
     const init = () => {
         try {
             initEventListeners();
             filterScripts();
         } catch (error) {
             console.error('Initialization failed:', error);
+            alert('Failed to initialize the application. Please refresh the page.');
         }
     };
 
