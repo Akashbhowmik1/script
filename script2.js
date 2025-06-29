@@ -130,6 +130,138 @@ const scripts = [
         game: "Grow a Garden",
         category: "Simulation",
         description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
+const scripts = [
+    {
+        name: "Blox Fruit Auto Farm",
+        game: "Blox Fruits",
+        category: "Adventure",
+        description: "A script for Blox Fruits with auto-farm and stats boost.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))`,
+        popularity: 100,
+        dateAdded: "2025-05-01"
+    },
+    {
+        name: "Adopt Me Pet Collector",
+        game: "Adopt Me",
+        category: "Simulation",
+        description: "A script for Adopt Me with pet auto-collect.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/JusticeValley/Antarctic-Hub/main/New.lua", true))()`,
+        popularity: 90,
+        dateAdded: "2025-04-15"
+    },
+    {
+        name: "Brookhaven Money Hack",
+        game: "Brookhaven",
+        category: "Roleplay",
+        description: "A script for Brookhaven to boost in-game currency.",
+        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Sander-XY-35845"))()`,
+        popularity: 85,
+        dateAdded: "2025-03-20"
+    },
+    {
+        name: "Dead Rails Auto Bonds And More",
+        game: "Dead Rails",
+        category: "Adventure",
+        description: "A script for Dead Rails to automate resource gathering.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ArdyBotzz/NatHub/refs/heads/master/NatHub.lua"))()`,
+        popularity: 70,
+        dateAdded: "2025-05-10"
+    },
+    {
+        name: "Blue Lock Rivals Speed and Hit-box Boost",
+        game: "Blue Lock Rivals",
+        category: "Sports",
+        description: "A script for Blue Lock Rivals to enhance player skills.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ultik-max/Isisis/refs/heads/main/Protected_9713416812708883.txt"))()`,
+        popularity: 65,
+        dateAdded: "2025-04-25"
+    },
+    {
+        name: "Arise Crossover Auto Farm",
+        game: "Arise Crossover",
+        category: "Adventure",
+        description: "A script for Arise Crossover Auto farm.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()`,
+        popularity: 60,
+        dateAdded: "2025-05-05"
+    },
+    {
+        name: "Doors Speedrun Hack",
+        game: "Doors",
+        category: "Horror",
+        description: "A script for Doors to speed up navigation through levels.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua"))()`,
+        popularity: 75,
+        dateAdded: "2025-04-10"
+    },
+    {
+        name: "Forsaken Auto Battle",
+        game: "Forsaken",
+        category: "Action",
+        description: "A script for Forsaken to automate combat sequences.",
+        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/sigmaboy-sigma-boy/sigmaboy-sigma-boy/refs/heads/main/StaminaSettings.ESP.PIDC.raw"))()`,
+        popularity: 80,
+        dateAdded: "2025-05-12"
+    },
+    {
+        name: "Tower Defense Simulator Auto Wave",
+        game: "Tower Defense Simulator",
+        category: "Strategy",
+        description: "A script for Tower Defense Simulator to automate wave defense.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
+        popularity: 85,
+        dateAdded: "2025-04-20"
+    },
+    {
+        name: "The Strongest Battlegrounds Combo Hack",
+        game: "The Strongest Battlegrounds",
+        category: "Fighting",
+        description: "A script for The Strongest Battlegrounds to optimize combat combos.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/yes1nt/yes/refs/heads/main/CHAINSAW%20MAN/Chainsaw%20Man%20(Obfuscated).txt"))()`,
+        popularity: 95,
+        dateAdded: "2025-05-08"
+    },
+    {
+        name: "Fisch Auto Farm",
+        game: "Fisch",
+        category: "Simulation",
+        description: "A script for Fisch to automate resource collection.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()`,
+        popularity: 60,
+        dateAdded: "2025-04-05"
+    },
+    {
+        name: "Jujutsu Shenanigans Auto Skill",
+        game: "Jujutsu Shenanigans",
+        category: "Fighting",
+        description: "A script for Jujutsu Shenanigans to automate skill usage.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
+        popularity: 70,
+        dateAdded: "2025-05-03"
+    },
+    {
+        name: "Realistic Street Soccer Hit-Box Boost etc.",
+        game: "Realistic Street Soccer",
+        category: "Sports",
+        description: "A script for Realistic Street Soccer to enhance trick performance.",
+        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Realistic-Street-Soccer-rayan-s-hub-SOlARA-SUPORT-39402"))()`,
+        popularity: 65,
+        dateAdded: "2025-04-12"
+    },
+    {
+        name: "Bubble Gum Simulator Auto Bubble",
+        game: "Bubble Gum Simulator",
+        category: "Simulation",
+        description: "A script for Bubble Gum Simulator to automate bubble collection.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
+        popularity: 95,
+        dateAdded: "2025-04-12"
+    },
+    {
+        name: "Grow a Garden Auto Harvest Auto Sell etc.",
+        game: "Grow a Garden",
+        category: "Simulation",
+        description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
         code: `loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))()`,
         popularity: 75,
         dateAdded: "2025-05-15"
@@ -242,19 +374,16 @@ const scripts = [
         popularity: 90,
         dateAdded: "2025-05-21"
     },
-
-        {
+    {
         name: "Shadow hub Basketball Zero script",
         game: "Basketball Zero",
         category: "Simulation",
-        description: "A script for Pet Simulator X to automate pet collection and farming.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowXScript/Shadow-Hub/refs/heads/main/BasketballZeroScript.lua"))(),
+        description: "A script for Basketball Zero to automate shooting and performance.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowXScript/Shadow-Hub/refs/heads/main/BasketballZeroScript.lua"))()`,
         popularity: 90,
         dateAdded: "2025-05-21"
-        },
+    }
 ];
-
-
 
 
 
