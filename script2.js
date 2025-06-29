@@ -27,6 +27,15 @@ const scripts = [
         popularity: 85,
         dateAdded: "2025-03-20"
     },
+
+        name: "Steal a brain root hack script",
+        game: "Steal a brain root",
+        category: "Simulation",
+        description: "A script for Adopt Me with pet auto-collect.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/steal%20a%20brainrot"))()`,
+        popularity: 90,
+        dateAdded: "2025-04-15"
+    },
     {
         name: "Dead Rails Auto Bonds And More",
         game: "Dead Rails",
