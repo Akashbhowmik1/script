@@ -241,7 +241,17 @@ const scripts = [
         code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua'))()`,
         popularity: 90,
         dateAdded: "2025-05-21"
-    }
+    },
+
+        {
+        name: "Shadow hub Basketball Zero script",
+        game: "Basketball Zero",
+        category: "Simulation",
+        description: "A script for Pet Simulator X to automate pet collection and farming.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowXScript/Shadow-Hub/refs/heads/main/BasketballZeroScript.lua"))(),
+        popularity: 90,
+        dateAdded: "2025-05-21"
+        }
 ];
 
 
