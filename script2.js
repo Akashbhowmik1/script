@@ -1,135 +1,4 @@
-const scripts = [
-    {
-        name: "Blox Fruit Auto Farm",
-        game: "Blox Fruits",
-        category: "Adventure",
-        description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))`,
-        popularity: 100,
-        dateAdded: "2025-05-01"
-    },
-    {
-        name: "Adopt Me Pet Collector",
-        game: "Adopt Me",
-        category: "Simulation",
-        description: "A script for Adopt Me with pet auto-collect.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/JusticeValley/Antarctic-Hub/main/New.lua", true))()`,
-        popularity: 90,
-        dateAdded: "2025-04-15"
-    },
-    {
-        name: "Brookhaven Money Hack",
-        game: "Brookhaven",
-        category: "Roleplay",
-        description: "A script for Brookhaven to boost in-game currency.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Sander-XY-35845"))()`,
-        popularity: 85,
-        dateAdded: "2025-03-20"
-    },
-    {
-        name: "Dead Rails Auto Bonds And More",
-        game: "Dead Rails",
-        category: "Adventure",
-        description: "A script for Dead Rails to automate resource gathering.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ArdyBotzz/NatHub/refs/heads/master/NatHub.lua"))()`,
-        popularity: 70,
-        dateAdded: "2025-05-10"
-    },
-    {
-        name: "Blue Lock Rivals Speed and Hit-box Boost",
-        game: "Blue Lock Rivals",
-        category: "Sports",
-        description: "A script for Blue Lock Rivals to enhance player skills.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ultik-max/Isisis/refs/heads/main/Protected_9713416812708883.txt"))()`,
-        popularity: 65,
-        dateAdded: "2025-04-25"
-    },
-    {
-        name: "Arise Crossover Auto Farm",
-        game: "Arise Crossover",
-        category: "Adventure",
-        description: "A script for Arise Crossover Auto farm.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()`,
-        popularity: 60,
-        dateAdded: "2025-05-05"
-    },
-    {
-        name: "Doors Speedrun Hack",
-        game: "Doors",
-        category: "Horror",
-        description: "A script for Doors to speed up navigation through levels.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua"))()`,
-        popularity: 75,
-        dateAdded: "2025-04-10"
-    },
-    {
-        name: "Forsaken Auto Battle",
-        game: "Forsaken",
-        category: "Action",
-        description: "A script for Forsaken to automate combat sequences.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/sigmaboy-sigma-boy/sigmaboy-sigma-boy/refs/heads/main/StaminaSettings.ESP.PIDC.raw"))()`,
-        popularity: 80,
-        dateAdded: "2025-05-12"
-    },
-    {
-        name: "Tower Defense Simulator Auto Wave",
-        game: "Tower Defense Simulator",
-        category: "Strategy",
-        description: "A script for Tower Defense Simulator to automate wave defense.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
-        popularity: 85,
-        dateAdded: "2025-04-20"
-    },
-    {
-        name: "The Strongest Battlegrounds Combo Hack",
-        game: "The Strongest Battlegrounds",
-        category: "Fighting",
-        description: "A script for The Strongest Battlegrounds to optimize combat combos.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/yes1nt/yes/refs/heads/main/CHAINSAW%20MAN/Chainsaw%20Man%20(Obfuscated).txt"))()`,
-        popularity: 95,
-        dateAdded: "2025-05-08"
-    },
-    {
-        name: "Fisch Auto Farm",
-        game: "Fisch",
-        category: "Simulation",
-        description: "A script for Fisch to automate resource collection.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()`,
-        popularity: 60,
-        dateAdded: "2025-04-05"
-    },
-    {
-        name: "Jujutsu Shenanigans Auto Skill",
-        game: "Jujutsu Shenanigans",
-        category: "Fighting",
-        description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
-        popularity: 70,
-        dateAdded: "2025-05-03"
-    },
-    {
-        name: "Realistic Street Soccer Hit-Box Boost etc.",
-        game: "Realistic Street Soccer",
-        category: "Sports",
-        description: "A script for Realistic Street Soccer to enhance trick performance.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Realistic-Street-Soccer-rayan-s-hub-SOlARA-SUPORT-39402"))()`,
-        popularity: 65,
-        dateAdded: "2025-04-12"
-    },
-    {
-        name: "Bubble Gum Simulator Auto Bubble",
-        game: "Bubble Gum Simulator",
-        category: "Simulation",
-        description: "A script for Bubble Gum Simulator to automate bubble collection.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
-        popularity: 95,
-        dateAdded: "2025-04-12"
-    },
-    {
-        name: "Grow a Garden Auto Harvest Auto Sell etc.",
-        game: "Grow a Garden",
-        category: "Simulation",
-        description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
+// Define scripts array once with corrected "Grow a Garden" entry
 const scripts = [
     {
         name: "Blox Fruit Auto Farm",
@@ -385,9 +254,22 @@ const scripts = [
     }
 ];
 
+let favorites = [];
+let currentPage = 1;
+const scriptsPerPage = 40;
 
-
-let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+// Initialize favorites from localStorage with error handling
+try {
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+        favorites = JSON.parse(savedFavorites);
+        // Validate favorites to ensure they exist in scripts
+        favorites = favorites.filter(name => scripts.some(script => script.name === name));
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+    }
+} catch (error) {
+    console.error('Failed to load favorites from localStorage:', error);
+}
 
 const isFavorite = (scriptName) => {
     if (typeof scriptName !== 'string' || !scriptName.trim()) {
@@ -404,14 +286,12 @@ const toggleFavorite = (scriptName) => {
     }
     scriptName = scriptName.trim();
 
-    // Check if script exists
     const scriptExists = scripts.some(script => script.name === scriptName);
     if (!scriptExists) {
         console.warn(`Script '${scriptName}' not found in scripts array.`);
         return;
     }
 
-    // Toggle favorite state
     const isCurrentlyFavorite = isFavorite(scriptName);
     if (isCurrentlyFavorite) {
         favorites = favorites.filter(name => name !== scriptName);
@@ -419,7 +299,6 @@ const toggleFavorite = (scriptName) => {
         favorites.push(scriptName);
     }
 
-    // Update localStorage
     try {
         localStorage.setItem('favorites', JSON.stringify(favorites));
     } catch (error) {
@@ -427,23 +306,20 @@ const toggleFavorite = (scriptName) => {
         return;
     }
 
-    // Update the specific favorite button
-    const favoriteButtons = document.querySelectorAll(`.favorite-btn[onclick="toggleFavorite('${scriptName}')"]`);
+    const favoriteButtons = document.querySelectorAll(`.favorite-btn[data-script-name="${scriptName}"]`);
     favoriteButtons.forEach(button => {
-        button.innerHTML = isCurrentlyFavorite ? '<i class="far fa-heart"></i>' : '<i class="fas fa-heart"></i>';
-        button.classList.toggle('favorited', !isCurrentlyFavorite);
-        button.setAttribute('aria-label', isCurrentlyFavorite ? `Add ${scriptName} to favorites` : `Remove ${scriptName} from favorites`);
+        button.innerHTML = isFavorite(scriptName) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+        button.classList.toggle('favorited', isFavorite(scriptName));
+        button.setAttribute('aria-label', isFavorite(scriptName) ? `Remove ${scriptName} from favorites` : `Add ${scriptName} to favorites`);
         button.classList.remove('animate');
         void button.offsetWidth; // Trigger reflow
         button.classList.add('animate');
     });
 
-   // Refresh display only if favorites filter is active
-const showFavorites = document.getElementById('showFavorites');
-if (showFavorites && showFavorites.checked) {
-    filterScripts();
-}
-
+    const showFavorites = document.getElementById('showFavorites');
+    if (showFavorites && showFavorites.checked) {
+        filterScripts();
+    }
 };
 
 function closeModal(modalId) {
@@ -453,6 +329,7 @@ function closeModal(modalId) {
         setTimeout(() => {
             modal.style.display = 'none';
             modal.classList.remove('hide');
+            modal.setAttribute('aria-hidden', 'true');
         }, 300);
     } else {
         console.warn(`Modal with ID '${modalId}' not found.`);
@@ -475,7 +352,7 @@ function showCode(scriptName) {
     }
 
     modalTitle.textContent = script.name;
-    modalGame.innerHTML = `<strong>Game:</strong> ${script.game} <br><strong>Category:</strong> ${script.category}`;
+    modalGame.textContent = `Game: ${script.game} | Category: ${script.category}`;
     modalDescription.textContent = script.description;
     modalCode.textContent = script.code;
 
@@ -492,7 +369,9 @@ function showCode(scriptName) {
         navigator.clipboard.writeText(script.code)
             .then(() => {
                 copyButton.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                setTimeout(() => { copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code'; }, 2000);
+                setTimeout(() => {
+                    copyButton.innerHTML = '<i class="fas fa-copy"></i> Copy Code';
+                }, 2000);
             })
             .catch(err => {
                 console.error('Failed to copy code:', err);
@@ -503,118 +382,62 @@ function showCode(scriptName) {
     modal.style.display = 'flex';
     modal.setAttribute('aria-hidden', 'false');
     modal.focus();
-    hljs.highlightElement(modalCode);
+
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightElement(modalCode);
+    } else {
+        console.warn('Highlight.js not loaded, skipping syntax highlighting.');
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    hljs.highlightAll();
+    if (typeof hljs !== 'undefined') {
+        hljs.highlightAll();
+    }
 
-    // Theme toggle
     const themeToggle = document.getElementById('themeToggle');
-    themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'light' ? 'moon' : 'sun'}"></i> ${currentTheme === 'light' ? 'Dark' : 'Light'} Mode`;
-        localStorage.setItem('theme', currentTheme);
-    });
-
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    themeToggle.innerHTML = `<i class="fas fa-${savedTheme === 'light' ? 'moon' : 'sun'}"></i> ${savedTheme === 'light' ? 'Dark' : 'Light'} Mode`;
-
-    // Overlay menu toggle
-    const hamburger = document.querySelector('.hamburger');
-    const overlayMenu = document.getElementById('overlayMenu');
-    hamburger.addEventListener('click', () => {
-        const isOpen = overlayMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', isOpen.toString());
-        overlayMenu.setAttribute('aria-hidden', (!isOpen).toString());
-        if (isOpen) {
-            overlayMenu.focus();
-        }
-    });
-
-    // Close overlay when clicking outside
-    overlayMenu.addEventListener('click', (e) => {
-        if (e.target === overlayMenu) {
-            overlayMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            overlayMenu.setAttribute('aria-hidden', 'true');
-        }
-    });
-
-    // Focus trap for overlay menu
-    overlayMenu.addEventListener('keydown', (e) => {
-        if (e.key === 'Tab') {
-            const focusableElements = overlayMenu.querySelectorAll('a, button');
-            const firstElement = focusableElements[0];
-            const lastElement = focusableElements[focusableElements.length - 1];
-
-            if (e.shiftKey && document.activeElement === firstElement) {
-                e.preventDefault();
-                lastElement.focus();
-            } else if (!e.shiftKey && document.activeElement === lastElement) {
-                e.preventDefault();
-                firstElement.focus();
-            }
-        }
-    });
-
-    // Close overlay and modals on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            overlayMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-            overlayMenu.setAttribute('aria-hidden', 'true');
-            closeModal('scriptModal');
-            closeModal('aboutModal');
-            closeModal('contactModal');
-        }
-    });
-
-    // About modal toggle
-    const aboutBtn = document.getElementById('aboutBtn');
-    const aboutModal = document.getElementById('aboutModal');
-    aboutBtn.addEventListener('click', () => {
-        aboutModal.style.display = 'flex';
-        aboutModal.setAttribute('aria-hidden', 'false');
-        aboutModal.focus();
-        overlayMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        overlayMenu.setAttribute('aria-hidden', 'true');
-    });
-
-    // Contact modal toggle
-    const contactBtn = document.getElementById('contactBtn');
-    const contactModal = document.getElementById('contactModal');
-    contactBtn.addEventListener('click', () => {
-        contactModal.style.display = 'flex';
-        contactModal.setAttribute('aria-hidden', 'false');
-        contactModal.focus();
-        overlayMenu.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-        overlayMenu.setAttribute('aria-hidden', 'true');
-    });
-
-    // Modal click to close
-    [document.getElementById('scriptModal'), aboutModal, contactModal].forEach(modal => {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeModal(modal.id);
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            themeToggle.innerHTML = `<i class="fas fa-${currentTheme === 'light' ? 'moon' : 'sun'}"></i> ${currentTheme === 'light' ? 'Dark' : 'Light'} Mode`;
+            try {
+                localStorage.setItem('theme', currentTheme);
+            } catch (error) {
+                console.error('Failed to save theme to localStorage:', error);
             }
         });
-    });
 
-    // Focus trap for modals
-    [document.getElementById('scriptModal'), aboutModal, contactModal].forEach(modal => {
-        modal.addEventListener('keydown', (e) => {
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        themeToggle.innerHTML = `<i class="fas fa-${savedTheme === 'light' ? 'moon' : 'sun'}"></i> ${savedTheme === 'light' ? 'Dark' : 'Light'} Mode`;
+    }
+
+    const hamburger = document.querySelector('.hamburger');
+    const overlayMenu = document.getElementById('overlayMenu');
+    if (hamburger && overlayMenu) {
+        hamburger.addEventListener('click', () => {
+            const isOpen = overlayMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            hamburger.setAttribute('aria-expanded', isOpen.toString());
+            overlayMenu.setAttribute('aria-hidden', (!isOpen).toString());
+            if (isOpen) {
+                overlayMenu.focus();
+            }
+        });
+
+        overlayMenu.addEventListener('click', (e) => {
+            if (e.target === overlayMenu) {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+
+        overlayMenu.addEventListener('keydown', (e) => {
             if (e.key === 'Tab') {
-                const focusableElements = modal.querySelectorAll('button, a, [tabindex="0"]');
+                const focusableElements = overlayMenu.querySelectorAll('a, button, input, select, [tabindex="0"]');
                 const firstElement = focusableElements[0];
                 const lastElement = focusableElements[focusableElements.length - 1];
 
@@ -627,13 +450,80 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            if (overlayMenu) {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+            }
+            closeModal('scriptModal');
+            closeModal('aboutModal');
+            closeModal('contactModal');
+        }
     });
 
-    // Pagination
-    let currentPage = 1;
-    const scriptsPerPage = 40;
+    const aboutBtn = document.getElementById('aboutBtn');
+    const aboutModal = document.getElementById('aboutModal');
+    if (aboutBtn && aboutModal) {
+        aboutBtn.addEventListener('click', () => {
+            aboutModal.style.display = 'flex';
+            aboutModal.setAttribute('aria-hidden', 'false');
+            aboutModal.focus();
+            if (overlayMenu && hamburger) {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
 
-    // Utility function to debounce input events
+    const contactBtn = document.getElementById('contactBtn');
+    const contactModal = document.getElementById('contactModal');
+    if (contactBtn && contactModal) {
+        contactBtn.addEventListener('click', () => {
+            contactModal.style.display = 'flex';
+            contactModal.setAttribute('aria-hidden', 'false');
+            contactModal.focus();
+            if (overlayMenu && hamburger) {
+                overlayMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                overlayMenu.setAttribute('aria-hidden', 'true');
+            }
+        });
+    }
+
+    [document.getElementById('scriptModal'), aboutModal, contactModal].forEach(modal => {
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal(modal.id);
+                }
+            });
+
+            modal.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    const focusableElements = modal.querySelectorAll('button, a, input, select, textarea, [tabindex="0"]');
+                    const firstElement = focusableElements[0];
+                    const lastElement = focusableElements[focusableElements.length - 1];
+
+                    if (e.shiftKey && document.activeElement === firstElement) {
+                        e.preventDefault();
+                        lastElement.focus();
+                    } else if (!e.shiftKey && document.activeElement === lastElement) {
+                        e.preventDefault();
+                        firstElement.focus();
+                    }
+                }
+            });
+        }
+    });
+
     const debounce = (func, delay) => {
         let timeoutId;
         return (...args) => {
@@ -642,27 +532,49 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    // Function to create a script card
     const createScriptCard = (script) => {
         const scriptCard = document.createElement('div');
         scriptCard.className = 'script-card';
         scriptCard.setAttribute('role', 'article');
-        scriptCard.innerHTML = `
-            <h3>${script.name}</h3>
-            <p><strong>Game:</strong> ${script.game}</p>
-            <p><strong>Category:</strong> ${script.category}</p>
-            <p>${script.description}</p>
-            <div class="buttons">
-                <button onclick="showCode('${script.name}')" aria-label="View code for ${script.name}"><i class="fas fa-code"></i> View Code</button>
-                <button class="favorite-btn${isFavorite(script.name) ? ' favorited' : ''}" onclick="toggleFavorite('${script.name}')" aria-label="${isFavorite(script.name) ? 'Remove from' : 'Add to'} favorites" data-script-name="${script.name}">
-                    ${isFavorite(script.name) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>'}
-                </button>
-            </div>
-        `;
+
+        const title = document.createElement('h3');
+        title.textContent = script.name;
+
+        const game = document.createElement('p');
+        game.innerHTML = `<strong>Game:</strong> ${script.game}`;
+
+        const category = document.createElement('p');
+        category.innerHTML = `<strong>Category:</strong> ${script.category}`;
+
+        const description = document.createElement('p');
+        description.textContent = script.description;
+
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons';
+
+        const viewCodeButton = document.createElement('button');
+        viewCodeButton.innerHTML = '<i class="fas fa-code"></i> View Code';
+        viewCodeButton.setAttribute('aria-label', `View code for ${script.name}`);
+        viewCodeButton.addEventListener('click', () => showCode(script.name));
+
+        const favoriteButton = document.createElement('button');
+        favoriteButton.className = `favorite-btn${isFavorite(script.name) ? ' favorited' : ''}`;
+        favoriteButton.setAttribute('data-script-name', script.name);
+        favoriteButton.setAttribute('aria-label', isFavorite(script.name) ? `Remove ${script.name} from favorites` : `Add ${script.name} to favorites`);
+        favoriteButton.innerHTML = isFavorite(script.name) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
+
+        buttonsDiv.appendChild(viewCodeButton);
+        buttonsDiv.appendChild(favoriteButton);
+
+        scriptCard.appendChild(title);
+        scriptCard.appendChild(game);
+        scriptCard.appendChild(category);
+        scriptCard.appendChild(description);
+        scriptCard.appendChild(buttonsDiv);
+
         return scriptCard;
     };
 
-    // Function to display scripts with loading state
     const displayScripts = (scriptsToShow) => {
         const scriptsGrid = document.getElementById('scriptsGrid');
         const noResults = document.getElementById('noResults');
@@ -678,7 +590,7 @@ document.addEventListener('DOMContentLoaded', () => {
         scriptsGrid.style.opacity = '0.5';
         scriptsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading scripts...</div>';
 
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             scriptsGrid.innerHTML = '';
             scriptsGrid.style.opacity = '1';
 
@@ -705,10 +617,9 @@ document.addEventListener('DOMContentLoaded', () => {
             prevPage.disabled = currentPage === 1;
             nextPage.disabled = currentPage === totalPages;
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
-        }, 500);
+        });
     };
 
-    // Function to filter and sort scripts
     const filterScripts = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
@@ -753,7 +664,6 @@ document.addEventListener('DOMContentLoaded', () => {
         displayScripts(filteredScripts);
     };
 
-    // Initialize event listeners
     const initEventListeners = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
@@ -776,18 +686,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sortFilter.addEventListener('change', filterScripts);
         showFavorites.addEventListener('change', filterScripts);
 
-        searchInput.addEventListener('touchstart', () => {
-            searchInput.focus();
-        });
-        [gameFilter, categoryFilter, sortFilter].forEach(select => {
-            select.addEventListener('touchstart', () => {
-                select.focus();
-            });
-        });
-        showFavorites.addEventListener('touchstart', () => {
-            showFavorites.focus();
-        });
-
         prevPage.addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
@@ -797,14 +695,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         nextPage.addEventListener('click', () => {
-            if (currentPage < Math.ceil(scripts.length / scriptsPerPage)) {
+            const filteredScripts = filterScriptsData();
+            const totalPages = Math.ceil(filteredScripts.length / scriptsPerPage);
+            if (currentPage < totalPages) {
                 currentPage++;
                 filterScripts();
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
-        // Simplified event delegation for favorite buttons
         scriptsGrid.addEventListener('click', (e) => {
             const favoriteBtn = e.target.closest('.favorite-btn');
             if (favoriteBtn) {
@@ -812,7 +711,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (scriptName) {
                     toggleFavorite(scriptName);
                     e.stopPropagation();
-                    e.preventDefault(); // Prevent multiple triggers
                 } else {
                     console.warn('No data-script-name found on favorite button.');
                 }
@@ -820,7 +718,33 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Initialize the app
+    // Helper function to get filtered scripts for pagination
+    const filterScriptsData = () => {
+        const searchInput = document.getElementById('searchInput');
+        const gameFilter = document.getElementById('gameFilter');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const showFavorites = document.getElementById('showFavorites');
+
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        const selectedGame = gameFilter.value;
+        const selectedCategory = categoryFilter.value;
+        const showFavoritesOnly = showFavorites.checked;
+
+        return scripts.filter(script => {
+            const searchFields = [
+                script.name.toLowerCase(),
+                script.game.toLowerCase(),
+                script.category.toLowerCase(),
+                script.description.toLowerCase()
+            ];
+            const matchesSearch = searchTerm === '' || searchFields.some(field => field.includes(searchTerm));
+            const matchesGame = selectedGame === '' || script.game === selectedGame;
+            const matchesCategory = selectedCategory === '' || script.category === selectedCategory;
+            const matchesFavorites = !showFavoritesOnly || isFavorite(script.name);
+            return matchesSearch && matchesGame && matchesCategory && matchesFavorites;
+        });
+    };
+
     const init = () => {
         try {
             initEventListeners();
