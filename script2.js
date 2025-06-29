@@ -27,6 +27,7 @@ const scripts = [
         popularity: 85,
         dateAdded: "2025-03-20"
     },
+    {
 
         name: "Steal a brain root hack script",
         game: "Steal a brain root",
