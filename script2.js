@@ -28,8 +28,8 @@ const scripts = [
         dateAdded: "2025-03-20"
     },
     {
-        name: "Steal a brain root hack script",
-        game: "Steal a brain root",
+        name: "Steal a brainrot hack script",
+        game: "Steal a brainrot",
         category: "Simulation",
         description: "A script for Steal a brain root to automate resource collection and hacks.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/steal%20a%20brainrot"))()`,
@@ -253,11 +253,11 @@ const scripts = [
         dateAdded: "2025-05-21"
     },
     {
-        name: "Shadow hub Basketball Zero script",
+        name: " Basketball Zero script",
         game: "Basketball Zero",
         category: "Simulation",
         description: "A script for Basketball Zero to automate shooting and performance.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ShadowXScript/Shadow-Hub/refs/heads/main/BasketballZeroScript.lua"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/roscripts749/loader/refs/heads/main/loader"))()`,
         popularity: 90,
         dateAdded: "2025-05-21"
     }
