@@ -154,11 +154,11 @@ const scripts = [
         dateAdded: "2025-05-06"
     },
     {
-        name: "Anime Rangers X Auto Grind",
-        game: "Anime Rangers X",
+        name: "99 Nights In The Forest Script",
+        game: "99 Nights In The Forest",
         category: "Adventure",
         description: "A script for Anime Rangers X to automate grinding tasks.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/yu/refs/heads/main/tu"))();`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/99-Nights-In-Forest"))()`,
         popularity: 70,
         dateAdded: "2025-04-18"
     },
