@@ -157,7 +157,7 @@ const scripts = [
         name: "99 Nights In The Forest Script",
         game: "99 Nights In The Forest",
         category: "Adventure",
-        description: "A script for Anime Rangers X to automate grinding tasks.",
+        description: "A script for 99 Nights In The Forest hack.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/99-Nights-In-Forest"))()`,
         popularity: 70,
         dateAdded: "2025-04-18"
@@ -255,7 +255,7 @@ const scripts = [
     {
         name: " Basketball Zero script",
         game: "Basketball Zero",
-        category: "Simulation",
+        category: "Sports",
         description: "A script for Basketball Zero to automate shooting and performance.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/roscripts749/loader/refs/heads/main/loader"))()`,
         popularity: 90,
