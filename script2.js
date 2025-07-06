@@ -5,7 +5,7 @@ const scripts = [
         game: "Blox Fruits",
         category: "Adventure",
         description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/newredz/BloxFruits/refs/heads/main/Source.luau"))`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`,
         popularity: 100,
         dateAdded: "2025-05-01"
     },
@@ -136,7 +136,7 @@ const scripts = [
         dateAdded: "2025-04-12"
     },
     {
-        name: "Grow a Garden Auto Harvest Auto Sell etc.",
+        name: "Grow a Garden No Lag Hub Script.",
         game: "Grow a Garden",
         category: "Simulation",
         description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
@@ -271,7 +271,7 @@ const scripts = [
         dateAdded: "2025-05-21"
     },
     {
-        name: "Thunderz Hub Script",
+        name: "Grow a Garden Thunderz Hub Script",
         game: "Grow a Garden",
         category: "Simulation",
         description: "A script for Grow a Garden to auto-farm, buy, and sell, turning your garden into a profit machine.",
