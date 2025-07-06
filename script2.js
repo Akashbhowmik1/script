@@ -1,4 +1,4 @@
-// Define scripts array with corrected "Steal a brain root hack script" description
+// Define scripts array with corrected entries
 const scripts = [
     {
         name: "Blox Fruit Auto Farm",
@@ -29,9 +29,9 @@ const scripts = [
     },
     {
         name: "Steal a brainrot hack script",
-        game: "Steal a brainrot",
+        game: "Steal a Brainrot",
         category: "Simulation",
-        description: "A script for Steal a brain root to automate resource collection and hacks.",
+        description: "A script for Steal a Brainrot to automate resource collection and hacks.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/steal%20a%20brainrot"))()`,
         popularity: 90,
         dateAdded: "2025-04-15"
@@ -149,7 +149,7 @@ const scripts = [
         game: "Anime Vanguards",
         category: "Adventure",
         description: "A script for Anime Vanguards to automate mission completion.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/godor1010/godor/refs/heads/main/anime_vanguards_'))()`,
+        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/godor1010/godor/refs/head/main/anime_vanguards_'))()`,
         popularity: 80,
         dateAdded: "2025-05-06"
     },
@@ -221,7 +221,7 @@ const scripts = [
         game: "Murder Mystery 2",
         category: "Action",
         description: "A script for Murder Mystery 2 to automatically win rounds.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CycleScripts/Official/refs/heads/main/freemium"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/C Gomez/Official/refs/heads/main/freemium"))()`,
         popularity: 85,
         dateAdded: "2025-05-20"
     },
@@ -253,11 +253,29 @@ const scripts = [
         dateAdded: "2025-05-21"
     },
     {
-        name: " Basketball Zero script",
+        name: "Basketball Zero script",
         game: "Basketball Zero",
         category: "Sports",
         description: "A script for Basketball Zero to automate shooting and performance.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/roscripts749/loader/refs/heads/main/loader"))()`,
+        popularity: 90,
+        dateAdded: "2025-05-21"
+    },
+    {
+        name: "Arc hub script",
+        game: "King Legacy",
+        category: "Adventure",
+        description: "A script for King Legacy to auto-farm and level up like a pirate king.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ChopLoris/ArcHub/main/main.lua"))()`,
+        popularity: 90,
+        dateAdded: "2025-05-21"
+    },
+    {
+        name: "Thunderz Hub Script",
+        game: "Grow a Garden",
+        category: "Simulation",
+        description: "A script for Grow a Garden to auto-farm, buy, and sell, turning your garden into a profit machine.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua"))()`,
         popularity: 90,
         dateAdded: "2025-05-21"
     }
@@ -265,7 +283,7 @@ const scripts = [
 
 let favorites = [];
 let currentPage = 1;
-const scriptsPerPage = 40;
+const scriptsPerPage = 15;
 
 // Initialize favorites from localStorage with error handling
 try {
@@ -485,6 +503,57 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Consolidated modal event handling
+    const modals = [
+        { id: 'scriptModal', triggerId: null },
+        { id: 'aboutModal', triggerId: 'aboutBtn' },
+        { id: 'contactModal', triggerId: 'contactBtn' }
+    ];
+
+    modals.forEach(({ id, triggerId }) => {
+        const modal = document.getElementById(id);
+        if (!modal) return;
+
+        if (triggerId) {
+            const trigger = document.getElementById(triggerId);
+            if (trigger) {
+                trigger.addEventListener('click', () => {
+                    modal.style.display = 'flex';
+                    modal.setAttribute('aria-hidden', 'false');
+                    modal.focus();
+                    if (overlayMenu && hamburger) {
+                        overlayMenu.classList.remove('active');
+                        hamburger.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        overlayMenu.setAttribute('aria-hidden', 'true');
+                    }
+                });
+            }
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal(id);
+            }
+        });
+
+        modal.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                const focusableElements = modal.querySelectorAll('button, a, input, select, textarea, [tabindex="0"]');
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        });
+    });
+
     // Escape key handling
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
@@ -494,70 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hamburger.setAttribute('aria-expanded', 'false');
                 overlayMenu.setAttribute('aria-hidden', 'true');
             }
-            closeModal('scriptModal');
-            closeModal('aboutModal');
-            closeModal('contactModal');
-        }
-    });
-
-    // About modal
-    const aboutBtn = document.getElementById('aboutBtn');
-    const aboutModal = document.getElementById('aboutModal');
-    if (aboutBtn && aboutModal) {
-        aboutBtn.addEventListener('click', () => {
-            aboutModal.style.display = 'flex';
-            aboutModal.setAttribute('aria-hidden', 'false');
-            aboutModal.focus();
-            if (overlayMenu && hamburger) {
-                overlayMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                overlayMenu.setAttribute('aria-hidden', 'true');
-            }
-        });
-    }
-
-    // Contact modal
-    const contactBtn = document.getElementById('contactBtn');
-    const contactModal = document.getElementById('contactModal');
-    if (contactBtn && contactModal) {
-        contactBtn.addEventListener('click', () => {
-            contactModal.style.display = 'flex';
-            contactModal.setAttribute('aria-hidden', 'false');
-            contactModal.focus();
-            if (overlayMenu && hamburger) {
-                overlayMenu.classList.remove('active');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                overlayMenu.setAttribute('aria-hidden', 'true');
-            }
-        });
-    }
-
-    // Modal click and focus trap
-    [document.getElementById('scriptModal'), aboutModal, contactModal].forEach(modal => {
-        if (modal) {
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal(modal.id);
-                }
-            });
-
-            modal.addEventListener('keydown', (e) => {
-                if (e.key === 'Tab') {
-                    const focusableElements = modal.querySelectorAll('button, a, input, select, textarea, [tabindex="0"]');
-                    const firstElement = focusableElements[0];
-                    const lastElement = focusableElements[focusableElements.length - 1];
-
-                    if (e.shiftKey && document.activeElement === firstElement) {
-                        e.preventDefault();
-                        lastElement.focus();
-                    } else if (!e.shiftKey && document.activeElement === lastElement) {
-                        e.preventDefault();
-                        firstElement.focus();
-                    }
-                }
-            });
+            modals.forEach(({ id }) => closeModal(id));
         }
     });
 
@@ -639,18 +645,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        scriptsGrid.style.opacity = '0.5';
         scriptsGrid.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading scripts...</div>';
 
         requestAnimationFrame(() => {
             scriptsGrid.innerHTML = '';
-            scriptsGrid.style.opacity = '1';
 
             if (scriptsToShow.length === 0) {
                 noResults.style.display = 'block';
                 prevPage.disabled = true;
                 nextPage.disabled = true;
-                pageInfo.textContent = 'Page 0 of 0';
+                pageInfo.textContent = 'No scripts found';
                 return;
             }
 
@@ -667,13 +671,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const totalPages = Math.ceil(scriptsToShow.length / scriptsPerPage);
             prevPage.disabled = currentPage === 1;
-            nextPage.disabled = currentPage === totalPages;
-            pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
+            nextPage.disabled = currentPage === totalPages || totalPages === 0;
+            pageInfo.textContent = totalPages === 0 ? 'No scripts found' : `Page ${currentPage} of ${totalPages}`;
         });
     };
 
     /**
      * Filter and sort scripts based on user input
+     * @returns {Array} - Filtered and sorted scripts
      */
     const filterScripts = () => {
         const searchInput = document.getElementById('searchInput');
@@ -684,7 +689,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!searchInput || !gameFilter || !categoryFilter || !sortFilter || !showFavorites) {
             console.error('Filter elements not found.');
-            return;
+            return scripts;
         }
 
         const searchTerm = searchInput.value.trim().toLowerCase();
@@ -717,6 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         currentPage = 1;
         displayScripts(filteredScripts);
+        return filteredScripts;
     };
 
     /**
@@ -747,17 +753,17 @@ document.addEventListener('DOMContentLoaded', () => {
         prevPage.addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
-                filterScripts();
+                displayScripts(filterScripts());
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
         nextPage.addEventListener('click', () => {
-            const filteredScripts = filterScriptsData();
+            const filteredScripts = filterScripts();
             const totalPages = Math.ceil(filteredScripts.length / scriptsPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
-                filterScripts();
+                displayScripts(filteredScripts);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
@@ -765,48 +771,14 @@ document.addEventListener('DOMContentLoaded', () => {
         scriptsGrid.addEventListener('click', (e) => {
             const favoriteBtn = e.target.closest('.favorite-btn');
             if (favoriteBtn) {
+                e.preventDefault(); // Prevent default button behavior
                 const scriptName = favoriteBtn.dataset.scriptName;
                 if (scriptName) {
                     toggleFavorite(scriptName);
-                    e.stopPropagation();
                 } else {
                     console.warn('No data-script-name found on favorite button.');
                 }
             }
-        });
-    };
-
-    /**
-     * Get filtered scripts for pagination
-     * @returns {Array} - Filtered scripts
-     */
-    const filterScriptsData = () => {
-        const searchInput = document.getElementById('searchInput');
-        const gameFilter = document.getElementById('gameFilter');
-        const categoryFilter = document.getElementById('categoryFilter');
-        const showFavorites = document.getElementById('showFavorites');
-
-        if (!searchInput || !gameFilter || !categoryFilter || !showFavorites) {
-            return scripts;
-        }
-
-        const searchTerm = searchInput.value.trim().toLowerCase();
-        const selectedGame = gameFilter.value;
-        const selectedCategory = categoryFilter.value;
-        const showFavoritesOnly = showFavorites.checked;
-
-        return scripts.filter(script => {
-            const searchFields = [
-                script.name.toLowerCase(),
-                script.game.toLowerCase(),
-                script.category.toLowerCase(),
-                script.description.toLowerCase()
-            ];
-            const matchesSearch = searchTerm === '' || searchFields.some(field => field.includes(searchTerm));
-            const matchesGame = selectedGame === '' || script.game === selectedGame;
-            const matchesCategory = selectedCategory === '' || script.category === selectedCategory;
-            const matchesFavorites = !showFavoritesOnly || isFavorite(script.name);
-            return matchesSearch && matchesGame && matchesCategory && matchesFavorites;
         });
     };
 
@@ -826,18 +798,18 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 });
 
-/* ads system */
+/* Ads system */
 
 let lastOpened = 0;
-const cooldown = 15000; // 20 seconds
+const cooldown = 15000; // 15 seconds cooldown for ads
 
-// Your two ad links
+// Ad links (currently identical; replace with distinct links if needed)
 const adLinks = [
-    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",  // Replace with your first link
-    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8"   // Replace with your second link
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8" // Replace with a different link if available
 ];
 
-// Function to pick a random link
+// Function to pick a random ad link
 function getRandomAdLink() {
     return adLinks[Math.floor(Math.random() * adLinks.length)];
 }
@@ -846,13 +818,18 @@ function getRandomAdLink() {
 function openAdWithCooldown() {
     const now = Date.now();
     if (now - lastOpened >= cooldown) {
-        const randomAd = getRandomAdLink();
-        window.open(randomAd, "_blank");
-        lastOpened = now;
+        try {
+            const randomAd = getRandomAdLink();
+            const adWindow = window.open(randomAd, "_blank");
+            if (!adWindow) {
+                console.warn('Ad window blocked or failed to open. Possible pop-up blocker.');
+            }
+            lastOpened = now;
+        } catch (error) {
+            console.error('Failed to open ad:', error);
+        }
     }
 }
 
 // Trigger on any click
-document.addEventListener("click", function () {
-    openAdWithCooldown();
-});
+document.addEventListener("click", openAdWithCooldown);
