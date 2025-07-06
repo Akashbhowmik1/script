@@ -212,3 +212,34 @@ document.addEventListener("keydown", (e) => {
     window.closePopup()
   }
 })
+
+/* ads system */
+
+let lastOpened = 0;
+const cooldown = 10000; // 20 seconds
+
+// Your two ad links
+const adLinks = [
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",  // Replace with your first link
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8"   // Replace with your second link
+];
+
+// Function to pick a random link
+function getRandomAdLink() {
+    return adLinks[Math.floor(Math.random() * adLinks.length)];
+}
+
+// Open ad if cooldown is passed
+function openAdWithCooldown() {
+    const now = Date.now();
+    if (now - lastOpened >= cooldown) {
+        const randomAd = getRandomAdLink();
+        window.open(randomAd, "_blank");
+        lastOpened = now;
+    }
+}
+
+// Trigger on any click
+document.addEventListener("click", function () {
+    openAdWithCooldown();
+});
