@@ -801,7 +801,7 @@ document.addEventListener('DOMContentLoaded', () => {
 /* Ads system */
 
 let lastOpened = 0;
-const cooldown = 15000; // 15 seconds cooldown for ads
+const cooldown = 8000; // 8 seconds cooldown for ads
 
 // Ad links (currently identical; replace with distinct links if needed)
 const adLinks = [
