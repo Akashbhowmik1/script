@@ -272,7 +272,7 @@ const scripts = [
     },
      {
         name: "Grow A Garden Dark Spawner script",
-        game: "Grow A Garden",
+        game: "Grow a Garden",
         category: "Simulation",
         description: "A script for Grow A Garden auto pets etc.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/Spawner.lua"))()`,
