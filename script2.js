@@ -270,6 +270,15 @@ const scripts = [
         popularity: 90,
         dateAdded: "2025-05-21"
     },
+     {
+        name: "Grow A Garden Dark Spawner script",
+        game: "Grow A Garden",
+        category: "Simulation",
+        description: "A script for Grow A Garden auto pets etc.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/Spawner.lua"))()`,
+        popularity: 90,
+        dateAdded: "2025-05-21"
+    },
     {
         name: "Grow a Garden Thunderz Hub Script",
         game: "Grow a Garden",
