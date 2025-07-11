@@ -1,0 +1,50 @@
+ const cooldownSeconds = 30;
+  const cooldownKey = "lastCooldownEnd";
+  const startKey = "cooldownStartTime";
+  const overlay = document.getElementById("cooldownOverlay");
+  const timerDisplay = document.getElementById("cooldownTimer");
+
+  const now = Date.now();
+  const lastEnd = parseInt(localStorage.getItem(cooldownKey)) || 0;
+  const startedAt = parseInt(localStorage.getItem(startKey)) || now;
+  const timeSinceEnd = now - lastEnd;
+
+  const fiveMinutes = 5 * 60 * 1000;
+
+  let remaining;
+
+  if (timeSinceEnd < fiveMinutes && lastEnd !== 0) {
+    // Visited within 5 minutes — skip cooldown
+    overlay.style.display = "none";
+  } else {
+    // Need cooldown
+    const elapsed = Math.floor((now - startedAt) / 1000);
+    remaining = Math.max(0, cooldownSeconds - elapsed);
+
+    if (remaining > 0) {
+      startCooldown(remaining);
+    } else {
+      localStorage.setItem(cooldownKey, now.toString());
+    }
+  }
+
+  function startCooldown(seconds) {
+    overlay.style.display = "flex";
+    document.body.classList.add("disable-clicks");
+
+    let timeLeft = seconds;
+    timerDisplay.textContent = timeLeft;
+
+    const interval = setInterval(() => {
+      timeLeft--;
+      timerDisplay.textContent = timeLeft;
+      localStorage.setItem(startKey, Date.now().toString());
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        overlay.style.display = "none";
+        document.body.classList.remove("disable-clicks");
+        localStorage.setItem(cooldownKey, Date.now().toString());
+      }
+    }, 1000);
+  }
