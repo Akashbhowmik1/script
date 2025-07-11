@@ -20,7 +20,7 @@ if (remaining > 0) {
   // Delay cooldown by 3 seconds
   setTimeout(() => {
     startCooldown(remaining);
-  }, 3000);
+  }, 5000);
 } else {
   // Already finished cooldown
   overlay.style.display = "none";
