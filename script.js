@@ -216,11 +216,11 @@ document.addEventListener("keydown", (e) => {
 /* ads system */
 
 let lastOpened = 0;
-const cooldown = 10000; // 20 seconds
+const cooldown = 80000; // 8 seconds
 
 // Your two ad links
 const adLinks = [
-    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",  // Replace with your first link
+    "https://otieu.com/4/9558019",  // Replace with your first link
     "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8"   // Replace with your second link
 ];
 
