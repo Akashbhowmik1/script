@@ -1,0 +1,35 @@
+ body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #cooldownOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.2); /* ✅ More transparent */
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+      z-index: 9999;
+      pointer-events: none;
+      flex-direction: column;
+    }
+
+    .disable-clicks *:not(#cooldownOverlay) {
+      pointer-events: none;
+    }
+
+    #cooldownMessage {
+      font-size: 16px;
+      margin-bottom: 20px;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 8px 16px;
+      border-radius: 10px;
+       background: rgba(0, 0, 0, 0.3); /* 👈 This controls the message background darkness */
+
+    }
