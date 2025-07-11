@@ -25,7 +25,7 @@ const scripts = [
         description: "All-in-one script for unlocking key Brookhaven features and tools in one place.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OpenSourceEngine/Script/refs/heads/main/Brookhaven.lua"))()`,
         popularity: 85,
-        dateAdded: "2025-03-20"
+        dateAdded: "2025-03-20"  
     },
     {
         name: "Steal a brainrot hack script",
