@@ -19,11 +19,11 @@ const scripts = [
         dateAdded: "2025-04-15"
     },
     {
-        name: "Brookhaven Money Hack",
+        name: "Brookhaven Exploit script",
         game: "Brookhaven",
         category: "Roleplay",
-        description: "A script for Brookhaven to boost in-game currency.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Brookhaven-RP-Sander-XY-35845"))()`,
+        description: "All-in-one script for unlocking key Brookhaven features and tools in one place.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OpenSourceEngine/Script/refs/heads/main/Brookhaven.lua"))()`,
         popularity: 85,
         dateAdded: "2025-03-20"
     },
