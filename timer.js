@@ -1,61 +1,53 @@
-window.addEventListener("DOMContentLoaded", () => {
-  const cooldownSeconds = 30;
-  const cooldownKey = "lastCooldownEnd";
-  const startKey = "cooldownStartTime";
-  const overlay = document.getElementById("cooldownOverlay");
-  const timerDisplay = document.getElementById("cooldownTimer");
+const cooldownSeconds = 30;
+const cooldownKey = "lastCooldownEnd";
+const startKey = "cooldownStartTime";
+const overlay = document.getElementById("cooldownOverlay");
+const timerDisplay = document.getElementById("cooldownTimer");
 
-  if (!overlay || !timerDisplay) {
-    console.error("Missing #cooldownOverlay or #cooldownTimer in HTML.");
-    return;
-  }
+const now = Date.now();
+let startedAt = parseInt(localStorage.getItem(startKey));
 
-  const now = Date.now();
-  const lastEnd = parseInt(localStorage.getItem(cooldownKey)) || 0;
-  const startedAt = parseInt(localStorage.getItem(startKey)) || now;
-  const timeSinceEnd = now - lastEnd;
+if (!startedAt) {
+  // First visit or no previous start — set start time now
+  startedAt = now;
+  localStorage.setItem(startKey, startedAt.toString());
+}
 
-  const oneMinute = 1 * 60 * 1000;
+let elapsed = Math.floor((now - startedAt) / 1000);
+let remaining = Math.max(0, cooldownSeconds - elapsed);
 
-  let remaining;
+if (remaining > 0) {
+  // Delay cooldown by 3 seconds
+  setTimeout(() => {
+    startCooldown(remaining);
+  }, 3000);
+} else {
+  // Already finished cooldown
+  overlay.style.display = "none";
+  localStorage.setItem(cooldownKey, now.toString());
+  localStorage.removeItem(startKey); // Reset for next visit
+}
 
-  if (timeSinceEnd < oneMinute && lastEnd !== 0) {
-    // ✅ User came back within 1 minute – no cooldown
-    overlay.style.display = "none";
-  } else {
-    // ⏳ Need cooldown
-    const elapsed = Math.floor((now - startedAt) / 1000);
-    remaining = Math.max(0, cooldownSeconds - elapsed);
+function startCooldown(seconds) {
+  overlay.style.display = "flex";
+  document.body.classList.add("disable-clicks");
 
-    if (remaining > 0) {
-      // ⏱️ Wait 3 seconds before showing the cooldown
-      setTimeout(() => {
-        startCooldown(remaining);
-      }, 3000);
-    } else {
-      // ✅ Already finished – update last cooldown time
-      localStorage.setItem(cooldownKey, now.toString());
-    }
-  }
+  let timeLeft = seconds;
+  timerDisplay.textContent = timeLeft;
 
-  function startCooldown(seconds) {
-    overlay.style.display = "flex";
-    document.body.classList.add("disable-clicks");
-
-    let timeLeft = seconds;
+  const interval = setInterval(() => {
+    timeLeft--;
     timerDisplay.textContent = timeLeft;
 
-    const interval = setInterval(() => {
-      timeLeft--;
-      timerDisplay.textContent = timeLeft;
-      localStorage.setItem(startKey, Date.now().toString());
+    // Save the current time for refresh recovery
+    localStorage.setItem(startKey, Date.now().toString());
 
-      if (timeLeft <= 0) {
-        clearInterval(interval);
-        overlay.style.display = "none";
-        document.body.classList.remove("disable-clicks");
-        localStorage.setItem(cooldownKey, Date.now().toString());
-      }
-    }, 1000);
-  }
-});
+    if (timeLeft <= 0) {
+      clearInterval(interval);
+      overlay.style.display = "none";
+      document.body.classList.remove("disable-clicks");
+      localStorage.setItem(cooldownKey, Date.now().toString());
+      localStorage.removeItem(startKey); // Reset for next visit
+    }
+  }, 1000);
+}
