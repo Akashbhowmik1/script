@@ -17,16 +17,17 @@ body {
   align-items: center;
   font-size: clamp(2.5rem, 8vw, 3.5rem);
   z-index: 10000;
-  pointer-events: none;
   flex-direction: column;
   transition: opacity 0.3s ease-in-out;
   backdrop-filter: blur(4px);
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow for depth */
-  font-weight: 600; /* Bolder text for prominence */
-  letter-spacing: 0.5px; /* Slight spacing for elegance */
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  pointer-events: auto; /* ✅ Allow interaction inside overlay */
 }
 
-.disable-clicks *:not(#cooldownOverlay) {
+/* ✅ Disable clicks everywhere EXCEPT the overlay and button */
+.disable-clicks body *:not(#cooldownOverlay):not(#cooldownOverlay *) {
   pointer-events: none;
 }
 
@@ -37,20 +38,20 @@ body {
   padding: 12px 24px;
   border-radius: 12px;
   text-align: center;
-  line-height: 1.6; /* Improved line height for readability */
+  line-height: 1.6;
   max-width: 90%;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   animation: fadeIn 0.5s ease-out;
-  font-weight: 400; /* Lighter weight for better readability */
-  letter-spacing: 0.3px; /* Subtle letter spacing */
-  color: #f0f0f0; /* Slightly off-white for softer contrast */
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for text clarity */
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  color: #f0f0f0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .cooldown-close-btn {
   background-color: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #f0f0f0; /* Match message text color */
+  color: #f0f0f0;
   font-size: clamp(16px, 3vw, 20px);
   padding: 10px 20px;
   border-radius: 10px;
@@ -59,9 +60,11 @@ body {
   transition: all 0.3s ease;
   font-weight: 500;
   letter-spacing: 0.5px;
-  text-transform: uppercase; /* Uppercase for button text */
-  font-family: inherit; /* Consistent font with body */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3); /* Subtle shadow for button text */
+  text-transform: uppercase;
+  font-family: inherit;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  pointer-events: auto; /* ✅ Ensure button stays clickable */
+  z-index: 10001;
 }
 
 .cooldown-close-btn:hover {
@@ -75,7 +78,7 @@ body {
   box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
 }
 
-/* Animation for smooth appearance */
+/* Animation */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -87,11 +90,11 @@ body {
   }
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (max-width: 768px) {
   #cooldownOverlay {
     font-size: clamp(2rem, 7vw, 3rem);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4); /* Slightly lighter shadow */
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   #cooldownMessage {
