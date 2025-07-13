@@ -815,8 +815,7 @@ const cooldown = 8000; // 8 seconds cooldown for ads
 // Ad links (currently identical; replace with distinct links if needed)
 const adLinks = [
     "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
-    "https://otieu.com/4/9558019" 
-    "https://mediocrecliffschangeless.com/ysgt1brp6y?key=afa3ebe412e568c35961207f14db42a0" // Replace with a different link if available
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8" // Replace with a different link if available
 ];
 
 // Function to pick a random ad link
@@ -843,5 +842,3 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
-
-
