@@ -192,16 +192,26 @@
 
 <div id="cooldownOverlay" style="display: none;">
   <div id="cooldownMessage">Click the cross button to cut the timer</div>
-  
-  <!-- ❌ Close Button -->
-<a href="https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8" target="_blank">
+
+  <!-- ❌ Close Button with random link -->
   <button id="closeCooldownBtn" class="cooldown-close-btn">❌</button>
-</a>
 
-
-  
   <div id="cooldownTimer">30</div>
 </div>
+
+<script>
+  const links = [
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
+    "https://mediocrecliffschangeless.com/ysgt1brp6y?key=afa3ebe412e568c35961207f14db42a0", // Replace with your second URL
+    "https://otieu.com/4/9558019"  // Replace with your third URL
+  ];
+
+  document.getElementById("closeCooldownBtn").addEventListener("click", function () {
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    window.open(randomLink, "_blank");
+  });
+</script>
+
 
 
 
