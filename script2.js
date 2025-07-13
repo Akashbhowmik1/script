@@ -843,3 +843,14 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
+ const links = [
+    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
+    "https://mediocrecliffschangeless.com/ysgt1brp6y?key=afa3ebe412e568c35961207f14db42a0", // Replace with your second URL
+    "https://otieu.com/4/9558019"  // Replace with your third URL
+  ];
+
+  document.getElementById("closeCooldownBtn").addEventListener("click", function () {
+    const randomLink = links[Math.floor(Math.random() * links.length)];
+    window.open(randomLink, "_blank");
+  });
