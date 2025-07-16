@@ -77,9 +77,9 @@ const scripts = [
         game: "Forsaken",
         category: "Action",
         description: "A script for Forsaken to automate combat sequences.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/sigmaboy-sigma-boy/sigmaboy-sigma-boy/refs/heads/main/StaminaSettings.ESP.PIDC.raw"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PlutomasterAccount/Funny-Hub/main/Funny%20Hub%20V2"))()`,
         popularity: 80,
-        dateAdded: "2025-05-12"
+        dateAdded: "2025-07-16"
     },
     {
         name: "Tower Defense Simulator Auto Wave",
