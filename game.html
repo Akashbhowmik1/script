@@ -29,16 +29,19 @@
 }
 
 body {
-    font-family: var(--font-primary);
+    font-family: var(--font-primary, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
     max-width: 1200px;
     margin: 0 auto;
-    padding: 24px;
-    line-height: 1.7;
-    background: var(--background-light);
-    color: var(--text-light);
-    transition: var(--transition);
+    padding: clamp(16px, 4vw, 32px);
     font-size: 16px;
+    line-height: 1.75;
+    background: var(--background-light, #f9fafb);
+    color: var(--text-light, #1e293b);
+    transition: background 0.4s ease, color 0.4s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+
 
 body.dark-mode {
     background: var(--background-dark);
@@ -60,44 +63,56 @@ body.dark-mode .game-details {
 }
 
 .game-details img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--border-radius);
-    margin-bottom: 24px;
     display: block;
-    transition: transform 0.3s ease;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: var(--border-radius, 16px);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-details img:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
 }
 
+
 .codes {
-    margin: 24px 0;
+    margin: 2rem 0;
 }
 
 .code-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px;
-    margin-bottom: 16px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
     background: #ffffff;
     border: 1px solid #e5e7eb;
-    border-radius: var(--border-radius);
-    transition: var(--transition);
+    border-radius: var(--border-radius, 12px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.code-item:hover {
+    transform: translateY(-2px);
+    background: #f9fafb;
 }
 
 body.dark-mode .code-item {
-    background: #374151;
-    border-color: #4b5563;
+    background: #1f2937;
+    border-color: #374151;
+    color: #f3f4f6;
 }
 
 .code-item.expired {
     background: #f3f4f6;
-    color: #6b7280;
-    opacity: 0.8;
+    color: #9ca3af;
+    opacity: 0.7;
 }
+
 
 body.dark-mode .code-item.expired {
     background: #2d3748;
@@ -149,26 +164,29 @@ body.dark-mode .code-item.expired {
 .back-btn {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     margin-top: 24px;
     padding: 12px 24px;
     background: #6b7280;
     color: #ffffff;
     text-decoration: none;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius, 12px);
     font-weight: 500;
-    transition: var(--transition);
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .back-btn:hover {
     background: #4b5563;
-    transform: translateY(-1px);
+    transform: translateY(-2px);
 }
+
 
 .notification {
     position: fixed;
     bottom: 32px;
     right: 32px;
-    background: #10b981;
+    background: #10b981; /* Emerald green */
     color: #ffffff;
     padding: 12px 24px;
     border-radius: var(--border-radius);
@@ -187,39 +205,42 @@ body.dark-mode .code-item.expired {
 }
 
 .error-message {
-    color: #ef4444;
+    color: #ef4444; /* Red text */
     font-weight: 600;
     text-align: center;
     padding: 12px;
-    background: #fee2e2;
+    background: #fee2e2; /* Light red background */
     border-radius: var(--border-radius);
     margin-bottom: 16px;
 }
 
 body.dark-mode .error-message {
-    background: #7f1d1d;
-    color: #fecaca;
+    background: #7f1d1d; /* Dark red */
+    color: #fecaca; /* Soft light red */
 }
+
 
 .loading {
     text-align: center;
     font-style: italic;
-    color: #6b7280;
+    color: #6b7280; /* Gray-500 */
     padding: 16px;
 }
 
 body.dark-mode .loading {
-    color: #9ca3af;
+    color: #9ca3af; /* Gray-400 for dark mode */
 }
 
+
 .code-meta {
-    font-size: 0.875rem;
-    color: #6b7280;
+    font-size: 0.875rem; /* Equivalent to 14px */
+    color: #6b7280; /* Gray-500 in light mode */
 }
 
 body.dark-mode .code-meta {
-    color: #9ca3af;
+    color: #9ca3af; /* Gray-400 in dark mode */
 }
+
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -317,18 +338,18 @@ a:focus {
         name: "Grow A Garden",
         image: "https://assets-prd.ignimgs.com/2025/05/12/grow-a-garden-codes-1747041583655.png?width=628&format=jpg&auto=webp&quality=80",
         codes: [
-            { code: "SQUIDGAME", effect: "15 Squid Tokens", status: "active" },
-            { code: "UPDATE22", effect: "1 Seed Pack", status: "active" },
-            { code: "GLOBAL", effect: "1 Seed Pack", status: "active" },
-            { code: "UPDATE16", effect: "1 Seed Pack", status: "active" },
-            { code: "ROD999", effect: "1 Seed Pack", status: "active" },
-            { code: "Update8", effect: "1 Seed Pack", status: "active" },
-            { code: "1000MEMBER", effect: "1 Seed Pack", status: "active" },
-            { code: "seedpack100", effect: "1 Seed Pack", status: "active" },
-            { code: "Update7", effect: "1 Seed Pack", status: "active" },
-            { code: "Update6", effect: "1 Seed Pack", status: "active" },
-            { code: "Update5", effect: "1 Seed Pack", status: "active" },
-            { code: "BLOOM2024", effect: "Gave 200 Gems", status: "expired" }
+            
+            { code: "UPDATE22", effect: "1 Seed Pack", status: "expired" },
+            { code: "GLOBAL", effect: "1 Seed Pack", status: "expired" },
+            { code: "UPDATE16", effect: "1 Seed Pack", status: "expired" },
+            { code: "ROD999", effect: "1 Seed Pack", status: "expired" },
+            { code: "Update8", effect: "1 Seed Pack", status: "expired" },
+            { code: "1000MEMBER", effect: "1 Seed Pack", status: "expired" },
+            { code: "seedpack100", effect: "1 Seed Pack", status: "expired" },
+            { code: "Update7", effect: "1 Seed Pack", status: "expired" },
+            { code: "Update6", effect: "1 Seed Pack", status: "expired" },
+            { code: "Update5", effect: "1 Seed Pack", status: "expired" },
+            
         ],
         category: "adventure",
         rating: 4.8,
@@ -1108,22 +1129,7 @@ a:focus {
         lastUpdated: "2025-05-26",
         popularity: "High"
     },
-    {
-        id: 47,
-        name: "[HIDE AND SEEK] Ink Game",
-        image: "https://tr.rbxcdn.com/180DAY-c6f212a156d16c7b644c6fc3c8fcec63/768/432/Image/Webp/noFilter",
-        codes: [
-            { code: "INK2025", effect: "Grants 100 Ink", status: "active" },
-            { code: "HIDE100", effect: "Unlocks Stealth Boost", status: "active" },
-            { code: "SEEK50", effect: "50% Speed Boost for 1 round", status: "active" },
-            { code: "HIDE2024", effect: "Gave 50 Ink", status: "expired" }
-        ],
-        category: "adventure",
-        rating: 4.6,
-        description: "Hide and seek in an inky world!",
-        lastUpdated: "2025-05-25",
-        popularity: "High"
-    },
+   
     {
         id: 48,
         name: "[RELEASE] All Star Tower Defense X",
