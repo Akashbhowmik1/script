@@ -1,12 +1,15 @@
-/* General smooth scroll and typography */
+/* General smooth scroll and refined typography */
 html {
     scroll-behavior: smooth;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
+
 body {
-    background: linear-gradient(135deg, #f9fafb 0%, #c7d2fe 100%);
-    color: #0f172a; /* Darker text for better contrast */
     margin: 0;
     padding: 0;
     min-height: 100vh;
@@ -14,12 +17,13 @@ body {
     flex-direction: column;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 18px;
-    line-height: 1.6;
+    line-height: 1.7;
+    color: #0f172a;
+    background: linear-gradient(135deg, #f9fafb 0%, #c7d2fe 100%);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    box-sizing: border-box;
+    transition: background 0.4s ease, color 0.4s ease;
 }
-
 
 body.dark-mode {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -28,10 +32,11 @@ body.dark-mode {
 
 /* Header */
 header {
-    background: #1e40af;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    padding: 1rem;
+    background: #1e40af; /* Deep blue background */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    padding: 1rem; /* 16px padding */
 }
+
 
 body.dark-mode header {
     background: #1e3a8a;
