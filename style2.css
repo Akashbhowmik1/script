@@ -144,6 +144,7 @@ button, input[type="button"], input[type="submit"], select {
 }
 
 /* Container with max-width for large screens */
+/* Container with max-width for large screens */
 .container {
     max-width: min(95%, 1400px);
     margin: 0 auto;
@@ -165,20 +166,69 @@ header {
     min-height: 60px;
 }
 
-/* Top center text with gradient */
+/* Top center text with huge animated entrance */
 .top-center-text {
     position: absolute;
-    top: 20px;
+    top: clamp(16px, 4vw, 32px);
     left: 50%;
     transform: translateX(-50%);
-    width: min(80%, 500px);
+    width: min(90%, 600px);
     text-align: center;
-    font-size: clamp(22px, 3.5vw, 34px);
-    font-weight: 600;
-    background: linear-gradient(to right, var(--primary, #00ffcc), var(--secondary, #ff00ff));
+    font-size: clamp(28px, 8vw, 48px);
+    font-weight: 800;
+    letter-spacing: 1px;
+
+    background: linear-gradient(90deg, var(--primary, #00ffcc), var(--secondary, #ff00ff), var(--primary, #00ffcc));
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
+
+    animation: megaEntrance 2s ease-out forwards, gradient-move 4s ease-in-out infinite;
+
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    opacity: 0;
+}
+
+/* Huge animated entrance effect */
+@keyframes megaEntrance {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50px) scale(0.8);
+        filter: blur(4px);
+    }
+    50% {
+        opacity: 1;
+        transform: translate(-50%, 0) scale(1.05);
+        filter: blur(0px);
+    }
+    100% {
+        transform: translate(-50%, 0) scale(1);
+        opacity: 1;
+    }
+}
+
+/* Gradient background animation */
+@keyframes gradient-move {
+    0% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+    100% {
+        background-position: 0% center;
+    }
+}
+
+/* Extra tweaks for small screens */
+@media (max-width: 480px) {
+    .top-center-text {
+        font-size: clamp(30px, 10vw, 36px); /* bigger on phones */
+        width: 95%;
+        top: 24px;
+    }
 }
 
 /* Fallback for browsers that don't support background-clip */
@@ -188,6 +238,15 @@ header {
         background: none;
     }
 }
+
+/* Optional bounce effect if you want later */
+@keyframes bounceIn {
+    0%   { transform: translate(-50%, -30px); }
+    60%  { transform: translate(-50%, 10px); }
+    80%  { transform: translate(-50%, -5px); }
+    100% { transform: translate(-50%, 0); }
+}
+
 
 @keyframes fadeInTop {
     from { opacity: 0; transform: translate(-50%, -20px); }
@@ -290,26 +349,64 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5);
 }
 .code-button {
-    background: linear-gradient(45deg, var(--primary, #00ffcc), var(--primary-dark, #00d1aa));
-    color: var(--dark, #0a0a0a);
-    border: none;
+    position: absolute;
+    top: 6.6rem;
+    left: 9rem;
+
     padding: 14px 28px;
-    text-align: center;
     font-size: clamp(16px, 2vw, 18px);
     font-weight: 600;
+    color: var(--dark, #0a0a0a);
+
+    background: linear-gradient(45deg, var(--primary, #00ffcc), var(--primary-dark, #00d1aa));
+    border: none;
     border-radius: 12px;
-    cursor: pointer;
-    transition: var(--transition, all 0.3s ease), transform 0.3s ease;
+    text-decoration: none;
+    
     box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
+    transition: var(--transition, all 0.3s ease), transform 0.3s ease;
+
+    cursor: pointer;
     min-height: 48px;
     min-width: 120px;
-    position: absolute;
-    top: 160%;
-    left: 150%;
+    z-index: 1000;
+
     transform: translate(-50%, -50%);
     -webkit-transform: translate(-50%, -50%);
     -ms-transform: translate(-50%, -50%);
 }
+
+/* Hover and active effects */
+.code-button:hover {
+    transform: translate(-50%, -52%) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.code-button:active {
+    transform: translate(-50%, -50%) scale(0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 📱 Mobile Fixes */
+@media (max-width: 768px) {
+    .code-button {
+        top: 6.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 14px;         /* Smaller padding */
+        font-size: 12px;           /* Smaller font size */
+        border-radius: 8px;        /* Smaller border radius */
+        min-width: unset;
+        min-height: unset;
+    }
+
+    .code-button:hover,
+    .code-button:active {
+        transform: translateX(-50%) scale(1.05); /* consistent scale */
+    }
+}
+
+
 
 /* Hamburger menu */
 .hamburger {
@@ -360,6 +457,7 @@ html[data-theme="light"] #searchInput::placeholder {
 }
 
 /* Overlay menu */
+
 .overlay-menu {
     position: fixed;
     top: 0;
@@ -458,6 +556,12 @@ html[data-theme="light"] #searchInput::placeholder {
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: slideUp 0.8s ease-out;
 }
+@media (max-width: 768px) {
+    .filter-bar {
+        margin-top: 100px; /* or any value you like */
+    }
+}
+
 
 /* Favorite toggle */
 .favorite-toggle {
