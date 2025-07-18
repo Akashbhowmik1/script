@@ -796,22 +796,7 @@
         lastUpdated: "2025-05-26",
         popularity: "High"
     },
-    {
-        id: 47,
-        name: "[HIDE AND SEEK] Ink Game",
-        image: "https://tr.rbxcdn.com/180DAY-c6f212a156d16c7b644c6fc3c8fcec63/768/432/Image/Webp/noFilter",
-        codes: [
-            { code: "INK2025", effect: "Grants 100 Ink", status: "active" },
-            { code: "HIDE100", effect: "Unlocks Stealth Boost", status: "active" },
-            { code: "SEEK50", effect: "50% Speed Boost for 1 round", status: "active" },
-            { code: "HIDE2024", effect: "Gave 50 Ink", status: "expired" }
-        ],
-        category: "adventure",
-        rating: 4.6,
-        description: "Hide and seek in an inky world!",
-        lastUpdated: "2025-05-25",
-        popularity: "High"
-    },
+    
     {
         id: 48,
         name: "[RELEASE] All Star Tower Defense X",
@@ -2686,7 +2671,7 @@ function displayGames(gamesToShow, page, filterType = 'all') {
             <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" data-id="${game.id}" aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
                 ${isFavorite ? '★' : '☆'}
             </button>
-            <a href="game-details.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
+            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
         `;
         domElements.gameList.appendChild(gameCard);
     });
@@ -2737,7 +2722,7 @@ function displayRecentlyViewed() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="game-details.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.recentlyViewedList.appendChild(gameCard);
     });
@@ -2752,7 +2737,7 @@ function displayFavorites() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="game-details.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.favoritesList.appendChild(gameCard);
     });
@@ -2900,7 +2885,7 @@ function initializeApp() {
             }
             const randomGame = games[Math.floor(Math.random() * games.length)];
             addToRecentlyViewed(randomGame);
-            window.location.href = `game-details.html?id=${randomGame.id}`;
+            window.location.href = `game.html?id=${randomGame.id}`;
         });
     }
 
@@ -2913,7 +2898,7 @@ function initializeApp() {
                 const game = games.find(g => g.id === gameId);
                 if (game) {
                     addToRecentlyViewed(game);
-                    window.location.href = `game-details.html?id=${gameId}`;
+                    window.location.href = `game.html?id=${gameId}`;
                 } else {
                     showError('Game not found.');
                 }
@@ -2932,7 +2917,7 @@ function initializeApp() {
                     const game = games.find(g => g.id === gameId);
                     if (game) {
                         addToRecentlyViewed(game);
-                        window.location.href = `game-details.html?id=${gameId}`;
+                        window.location.href = `game.html?id=${gameId}`;
                     } else {
                         showError('Game not found.');
                     }
