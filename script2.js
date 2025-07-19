@@ -288,6 +288,15 @@ const scripts = [
         popularity: 90,
         dateAdded: "2025-05-21"
     },
+    {
+    name: "Ink Game Script",
+    game: "Ink Game",
+    category: "Action",
+    description: "A script for [HIDE AND SEEK] Ink Game that provides features like ESP, auto-hide, and seeker avoidance for easy wins.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/VapeVoidware/VW-Add/main/inkgame.lua", true))()`,
+    popularity: 85,
+    dateAdded: "2025-07-18"
+},
 
 
 ];
