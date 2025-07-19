@@ -1,4 +1,4 @@
-const cooldownSeconds = 30;
+const cooldownSeconds = 15;
 const cooldownKey = "lastCooldownEnd";
 const startKey = "cooldownStartTime";
 const overlay = document.getElementById("cooldownOverlay");
