@@ -297,6 +297,15 @@ const scripts = [
     popularity: 85,
     dateAdded: "2025-07-18"
 },
+   {
+    name: "prospecting Script",
+    game: "prospecting",
+    category: "Action",
+    description: "A script for prospecting Game that provides features for easy game.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()`,
+    popularity: 85,
+    dateAdded: "2025-07-30"
+},
 
 
 ];
