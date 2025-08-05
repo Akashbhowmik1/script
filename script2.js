@@ -306,6 +306,15 @@ const scripts = [
     popularity: 85,
     dateAdded: "2025-07-30"
 },
+{
+    name: "TYPE://SOUL Script",
+    game: "TYPE://SOUL",
+    category: "Action",
+    description: "A script for TYPE://SOUL that provides enhanced gameplay features and automation.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/0xCiel/scripts/refs/heads/main/typesoul.lua"))()`,
+    popularity: 92,
+    dateAdded: "2025-08-05"
+},
 
 
 ];
