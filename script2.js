@@ -836,21 +836,7 @@ document.addEventListener('DOMContentLoaded', () => {
     init();
 });
 
-/* Ads system */
 
-let lastOpened = 0;
-const cooldown = 8000; // 8 seconds cooldown for ads
-
-// Ad links (currently identical; replace with distinct links if needed)
-const adLinks = [
-    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
-    "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8" // Replace with a different link if available
-];
-
-// Function to pick a random ad link
-function getRandomAdLink() {
-    return adLinks[Math.floor(Math.random() * adLinks.length)];
-}
 
 // Open ad if cooldown is passed
 function openAdWithCooldown() {
