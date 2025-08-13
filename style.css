@@ -337,10 +337,9 @@ body {
 /* Main Container */
 .main-container {
   padding-top: 70px;
-  -webkit-overflow-scrolling: touch; /* iOS momentum scroll */
-  overflow: auto; /* or scroll, depending on your need */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
 }
-
 
 /* Hero Section */
 .hero-section {
@@ -645,8 +644,8 @@ body {
   padding: 0 var(--container-padding) var(--section-spacing);
   max-width: 1200px;
   margin: 0 auto;
-  overflow: auto; /* Enables scroll if needed */
-  -webkit-overflow-scrolling: touch; /* Smooth scroll on iOS */
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
 }
 
 /* Platform Section */
