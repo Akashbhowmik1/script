@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore the latest game scripts and codes at ScriptHub.">
+    <title>ScriptHub</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+    <link rel="stylesheet" href="/project-root/src/css/code.css">
+</head>
+<body>
+       <div id="copyNotification" class="copy-notification">Code copied!</div>
+
+      
+    <header role="banner" aria-label="ScriptHub header">
+        
+        <div class="header-container">
+            <div class="logo">ScriptHub</div>
+            <nav>
+                <a href="#" aria-label="News">News</a>
+                <a href="#" aria-label="Guides">Guides</a>
+                <a href="#" aria-label="Gaming" class="active">Gaming</a>
+                <a href="#" aria-label="Tech">Tech</a>
+                <a href="#" aria-label="Entertainment">Entertainment</a>
+                <a href="#" aria-label="ScriptHub Gadgets">ScriptHub Gadgets</a>
+            </nav>
+            <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle">🌙</button>
+        </div>
+        <div class="search-section">
+            <h2>Search Results for <span class="highlight">game codes</span></h2>
+            <div class="search-container">
+                <input id="searchInput" type="search" placeholder="game codes" aria-label="Search for game codes" class="search-input">
+                <button id="clearSearch" class="clear-search" aria-label="Clear search">✖</button>
+            </div>
+        </div>
+        <div class="filter-container">
+            <select id="categoryFilter" aria-label="Filter by category">
+                <option value="all">All Categories</option>
+                <option value="adventure">Adventure</option>
+                <option value="action">Action</option>
+                <option value="roleplay">Roleplay</option>
+                <option value="simulation">Simulation</option>
+                <option value="strategy">Strategy</option>
+                <option value="sports">Sports</option>
+            </select>
+            <select id="sortBy" aria-label="Sort games">
+                <option value="name">Sort by Name</option>
+                <option value="rating">Sort by Rating</option>
+            </select>
+            <button id="randomGame" aria-label="Show random game">🎲 Random Game</button>
+        </div>
+    </header>
+    <main>
+        <div class="stories-section">
+            <h2>735 Stories</h2>
+            <div id="gameList" role="list" aria-live="polite" class="game-grid"></div>
+        </div>
+        <div id="pagination" class="flex justify-center mt-6"></div>
+        <button id="loadMore" class="load-more" aria-label="Load more stories">Load More</button>
+    </main>
+    <footer>
+        <p>© 2025 ScriptHub. All rights reserved.</p>
+        <div class="social-links">
+            <a href="https://twitter.com" target="_blank" aria-label="Follow us on Twitter">Twitter</a>
+            <a href="https://discord.com" target="_blank" aria-label="Join our Discord">Discord</a>
+            <a href="mailto:support@scripthub.com" aria-label="Report an issue">Report Issue</a>
+        </div>
+    </footer>
+    <button id="backToTop" class="back-to-top" aria-label="Back to top">↑</button>
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <button id="closePopup" class="close-btn" aria-label="Close popup">✖</button>
+            <div id="popupDetails"></div>
+        </div>
+    </div>
+    <script src="/project-root/src/js/code.js"></script>
+</body>
+</html>
