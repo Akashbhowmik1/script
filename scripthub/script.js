@@ -145,13 +145,13 @@ const scripts = [
         dateAdded: "2025-05-15"
     },
     {
-        name: "Anime Vanguards Auto Mission",
-        game: "Anime Vanguards",
-        category: "Adventure",
-        description: "A script for Anime Vanguards to automate mission completion.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/godor1010/godor/refs/head/main/anime_vanguards_'))()`,
+        name: "Grow a Garden THAN HUB Script.",
+        game: "Grow a Garden",
+        category: "Simulation",
+        description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1"))()`,
         popularity: 80,
-        dateAdded: "2025-05-06"
+        dateAdded: "2025-08-17"
     },
     {
         name: "99 Nights In The Forest Script",
@@ -857,3 +857,4 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
