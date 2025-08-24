@@ -315,6 +315,16 @@ const scripts = [
     popularity: 92,
     dateAdded: "2025-08-05"
 },
+{
+    name: "Blox Fruit HoHo Hub script",
+    game: "Blox Fruit",
+    category: "Action",
+    description: "A powerful hub for Blox Fruit that provides multiple features, automation, and gameplay enhancements.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`,
+    popularity: 95,
+    dateAdded: "2025-08-24"
+},
+
 
 
 ];
@@ -857,4 +867,5 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
