@@ -2671,7 +2671,7 @@ function displayGames(gamesToShow, page, filterType = 'all') {
             <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" data-id="${game.id}" aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
                 ${isFavorite ? '★' : '☆'}
             </button>
-            <a href="/script/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
         `;
         domElements.gameList.appendChild(gameCard);
     });
@@ -2722,7 +2722,7 @@ function displayRecentlyViewed() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="/script/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.recentlyViewedList.appendChild(gameCard);
     });
@@ -2737,7 +2737,7 @@ function displayFavorites() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="/script/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.favoritesList.appendChild(gameCard);
     });
@@ -2885,7 +2885,7 @@ function initializeApp() {
             }
             const randomGame = games[Math.floor(Math.random() * games.length)];
             addToRecentlyViewed(randomGame);
-            window.location.href = `/script/scripthub/game/index.html?id=${randomGame.id}`;
+            window.location.href = `/scripthub/game/index.html?id=${randomGame.id}`;
         });
     }
 
@@ -2898,7 +2898,7 @@ function initializeApp() {
                 const game = games.find(g => g.id === gameId);
                 if (game) {
                     addToRecentlyViewed(game);
-                    window.location.href = `/script/scripthub/game/index.html?id=${gameId}`;
+                    window.location.href = `/scripthub/game/index.html?id=${gameId}`;
                 } else {
                     showError('Game not found.');
                 }
@@ -2917,7 +2917,7 @@ function initializeApp() {
                     const game = games.find(g => g.id === gameId);
                     if (game) {
                         addToRecentlyViewed(game);
-                        window.location.href = `/script/scripthub/game/index.html?id=${gameId}`;
+                        window.location.href = `/scripthub/game/index.html?id=${gameId}`;
                     } else {
                         showError('Game not found.');
                     }
@@ -2988,4 +2988,5 @@ document.addEventListener('click', () => {
     setInterval(openPopunder, 8000); // every 8 sec
   }
 });
+
 
