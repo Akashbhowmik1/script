@@ -2671,7 +2671,7 @@ function displayGames(gamesToShow, page, filterType = 'all') {
             <button class="favorite-btn ${isFavorite ? 'favorited' : ''}" data-id="${game.id}" aria-label="${isFavorite ? 'Remove from favorites' : 'Add to favorites'}">
                 ${isFavorite ? '★' : '☆'}
             </button>
-            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View Codes</a>
         `;
         domElements.gameList.appendChild(gameCard);
     });
@@ -2722,7 +2722,7 @@ function displayRecentlyViewed() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.recentlyViewedList.appendChild(gameCard);
     });
@@ -2737,7 +2737,7 @@ function displayFavorites() {
         gameCard.innerHTML = `
             <img src="${game.image}" alt="${game.name} thumbnail" loading="lazy">
             <p>${game.name}</p>
-            <a href="game.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
+            <a href="/scripthub/game/index.html?id=${game.id}" class="view-details" data-id="${game.id}" aria-label="View codes for ${game.name}">View</a>
         `;
         domElements.favoritesList.appendChild(gameCard);
     });
@@ -2885,7 +2885,7 @@ function initializeApp() {
             }
             const randomGame = games[Math.floor(Math.random() * games.length)];
             addToRecentlyViewed(randomGame);
-            window.location.href = `game.html?id=${randomGame.id}`;
+            window.location.href = `/scripthub/game/index.html?id=${randomGame.id}`;
         });
     }
 
@@ -2898,7 +2898,7 @@ function initializeApp() {
                 const game = games.find(g => g.id === gameId);
                 if (game) {
                     addToRecentlyViewed(game);
-                    window.location.href = `game.html?id=${gameId}`;
+                    window.location.href = `/scripthub/game/index.html?id=${gameId}`;
                 } else {
                     showError('Game not found.');
                 }
@@ -2917,7 +2917,7 @@ function initializeApp() {
                     const game = games.find(g => g.id === gameId);
                     if (game) {
                         addToRecentlyViewed(game);
-                        window.location.href = `game.html?id=${gameId}`;
+                        window.location.href = `/scripthub/game/index.html?id=${gameId}`;
                     } else {
                         showError('Game not found.');
                     }
@@ -2952,40 +2952,4 @@ function initializeApp() {
 }
 
 document.addEventListener('DOMContentLoaded', initializeApp);
-
-// Ad links to rotate through
-const adLinks = [
-  "https://otieu.com/4/9558019",
-  "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
-  "https://mediocrecliffschangeless.com/ysgt1brp6y?key=afa3ebe412e568c35961207f14db42a0"
-];
-
-let adIndex = 0;
-let clickCount = 0;
-let timerStarted = false;
-
-function openPopunder() {
-  const url = adLinks[adIndex];
-  adIndex = (adIndex + 1) % adLinks.length;
-
-  const pop = window.open(url, '_blank');
-  if (pop) {
-    pop.blur();
-    window.focus();
-  }
-}
-
-// First 2 ads on user clicks
-document.addEventListener('click', () => {
-  if (clickCount < 2) {
-    openPopunder();
-    clickCount++;
-  }
-
-  // Start 8-second timer after 2nd click
-  if (clickCount === 2 && !timerStarted) {
-    timerStarted = true;
-    setInterval(openPopunder, 8000); // every 8 sec
-  }
-});
 
