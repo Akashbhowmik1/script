@@ -329,8 +329,8 @@ const scripts = [
     game: "Hunty Zombie",
     category: "Action",
     description: "A Luarmor-protected script for Hunty Zombie with secure key system and gameplay enhancements.",
-    code: `script_key="https://ads.luarmor.net/get_key?for=Hunty_Zombie-MyKlvsNYuOOZ";
-     loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259b8178f83b65751dcf8.lua"))()`,
+    code: `script_key="https://ads.luarmor.net/get_key?for=Hunty_Zombie_1-MDSCIjQlKacW";
+loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259b8178f83b65751dcf8.lua"))()`,
     popularity: 90,
     dateAdded: "2025-08-30"
 },
@@ -878,6 +878,7 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
 
 
