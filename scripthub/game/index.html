@@ -6,22 +6,27 @@
     <meta name="description" content="View details and codes for your favorite games.">
     <title>Game Details</title>
     <style>
-        :root {
+:root {
     --primary-color: #007bff;
     --primary-hover: #0056b3;
     --favorite-color: #ffc107;
     --favorite-hover: #ffca2f;
     --background-light: #f8fafc;
-    --background-dark: #1f2937;
+    --background-dark: #111827;
     --text-light: #1f2937;
-    --text-dark: #e5e7eb;
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --text-dark: #f3f4f6;
+    --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 6px 12px rgba(0, 0, 0, 0.12);
+    --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.2);
     --transition: all 0.3s ease-in-out;
-    --border-radius: 8px;
+    --border-radius: 12px;
     --font-primary: 'Inter', system-ui, -apple-system, sans-serif;
+    --glass-bg: rgba(255, 255, 255, 0.6);
+    --glass-bg-dark: rgba(31, 41, 55, 0.6);
+    --blur: blur(12px);
 }
 
+/* Reset + base */
 * {
     margin: 0;
     padding: 0;
@@ -29,307 +34,692 @@
 }
 
 body {
-    font-family: var(--font-primary, 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif);
+    font-family: var(--font-primary);
     max-width: 1200px;
     margin: 0 auto;
     padding: clamp(16px, 4vw, 32px);
     font-size: 16px;
-    line-height: 1.75;
-    background: var(--background-light, #f9fafb);
-    color: var(--text-light, #1e293b);
+    line-height: 1.7;
+    background: linear-gradient(135deg, #f9fafb, #eef2f7);
+    color: var(--text-light);
     transition: background 0.4s ease, color 0.4s ease;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-
 body.dark-mode {
-    background: var(--background-dark);
+    background: linear-gradient(135deg, #111827, #1f2937);
     color: var(--text-dark);
 }
 
+/* === Game Details Card === */
 .game-details {
-    background: #ffffff;
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
     padding: 32px;
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     margin-bottom: 24px;
     transition: var(--transition);
+    position: relative;
+    overflow: hidden;
 }
 
+/* Dark Mode */
 body.dark-mode .game-details {
-    background: #374151;
-    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.05);
+    background: var(--glass-bg-dark);
 }
 
+/* Subtle gradient glow border */
+.game-details::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 2px;
+    background: linear-gradient(135deg, #f472b6, #60a5fa, #34d399);
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box, 
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    opacity: 0.7;
+    transition: opacity 0.4s ease-in-out;
+}
+.game-details:hover::before {
+    opacity: 1;
+}
+
+/* Floating hover effect */
+.game-details:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* === Game Image === */
 .game-details img {
     display: block;
     width: 100%;
     height: auto;
-    max-width: 100%;
-    border-radius: var(--border-radius, 16px);
+    border-radius: var(--border-radius);
     margin-bottom: 1.5rem;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: var(--shadow-md);
+    transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
 }
 
+/* Hover effect with zoom + glow */
 .game-details img:hover {
-    transform: scale(1.03);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: scale(1.06) rotate(1deg);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+    filter: brightness(1.1) contrast(1.05);
+}
+
+/* === Game Title === */
+.game-details h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+body.dark-mode .game-details h2 {
+    color: #f9a8d4;
+}
+.game-details h2:hover {
+    color: #2563eb;
+    text-shadow: 0 2px 10px rgba(96,165,250,0.6);
+}
+
+/* === Game Description === */
+.game-details p {
+    color: var(--text-light);
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+}
+body.dark-mode .game-details p {
+    color: var(--text-dark);
+}
+
+/* === Buttons === */
+.game-details .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2563eb, #9333ea);
+    color: #fff;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+}
+.game-details .btn:hover {
+    background: linear-gradient(135deg, #3b82f6, #a855f7);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+/* === Extra: Tags or Badges === */
+.game-details .tags {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.game-details .tag {
+    padding: 0.3rem 0.75rem;
+    background: rgba(0,0,0,0.05);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+body.dark-mode .game-details .tag {
+    background: rgba(255,255,255,0.08);
+    color: #f9fafb;
+}
+.game-details .tag:hover {
+    background: #3b82f6;
+    color: #fff;
+    transform: scale(1.08);
+}
+
+/* === Responsive Adjustments === */
+@media (max-width: 768px) {
+    .game-details {
+        padding: 20px;
+    }
+    .game-details h2 {
+        font-size: 1.5rem;
+    }
+    .game-details p {
+        font-size: 0.95rem;
+    }
 }
 
 
+/* === Codes List === */
 .codes {
     margin: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
+/* === Code Item Card === */
 .code-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
     padding: 1rem 1.25rem;
-    margin-bottom: 1rem;
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: var(--border-radius, 12px);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-    transition: background 0.3s ease, transform 0.3s ease;
+    background: var(--glass-bg);
+    backdrop-filter: var(--blur);
+    border: 1px solid rgba(0,0,0,0.08);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
 }
 
+/* Hover lift + glow */
 .code-item:hover {
-    transform: translateY(-2px);
-    background: #f9fafb;
+    transform: translateY(-4px) scale(1.01);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.12);
 }
 
+/* Gradient border effect */
+.code-item::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, #60a5fa, #a78bfa, #34d399);
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) content-box, 
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+.code-item:hover::before {
+    opacity: 1;
+}
+
+/* Dark Mode */
 body.dark-mode .code-item {
-    background: #1f2937;
-    border-color: #374151;
-    color: #f3f4f6;
+    background: var(--glass-bg-dark);
+    border-color: rgba(255,255,255,0.08);
 }
 
+/* === Code Text === */
+.code-text {
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    color: var(--primary-color);
+    user-select: all;
+}
+body.dark-mode .code-text {
+    color: #93c5fd;
+}
+
+/* Expired Code Style */
 .code-item.expired {
-    background: #f3f4f6;
-    color: #9ca3af;
+    opacity: 0.65;
+    text-decoration: line-through;
+    position: relative;
+    pointer-events: none;
+}
+.code-item.expired::after {
+    content: "EXPIRED";
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: rotate(-12deg) translateY(-50%);
+    background: #ef4444;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+}
+
+/* === Copy Button === */
+.copy-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2563eb, #9333ea);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+}
+.copy-btn:hover {
+    background: linear-gradient(135deg, #3b82f6, #a855f7);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
+}
+
+/* Success copied effect */
+.copy-btn.copied {
+    background: linear-gradient(135deg, #10b981, #34d399);
+    box-shadow: 0 6px 16px rgba(16,185,129,0.4);
+}
+.copy-btn.copied::after {
+    content: "✔ Copied!";
+    margin-left: 0.5rem;
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: #d1fae5;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+    .code-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .copy-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* === Universal Button Styles === */
+.code-item button,
+.favorite-btn,
+.back-btn {
+    padding: 10px 18px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Ripple effect */
+.code-item button::after,
+.favorite-btn::after,
+.back-btn::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0.4;
+    background: #fff;
+    inset: 0;
+    margin: auto;
+    pointer-events: none;
+    transition: transform 0.6s ease, opacity 0.6s ease;
+}
+.code-item button:active::after,
+.favorite-btn:active::after,
+.back-btn:active::after {
+    transform: scale(4);
+    opacity: 0;
+}
+
+/* === Code Item Button === */
+.code-item button {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: #fff;
+}
+.code-item button:hover:not(:disabled) {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+}
+.code-item button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
     opacity: 0.7;
 }
 
-
-body.dark-mode .code-item.expired {
-    background: #2d3748;
-    color: #9ca3af;
-}
-
-.code-item button {
-    padding: 8px 16px;
-    background: var(--primary-color);
-    color: #ffffff;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-weight: 500;
-    transition: var(--transition);
-}
-
-.code-item button:hover:not(:disabled) {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-}
-
-.code-item button:disabled {
-    background: #d1d5db;
-    cursor: not-allowed;
-    opacity: 0.6;
-}
-
+/* === Favorite Button === */
 .favorite-btn {
-    padding: 10px 20px;
-    background: var(--favorite-color);
+    background: linear-gradient(135deg, var(--favorite-color), #facc15);
     color: #1f2937;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-weight: 500;
-    transition: var(--transition);
 }
-
+.favorite-btn:hover {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 18px rgba(251,191,36,0.4);
+}
 .favorite-btn.favorited {
-    background: var(--favorite-hover);
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+    color: #fff;
+    box-shadow: 0 8px 22px rgba(245,158,11,0.5);
+    animation: pulseGlow 1.5s infinite alternate;
 }
 
-.favorite-btn:hover:not(.favorited) {
-    background: var(--favorite-hover);
-    transform: translateY(-1px);
+/* Pulse glow for favorited */
+@keyframes pulseGlow {
+    from { box-shadow: 0 0 8px rgba(245,158,11,0.5); }
+    to { box-shadow: 0 0 18px rgba(245,158,11,0.9); }
 }
 
+/* === Back Button === */
 .back-btn {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-top: 24px;
-    padding: 12px 24px;
-    background: #6b7280;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: var(--border-radius, 12px);
-    font-weight: 500;
-    transition: background 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    background: linear-gradient(135deg, #6b7280, #4b5563);
+    color: #fff;
 }
-
 .back-btn:hover {
-    background: #4b5563;
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, #4b5563, #374151);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(55,65,81,0.5);
 }
 
+/* Add arrow hover wiggle */
+.back-btn svg {
+    transition: transform 0.3s ease;
+}
+.back-btn:hover svg {
+    transform: translateX(-4px);
+}
 
+/* === Responsive Adjustments === */
+@media (max-width: 600px) {
+    .code-item button,
+    .favorite-btn,
+    .back-btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+/* === Notification === */
 .notification {
     position: fixed;
-    bottom: 32px;
-    right: 32px;
-    background: #10b981; /* Emerald green */
-    color: #ffffff;
-    padding: 12px 24px;
+    bottom: 24px;
+    right: 24px;
+    min-width: 240px;
+    max-width: 360px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    padding: 14px 22px;
     border-radius: var(--border-radius);
-    box-shadow: var(--shadow-md);
-    display: none;
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: 10px;
     z-index: 1000;
     opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(30px) scale(0.98);
+    transition: all 0.4s ease;
+    pointer-events: none;
 }
 
+/* Show state */
 .notification.show {
-    display: block;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+    pointer-events: auto;
 }
 
+/* Notification types */
+.notification.success {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+.notification.error {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+.notification.warning {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+.notification.info {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+}
+
+/* Notification Icon */
+.notification .icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+/* Notification Text */
+.notification .text {
+    flex: 1;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Close Button */
+.notification .close-btn {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+.notification .close-btn:hover {
+    opacity: 1;
+}
+
+/* Progress bar (auto-dismiss) */
+.notification .progress {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    background: rgba(255,255,255,0.7);
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+    width: 100%;
+    animation: progressBar 5s linear forwards;
+}
+@keyframes progressBar {
+    from { width: 100%; }
+    to { width: 0; }
+}
+
+/* === Error Message (inline) === */
 .error-message {
-    color: #ef4444; /* Red text */
+    color: #ef4444;
     font-weight: 600;
     text-align: center;
     padding: 12px;
-    background: #fee2e2; /* Light red background */
+    background: #fee2e2;
     border-radius: var(--border-radius);
     margin-bottom: 16px;
+    border: 1px solid #fca5a5;
+    animation: shake 0.4s ease;
 }
-
 body.dark-mode .error-message {
-    background: #7f1d1d; /* Dark red */
-    color: #fecaca; /* Soft light red */
+    background: #7f1d1d;
+    color: #fecaca;
+    border-color: #f87171;
+}
+/* Shake animation for errors */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20% { transform: translateX(-4px); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-3px); }
+    80% { transform: translateX(3px); }
 }
 
-
+/* === Loading === */
 .loading {
     text-align: center;
     font-style: italic;
-    color: #6b7280; /* Gray-500 */
+    color: #6b7280;
     padding: 16px;
+    font-size: 0.95rem;
+    position: relative;
 }
-
 body.dark-mode .loading {
-    color: #9ca3af; /* Gray-400 for dark mode */
+    color: #9ca3af;
+}
+/* Loading dots animation */
+.loading::after {
+    content: "...";
+    display: inline-block;
+    animation: dots 1.5s infinite steps(3);
+}
+@keyframes dots {
+    0%, 20% { content: "."; }
+    40% { content: ".."; }
+    60%, 100% { content: "..."; }
 }
 
-
+/* === Meta Info === */
 .code-meta {
-    font-size: 0.875rem; /* Equivalent to 14px */
-    color: #6b7280; /* Gray-500 in light mode */
+    font-size: 0.85rem;
+    color: #6b7280;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
-
 body.dark-mode .code-meta {
-    color: #9ca3af; /* Gray-400 in dark mode */
+    color: #9ca3af;
 }
 
-
-/* Responsive Design */
-@media (max-width: 768px) {
+/* ===== Responsive Design ===== */
+@media (max-width: 1024px) {
     body {
-        padding: 16px;
         font-size: 15px;
     }
-
-    .game-details {
-        padding: 24px;
-    }
-
-    .code-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-    }
-
-    .code-item button {
-        width: 100%;
-        text-align: center;
-    }
-
-    .favorite-btn {
-        width: 100%;
-        text-align: center;
-    }
-
-    .back-btn {
-        width: 100%;
-        justify-content: center;
-    }
 }
-
-@media (max-width: 480px) {
-    body {
-        padding: 12px;
-    }
-
-    .game-details {
-        padding: 16px;
-    }
-
+@media (max-width: 768px) {
     .notification {
         bottom: 16px;
         right: 16px;
         width: calc(100% - 32px);
+        max-width: unset;
+    }
+}
+@media (max-width: 480px) {
+    body {
+        padding: 12px;
+        font-size: 14px;
+    }
+    .notification {
+        padding: 12px 18px;
     }
 }
 
-/* Smooth Scroll */
+/* === Smooth Scroll === */
 html {
     scroll-behavior: smooth;
 }
 
-/* Focus states for accessibility */
+/* === Focus Styles (Accessible) === */
 button:focus,
-a:focus {
+a:focus,
+input:focus,
+textarea:focus {
     outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 6px;
+    transition: outline-offset 0.2s ease;
 }
 
-/* High contrast mode */
+/* Dark mode focus ring */
+body.dark-mode button:focus,
+body.dark-mode a:focus,
+body.dark-mode input:focus,
+body.dark-mode textarea:focus {
+    outline: 2px solid #93c5fd; /* soft blue glow */
+}
+
+/* === Skip Link (Accessibility) === */
+.skip-link {
+    position: absolute;
+    top: -50px;
+    left: 10px;
+    background: var(--primary-color);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    z-index: 10000;
+    transition: top 0.3s ease;
+}
+.skip-link:focus {
+    top: 10px;
+}
+
+/* === High Contrast Mode === */
 @media (prefers-contrast: high) {
     :root {
-        --primary-color: #005bb5;
-        --text-light: #000000;
-        --text-dark: #ffffff;
-        --background-light: #ffffff;
-        --background-dark: #000000;
+        --primary-color: #000;
+        --text-light: #000;
+        --text-dark: #fff;
+        --background-light: #fff;
+        --background-dark: #000;
     }
 
     .code-item {
-        border: 2px solid #000000;
+        border: 2px solid #000;
+        background: #fff !important;
+        color: #000 !important;
     }
 
     body.dark-mode .code-item {
-        border-color: #ffffff;
+        background: #000 !important;
+        color: #fff !important;
     }
 }
 
-/* Reduced motion for accessibility */
+/* === Reduced Motion === */
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;
         transform: none !important;
+        animation: none !important;
+        scroll-behavior: auto !important;
     }
 }
-    </style>
+
+/* === Auto Dark Mode (system preference) === */
+@media (prefers-color-scheme: dark) {
+    body {
+        background: var(--background-dark);
+        color: var(--text-dark);
+    }
+}
+
+/* === Print Styles === */
+@media print {
+    body {
+        background: #fff !important;
+        color: #000 !important;
+        font-size: 12pt;
+    }
+    a {
+        text-decoration: underline;
+        color: #000;
+    }
+    .code-item,
+    .notification,
+    .favorite-btn,
+    .back-btn {
+        box-shadow: none !important;
+        border: 1px solid #000 !important;
+    }
+    .notification,
+    .loading {
+        display: none !important; /* hide UI-only parts */
+    }
+}
+
+</style>
+
     <script>
         // Sample games data (replace with API fetch in production)
        const games = [
@@ -3009,7 +3399,7 @@ class GameDetails {
             <p><strong>Category:</strong> ${this.sanitize(game.category)}</p>
             <p><strong>Last Updated:</strong> ${this.sanitize(game.lastUpdated)}</p>
             <p><strong>Popularity:</strong> ${this.sanitize(game.popularity)}</p>
-            <a href="code.html" class="back-btn" aria-label="Back to game list">Back to Games</a>
+            <a href="/scripthub/code/index.html" class="back-btn" aria-label="Back to game list">Back to Games</a>
         `;
 
         // Event delegation for favorite button
@@ -3104,41 +3494,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.gameDetails = new GameDetails();
 });
 
-// Ad links to rotate through
-const adLinks = [
-  "https://otieu.com/4/9558019",
-  "https://mediocrecliffschangeless.com/nxtpva0b?key=6a516ed055d3c69ba578557cab77d4e8",
-  "https://mediocrecliffschangeless.com/ysgt1brp6y?key=afa3ebe412e568c35961207f14db42a0"
-];
-
-let adIndex = 0;
-let clickCount = 0;
-let timerStarted = false;
-
-function openPopunder() {
-  const url = adLinks[adIndex];
-  adIndex = (adIndex + 1) % adLinks.length;
-
-  const pop = window.open(url, '_blank');
-  if (pop) {
-    pop.blur();
-    window.focus();
-  }
-}
-
-// First 2 ads on user clicks
-document.addEventListener('click', () => {
-  if (clickCount < 2) {
-    openPopunder();
-    clickCount++;
-  }
-
-  // Start 8-second timer after 2nd click
-  if (clickCount === 2 && !timerStarted) {
-    timerStarted = true;
-    setInterval(openPopunder, 8000); // every 8 sec
-  }
-});
 
     </script>
 </head>
