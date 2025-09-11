@@ -346,8 +346,6 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
 
 
 
-
-
 ];
 
 let favorites = [];
@@ -888,6 +886,7 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
 
 
