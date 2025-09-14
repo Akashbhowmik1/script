@@ -1,11 +1,17 @@
 // Define scripts array with corrected entries
 const scripts = [
     {
-        name: "Blox Fruit Auto Farm",
+        name: "Blox Fruit Redz Hub script",
         game: "Blox Fruits",
         category: "Adventure",
         description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`,
+        code: `local Settings = {
+  JoinTeam = "Pirates"; -- Pirates/Marines
+  Translator = true; -- true/false
+}
+
+getgenv().BETA_VERSION = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/heads/main/main.luau"))(Settings)`,
         popularity: 100,
         dateAdded: "2025-05-01"
     },
@@ -886,6 +892,7 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
 
 
