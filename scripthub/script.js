@@ -349,6 +349,15 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     popularity: 85,
     dateAdded: "2025-09-11"
 },
+{
+    name: "Plants Vs Brainrots Script",
+    game: "Plants Vs Brainrots",
+    category: "Simulation",
+    description: "A script for Plants Vs Brainrots providing automation and gameplay enhancements.",
+    code: `loadstring(game:HttpGet("https://pastefy.app/Vn9St10L/raw", true))()`,
+    popularity: 72,
+    dateAdded: "2025-10-01"
+},
 
 
 
@@ -892,6 +901,7 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
 
 
