@@ -931,10 +931,13 @@ body {
 }
 
 /* VNG Button with Vietnamese flag */
-.btn-secondary[href*="vng"],
+.btn-secondary[href*="vng"], 
 .btn-secondary[href*="VNG"],
 .btn[href*="vng"],
 .btn[href*="VNG"],
+.btn:has(i + text()[contains(., 'VNG')]),
+.btn:has(text()[contains(., 'VNG')]),
+.btn-secondary:contains('VNG'),
 a.btn-secondary[href*="mediafire"][href*="Vng"],
 a.btn-secondary[href*="mediafire"][href*="VNG"],
 a.btn-secondary[href*="mediafire"][href*="Vietnam"],
@@ -944,14 +947,13 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   background-size: cover !important;
   background-position: center center !important;
   background-repeat: no-repeat !important;
-  color: #fff !important;
+  color: white !important;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
   border: 1px solid rgba(255, 255, 255, 0.3) !important;
   position: relative;
   overflow: hidden;
   font-weight: 700 !important;
 }
-
 
 .btn-secondary[href*="vng"]:hover, 
 .btn-secondary[href*="VNG"]:hover,
