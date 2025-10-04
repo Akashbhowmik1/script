@@ -259,29 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => liveRegion.remove(), 1000);
     }
 
-    // Lazy Loading Images
-    const images = document.querySelectorAll('img[data-src]');
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                img.src = img.getAttribute('data-src');
-                img.removeAttribute('data-src');
-                img.classList.add('loaded');
-                observer.unobserve(img);
-            }
-        });
-    }, { rootMargin: '100px' });
-
-    images.forEach(img => observer.observe(img));
-
-    // Set data-src for executor logos
-    document.querySelectorAll('.executor-logo').forEach(img => {
-        if (!img.hasAttribute('data-src')) {
-            img.setAttribute('data-src', img.src);
-            img.src = '';
-        }
-    });
+    
 
     // Handle Disabled Buttons
     document.querySelectorAll('.btn.disabled').forEach(button => {
@@ -665,3 +643,4 @@ function handleMobileResponsive() {
 // Call responsive handler on load and resize
 handleMobileResponsive();
 window.addEventListener('resize', handleMobileResponsive);
+
