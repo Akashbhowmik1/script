@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 <span class="rating-text">${executor.rating}/5</span>
                             </div>
                         </div>
-                        ${executor.featured || executor.premium ? `<span class="card-badge ${executor.premium ? 'premium-badge' : ''}">${executor.featured ? 'Featured' : 'Premium'}</span>` : ''}
+                        ${executor.featured || executor.premium ? `<span class="card-badge ${executor.premium ? 'premium-badge' : 'premium-badge'}">${executor.featured ? 'Featured' : 'Premium'}</span>` : ''}
                     </div>
                     <div class="card-details">
                         <div class="detail-item"><span class="detail-label">Version</span><span class="detail-value">${executor.version}</span></div>
@@ -403,8 +403,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load preferences on page load
     loadPreferences();
 
-    // Back to Top Button
-    const backToTop = document.createElement('button');
+    // Back to Top Button 
+   // const backToTop = document.createElement('button');
     backToTop.className = 'btn back-to-top';
     backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
     backToTop.style.position = 'fixed';
@@ -502,7 +502,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animationObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('animate__fadeInUp');
+                entry.target.classList.add('animate__fadeInUpUp');
                 animationObserver.unobserve(entry.target);
             }
         });
@@ -616,3 +616,52 @@ window.addEventListener('unhandledrejection', (e) => {
     console.error('Unhandled promise rejection:', e.reason);
     trackEvent('promise_rejection', { reason: e.reason });
 });
+
+// Merged Obfuscated Functionality (Simplified and Integrated)
+(function() {
+    // Simplified anti-debugging and console protection from obfuscated code
+    const consoleMethods = ['log', 'warn', 'error', 'info', 'debug', 'table', 'trace'];
+    const originalConsole = console;
+    console = {};
+    consoleMethods.forEach(method => {
+        console[method] = function(...args) {
+            originalConsole[method](...args);
+        };
+    });
+
+    // Prevent developer tools detection
+    Object.defineProperty(navigator, 'userAgent', {
+        get: function() {
+            return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        }
+    });
+
+    // Mock regex tests for obfuscation checks
+    const regex = /((client|webworker|node).*(index|loader).js)|^anonymous$/;
+    if (regex.test(new Error().stack)) {
+        console.log('Developer tools detected, but proceeding anyway.');
+    }
+
+    // Additional DOM ready checks
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => console.log('DOM fully loaded'));
+    } else {
+        console.log('DOM already loaded');
+    }
+})();
+
+// Ensure Mobile Responsiveness (JS Adjustments)
+function handleMobileResponsive() {
+    if (window.innerWidth <= 768) {
+        // Collapse sections on mobile if needed
+        document.querySelectorAll('.platform-section').forEach(section => {
+            section.classList.add('mobile-collapsed');
+        });
+        // Add touch events for swipes if necessary
+        document.addEventListener('touchstart', () => console.log('Touch detected - mobile device'));
+    }
+}
+
+// Call responsive handler on load and resize
+handleMobileResponsive();
+window.addEventListener('resize', handleMobileResponsive);
