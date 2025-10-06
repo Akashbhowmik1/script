@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
 
 :root {
   /* Colors */
@@ -42,6 +43,16 @@
   /* Spacing */
   --container-padding: 2rem;
   --section-spacing: 6rem;
+
+  /* Font Sizes for Accessibility */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 2rem;
+  --font-size-4xl: 2.5rem;
 }
 
 /* Light Theme */
@@ -51,11 +62,9 @@ html[data-theme="light"] {
   --bg-tertiary: #f1f5f9;
   --bg-card: rgba(0, 0, 0, 0.02);
   --bg-card-hover: rgba(0, 0, 0, 0.05);
-
   --text-primary: #0f172a;
   --text-secondary: #475569;
   --text-tertiary: #64748b;
-
   --border-primary: rgba(0, 0, 0, 0.1);
   --border-secondary: rgba(0, 0, 0, 0.05);
 }
@@ -77,7 +86,8 @@ html[data-theme="light"] {
 input,
 textarea,
 .search-input,
-.command-input {
+.command-input,
+[contenteditable] {
   -webkit-user-select: text;
   -moz-user-select: text;
   -ms-user-select: text;
@@ -89,6 +99,7 @@ html {
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   scroll-padding-top: 80px;
+  font-size: var(--font-size-base);
 }
 
 body {
@@ -110,13 +121,18 @@ body {
   user-scalable: yes;
 }
 
+meta[name="viewport"] {
+  content: "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
+}
+
 /* Improve touch targets for mobile */
 .btn,
 .filter-tag,
 .nav-link,
-.copy-btn {
-  min-height: 44px;
-  min-width: 44px;
+.copy-btn,
+.social-link {
+  min-height: 48px;
+  min-width: 48px;
   touch-action: manipulation;
 }
 
@@ -174,38 +190,31 @@ body {
   width: 100%;
   height: 100%;
   background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+                    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
   background-size: 50px 50px;
   opacity: 0.5;
 }
 
 @keyframes float {
-  0%,
-  100% {
-    -webkit-transform: translate(0, 0) rotate(0deg);
+  0%, 100% {
     transform: translate(0, 0) rotate(0deg);
   }
   33% {
-    -webkit-transform: translate(30px, -30px) rotate(120deg);
     transform: translate(30px, -30px) rotate(120deg);
   }
   66% {
-    -webkit-transform: translate(-20px, 20px) rotate(240deg);
     transform: translate(-20px, 20px) rotate(240deg);
   }
 }
 
 /* Navigation */
 .navbar {
-  position: -webkit-sticky;
-  position: sticky;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   background: rgba(15, 15, 35, 0.95);
   backdrop-filter: blur(var(--blur));
-  -webkit-backdrop-filter: blur(var(--blur));
   border-bottom: 1px solid var(--border-primary);
   z-index: 1000;
   transition: var(--transition);
@@ -222,9 +231,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--container-padding);
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -236,7 +242,7 @@ body {
   align-items: center;
   gap: 0.75rem;
   font-weight: 700;
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   color: var(--text-primary);
 }
 
@@ -258,7 +264,6 @@ body {
   height: 100%;
   object-fit: contain;
   border-radius: 8px;
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: auto;
 }
 
@@ -272,6 +277,7 @@ body {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
+  font-size: var(--font-size-md);
   transition: var(--transition);
   position: relative;
 }
@@ -292,6 +298,12 @@ body {
   border-radius: 1px;
 }
 
+.nav-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .theme-toggle {
   background: var(--bg-card);
   border: 1px solid var(--border-primary);
@@ -305,17 +317,16 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
   background-clip: padding-box;
-  cursor: pointer;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
   background: var(--bg-card-hover);
   color: var(--primary);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .nav-toggle {
@@ -332,10 +343,14 @@ body {
   transition: var(--transition);
 }
 
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
 /* Main Container */
 .main-container {
   padding-top: 70px;
-  -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }
 
@@ -363,14 +378,14 @@ body {
   border: 1px solid var(--border-primary);
   border-radius: 50px;
   padding: 0.5rem 1rem;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   color: var(--text-secondary);
   margin-bottom: 2rem;
 }
 
 .hero-title {
-  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: 800;
   line-height: 1.1;
   margin-bottom: 1.5rem;
@@ -378,9 +393,7 @@ body {
 
 .gradient-text {
   background: linear-gradient(45deg, var(--primary), var(--primary-light));
-  background: -webkit-linear-gradient(45deg, var(--primary), var(--primary-light));
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
 }
@@ -393,7 +406,7 @@ body {
 }
 
 .hero-description {
-  font-size: 1.25rem;
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
   margin-bottom: 3rem;
   max-width: 600px;
@@ -402,9 +415,6 @@ body {
 }
 
 .hero-actions {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   gap: 1rem;
   justify-content: center;
@@ -413,9 +423,6 @@ body {
 }
 
 .hero-stats {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   gap: 3rem;
   justify-content: center;
@@ -427,14 +434,14 @@ body {
 }
 
 .stat-number {
-  font-size: 2rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   color: var(--primary);
   display: block;
 }
 
 .stat-label {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -458,13 +465,13 @@ body {
 }
 
 .search-header h2 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .search-header p {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
 }
 
@@ -479,7 +486,7 @@ body {
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-tertiary);
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
 }
 
 .search-input {
@@ -489,22 +496,53 @@ body {
   border: 1px solid var(--border-primary);
   border-radius: 16px;
   color: var(--text-primary);
-  font-size: 1rem;
+  font-size: var(--font-size-md);
   transition: var(--transition);
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
+  border: none;
   background-clip: padding-box;
 }
 
 .search-input:focus {
-  outline: none;
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
   border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 .search-input::placeholder {
   color: var(--text-tertiary);
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  margin-top: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 100;
+}
+
+.suggestion-item {
+  padding: 0.75rem 1.5rem;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.suggestion-item:hover,
+.suggestion-item:focus {
+  background: var(--bg-card-hover);
+  outline: none;
+}
+
+.suggestion-item:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .filter-section {
@@ -520,12 +558,10 @@ body {
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-secondary);
+  font-size: var(--font-size-md);
 }
 
 .filter-tags {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   gap: 0.75rem;
   justify-content: center;
@@ -544,20 +580,19 @@ body {
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 48px;
+  min-width: 48px;
   touch-action: manipulation;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
   background-clip: padding-box;
-  cursor: pointer;
 }
 
-.filter-tag:hover {
+.filter-tag:hover,
+.filter-tag:focus-visible {
   background: var(--bg-card-hover);
   border-color: var(--primary);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .filter-tag.active {
@@ -581,14 +616,16 @@ body {
   border-radius: 8px;
   color: var(--text-primary);
   font-family: "JetBrains Mono", "Courier New", monospace;
-  font-size: 0.75rem;
+  font-size: var(--font-size-sm);
   resize: none;
   overflow: hidden;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-  border-radius: 16px;
+  border: none;
   background-clip: padding-box;
+}
+
+.command-input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .copy-btn {
@@ -603,38 +640,24 @@ body {
   width: 28px;
   height: 28px;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: var(--font-size-sm);
   transition: var(--transition);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 48px;
+  min-width: 48px;
   touch-action: manipulation;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
   background-clip: padding-box;
-  cursor: pointer;
 }
 
-.copy-btn:hover {
+.copy-btn:hover,
+.copy-btn:focus-visible {
   background: var(--primary-dark);
   transform: translateY(-50%) scale(1.05);
-}
-
-@media (max-width: 768px) {
-  .command-input {
-    font-size: 0.7rem;
-    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
-  }
-
-  .copy-btn {
-    width: 24px;
-    height: 24px;
-    font-size: 0.7rem;
-  }
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 /* Executors Main */
@@ -642,7 +665,6 @@ body {
   padding: 0 var(--container-padding) var(--section-spacing);
   max-width: 1200px;
   margin: 0 auto;
-  -webkit-overflow-scrolling: touch;
   overflow-scrolling: touch;
 }
 
@@ -650,6 +672,14 @@ body {
 .platform-section {
   margin-bottom: var(--section-spacing);
   animation: fadeInUp 0.6s ease-out;
+}
+
+.platform-section.mobile-collapsed {
+  display: none;
+}
+
+.platform-section.mobile-collapsed.active {
+  display: block;
 }
 
 .section-header {
@@ -670,18 +700,18 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
 }
 
 .section-info h2 {
-  font-size: 2rem;
+  font-size: var(--font-size-2xl);
   font-weight: 700;
   margin-bottom: 0.25rem;
 }
 
 .section-info p {
   color: var(--text-secondary);
-  font-size: 1rem;
+  font-size: var(--font-size-md);
 }
 
 .section-badge {
@@ -695,19 +725,18 @@ body {
 
 .executor-count {
   display: block;
-  font-size: 1.5rem;
+  font-size: var(--font-size-lg);
   font-weight: 700;
   color: var(--primary);
 }
 
 .section-badge span:last-child {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
 /* Executors Grid */
 .executors-grid {
-  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 1.5rem;
@@ -755,10 +784,6 @@ body {
 }
 
 .executor-card:hover {
-  -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
   transform: translateY(-5px);
   box-shadow: var(--shadow-xl);
   border-color: var(--primary);
@@ -768,11 +793,7 @@ body {
   opacity: 1;
 }
 
-.executor-card.featured {
-  border-color: var(--secondary);
-  background: linear-gradient(135deg, var(--bg-card), rgba(245, 158, 11, 0.05));
-}
-
+.executor-card.featured,
 .executor-card.premium {
   border-color: var(--secondary);
   background: linear-gradient(135deg, var(--bg-card), rgba(245, 158, 11, 0.05));
@@ -786,7 +807,7 @@ body {
   color: white;
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
-  font-size: 0.75rem;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   text-transform: uppercase;
 }
@@ -808,12 +829,11 @@ body {
   border-radius: 12px;
   object-fit: contain;
   box-shadow: var(--shadow-md);
-  image-rendering: -webkit-optimize-contrast;
   image-rendering: auto;
 }
 
 .executor-info h3 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: 0.5rem;
 }
@@ -831,7 +851,7 @@ body {
 }
 
 .rating-text {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   font-weight: 600;
   color: var(--text-secondary);
 }
@@ -853,12 +873,12 @@ body {
 }
 
 .detail-label {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   color: var(--text-secondary);
 }
 
 .detail-value {
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
   color: var(--text-primary);
 }
@@ -867,7 +887,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   font-weight: 500;
 }
 
@@ -897,16 +917,11 @@ body {
 }
 
 .card-actions {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
   display: flex;
   gap: 0.75rem;
 }
 
 /* Buttons */
-
-
 .btn {
   display: inline-flex;
   align-items: center;
@@ -916,20 +931,21 @@ body {
   border: none;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   text-decoration: none;
   cursor: pointer;
   transition: var(--transition);
   white-space: nowrap;
-  min-height: 44px;
-  min-width: 44px;
+  min-height: 48px;
+  min-width: 48px;
   touch-action: manipulation;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border: none;
   background-clip: padding-box;
-  cursor: pointer;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 /* VNG Button with Vietnamese flag */
@@ -942,20 +958,19 @@ a.btn-secondary[href*="mediafire"][href*="VNG"],
 a.btn-secondary[href*="mediafire"][href*="Vietnam"],
 a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
-              url('./Flag-Vietnam.jpg') !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-  color: white !important;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8) !important;
-  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+              url('./Flag-Vietnam.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: white;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   position: relative;
   overflow: hidden;
-  font-weight: 700 !important;
+  font-weight: 700;
 }
 
-
-.btn-secondary[href*="vng"]:hover, 
+.btn-secondary[href*="vng"]:hover,
 .btn-secondary[href*="VNG"]:hover,
 .btn[href*="vng"]:hover,
 .btn[href*="VNG"]:hover,
@@ -963,18 +978,18 @@ a.btn-secondary[href*="mediafire"][href*="Vng"]:hover,
 a.btn-secondary[href*="mediafire"][href*="VNG"]:hover,
 a.btn-secondary[href*="mediafire"][href*="Vietnam"]:hover,
 a.btn-secondary[href*="wrdcdn"][href*="Vietnam"]:hover {
-  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)), 
-              url('./Flag-Vietnam.jpg') !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.1)),
+              url('./Flag-Vietnam.jpg');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 255, 255, 0.5) !important;
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 /* Fallback for VNG buttons if image fails to load */
-.btn-secondary[href*="vng"], 
+.btn-secondary[href*="vng"],
 .btn-secondary[href*="VNG"],
 .btn[href*="vng"],
 .btn[href*="VNG"],
@@ -982,10 +997,10 @@ a.btn-secondary[href*="mediafire"][href*="Vng"],
 a.btn-secondary[href*="mediafire"][href*="VNG"],
 a.btn-secondary[href*="mediafire"][href*="Vietnam"],
 a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
-  background-color: #da251d !important;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
+  background-color: #da251d;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),
                     url('./Flag-Vietnam.jpg'),
-                    linear-gradient(45deg, #da251d 0%, #ff6b6b 100%) !important;
+                    linear-gradient(45deg, #da251d 0%, #ff6b6b 100%);
 }
 
 .btn-primary {
@@ -995,7 +1010,6 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .btn-primary:hover {
-  -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -1018,7 +1032,6 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .btn-download:hover {
-  -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -1030,7 +1043,6 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .btn-premium:hover {
-  -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
 }
@@ -1044,7 +1056,6 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .btn-icon:hover {
-  -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(88, 101, 242, 0.4);
 }
@@ -1052,7 +1063,7 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 .btn.disabled {
   opacity: 0.5;
   cursor: not-allowed;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 /* About Section */
@@ -1072,18 +1083,17 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .about-header h2 {
-  font-size: 2.5rem;
+  font-size: var(--font-size-3xl);
   font-weight: 700;
   margin-bottom: 1rem;
 }
 
 .about-header p {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   color: var(--text-secondary);
 }
 
 .features-grid {
-  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
@@ -1099,10 +1109,6 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 }
 
 .feature-card:hover {
-  -webkit-transform: translateY(-5px);
-  -moz-transform: translateY(-5px);
-  -ms-transform: translateY(-5px);
-  -o-transform: translateY(-5px);
   transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
   border-color: var(--primary);
@@ -1118,11 +1124,11 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   justify-content: center;
   margin: 0 auto 1.5rem;
   color: white;
-  font-size: 1.5rem;
+  font-size: var(--font-size-xl);
 }
 
 .feature-card h3 {
-  font-size: 1.25rem;
+  font-size: var(--font-size-xl);
   font-weight: 600;
   margin-bottom: 1rem;
 }
@@ -1142,14 +1148,13 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   max-width: 1200px;
   margin: 0 auto;
   padding: 4rem var(--container-padding) 2rem;
-  display: -ms-grid;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
 }
 
 .footer-section h4 {
-  font-size: 1.125rem;
+  font-size: var(--font-size-lg);
   font-weight: 600;
   margin-bottom: 1rem;
   color: var(--text-primary);
@@ -1187,11 +1192,14 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   transition: var(--transition);
 }
 
-.social-link:hover {
+.social-link:hover,
+.social-link:focus-visible {
   background: var(--primary);
   border-color: var(--primary);
   color: white;
   transform: translateY(-2px);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .footer-links {
@@ -1208,8 +1216,11 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   transition: var(--transition);
 }
 
-.footer-links a:hover {
+.footer-links a:hover,
+.footer-links a:focus-visible {
   color: var(--primary);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
 }
 
 .footer-bottom {
@@ -1235,12 +1246,83 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 .footer-bottom-links a {
   color: var(--text-secondary);
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: var(--font-size-sm);
   transition: var(--transition);
 }
 
-.footer-bottom-links a:hover {
+.footer-bottom-links a:hover,
+.footer-bottom-links a:focus-visible {
   color: var(--primary);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Back to Top Button */
+.back-to-top {
+  background: var(--primary);
+  color: white;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-md);
+  transition: var(--transition);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  background: var(--primary-dark);
+  transform: scale(1.1);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Recently Viewed Section */
+.recently-viewed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--container-padding);
+}
+
+.recently-viewed h3 {
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.recent-item {
+  padding: 0.75rem 1.5rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-primary);
+  border-radius: 12px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.recent-item:hover,
+.recent-item:focus-visible {
+  background: var(--bg-card-hover);
+  border-color: var(--primary);
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Link Preview */
+.link-preview {
+  z-index: 1000;
+  max-width: 300px;
+  font-size: var(--font-size-sm);
+}
+
+/* Error Message */
+.error-message {
+  color: var(--error);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  padding: 1rem;
 }
 
 /* Utility Classes */
@@ -1248,15 +1330,53 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   display: none !important;
 }
 
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
 /* Responsive Design */
+@media (max-width: 1024px) {
+  :root {
+    --container-padding: 1.5rem;
+    --section-spacing: 5rem;
+  }
+
+  .executors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+}
+
 @media (max-width: 768px) {
   :root {
     --container-padding: 1rem;
     --section-spacing: 4rem;
+    --font-size-base: 14px;
   }
 
   .nav-menu {
     display: none;
+  }
+
+  .nav-menu.active {
+    display: flex;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-primary);
+    border-top: none;
+    flex-direction: column;
+    padding: 1rem;
+    gap: 1rem;
+    z-index: 1001;
   }
 
   .nav-toggle {
@@ -1264,11 +1384,11 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   }
 
   .hero-title {
-    font-size: 2.5rem;
+    font-size: var(--font-size-3xl);
   }
 
   .hero-description {
-    font-size: 1.125rem;
+    font-size: var(--font-size-md);
   }
 
   .hero-actions {
@@ -1281,7 +1401,7 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   }
 
   .search-header h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
 
   .filter-tags {
@@ -1306,13 +1426,10 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
     flex-direction: column;
   }
 
-  .btn {
-    width: 100%;
-  }
-
+  .btn,
   .btn-icon {
     width: 100%;
-    height: 44px;
+    height: 48px;
   }
 
   .features-grid {
@@ -1323,19 +1440,28 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
     flex-direction: column;
     text-align: center;
   }
+
+  .gradient-orb {
+    display: none; /* Disable heavy animations on mobile */
+  }
 }
 
 @media (max-width: 480px) {
+  :root {
+    --container-padding: 0.75rem;
+    --section-spacing: 3rem;
+  }
+
   .hero-title {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
 
   .search-header h2 {
-    font-size: 1.75rem;
+    font-size: var(--font-size-xl);
   }
 
   .section-info h2 {
-    font-size: 1.5rem;
+    font-size: var(--font-size-xl);
   }
 
   .executor-card {
@@ -1343,11 +1469,45 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   }
 
   .about-header h2 {
-    font-size: 2rem;
+    font-size: var(--font-size-2xl);
   }
 
   .feature-card {
     padding: 1.5rem;
+  }
+
+  .command-input {
+    font-size: 0.7rem;
+    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+
+  .copy-btn {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+}
+
+/* Fix for landscape orientation on mobile */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  .hero-section {
+    min-height: auto;
+    padding: 2rem var(--container-padding);
+  }
+
+  .hero-title {
+    font-size: var(--font-size-2xl);
+  }
+
+  .hero-description {
+    font-size: var(--font-size-md);
+  }
+
+  .nav-menu.active {
+    flex-direction: row;
+    overflow-x: auto;
   }
 }
 
@@ -1363,92 +1523,7 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   }
 }
 
-.platform-section {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* Improve mobile responsiveness */
-@media screen and (max-width: 768px) {
-  .nav-menu.active {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-primary);
-    border-top: none;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    padding: 1rem;
-    gap: 1rem;
-    z-index: 1001;
-  }
-
-  .hero-actions {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
-  }
-
-  .card-actions {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-  }
-}
-
-/* Fix for very small screens */
-@media screen and (max-width: 480px) {
-  .executors-grid {
-    grid-template-columns: 1fr;
-    -ms-grid-columns: 1fr;
-  }
-
-  .executor-card {
-    margin: 0;
-    width: 100%;
-  }
-
-  .command-input {
-    font-size: 0.7rem;
-    padding: 0.75rem 2.5rem 0.75rem 0.75rem;
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
-}
-
-/* Fix for landscape orientation on mobile */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  .hero-section {
-    min-height: auto;
-    padding: 2rem var(--container-padding);
-  }
-
-  .hero-title {
-    font-size: 2rem;
-  }
-
-  .hero-description {
-    font-size: 1rem;
-  }
-}
-
-/* Accessibility improvements */
+/* Accessibility Improvements */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -1461,17 +1536,31 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
   .gradient-orb {
     animation: none;
   }
-}
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  :root {
-    --border-primary: rgba(255, 255, 255, 0.3);
-    --bg-card: rgba(255, 255, 255, 0.1);
+  .executor-card,
+  .feature-card,
+  .btn,
+  .social-link,
+  .back-to-top {
+    transform: none !important;
   }
 }
 
-/* Dark mode improvements for WebViews */
+@media (prefers-contrast: high) {
+  :root {
+    --border-primary: rgba(255, 255, 255, 0.5);
+    --bg-card: rgba(255, 255, 255, 0.2);
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0e0;
+  }
+
+  .btn,
+  .filter-tag,
+  .nav-link {
+    border: 2px solid var(--border-primary);
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   html[data-theme="dark"] {
     color-scheme: dark;
@@ -1481,5 +1570,29 @@ a.btn-secondary[href*="wrdcdn"][href*="Vietnam"] {
 @media (prefers-color-scheme: light) {
   html[data-theme="light"] {
     color-scheme: light;
+  }
+}
+
+/* Touch-specific optimizations */
+@media (pointer: coarse) {
+  .btn,
+  .filter-tag,
+  .nav-link,
+  .copy-btn,
+  .social-link {
+    padding: 1rem;
+  }
+}
+
+/* Large screen optimizations */
+@media (min-width: 1440px) {
+  :root {
+    --container-padding: 3rem;
+    --section-spacing: 8rem;
+    --font-size-base: 18px;
+  }
+
+  .executors-grid {
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   }
 }
