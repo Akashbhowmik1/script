@@ -358,6 +358,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     popularity: 72,
     dateAdded: "2025-10-01"
 },
+{
+    name: "Anime Eternal Script",
+    game: "Anime Eternal",
+    category: "Simulation",
+    description: "A script for Anime Eternal providing automation and gameplay enhancements.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/LinuxDevBr/Anime-Eternal/refs/heads/main/Script.lua"))()`,
+    popularity: 72,
+    dateAdded: "2025-10-08"
+},
+
 
 
 
@@ -901,6 +911,7 @@ function openAdWithCooldown() {
 
 // Trigger on any click
 document.addEventListener("click", openAdWithCooldown);
+
 
 
 
