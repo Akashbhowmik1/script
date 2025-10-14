@@ -769,10 +769,10 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     /**
-     * Filter and sort scripts based on user input
+     * Get filtered and sorted scripts based on user input (without resetting page or displaying)
      * @returns {Array} - Filtered and sorted scripts
      */
-    const filterScripts = () => {
+    const getFilteredScripts = () => {
         const searchInput = document.getElementById('searchInput');
         const gameFilter = document.getElementById('gameFilter');
         const categoryFilter = document.getElementById('categoryFilter');
@@ -812,9 +812,15 @@ document.addEventListener('DOMContentLoaded', () => {
             filteredScripts.sort((a, b) => a.name.localeCompare(b.name));
         }
 
-        currentPage = 1;
-        displayScripts(filteredScripts);
         return filteredScripts;
+    };
+
+    /**
+     * Apply filters, reset page, and display scripts
+     */
+    const filterScripts = () => {
+        currentPage = 1;
+        displayScripts(getFilteredScripts());
     };
 
     /**
@@ -845,13 +851,13 @@ document.addEventListener('DOMContentLoaded', () => {
         prevPage.addEventListener('click', () => {
             if (currentPage > 1) {
                 currentPage--;
-                displayScripts(filterScripts());
+                displayScripts(getFilteredScripts());
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         });
 
         nextPage.addEventListener('click', () => {
-            const filteredScripts = filterScripts();
+            const filteredScripts = getFilteredScripts();
             const totalPages = Math.ceil(filteredScripts.length / scriptsPerPage);
             if (currentPage < totalPages) {
                 currentPage++;
@@ -889,34 +895,3 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
-
-
-
-// Open ad if cooldown is passed
-function openAdWithCooldown() {
-    const now = Date.now();
-    if (now - lastOpened >= cooldown) {
-        try {
-            const randomAd = getRandomAdLink();
-            const adWindow = window.open(randomAd, "_blank");
-            if (!adWindow) {
-                console.warn('Ad window blocked or failed to open. Possible pop-up blocker.');
-            }
-            lastOpened = now;
-        } catch (error) {
-            console.error('Failed to open ad:', error);
-        }
-    }
-}
-
-// Trigger on any click
-document.addEventListener("click", openAdWithCooldown);
-
-
-
-
-
-
-
-
-
