@@ -31,9 +31,7 @@ html[data-theme="light"] {
     --glass-hover: rgba(0, 0, 0, 0.1);
     --glass-dark: rgba(255, 255, 255, 0.9);
     --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    scroll-behavior: auto;
 }
-
 
 /* Reset and base styles */
 * {
@@ -42,6 +40,7 @@ html[data-theme="light"] {
     padding: 0;
     font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
     background-color: transparent;
+    -webkit-tap-highlight-color: transparent;
 }
 
 /* Fallback and base HTML settings */
@@ -51,7 +50,7 @@ html {
     -ms-text-size-adjust: 100%;
     scroll-behavior: smooth;
     height: 100%;
-    font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
+    font-family: 'Poppins', 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* Body with premium animated gradient background */
@@ -76,15 +75,9 @@ body {
 
 /* Smoother background gradient motion */
 @keyframes lights {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 /* Buttons and inputs: better UX on touch devices */
@@ -103,12 +96,6 @@ select {
     outline: none;
 }
 
-/* Ensure smooth font rendering across all elements */
-* {
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
-}
-
 /* Scrollbar hidden on mobile but visible on desktop */
 body::-webkit-scrollbar {
     width: 10px;
@@ -120,7 +107,6 @@ body::-webkit-scrollbar-thumb {
     background-color: rgba(0, 255, 204, 0.3);
     border-radius: 10px;
 }
-
 
 /* Background animation container */
 .bg-animation {
@@ -140,8 +126,6 @@ body::-webkit-scrollbar-thumb {
     filter: blur(80px);
     opacity: 0.4;
     animation: float 20s infinite ease-in-out alternate;
-    -webkit-animation: float 20s infinite ease-in-out alternate;
-    -moz-animation: float 20s infinite ease-in-out alternate;
 }
 
 .blob1 {
@@ -178,7 +162,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* Container with max-width for large screens */
-/* Container with max-width for large screens */
 .container {
     max-width: min(95%, 1400px);
     margin: 0 auto;
@@ -211,15 +194,12 @@ header {
     font-size: clamp(28px, 8vw, 48px);
     font-weight: 800;
     letter-spacing: 1px;
-
     background: linear-gradient(90deg, var(--primary, #00ffcc), var(--secondary, #ff00ff), var(--primary, #00ffcc));
     background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-
     animation: megaEntrance 2s ease-out forwards, gradient-move 4s ease-in-out infinite;
-
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     z-index: 1000;
     opacity: 0;
@@ -227,42 +207,16 @@ header {
 
 /* Huge animated entrance effect */
 @keyframes megaEntrance {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50px) scale(0.8);
-        filter: blur(4px);
-    }
-    50% {
-        opacity: 1;
-        transform: translate(-50%, 0) scale(1.05);
-        filter: blur(0px);
-    }
-    100% {
-        transform: translate(-50%, 0) scale(1);
-        opacity: 1;
-    }
+    0% { opacity: 0; transform: translate(-50%, -50px) scale(0.8); filter: blur(4px); }
+    50% { opacity: 1; transform: translate(-50%, 0) scale(1.05); filter: blur(0px); }
+    100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
 }
 
 /* Gradient background animation */
 @keyframes gradient-move {
-    0% {
-        background-position: 0% center;
-    }
-    50% {
-        background-position: 100% center;
-    }
-    100% {
-        background-position: 0% center;
-    }
-}
-
-/* Extra tweaks for small screens */
-@media (max-width: 480px) {
-    .top-center-text {
-        font-size: clamp(30px, 10vw, 36px); /* bigger on phones */
-        width: 95%;
-        top: 24px;
-    }
+    0% { background-position: 0% center; }
+    50% { background-position: 100% center; }
+    100% { background-position: 0% center; }
 }
 
 /* Fallback for browsers that don't support background-clip */
@@ -272,15 +226,6 @@ header {
         background: none;
     }
 }
-
-/* Optional bounce effect if you want later */
-@keyframes bounceIn {
-    0%   { transform: translate(-50%, -30px); }
-    60%  { transform: translate(-50%, 10px); }
-    80%  { transform: translate(-50%, -5px); }
-    100% { transform: translate(-50%, 0); }
-}
-
 
 @keyframes fadeInTop {
     from { opacity: 0; transform: translate(-50%, -20px); }
@@ -364,50 +309,41 @@ html[data-theme="light"] #searchInput::placeholder {
     font-weight: 600;
     border-radius: 12px;
     cursor: pointer;
-    transition: var(--transition, all 0.3s ease), transform 0.3s ease;
+    
     box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
     min-height: 48px;
     min-width: 120px;
     position: absolute;
-    top: 120%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+    top: 88%;
+    left: 37%;
+    
 }
 
 .executor-button:hover {
-    transform: translate(-50%, calc(-50% + 5px));
-    -webkit-transform: translate(-50%, calc(-50% + 5px));
-    -ms-transform: translate(-50%, calc(-50% + 5px));
+    
     box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5);
 }
+
+/* Code button */
 .code-button {
     position: absolute;
     top: 6.6rem;
     left: 9rem;
-
     padding: 14px 28px;
     font-size: clamp(16px, 2vw, 18px);
     font-weight: 600;
     color: var(--dark, #0a0a0a);
-
     background: linear-gradient(45deg, var(--primary, #00ffcc), var(--primary-dark, #00d1aa));
     border: none;
     border-radius: 12px;
     text-decoration: none;
-    
     box-shadow: 0 5px 15px rgba(0, 255, 204, 0.3);
     transition: var(--transition, all 0.3s ease), transform 0.3s ease;
-
     cursor: pointer;
     min-height: 48px;
     min-width: 120px;
     z-index: 1000;
-
     transform: translate(-50%, -50%);
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
 }
 
 /* Hover and active effects */
@@ -421,33 +357,12 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 📱 Mobile Fixes */
-@media (max-width: 768px) {
-    .code-button {
-        top: 6.8rem;
-        left: 50%;
-        transform: translateX(-50%);
-        padding: 8px 14px;         /* Smaller padding */
-        font-size: 12px;           /* Smaller font size */
-        border-radius: 8px;        /* Smaller border radius */
-        min-width: unset;
-        min-height: unset;
-    }
-
-    .code-button:hover,
-    .code-button:active {
-        transform: translateX(-50%) scale(1.05); /* consistent scale */
-    }
-}
-
-
-
 /* Enhanced Hamburger Menu */
 .hamburger {
     background: none;
     border: none;
     color: var(--light, #ffffff);
-    font-size: clamp(2em, 4vw, 2.5em); /* Bigger size */
+    font-size: clamp(2em, 4vw, 2.5em);
     cursor: pointer;
     min-height: 60px;
     min-width: 60px;
@@ -457,19 +372,18 @@ html[data-theme="light"] #searchInput::placeholder {
     align-items: center;
     position: relative;
     z-index: 999;
-    margin-top: clamp(30px, 5vw, 50px); /* Increased spacing to push it down */
+    margin-top: clamp(30px, 5vw, 50px);
     padding: clamp(5px, 2vw, 10px);
     border-radius: 12px;
     transition: background 0.3s ease;
 }
 
-
 .hamburger:hover {
-    background: rgba(255, 255, 255, 0.08); /* Premium hover effect */
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .hamburger span {
-    width: clamp(28px, 6vw, 36px); /* Responsive width */
+    width: clamp(28px, 6vw, 36px);
     height: 4px;
     background: var(--light, #ffffff);
     margin: clamp(4px, 0.6vw, 6px) 0;
@@ -497,9 +411,7 @@ html[data-theme="light"] #searchInput::placeholder {
     outline-offset: 4px;
 }
 
-
 /* Overlay menu */
-
 .overlay-menu {
     position: fixed;
     top: 0;
@@ -507,15 +419,12 @@ html[data-theme="light"] #searchInput::placeholder {
     width: 100%;
     height: 100%;
     background: var(--glass-dark, rgba(0, 0, 0, 0.4));
-    -webkit-backdrop-filter: blur(var(--blur, 12px));
     backdrop-filter: blur(var(--blur, 12px));
     display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3000;
     transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    -webkit-transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    -moz-transition: right 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     overflow-y: auto;
     border-left: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -556,8 +465,6 @@ html[data-theme="light"] #searchInput::placeholder {
 .overlay-content a:hover, .overlay-content a:focus,
 .overlay-content button:hover, .overlay-content button:focus {
     transform: translateY(-3px);
-    -webkit-transform: translateY(-3px);
-    -ms-transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
 }
 
@@ -574,8 +481,6 @@ html[data-theme="light"] #searchInput::placeholder {
 .overlay-menu.active .overlay-content button {
     opacity: 1;
     transform: translateY(0);
-    -webkit-transform: translateY(0);
-    -ms-transform: translateY(0);
 }
 
 .overlay-content a:nth-child(n), .overlay-content button:nth-child(n) {
@@ -593,17 +498,10 @@ html[data-theme="light"] #searchInput::placeholder {
     padding: clamp(15px, 2vw, 25px);
     border-radius: 20px;
     box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.5));
-    -webkit-backdrop-filter: blur(var(--blur, 12px));
     backdrop-filter: blur(var(--blur, 12px));
     border: 1px solid rgba(255, 255, 255, 0.1);
     animation: slideUp 0.8s ease-out;
 }
-@media (max-width: 768px) {
-    .filter-bar {
-        margin-top: 100px; /* or any value you like */
-    }
-}
-
 
 /* Favorite toggle */
 .favorite-toggle {
@@ -665,7 +563,6 @@ html[data-theme="light"] #searchInput::placeholder {
     border-radius: 20px;
     padding: clamp(24px, 4vw, 36px);
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
     transition: all 0.4s ease;
@@ -728,7 +625,6 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: 0 0 12px rgba(0, 255, 204, 0.5);
 }
 
-
 /* Favorite button styles */
 .script-card button.favorite-btn {
     background: #5865f2;
@@ -746,14 +642,10 @@ html[data-theme="light"] #searchInput::placeholder {
 .script-card button.favorite-btn:hover {
     background: #4752c4;
     transform: scale(1.05);
-    -webkit-transform: scale(1.05);
-    -ms-transform: scale(1.05);
 }
 
 .script-card button.favorite-btn:active {
     transform: scale(0.95);
-    -webkit-transform: scale(0.95);
-    -ms-transform: scale(0.95);
 }
 
 .script-card button.favorite-btn.favorited {
@@ -768,29 +660,16 @@ html[data-theme="light"] #searchInput::placeholder {
 
 .script-card button.favorite-btn.animate {
     animation: pop-favorite 0.3s ease forwards;
-    -webkit-animation: pop-favorite 0.3s ease forwards;
-    -moz-animation: pop-favorite 0.3s ease forwards;
 }
 
 @keyframes pop-favorite {
-    0% {
-        transform: scale(1);
-        box-shadow: 0 0 0 transparent;
-    }
-    50% {
-        transform: scale(1.2);
-        box-shadow: 0 0 12px rgba(88, 101, 242, 0.6);
-    }
-    100% {
-        transform: scale(1);
-        box-shadow: 0 0 0 transparent;
-    }
+    0% { transform: scale(1); box-shadow: 0 0 0 transparent; }
+    50% { transform: scale(1.2); box-shadow: 0 0 12px rgba(88, 101, 242, 0.6); }
+    100% { transform: scale(1); box-shadow: 0 0 0 transparent; }
 }
 
 .script-card button:hover, .script-card button:focus {
     transform: translateY(-3px);
-    -webkit-transform: translateY(-3px);
-    -ms-transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
 }
 
@@ -812,7 +691,6 @@ html[data-theme="light"] #searchInput::placeholder {
     line-height: 1.5;
     padding: 0 clamp(10px, 3vw, 20px);
     backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
 }
 
 /* Optional subtle glow on dark backgrounds */
@@ -826,18 +704,11 @@ html[data-theme="light"] #searchInput::placeholder {
     opacity: 0.4;
 }
 
-/* Fade in keyframes (if not already defined) */
+/* Fade in keyframes */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 
 /* Pagination */
 .pagination {
@@ -869,8 +740,6 @@ html[data-theme="light"] #searchInput::placeholder {
 
 .pagination button:hover, .pagination button:focus {
     transform: translateY(-3px);
-    -webkit-transform: translateY(-3px);
-    -ms-transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 255, 204, 0.5);
 }
 
@@ -912,7 +781,6 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.5));
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    -webkit-backdrop-filter: blur(var(--blur, 12px));
     backdrop-filter: blur(var(--blur, 12px));
 }
 
@@ -978,8 +846,6 @@ html[data-theme="light"] #searchInput::placeholder {
 .close-btn:hover, .close-btn:focus {
     background: #7289da;
     transform: rotate(90deg);
-    -webkit-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
     box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
 }
 
@@ -997,7 +863,6 @@ html[data-theme="light"] #searchInput::placeholder {
     font-weight: 600;
     letter-spacing: 0.3px;
     backdrop-filter: blur(3px);
-    -webkit-backdrop-filter: blur(3px);
 }
 
 /* Premium spinning loader */
@@ -1014,23 +879,8 @@ html[data-theme="light"] #searchInput::placeholder {
 
 /* Spinner animation */
 @keyframes spin {
-    to {
-        transform: rotate(360deg);
-    }
+    to { transform: rotate(360deg); }
 }
-
-/* Optional: Fade-in animation (if not defined already) */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 /* Copy button - Premium interactive style */
 .copy-btn {
@@ -1069,11 +919,10 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: 0 0 20px rgba(0, 255, 204, 0.7);
 }
 
-/* Light theme tweak (already included in your code) */
+/* Light theme tweak */
 html[data-theme="light"] .copy-btn {
     color: #ffffff;
 }
-
 
 /* Favorite toggle animation */
 @keyframes pulse-favorite {
@@ -1093,8 +942,6 @@ html[data-theme="light"] .copy-btn {
 .favorite-toggle input:checked + i {
     color: red;
     animation: pulse-favorite 0.4s ease;
-    -webkit-animation: pulse-favorite 0.4s ease;
-    -moz-animation: pulse-favorite 0.4s ease;
 }
 
 /* Media Queries for Responsiveness */
@@ -1143,6 +990,7 @@ html[data-theme="light"] .copy-btn {
         align-items: stretch;
         padding: 15px;
         gap: 10px;
+        margin-top: 100px;
     }
     #searchInput, #gameFilter, #categoryFilter, #sortFilter {
         max-width: 100%;
@@ -1176,7 +1024,6 @@ html[data-theme="light"] .copy-btn {
         opacity: 0.2;
     }
     .filter-bar, .overlay-menu, .modal-content, .top-center-text {
-        -webkit-backdrop-filter: none;
         backdrop-filter: none;
         background: var(--glass-dark, rgba(0, 0, 0, 0.4));
     }
@@ -1230,6 +1077,20 @@ html[data-theme="light"] .copy-btn {
         font-size: clamp(12px, 1.8vw, 14px);
         min-height: 40px;
         min-width: 80px;
+    }
+    .code-button {
+        top: 6.8rem;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 8px 14px;
+        font-size: 12px;
+        border-radius: 8px;
+        min-width: unset;
+        min-height: unset;
+    }
+    .code-button:hover,
+    .code-button:active {
+        transform: translateX(-50%) scale(1.05);
     }
 }
 
