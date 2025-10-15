@@ -1,0 +1,752 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Spin & Wallet — Spin to Win</title>
+
+<style>
+  :root {
+    --bg: #f4f4f9;
+    --card: #ffffff;
+    --accent: #3b82f6;
+    --accent2: #6b7280;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --shadow: rgba(0, 0, 0, 0.1);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 16px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 16px;
+    line-height: 1.5;
+  }
+
+  .app {
+    width: 100%;
+    max-width: 960px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid var(--border);
+  }
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .logo svg { width: 24px; height: 24px; fill: #fff; }
+  .title { font-size: 1.25rem; font-weight: 600; }
+  .subtitle { font-size: 0.875rem; color: var(--muted); margin-top: 4px; }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .balance {
+    background: var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    text-align: right;
+    min-width: 120px;
+  }
+  .balance small { display: block; font-size: 0.75rem; color: var(--muted); }
+  .balance .amount { font-size: 1rem; font-weight: 600; }
+
+  .admin-btn {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 0.875rem;
+  }
+
+  .main {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .card {
+    flex: 1;
+    background: var(--card);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: center;
+  }
+  .wheel-wrap { position: relative; }
+  .pointer {
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid var(--accent);
+    margin: 0 auto 8px;
+  }
+  .wheel {
+    width: 280px;
+    height: 280px;
+    margin: 0 auto;
+    border-radius: 50%;
+    border: 8px solid var(--border);
+    background: conic-gradient(
+      #3b82f6 0deg 45deg,
+      #10b981 45deg 90deg,
+      #f59e0b 90deg 135deg,
+      #ef4444 135deg 180deg,
+      #8b5cf6 180deg 225deg,
+      #ec4899 225deg 270deg,
+      #14b8a6 270deg 315deg,
+      #06b6d4 315deg 360deg
+    );
+    position: relative;
+    transition: transform 4s ease-out;
+  }
+
+  .wheel-label {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #fff;
+    text-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    background: var(--accent);
+    border: none;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.875rem;
+  }
+  .btn.secondary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .info {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    color: var(--muted);
+  }
+
+  .spins-left {
+    margin-top: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .side {
+    flex: 0 0 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .wallet {
+    background: var(--card);
+    padding: 16px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .wallet h3 {
+    margin: 0 0 12px;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .wallet .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0;
+  }
+  .small { font-size: 0.875rem; color: var(--muted); }
+
+  .transactions {
+    max-height: 200px;
+    overflow-y: auto;
+    margin-top: 8px;
+    padding-right: 4px;
+  }
+  .tx {
+    background: var(--border);
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .tx .left { font-size: 0.875rem; }
+  .tx .right { font-size: 0.875rem; color: var(--muted); }
+
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .modal {
+    width: 90%;
+    max-width: 400px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid var(--border);
+  }
+  .modal h4 {
+    margin: 0 0 12px;
+    font-size: 1.125rem;
+  }
+  .field { margin-bottom: 12px; }
+  .field label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .field input, .field textarea {
+    width: 100%;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 0.875rem;
+  }
+
+  @media (max-width: 768px) {
+    .main { flex-direction: column; }
+    .side { flex: unset; width: 100%; }
+    .wheel { width: 240px; height: 240px; }
+    .wheel-label { font-size: 0.7rem; }
+    .app { padding: 12px; }
+    .header { flex-direction: column; align-items: flex-start; }
+    .top-actions { width: 100%; justify-content: flex-end; }
+  }
+  @media (max-width: 480px) {
+    .wheel { width: 200px; height: 200px; }
+    .wheel-label { font-size: 0.6rem; }
+    .btn { padding: 8px 12px; font-size: 0.75rem; }
+    .balance { min-width: 100px; font-size: 0.75rem; }
+    .spins-left { font-size: 0.75rem; }
+  }
+
+  .muted { color: var(--muted); }
+  .center { text-align: center; }
+  .hidden { display: none; }
+  .copy-btn {
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<div class="app" role="application" aria-label="Spin and Wallet">
+  <div class="header">
+    <div class="brand">
+      <div class="logo" id="logoBtn" title="Spin & Wallet">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="3" y="3" width="18" height="18" rx="4" fill="white" opacity="0.12"></rect>
+          <path d="M6 12h12" stroke="white" stroke-width="1.6" stroke-linecap="round"></path>
+          <path d="M12 6v12" stroke="white" stroke-width="1.6" stroke-linecap="round"></path>
+        </svg>
+      </div>
+      <div>
+        <div class="title">Spin & Wallet</div>
+        <div class="subtitle">Complete tasks → Earn spins → Withdraw</div>
+      </div>
+    </div>
+
+    <div class="top-actions">
+      <div class="balance" title="Your wallet balance">
+        <small>Balance</small>
+        <div class="amount" id="balanceDisplay">$0.000</div>
+      </div>
+      <button class="admin-btn" id="adminBtn">Admin</button>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="card">
+      <div class="wheel-wrap">
+        <div class="pointer" aria-hidden="true"></div>
+        <div class="wheel" id="wheel" role="img" aria-label="prize wheel"></div>
+      </div>
+
+      <div class="controls">
+        <button class="btn" id="spinBtn">Spin Now</button>
+        <button class="btn secondary" id="getSpinBtn">Get Spin (Linkvertise)</button>
+        <button class="btn secondary" id="historyToggle">Show History</button>
+      </div>
+
+      <div class="spins-left" id="spinsLeftDisplay">Spins Left: 0</div>
+
+      <div class="info" id="infoText">Complete a Linkvertise task to earn spins. Spins are saved locally on your device.</div>
+
+      <div id="winHistory" class="hidden" style="margin-top:14px;">
+        <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px;">
+          <div class="small muted">Prizes are weighted. Big wins are rare.</div>
+        </div>
+        <div id="historyList"></div>
+      </div>
+    </div>
+
+    <div class="side">
+      <div class="wallet">
+        <h3>Wallet</h3>
+        <div class="row"><div class="small muted">Spins available</div><div id="spinsDisp" style="font-weight:700">0</div></div>
+        <div class="row"><div class="small muted">Withdraw minimum</div><div class="small" style="font-weight:700">$10.00</div></div>
+
+        <div style="display:flex; gap:8px; margin-top:10px;">
+          <button class="btn" id="withdrawBtn" style="flex:1">Withdraw</button>
+          <button class="btn secondary" id="clearBtn" style="flex:1">Clear Data</button>
+        </div>
+
+        <div style="margin-top:12px;">
+          <div class="small muted">Recent transactions</div>
+          <div class="transactions" id="txList"></div>
+        </div>
+      </div>
+
+      <div class="wallet">
+        <h3>How it works</h3>
+        <div class="small muted">
+          • Click <b>Get Spin (Linkvertise)</b>, complete the task, and be redirected back with <code>?earned=1</code> to get 1 spin.<br>
+          • Spin to win money — winnings are added to your wallet.<br>
+          • To withdraw, click Withdraw (min $10). You will receive the withdraw code "GETMONEY" and instructions to create a Discord ticket.
+        </div>
+
+        <div style="margin-top:10px;" class="center">
+          <button class="btn secondary" id="discordBtn">Open Discord</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <h4 id="modalTitle">Admin Panel</h4>
+
+    <div id="adminLogin">
+      <div class="field">
+        <label>Enter admin password</label>
+        <input id="adminPwd" type="password" placeholder="••••••••" />
+      </div>
+      <div style="display:flex; style="display:flex; gap:8px; justify-content:flex-end;">
+        <button class="btn secondary" id="closeModal">Close</button>
+        <button class="btn" id="adminLoginBtn">Login</button>
+      </div>
+    </div>
+
+    <div id="adminPanel" class="hidden">
+      <div class="field">
+        <label>Discord invite / ticket URL</label>
+        <input id="discordInput" type="text" placeholder="https://discord.gg/your-invite" />
+      </div>
+      <div class="field">
+        <label>Prizes JSON (array of {amount, chance}) - chances sum to 100</label>
+        <textarea id="prizesInput" rows="6"></textarea>
+      </div>
+      <div class="field">
+        <label>Admin settings</label>
+        <div style="display:flex; gap:8px;">
+          <button class="btn" id="saveAdminBtn">Save</button>
+          <button class="btn secondary" id="logoutAdmin">Logout</button>
+        </div>
+      </div>
+      <div class="field">
+        <small class="muted">Note: This is a frontend-only site. Data is stored in your browser (localStorage). For production, use a backend for secure storage.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="withdrawModalBackdrop">
+  <div class="modal">
+    <h4>Withdraw Request</h4>
+    <div id="withdrawContent"></div>
+    <div style="display:flex; justify-content:center; gap:8px; margin-top:16px;">
+      <button class="btn" id="copyCodeBtn">Copy Code</button>
+      <button class="btn secondary" id="closeWithdrawModal">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ========= State and storage keys ========= */
+const STORAGE = {
+  spins: 'spin_wallet_spins',
+  balance: 'spin_wallet_balance',
+  tx: 'spin_wallet_txs',
+  adminDiscord: 'spin_wallet_discord',
+  prizes: 'spin_wallet_prizes',
+  sessionToken: 'spin_wallet_session_token'
+};
+
+/* Simple helpers with sanitization */
+function $id(id) { return document.getElementById(id); }
+function sanitize(str) {
+  const div = document.createElement('div');
+  div.textContent = str || '';
+  return div.innerHTML;
+}
+function save(key, val) {
+  if (typeof val === 'string') val = sanitize(val);
+  localStorage.setItem(key, JSON.stringify(val));
+}
+function load(key, fallback) {
+  const v = localStorage.getItem(key);
+  return v ? JSON.parse(v) : fallback;
+}
+
+/* Generate simple session token for admin actions */
+function generateSessionToken() {
+  const token = Math.random().toString(36).substring(2) + Date.now().toString(36);
+  save(STORAGE.sessionToken, token);
+  return token;
+}
+
+/* Initial load */
+let spins = load(STORAGE.spins, 0);
+let balance = load(STORAGE.balance, 0.0);
+let txs = load(STORAGE.tx, []);
+let adminDiscord = load(STORAGE.adminDiscord, '');
+let prizes = load(STORAGE.prizes, [
+  { amount: 0.001, chance: 40 },
+  { amount: 0.01,  chance: 25 },
+  { amount: 0.10,  chance: 5 },
+  { amount: 1,     chance: 8 },
+  { amount: 10,    chance: 0.0005 },
+  { amount: 100,   chance: 0.0001 },
+  { amount: 0.20,  chance: 3 },
+  { amount: 0.00,  chance: 3 }
+]);
+let sessionToken = load(STORAGE.sessionToken, null);
+const FIXED_WITHDRAW_CODE = 'GETMONEY';
+
+/* UI elements */
+const wheelEl = $id('wheel');
+const spinBtn = $id('spinBtn');
+const getSpinBtn = $id('getSpinBtn');
+const spinsDisp = $id('spinsDisp');
+const balanceDisplay = $id('balanceDisplay');
+const txList = $id('txList');
+const historyToggle = $id('historyToggle');
+const historyList = $id('historyList');
+const winHistory = $id('winHistory');
+const withdrawBtn = $id('withdrawBtn');
+const discordBtn = $id('discordBtn');
+const clearBtn = $id('clearBtn');
+const modalBackdrop = $id('modalBackdrop');
+const adminBtn = $id('adminBtn');
+const adminLoginBtn = $id('adminLoginBtn');
+const adminPanel = $id('adminPanel');
+const adminLogin = $id('adminLogin');
+const adminPwd = $id('adminPwd');
+const closeModal = $id('closeModal');
+const saveAdminBtn = $id('saveAdminBtn');
+const discordInput = $id('discordInput');
+const prizesInput = $id('prizesInput');
+const logoutAdmin = $id('logoutAdmin');
+const logoBtn = $id('logoBtn');
+const withdrawModalBackdrop = $id('withdrawModalBackdrop');
+const withdrawContent = $id('withdrawContent');
+const copyCodeBtn = $id('copyCodeBtn');
+const closeWithdrawModal = $id('closeWithdrawModal');
+const spinsLeftDisplay = $id('spinsLeftDisplay');
+
+/* Render prize labels on wheel */
+function renderWheelLabels() {
+  const segmentAngle = 360 / prizes.length;
+  wheelEl.innerHTML = '';
+  prizes.forEach((prize, i) => {
+    const angle = i * segmentAngle - 90;
+    const label = document.createElement('div');
+    label.className = 'wheel-label';
+    label.style.transform = `rotate(${angle}deg) translate(100px) rotate(90deg)`;
+    label.textContent = prize.amount === 0 ? 'No Prize' : `$${prize.amount.toFixed(3)}`;
+    wheelEl.appendChild(label);
+  });
+}
+renderWheelLabels();
+
+/* Prize functions */
+function totalWeight() { return prizes.reduce((s, p) => s + p.chance, 0); }
+function pickWeighted() {
+  let r = Math.random() * totalWeight();
+  for (const p of prizes) {
+    if (r < p.chance) return p;
+    r -= p.chance;
+  }
+  return prizes[0];
+}
+
+/* UI updates */
+function fmt(v) {
+  return `$${Number(v).toFixed(3)}`;
+}
+function updateUI() {
+  spinsDisp.textContent = spins;
+  spinsLeftDisplay.textContent = `Spins Left: ${spins}`;
+  balanceDisplay.textContent = fmt(balance);
+  renderTxs();
+  historyList.innerHTML = txs.slice().reverse().map(t => `<div class="tx"><div class="left">${sanitize(t.note)}</div><div class="right">${fmt(t.amount)}</div></div>`).join('');
+}
+function pushTx(amount, note) {
+  const item = { amount, note: sanitize(note), time: new Date().toISOString() };
+  txs.push(item);
+  if (txs.length > 200) txs.shift();
+  save(STORAGE.tx, txs);
+  save(STORAGE.balance, balance);
+}
+function renderTxs() {
+  if (txs.length === 0) {
+    txList.innerHTML = '<div class="small muted">No transactions yet</div>';
+    return;
+  }
+  txList.innerHTML = txs.slice().reverse().map(t => {
+    const d = new Date(t.time);
+    return `<div class="tx"><div class="left">${sanitize(t.note)}<div class="small muted" style="margin-top:6px">${d.toLocaleString()}</div></div><div class="right">${fmt(t.amount)}</div></div>`;
+  }).join('');
+}
+updateUI();
+
+/* Spin logic */
+let spinning = false;
+spinBtn.addEventListener('click', () => {
+  if (spinning) return;
+  if (spins <= 0) { alert('No spins left. Complete a task to earn spins.'); return; }
+  spinning = true;
+  spins = Math.max(0, spins - 1);
+  save(STORAGE.spins, spins);
+  updateUI();
+
+  const extra = 360 * (8 + Math.floor(Math.random() * 6));
+  wheelEl.style.transition = 'transform 4s ease-out';
+  wheelEl.style.transform = `rotate(${extra}deg)`;
+
+  setTimeout(() => {
+    const p = pickWeighted();
+    balance = Number((Number(balance) + Number(p.amount)).toFixed(6));
+    save(STORAGE.balance, balance);
+    pushTx(p.amount, `Win (${p.amount === 0 ? 'No prize' : '$' + p.amount})`);
+    alert(p.amount === 0 ? 'No prize this time!' : `🎉 You won ${fmt(p.amount)}!`);
+    updateUI();
+    spinning = false;
+  }, 4200);
+});
+
+/* Get spin button */
+getSpinBtn.addEventListener('click', () => {
+  const lv = prompt('Enter your Linkvertise URL:', 'https://linkvertise.com/YOUR_LINK_HERE');
+  if (!lv) return;
+  window.open(sanitize(lv), '_blank');
+});
+
+/* Earned spin param */
+(function checkEarnedParam() {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('earned') === '1') {
+    spins = (spins || 0) + 1;
+    save(STORAGE.spins, spins);
+    updateUI();
+    alert('✅ You earned 1 spin!');
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }
+})();
+
+/* History toggle */
+historyToggle.addEventListener('click', () => {
+  winHistory.classList.toggle('hidden');
+  historyToggle.textContent = winHistory.classList.contains('hidden') ? 'Show History' : 'Hide History';
+});
+
+/* Withdraw flow */
+withdrawBtn.addEventListener('click', () => {
+  if (balance < 10) {
+    alert('Minimum withdraw is $10.00.');
+    return;
+  }
+  const max = Number(balance.toFixed(3));
+  let amtStr = prompt(`Enter withdraw amount (min $10.00, max ${fmt(max)}).`, `${Math.min(max, 10).toFixed(3)}`);
+  if (amtStr === null) return;
+  let amt = Number(amtStr);
+  if (isNaN(amt) || amt < 10 || amt > max) {
+    alert('Invalid amount.');
+    return;
+  }
+  balance = Number((balance - amt).toFixed(6));
+  save(STORAGE.balance, balance);
+  pushTx(-amt, `Withdraw request`);
+  updateUI();
+
+  const code = FIXED_WITHDRAW_CODE;
+  const discord = sanitize(adminDiscord) || 'Not set';
+  withdrawContent.innerHTML = `✅ Withdraw requested for ${fmt(amt)}.<br><br>To claim: Create a ticket in our Discord and send the following code to the staff:<br><br><strong>Code: ${code}</strong><br><br>Discord: ${discord}<br><br>Note: This site is frontend-only; the admin will verify and pay out manually.`;
+  withdrawModalBackdrop.style.display = 'flex';
+
+  copyCodeBtn.onclick = () => {
+    navigator.clipboard.writeText(code).then(() => alert('Code copied to clipboard!')).catch(() => alert('Failed to copy code.'));
+  };
+  closeWithdrawModal.onclick = () => {
+    withdrawModalBackdrop.style.display = 'none';
+  };
+});
+
+/* Discord button */
+discordBtn.addEventListener('click', () => {
+  if (!adminDiscord) {
+    alert('Discord invite not set.');
+    return;
+  }
+  window.open(sanitize(adminDiscord), '_blank');
+});
+
+/* Clear data */
+clearBtn.addEventListener('click', () => {
+  if (!confirm('Clear all local data?')) return;
+  localStorage.clear();
+  spins = 0; balance = 0; txs = []; adminDiscord = ''; prizes = load(STORAGE.prizes, prizes); sessionToken = null;
+  updateUI();
+  renderWheelLabels();
+  alert('Data cleared.');
+});
+
+/* Admin modal logic */
+adminBtn.addEventListener('click', openModal);
+logoBtn.addEventListener('click', openModal);
+closeModal.addEventListener('click', closeModalFn);
+
+function openModal() {
+  adminPwd.value = '';
+  adminLogin.classList.remove('hidden');
+  adminPanel.classList.add('hidden');
+  modalBackdrop.style.display = 'flex';
+}
+function closeModalFn() {
+  modalBackdrop.style.display = 'none';
+}
+
+/* Admin login */
+adminLoginBtn.addEventListener('click', () => {
+  const pwd = adminPwd.value || '';
+  if (pwd === 'admin123') {
+    sessionToken = generateSessionToken();
+    adminLogin.classList.add('hidden');
+    adminPanel.classList.remove('hidden');
+    discordInput.value = sanitize(adminDiscord);
+    prizesInput.value = JSON.stringify(prizes, null, 2);
+  } else {
+    alert('Wrong password.');
+  }
+});
+
+/* Save admin settings */
+saveAdminBtn.addEventListener('click', () => {
+  if (!sessionToken || sessionToken !== load(STORAGE.sessionToken, null)) {
+    alert('Session expired. Please log in again.');
+    closeModalFn();
+    return;
+  }
+  const disc = sanitize(discordInput.value.trim());
+  const prizesStr = prizesInput.value.trim();
+  let newPrizes;
+  try {
+    newPrizes = JSON.parse(prizesStr);
+    const sum = newPrizes.reduce((s, p) => s + (p.chance || 0), 0);
+    if (Math.abs(sum - 100) > 0.1) {
+      alert(`Warning: Chances sum to ${sum}, ideally should be 100.`);
+    }
+  } catch (e) {
+    alert('Invalid prizes JSON.');
+    return;
+  }
+  adminDiscord = disc;
+  prizes = newPrizes;
+  save(STORAGE.adminDiscord, disc);
+  save(STORAGE.prizes, newPrizes);
+  renderWheelLabels();
+  alert('Settings saved.');
+  closeModalFn();
+});
+
+/* Logout admin */
+logoutAdmin.addEventListener('click', () => {
+  sessionToken = null;
+  save(STORAGE.sessionToken, null);
+  adminPanel.classList.add('hidden');
+  adminLogin.classList.remove('hidden');
+  adminPwd.value = '';
+});
+
+/* Prevent right-click and dev tools for basic security */
+document.addEventListener('contextmenu', (e) => e.preventDefault());
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && e.key === 'I')) {
+    e.preventDefault();
+  }
+});
+
+updateUI();
+</script>
+</body>
+</html>
