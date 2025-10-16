@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Spin & Wallet — Spin to Win</title>
 
 <style>
@@ -28,6 +28,7 @@
     align-items: flex-start;
     padding: 16px;
     line-height: 1.5;
+    overflow-x: hidden;
   }
 
   .app {
@@ -106,8 +107,14 @@
     border-radius: 12px;
     border: 1px solid var(--border);
     text-align: center;
+    min-width: 0;
   }
-  .wheel-wrap { position: relative; }
+  .wheel-wrap {
+    position: relative;
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
   .pointer {
     width: 0;
     height: 0;
@@ -117,8 +124,9 @@
     margin: 0 auto 8px;
   }
   .wheel {
-    width: 280px;
-    height: 280px;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-width: 300px;
     margin: 0 auto;
     border-radius: 50%;
     border: 8px solid var(--border);
@@ -134,6 +142,7 @@
     );
     position: relative;
     transition: transform 4s ease-out;
+    touch-action: none;
   }
 
   .wheel-label {
@@ -171,6 +180,11 @@
     background: var(--card);
     border: 1px solid var(--border);
     color: var(--text);
+  }
+  .btn:disabled {
+    background: var(--border);
+    color: var(--muted);
+    cursor: not-allowed;
   }
 
   .info {
@@ -270,14 +284,16 @@
   @media (max-width: 768px) {
     .main { flex-direction: column; }
     .side { flex: unset; width: 100%; }
-    .wheel { width: 240px; height: 240px; }
+    .wheel-wrap { max-width: 260px; }
+    .wheel { max-width: 260px; }
     .wheel-label { font-size: 0.7rem; }
     .app { padding: 12px; }
     .header { flex-direction: column; align-items: flex-start; }
     .top-actions { width: 100%; justify-content: flex-end; }
   }
   @media (max-width: 480px) {
-    .wheel { width: 200px; height: 200px; }
+    .wheel-wrap { max-width: 200px; }
+    .wheel { max-width: 200px; }
     .wheel-label { font-size: 0.6rem; }
     .btn { padding: 8px 12px; font-size: 0.75rem; }
     .balance { min-width: 100px; font-size: 0.75rem; }
@@ -334,12 +350,13 @@
       <div class="controls">
         <button class="btn" id="spinBtn">Spin Now</button>
         <button class="btn secondary" id="getSpinBtn">Get Spin (Linkvertise)</button>
+        <button class="btn secondary" id="claimFreeSpinBtn">Claim Free Spin</button>
         <button class="btn secondary" id="historyToggle">Show History</button>
       </div>
 
       <div class="spins-left" id="spinsLeftDisplay">Spins Left: 0</div>
 
-      <div class="info" id="infoText">Complete a Linkvertise task to earn spins. Spins are saved locally on your device.</div>
+      <div class="info" id="infoText">Complete a Linkvertise task or claim a free spin every 2 hours to earn spins. Spins are saved locally on your device.</div>
 
       <div id="winHistory" class="hidden" style="margin-top:14px;">
         <div style="display:flex; justify-content:center; gap:8px; margin-bottom:8px;">
@@ -370,6 +387,7 @@
         <h3>How it works</h3>
         <div class="small muted">
           • Click <b>Get Spin (Linkvertise)</b>, complete the task, and be redirected back with <code>?earned=1</code> to get 1 spin.<br>
+          • Click <b>Claim Free Spin</b> every 2 hours to get 1 free spin.<br>
           • Spin to win money — winnings are added to your wallet.<br>
           • To withdraw, click Withdraw (min $10). You will receive the withdraw code "GETMONEY" and instructions to create a Discord ticket.
         </div>
@@ -391,7 +409,7 @@
         <label>Enter admin password</label>
         <input id="adminPwd" type="password" placeholder="••••••••" />
       </div>
-      <div style="display:flex; style="display:flex; gap:8px; justify-content:flex-end;">
+      <div style="display:flex; gap:8px; justify-content:flex-end;">
         <button class="btn secondary" id="closeModal">Close</button>
         <button class="btn" id="adminLoginBtn">Login</button>
       </div>
@@ -400,7 +418,7 @@
     <div id="adminPanel" class="hidden">
       <div class="field">
         <label>Discord invite / ticket URL</label>
-        <input id="discordInput" type="text" placeholder="https://discord.gg/your-invite" />
+        <input id="discordInput" type="text" placeholder="https://discord.gg/7q2TvZ9GYX" />
       </div>
       <div class="field">
         <label>Prizes JSON (array of {amount, chance}) - chances sum to 100</label>
@@ -439,7 +457,8 @@ const STORAGE = {
   tx: 'spin_wallet_txs',
   adminDiscord: 'spin_wallet_discord',
   prizes: 'spin_wallet_prizes',
-  sessionToken: 'spin_wallet_session_token'
+  sessionToken: 'spin_wallet_session_token',
+  lastFreeSpin: 'spin_wallet_last_free_spin'
 };
 
 /* Simple helpers with sanitization */
@@ -469,7 +488,7 @@ function generateSessionToken() {
 let spins = load(STORAGE.spins, 0);
 let balance = load(STORAGE.balance, 0.0);
 let txs = load(STORAGE.tx, []);
-let adminDiscord = load(STORAGE.adminDiscord, '');
+let adminDiscord = load(STORAGE.adminDiscord, 'https://discord.gg/7q2TvZ9GYX');
 let prizes = load(STORAGE.prizes, [
   { amount: 0.001, chance: 40 },
   { amount: 0.01,  chance: 25 },
@@ -481,12 +500,14 @@ let prizes = load(STORAGE.prizes, [
   { amount: 0.00,  chance: 3 }
 ]);
 let sessionToken = load(STORAGE.sessionToken, null);
+let lastFreeSpin = load(STORAGE.lastFreeSpin, null);
 const FIXED_WITHDRAW_CODE = 'GETMONEY';
 
 /* UI elements */
 const wheelEl = $id('wheel');
 const spinBtn = $id('spinBtn');
 const getSpinBtn = $id('getSpinBtn');
+const claimFreeSpinBtn = $id('claimFreeSpinBtn');
 const spinsDisp = $id('spinsDisp');
 const balanceDisplay = $id('balanceDisplay');
 const txList = $id('txList');
@@ -514,6 +535,46 @@ const copyCodeBtn = $id('copyCodeBtn');
 const closeWithdrawModal = $id('closeWithdrawModal');
 const spinsLeftDisplay = $id('spinsLeftDisplay');
 
+/* Free spin logic */
+function canClaimFreeSpin() {
+  if (!lastFreeSpin) return true;
+  const now = Date.now();
+  const last = new Date(lastFreeSpin).getTime();
+  const twoHours = 2 * 60 * 60 * 1000;
+  return now - last >= twoHours;
+}
+
+function updateFreeSpinButton() {
+  if (canClaimFreeSpin()) {
+    claimFreeSpinBtn.disabled = false;
+    claimFreeSpinBtn.textContent = 'Claim Free Spin';
+  } else {
+    claimFreeSpinBtn.disabled = true;
+    const nextClaim = new Date(lastFreeSpin).getTime() + 2 * 60 * 60 * 1000;
+    const remaining = Math.max(0, nextClaim - Date.now());
+    const minutes = Math.floor(remaining / 1000 / 60);
+    const seconds = Math.floor((remaining / 1000) % 60);
+    claimFreeSpinBtn.textContent = `Free Spin in ${minutes}m ${seconds}s`;
+  }
+}
+
+setInterval(updateFreeSpinButton, 1000);
+updateFreeSpinButton();
+
+claimFreeSpinBtn.addEventListener('click', () => {
+  if (!canClaimFreeSpin()) {
+    alert('Please wait for the cooldown to claim another free spin.');
+    return;
+  }
+  spins += 1;
+  lastFreeSpin = new Date().toISOString();
+  save(STORAGE.spins, spins);
+  save(STORAGE.lastFreeSpin, lastFreeSpin);
+  updateUI();
+  updateFreeSpinButton();
+  alert('✅ You claimed 1 free spin!');
+});
+
 /* Render prize labels on wheel */
 function renderWheelLabels() {
   const segmentAngle = 360 / prizes.length;
@@ -522,7 +583,7 @@ function renderWheelLabels() {
     const angle = i * segmentAngle - 90;
     const label = document.createElement('div');
     label.className = 'wheel-label';
-    label.style.transform = `rotate(${angle}deg) translate(100px) rotate(90deg)`;
+    label.style.transform = `rotate(${angle}deg) translate(calc(50% - 20px)) rotate(90deg)`;
     label.textContent = prize.amount === 0 ? 'No Prize' : `$${prize.amount.toFixed(3)}`;
     wheelEl.appendChild(label);
   });
@@ -574,7 +635,7 @@ updateUI();
 let spinning = false;
 spinBtn.addEventListener('click', () => {
   if (spinning) return;
-  if (spins <= 0) { alert('No spins left. Complete a task to earn spins.'); return; }
+  if (spins <= 0) { alert('No spins left. Complete a task or claim a free spin.'); return; }
   spinning = true;
   spins = Math.max(0, spins - 1);
   save(STORAGE.spins, spins);
@@ -623,7 +684,7 @@ historyToggle.addEventListener('click', () => {
 /* Withdraw flow */
 withdrawBtn.addEventListener('click', () => {
   if (balance < 10) {
-    alert('Minimum withdraw is $10.00.');
+    alert('You need at least $10.00 to withdraw.');
     return;
   }
   const max = Number(balance.toFixed(3));
@@ -631,7 +692,7 @@ withdrawBtn.addEventListener('click', () => {
   if (amtStr === null) return;
   let amt = Number(amtStr);
   if (isNaN(amt) || amt < 10 || amt > max) {
-    alert('Invalid amount.');
+    alert('Invalid amount. Please enter a value between $10.00 and your current balance.');
     return;
   }
   balance = Number((balance - amt).toFixed(6));
@@ -663,12 +724,13 @@ discordBtn.addEventListener('click', () => {
 
 /* Clear data */
 clearBtn.addEventListener('click', () => {
-  if (!confirm('Clear all local data?')) return;
+  if (!confirm('Are you sure you want to clear all local data? This cannot be undone.')) return;
   localStorage.clear();
-  spins = 0; balance = 0; txs = []; adminDiscord = ''; prizes = load(STORAGE.prizes, prizes); sessionToken = null;
+  spins = 0; balance = 0; txs = []; adminDiscord = 'https://discord.gg/7q2TvZ9GYX'; prizes = load(STORAGE.prizes, prizes); sessionToken = null; lastFreeSpin = null;
   updateUI();
   renderWheelLabels();
-  alert('Data cleared.');
+  updateFreeSpinButton();
+  alert('All data has been cleared.');
 });
 
 /* Admin modal logic */
@@ -689,21 +751,21 @@ function closeModalFn() {
 /* Admin login */
 adminLoginBtn.addEventListener('click', () => {
   const pwd = adminPwd.value || '';
-  if (pwd === 'admin123') {
+  if (pwd === 'admin123nghgndsads') {
     sessionToken = generateSessionToken();
     adminLogin.classList.add('hidden');
     adminPanel.classList.remove('hidden');
     discordInput.value = sanitize(adminDiscord);
     prizesInput.value = JSON.stringify(prizes, null, 2);
   } else {
-    alert('Wrong password.');
+    alert('Incorrect password. Please try again.');
   }
 });
 
 /* Save admin settings */
 saveAdminBtn.addEventListener('click', () => {
   if (!sessionToken || sessionToken !== load(STORAGE.sessionToken, null)) {
-    alert('Session expired. Please log in again.');
+    alert('Your session has expired. Please log in again.');
     closeModalFn();
     return;
   }
@@ -714,10 +776,10 @@ saveAdminBtn.addEventListener('click', () => {
     newPrizes = JSON.parse(prizesStr);
     const sum = newPrizes.reduce((s, p) => s + (p.chance || 0), 0);
     if (Math.abs(sum - 100) > 0.1) {
-      alert(`Warning: Chances sum to ${sum}, ideally should be 100.`);
+      alert(`Warning: Prize chances sum to ${sum}%, ideally should be 100%.`);
     }
   } catch (e) {
-    alert('Invalid prizes JSON.');
+    alert('Invalid prizes JSON format. Please check and try again.');
     return;
   }
   adminDiscord = disc;
@@ -725,7 +787,7 @@ saveAdminBtn.addEventListener('click', () => {
   save(STORAGE.adminDiscord, disc);
   save(STORAGE.prizes, newPrizes);
   renderWheelLabels();
-  alert('Settings saved.');
+  alert('Settings saved successfully.');
   closeModalFn();
 });
 
