@@ -354,7 +354,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     game: "Plants Vs Brainrots",
     category: "Simulation",
     description: "A script for Plants Vs Brainrots providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://pastefy.app/Vn9St10L/raw", true))()`,
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()`,
     popularity: 72,
     dateAdded: "2025-10-01"
 },
@@ -895,4 +895,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
