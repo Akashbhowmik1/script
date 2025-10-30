@@ -345,7 +345,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     game: "Fish It",
     category: "Simulation",
     description: "A script for Fish It providing enhanced gameplay automation and fishing features.",
-    code: `loadstring(game:HttpGet("https://gist.githubusercontent.com/OmarBinLadek/e8224cc7ed5faae9767235b3a978ed44/raw/569ca6b703826253068f015bbe465a1093f8cda9/usethisautokraken.lua"))()`,
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MajestySkie/list/refs/heads/main/games"))()`,
     popularity: 85,
     dateAdded: "2025-09-11"
 },
@@ -895,5 +895,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
