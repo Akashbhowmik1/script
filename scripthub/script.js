@@ -363,7 +363,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     game: "Anime Eternal",
     category: "Simulation",
     description: "A script for Anime Eternal providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/LinuxDevBr/Anime-Eternal/refs/heads/main/Script.lua"))()`,
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()`,
     popularity: 72,
     dateAdded: "2025-10-08"
 },
@@ -895,6 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
