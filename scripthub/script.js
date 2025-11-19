@@ -79,11 +79,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-04-10"
     },
     {
-        name: "Forsaken Auto Battle",
+        name: "Forsaken script",
         game: "Forsaken",
         category: "Action",
         description: "A script for Forsaken to automate combat sequences.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PlutomasterAccount/Funny-Hub/main/Funny%20Hub%20V2"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/zxcursedsocute/Forsaken-Script/refs/heads/main/lua"))()`,
         popularity: 80,
         dateAdded: "2025-07-16"
     },
@@ -895,6 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
