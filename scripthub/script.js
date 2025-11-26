@@ -191,7 +191,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Pet Simulator 99",
         category: "Simulation",
         description: "A script for Pet Simulator 99 to automate pet collection.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/SlamminPig/6FootScripts/main/Scripts/PetSimulator99.lua'))()`,
+        code: `loadstring(game:HttpGet('https://zaphub.xyz/Exec'))()`,
         popularity: 95,
         dateAdded: "2025-05-11"
     },
@@ -895,6 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
