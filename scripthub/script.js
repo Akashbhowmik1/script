@@ -164,7 +164,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "99 Nights In The Forest",
         category: "Adventure",
         description: "A script for 99 Nights In The Forest hack.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/99-Nights-In-Forest"))()`,
+        code: `loadstring(game:HttpGet('https://zaphub.xyz/Exec'))()`,
         popularity: 70,
         dateAdded: "2025-04-18"
     },
@@ -895,6 +895,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
