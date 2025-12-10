@@ -52,11 +52,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-05-10"
     },
     {
-        name: "Blue Lock Rivals Speed and Hit-box Boost",
+        name: "Blue Lock Rivals Script",
         game: "Blue Lock Rivals",
         category: "Sports",
         description: "A script for Blue Lock Rivals to enhance player skills.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Ultik-max/Isisis/refs/heads/main/Protected_9713416812708883.txt"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/BexruzScripts/Blue-lock-no-cd-reo-get-any-style-script.-WORKS-WITH-WORLD-CLASSES-/refs/heads/main/script.lua"))()`,
         popularity: 65,
         dateAdded: "2025-04-25"
     },
@@ -904,6 +904,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
