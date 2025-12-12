@@ -376,6 +376,15 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     popularity: 0,
     dateAdded: "2025-12-09"
 },
+{
+    name: "Rivals Script",
+    game: "Rivals",
+    category: "Simulation",
+    description: "A script for Rivals providing automation and gameplay enhancements.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/4lpaca-pin/Arceney/refs/heads/main/main.luau"))()`,
+    popularity: 80,
+    dateAdded: "2025-12-12"
+},
 
 
 
@@ -904,6 +913,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
