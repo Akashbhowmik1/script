@@ -65,11 +65,11 @@
   </div>
 
   <script>
-    // ===== CONFIG (matches server.js) =====
-    const API_ENDPOINT = 'http://127.0.0.1:8787/bypass';
-    const API_REFRESH_ENDPOINT = 'http://127.0.0.1:8787/refresh';
+    // ===== CONFIG: point to your Cloudflare Worker (24/7) =====
+    const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
+    const API_REFRESH_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/refresh';
     const API_METHOD = 'GET';
-    // =====================================
+    // ==========================================================
 
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
@@ -201,7 +201,7 @@
         }
       } catch (err) {
         console.error('Bypass error:', err);
-        return { text: `Error: ${err.message}\nPossible causes: proxy down, invalid API key, rate limit, or unsupported link.`, isError:true };
+        return { text: `Error: ${err.message}\nPossible causes: CORS/origin not allowed in Worker, API rate limit, or unsupported link.`, isError:true };
       }
     }
 
