@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+  <meta name="viewport" content="width=device-width, initial-scale=0.85, viewport-fit=cover"/>
   <meta name="description" content="Script Hub Bypass - Professional ad-link bypasser for Roblox script hubs, Linkvertise, Work.ink, and more."/>
   <title>Script Hub Bypass</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,8 +17,6 @@
       --accent-secondary: #8b5cf6;
       --border: #2a2a3a;
       --shadow: rgba(0, 0, 0, 0.5);
-      --success: #86efac;
-      --error: #f87171;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       --radius: 18px;
       --safe-top: env(safe-area-inset-top);
@@ -63,7 +61,7 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       padding-top: var(--safe-top);
-      padding-bottom: 140px; /* Ensures last message is visible above fixed input on PC */
+      padding-bottom: 140px;
     }
     #main-scroll::-webkit-scrollbar { width: 8px; }
     #main-scroll::-webkit-scrollbar-thumb {
@@ -142,7 +140,7 @@
       display: flex;
       flex-direction: column;
       gap: 24px;
-      min-height: 0; /* Important for flex children */
+      min-height: 0;
     }
     #welcome-message {
       text-align: center;
@@ -319,6 +317,155 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
+    .top-right-menu {
+      position: absolute;
+      top: calc(24px + var(--safe-top));
+      right: max(24px, var(--safe-right));
+      z-index: 20;
+    }
+    #menu-btn {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-card);
+      border: none;
+      border-radius: 14px;
+      color: var(--text-primary);
+      font-size: 28px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px var(--shadow);
+      transition: var(--transition);
+    }
+    #menu-btn:hover {
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 12px 28px var(--shadow);
+    }
+    .dropdown-menu {
+      position: absolute;
+      top: 60px;
+      right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 12px 32px var(--shadow);
+      display: none;
+      flex-direction: column;
+      min-width: 200px;
+      overflow: hidden;
+    }
+    .dropdown-menu button {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      padding: 16px 24px;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 16px;
+    }
+    .dropdown-menu button:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+    @media (max-width: 768px) {
+      .top-right-menu {
+        top: calc(20px + var(--safe-top));
+        right: max(20px, var(--safe-right));
+      }
+      #menu-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 24px;
+      }
+    }
+
+    #modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    #modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .modal-content {
+      background: var(--bg-secondary);
+      border-radius: var(--radius);
+      max-width: 90%;
+      max-height: 90%;
+      width: 800px;
+      overflow: hidden;
+      box-shadow: 0 20px 60px var(--shadow);
+    }
+    .modal-header {
+      padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    #close-modal {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 32px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #close-modal:hover {
+      color: var(--text-primary);
+    }
+    .modal-body {
+      padding: 28px;
+      overflow-y: auto;
+      max-height: calc(90vh - 100px);
+    }
+    .category {
+      margin-bottom: 32px;
+    }
+    .category h4 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: var(--accent-primary);
+    }
+    .category ul {
+      list-style: none;
+      columns: 2;
+      column-gap: 40px;
+    }
+    .category li {
+      margin-bottom: 8px;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    @media (max-width: 768px) {
+      .category ul {
+        columns: 1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -332,6 +479,13 @@
           <a href="https://discord.gg/7q2TvZ9GYX" target="_blank" rel="noopener noreferrer" aria-label="Discord">
             <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
           </a>
+        </div>
+        <div class="top-right-menu">
+          <button id="menu-btn" aria-label="Menu">⋮</button>
+          <div class="dropdown-menu" id="dropdown-menu">
+            <button id="supported-links-btn">Supported Links</button>
+            <button id="about-us-btn">About Us</button>
+          </div>
         </div>
         <h1>Script Hub Bypass</h1>
         <p>Professional & Fast Bypasser for Roblox Scripts, Linkvertise, Work.ink, Lootlinks and more</p>
@@ -355,6 +509,16 @@
     </button>
   </div>
 
+  <div id="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title"></h3>
+        <button id="close-modal">&times;</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
   <script>
     const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
     const API_METHOD = 'GET';
@@ -365,7 +529,6 @@
     const sendBtn = document.getElementById('send-btn');
     const clearBtn = document.getElementById('clear-btn');
 
-    // Auto-resize textarea
     userInput.addEventListener('input', () => {
       userInput.style.height = 'auto';
       userInput.style.height = `${userInput.scrollHeight}px`;
@@ -420,7 +583,6 @@
       chatContainer.appendChild(msgDiv);
 
       if (animate) {
-        // Small delay to ensure DOM update before scrolling
         requestAnimationFrame(() => {
           scrollToBottom();
         });
@@ -538,7 +700,6 @@
       saveChatHistory();
     }
 
-    // Event Listeners
     sendBtn.addEventListener('click', handleSend);
     userInput.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -548,9 +709,154 @@
     });
     clearBtn.addEventListener('click', clearChat);
 
-    // Initial state
     sendBtn.disabled = true;
     renderChatHistory();
+
+    // New menu functionality
+    const menuBtn = document.getElementById('menu-btn');
+    const dropdown = document.getElementById('dropdown-menu');
+    const supportedBtn = document.getElementById('supported-links-btn');
+    const aboutBtn = document.getElementById('about-us-btn');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModal = document.getElementById('close-modal');
+
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
+    });
+
+    document.addEventListener('click', () => {
+      dropdown.style.display = 'none';
+    });
+
+    dropdown.addEventListener('click', (e) => e.stopPropagation());
+
+    function openModal(title, content) {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = content;
+      modal.classList.add('active');
+    }
+
+    supportedBtn.addEventListener('click', () => {
+      openModal('Supported Links', `
+        <div class="category">
+          <h4>Key System</h4>
+          <ul>
+            <li>Platoboost</li>
+            <li>auth.platorelay.com</li>
+            <li>auth.platoboost.me</li>
+            <li>auth.platoboost.app</li>
+            <li>auth.platoboost.net</li>
+            <li>auth.platoboost.click</li>
+            <li>Pandadevelopment</li>
+            <li>pandadevelopment.net</li>
+            <li>Violated</li>
+            <li>violated.lol</li>
+            <li>Blox-script</li>
+            <li>blox-script.com</li>
+            <li>Kapao-hub</li>
+            <li>kapao-hub.vercel.app</li>
+            <li>Overdrivehub</li>
+            <li>overdrivehub.xyz</li>
+            <li>Codex</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h4>Ad-Link</h4>
+          <ul>
+            <li>Linkvertise</li>
+            <li>linkvertise.com</li>
+            <li>link-to.net</li>
+            <li>link-hub.net</li>
+            <li>link-target.org</li>
+            <li>link-target.net</li>
+            <li>link-center.net</li>
+            <li>direct-link.net</li>
+            <li>Admaven (lootlabs, free-content, etc.)</li>
+            <li>loot-link.com</li>
+            <li>lootdest.org</li>
+            <li>free-content.pro</li>
+            <li>lootdest.com</li>
+            <li>bleleadersto.com</li>
+            <li>daughablelea.com</li>
+            <li>fast-links.org</li>
+            <li>best-links.org</li>
+            <li>free-leaks.com</li>
+            <li>discordlink.cc</li>
+            <li>+23 more</li>
+            <li>Workink</li>
+            <li>work.ink</li>
+            <li>workink.net</li>
+            <li>Linkunlocker</li>
+            <li>linkunlocker.com</li>
+            <li>Link-unlock</li>
+            <li>link-unlock.com</li>
+            <li>Arolinks</li>
+            <li>arolinks.com</li>
+            <li>Socialwolvez</li>
+            <li>socialwolvez.com</li>
+            <li>Linkify</li>
+            <li>go.linkify.ru</li>
+            <li>Mboost</li>
+            <li>mboost.me</li>
+            <li>Social-unlock</li>
+            <li>social-unlock.com</li>
+            <li>Rekonise (rekonise.com, rekonise.org)</li>
+            <li>rekonise.com</li>
+            <li>rekonise.org</li>
+            <li>rkns.link</li>
+            <li>Sub2Unlock</li>
+            <li>sub2unlock.com</li>
+            <li>sub2unlock.me</li>
+            <li>Sub4Unlock</li>
+            <li>sub4unlock.com</li>
+            <li>sub4unlock.me</li>
+            <li>sub4unlock.io</li>
+            <li>sub4unlock.pro</li>
+            <li>Scriptpastebins</li>
+            <li>scriptpastebins.com</li>
+            <li>Bstshrt</li>
+            <li>bstshrt.com</li>
+            <li>Sfl.gl</li>
+            <li>sfl.gl</li>
+            <li>Yorurl</li>
+            <li>go.yorurl.com</li>
+            <li>yorurl.com</li>
+            <li>Robloxscripts</li>
+          </ul>
+        </div>
+        <div class="category">
+          <h4>Paste</h4>
+          <ul>
+            <li>Pastebin</li>
+            <li>pastebin.com</li>
+            <li>Paste-Drop</li>
+            <li>paste-drop.com</li>
+            <li>Pastefy</li>
+            <li>pastefy.app</li>
+            <li>Pasterso</li>
+          </ul>
+        </div>
+      `);
+      dropdown.style.display = 'none';
+    });
+
+    aboutBtn.addEventListener('click', () => {
+      openModal('About Us', `Script Hub Bypass is a free, professional tool designed to help Roblox script users bypass annoying ad-links, key systems, and shorteners quickly and securely.<br><br>We support a wide range of popular services and are constantly updating to add more.<br><br>No data is stored, everything happens client-side or via secure bypass API.<br><br>Created with ❤️ for the Scrips Hub community.`);
+      dropdown.style.display = 'none';
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
