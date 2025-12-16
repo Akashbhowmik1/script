@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
   <meta name="description" content="Script Hub Bypass - Professional ad-link bypasser for Roblox script hubs, Linkvertise, Work.ink, and more. Get direct links instantly."/>
   <title>Script Hub Bypass</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -19,7 +19,10 @@
       --shadow: rgba(0, 0, 0, 0.4);
       --transition: all 0.3s ease;
       --radius: 16px;
+      --safe-top: env(safe-area-inset-top);
       --safe-bottom: env(safe-area-inset-bottom);
+      --safe-left: env(safe-area-inset-left);
+      --safe-right: env(safe-area-inset-right);
     }
     @media (prefers-color-scheme: light) {
       :root {
@@ -35,25 +38,28 @@
       }
     }
     *, *::before, *::after { box-sizing: border-box; }
-    body {
+    html, body {
       margin: 0;
       padding: 0;
+      height: 100%;
+      height: 100dvh; /* Fallback for dynamic viewport on modern mobile */
+      overflow: hidden;
+    }
+    body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
-      height: 100vh;
-      overflow: hidden;
       display: flex;
       flex-direction: column;
       line-height: 1.6;
     }
-    /* Main scrollable area that includes header + chat */
     #main-scroll {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
+      padding-top: var(--safe-top);
     }
     #main-scroll::-webkit-scrollbar {
       width: 6px;
@@ -82,15 +88,13 @@
     header p {
       font-size: clamp(14px, 3.5vw, 16px);
       color: var(--text-secondary);
-      margin: 0;
-      max-width: 800px;
       margin: 0 auto;
+      max-width: 800px;
     }
-    /* Top-left social buttons */
     .top-left-buttons {
       position: absolute;
-      top: 20px;
-      left: 20px;
+      top: calc(20px + var(--safe-top));
+      left: max(20px, var(--safe-left));
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -133,7 +137,7 @@
       color: #fff;
     }
     #chat-container {
-      padding: 24px 20px;
+      padding: 24px 20px 40px; /* Extra bottom padding for input visibility */
       display: flex;
       flex-direction: column;
       gap: 20px;
@@ -211,17 +215,21 @@
       font-weight: 600;
     }
     .bubble a:hover { text-decoration: underline; }
-    .bubble.success { color: #86efac; }
     .bubble.error { color: #f87171; }
     #input-container {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
       background: var(--bg-secondary);
       backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      padding: 20px 20px calc(20px + var(--safe-bottom));
+      padding: 20px max(20px, var(--safe-left)) calc(20px + var(--safe-bottom)) max(20px, var(--safe-right));
       display: flex;
       gap: 16px;
       align-items: flex-end;
       box-shadow: 0 -4px 20px var(--shadow);
+      z-index: 10;
     }
     #user-input {
       flex: 1;
@@ -236,6 +244,7 @@
       max-height: 180px;
       overflow-y: auto;
       outline: none;
+      -webkit-appearance: none;
     }
     #user-input::placeholder {
       color: var(--text-secondary);
@@ -266,8 +275,8 @@
     @media (max-width: 768px) {
       header { padding: 20px 16px; }
       .top-left-buttons {
-        top: 16px;
-        left: 16px;
+        top: calc(16px + var(--safe-top));
+        left: max(16px, var(--safe-left));
         gap: 10px;
       }
       .top-left-buttons a {
@@ -283,18 +292,15 @@
         padding: 14px;
         margin-top: 20px;
       }
-      #chat-container { padding: 20px 16px; gap: 16px; }
-      #input-container { padding: 16px 16px calc(16px + var(--safe-bottom)); gap: 12px; }
+      #chat-container { padding: 20px 16px 80px; gap: 16px; }
+      #input-container { padding: 16px max(16px, var(--safe-left)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-right)); gap: 12px; }
       #user-input { padding: 14px 20px; font-size: 16px; min-height: 52px; }
       #send-btn { width: 52px; height: 52px; }
     }
     @media (max-width: 480px) {
-      #input-container { padding: 12px 12px calc(12px + var(--safe-bottom)); }
+      #input-container { padding: 12px max(12px, var(--safe-left)) calc(12px + var(--safe-bottom)) max(12px, var(--safe-right)); }
       #user-input { min-height: 48px; }
       #send-btn { width: 48px; height: 48px; }
-    }
-    @supports (padding: max(0px)) {
-      header { padding-top: max(20px, env(safe-area-inset-top)); }
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -303,10 +309,8 @@
   </style>
 </head>
 <body>
-  <!-- Scrollable container: header + chat -->
   <div id="main-scroll">
     <header>
-      <!-- Top-left YouTube & Discord buttons -->
       <div class="top-left-buttons">
         <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
           <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
@@ -329,36 +333,39 @@
       </div>
     </div>
   </div>
-  <!-- Fixed input bar at bottom -->
   <div id="input-container">
     <textarea id="user-input" rows="1" placeholder="Paste your link here..."></textarea>
     <button id="send-btn" disabled>
       <svg class="send-icon" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
     </button>
   </div>
-   <script>
-    // ===== CONFIG: point to your Cloudflare Worker (24/7) =====
+  <script>
+    // ===== CONFIG =====
     const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
     const API_REFRESH_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/refresh';
     const API_METHOD = 'GET';
-    // ==========================================================
+    // =================
     const chatContainer = document.getElementById('chat-container');
+    const mainScroll = document.getElementById('main-scroll');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const clearBtn = document.getElementById('clear-btn');
-    // Auto-resize + enable send
+
     userInput.addEventListener('input', () => {
       userInput.style.height = 'auto';
       userInput.style.height = userInput.scrollHeight + 'px';
       sendBtn.disabled = userInput.value.trim() === '';
     });
+
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
     renderChatHistory();
+
     function renderChatHistory() {
       chatContainer.innerHTML = '';
       chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false, false));
       scrollToBottom();
     }
+
     function addMessage(sender, text, isError = false, animate = true) {
       const msgDiv = document.createElement('div');
       msgDiv.classList.add('message', sender);
@@ -368,6 +375,7 @@
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
       if (isError) bubble.classList.add('error');
+
       const urlRegex = /(https?:\/\/[^\s]+)/g;
       if (urlRegex.test(text)) {
         const parts = text.split(urlRegex);
@@ -386,11 +394,13 @@
       } else {
         bubble.textContent = text;
       }
+
       msgDiv.appendChild(avatar);
       msgDiv.appendChild(bubble);
       chatContainer.appendChild(msgDiv);
       if (animate) scrollToBottom();
     }
+
     function addTypingIndicator() {
       const typingDiv = document.createElement('div');
       typingDiv.classList.add('message');
@@ -399,24 +409,27 @@
       avatar.classList.add('avatar');
       avatar.textContent = 'B';
       const indicator = document.createElement('div');
-      indicator.classList.add('bubble', 'typing-indicator');
+      indicator.classList.add('bubble');
       indicator.innerHTML = '<span></span><span></span><span></span>';
       typingDiv.appendChild(avatar);
       typingDiv.appendChild(indicator);
       chatContainer.appendChild(typingDiv);
       scrollToBottom();
     }
+
     function removeTypingIndicator() {
       const typing = document.getElementById('typing');
       if (typing) typing.remove();
     }
+
     function scrollToBottom() {
-      const mainScroll = document.getElementById('main-scroll');
       mainScroll.scrollTop = mainScroll.scrollHeight;
     }
+
     function saveChatHistory() {
       localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
     }
+
     function clearChat() {
       if (chatHistory.length === 0) {
         alert("Chat is already empty!");
@@ -428,33 +441,35 @@
         renderChatHistory();
       }
     }
-    async function bypassLink(link, useRefresh=false) {
+
+    async function bypassLink(link, useRefresh = false) {
       try {
         let url = (useRefresh ? API_REFRESH_ENDPOINT : API_ENDPOINT);
         url += (url.includes('?') ? '&' : '?') + 'url=' + encodeURIComponent(link.trim());
         const resp = await fetch(url, { method: API_METHOD, redirect: 'follow', headers: { 'Accept': 'application/json' } });
         if (!resp.ok) {
-          const txt = await resp.text().catch(()=>null);
+          const txt = await resp.text().catch(() => null);
           throw new Error(`HTTP ${resp.status}: ${resp.statusText}${txt ? '\n' + txt : ''}`);
         }
         const contentType = resp.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const data = await resp.json();
-          if (data.success && data.destination) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.destination}`, isError:false };
-          if (data.status === 'success' && data.result) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.result}`, isError:false };
-          if (data.bypassed || data.direct_url) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.bypassed || data.direct_url}`, isError:false };
-          return { text: `Bypass completed:\n${JSON.stringify(data, null, 2)}`, isError:false };
+          if (data.success && data.destination) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.destination}`, isError: false };
+          if (data.status === 'success' && data.result) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.result}`, isError: false };
+          if (data.bypassed || data.direct_url) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.bypassed || data.direct_url}`, isError: false };
+          return { text: `Bypass completed:\n${JSON.stringify(data, null, 2)}`, isError: false };
         } else {
           const text = await resp.text();
           const m = text.match(/https?:\/\/[^\s'"]+/);
-          if (m) return { text: `Bypassed successfully! 🎉\nDirect link: ${m[0]}`, isError:false };
-          return { text: text || 'Bypass completed (no response body)', isError:false };
+          if (m) return { text: `Bypassed successfully! 🎉\nDirect link: ${m[0]}`, isError: false };
+          return { text: text || 'Bypass completed (no response body)', isError: false };
         }
       } catch (err) {
         console.error('Bypass error:', err);
-        return { text: `Error: ${err.message}\nPossible causes: CORS/origin not allowed in Worker, API rate limit, or unsupported link.`, isError:true };
+        return { text: `Error: ${err.message}\nPossible causes: CORS/origin not allowed in Worker, API rate limit, or unsupported link.`, isError: true };
       }
     }
+
     async function handleSend() {
       const inputText = userInput.value.trim();
       if (!inputText) return;
@@ -463,7 +478,7 @@
         return;
       }
       addMessage('user', inputText);
-      chatHistory.push({ sender:'user', text:inputText });
+      chatHistory.push({ sender: 'user', text: inputText });
       saveChatHistory();
       userInput.value = '';
       userInput.style.height = 'auto';
@@ -472,9 +487,11 @@
       const { text, isError } = await bypassLink(inputText, false);
       removeTypingIndicator();
       addMessage('bot', text, isError);
-      chatHistory.push({ sender:'bot', text, isError });
+      chatHistory.push({ sender: 'bot', text, isError });
       saveChatHistory();
+      scrollToBottom();
     }
+
     sendBtn.addEventListener('click', handleSend);
     userInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -485,7 +502,7 @@
     clearBtn.addEventListener('click', clearChat);
     sendBtn.disabled = true;
 
-    // Focus on textarea when tapping it (improves mobile experience)
+    // Mobile focus improvements: scroll input into view when focused
     userInput.addEventListener('focus', () => {
       setTimeout(() => {
         userInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
