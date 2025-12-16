@@ -6,8 +6,11 @@
   <meta name="description" content="Script Hub Bypass - Ads are dead. Waiting is over.
 Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, and dozens more in seconds."/>
   <title>Script Hub Bypass</title>
+  <script src="https://quge5.com/88/tag.min.js" data-zone="182197" async data-cfasync="false"></script>
   <script src="https://quge5.com/88/tag.min.js" data-zone="156729" async data-cfasync="false"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="script/scripthub/executor/titel.png">
+
   <style>
     :root {
       --bg-primary: #0a0a0f;
@@ -468,6 +471,31 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
         columns: 1;
       }
     }
+
+    .site-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.site-logo img {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px var(--shadow);
+}
+
+@media (max-width: 768px) {
+  .site-logo img {
+    width: 60px;
+    height: 60px;
+  }
+}
+    .avatar img {
+  object-fit: cover;
+}
+
   </style>
 </head>
 <body>
@@ -488,6 +516,9 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
             <button id="supported-links-btn">Supported Links</button>
             <button id="about-us-btn">About Us</button>
           </div>
+        </div>
+        <div class="site-logo">
+           <img src="script/scripthub/executor/titel.png" alt="Script Hub Logo">
         </div>
         <h1>Script Hub Bypass</h1>
         <p>Professional & Fast Bypasser for Roblox Scripts, Linkvertise, Work.ink, Lootlinks and more</p>
@@ -554,8 +585,20 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
       msgDiv.className = `message ${sender}`;
 
       const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      avatar.textContent = sender === 'user' ? 'U' : 'B';
+avatar.className = 'avatar';
+
+if (sender === 'bot') {
+  const img = document.createElement('img');
+  img.src = 'script/scripthub/executor/titel.png';
+  img.alt = 'Bot Logo';
+  img.style.width = '100%';
+  img.style.height = '100%';
+  img.style.borderRadius = '50%';
+  avatar.appendChild(img);
+} else {
+  avatar.textContent = 'U';
+}
+
 
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
@@ -862,5 +905,6 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
   </script>
 </body>
 </html>
+
 
 
