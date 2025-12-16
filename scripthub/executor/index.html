@@ -3,22 +3,24 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-  <meta name="description" content="Script Hub Bypass - Professional ad-link bypasser for Roblox script hubs, Linkvertise, Work.ink, and more. Get direct links instantly."/>
+  <meta name="description" content="Script Hub Bypass - Professional ad-link bypasser for Roblox script hubs, Linkvertise, Work.ink, and more."/>
   <title>Script Hub Bypass</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0a0a0f;
       --bg-secondary: #111118;
-      --bg-card: rgba(20, 20, 30, 0.6);
+      --bg-card: rgba(20, 20, 30, 0.7);
       --text-primary: #ffffff;
       --text-secondary: #a0a0c0;
       --accent-primary: #6366f1;
       --accent-secondary: #8b5cf6;
       --border: #2a2a3a;
-      --shadow: rgba(0, 0, 0, 0.4);
-      --transition: all 0.3s ease;
-      --radius: 16px;
+      --shadow: rgba(0, 0, 0, 0.5);
+      --success: #86efac;
+      --error: #f87171;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      --radius: 18px;
       --safe-top: env(safe-area-inset-top);
       --safe-bottom: env(safe-area-inset-bottom);
       --safe-left: env(safe-area-inset-left);
@@ -28,21 +30,16 @@
       :root {
         --bg-primary: #f8f9fa;
         --bg-secondary: #ffffff;
-        --bg-card: rgba(255, 255, 255, 0.8);
+        --bg-card: rgba(255, 255, 255, 0.85);
         --text-primary: #1e1e2e;
         --text-secondary: #64748b;
-        --accent-primary: #6366f1;
-        --accent-secondary: #8b5cf6;
         --border: #e2e8f0;
-        --shadow: rgba(0, 0, 0, 0.1);
+        --shadow: rgba(0, 0, 0, 0.12);
       }
     }
-    *, *::before, *::after { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
-      margin: 0;
-      padding: 0;
       height: 100%;
-      height: 100dvh; /* Fallback for dynamic viewport on modern mobile */
       overflow: hidden;
     }
     body {
@@ -53,6 +50,12 @@
       flex-direction: column;
       line-height: 1.6;
     }
+    #app-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
     #main-scroll {
       flex: 1;
       overflow-y: auto;
@@ -60,175 +63,176 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       padding-top: var(--safe-top);
+      padding-bottom: 120px; /* Extra space on desktop to ensure last message visible above input */
     }
-    #main-scroll::-webkit-scrollbar {
-      width: 6px;
-    }
+    #main-scroll::-webkit-scrollbar { width: 8px; }
     #main-scroll::-webkit-scrollbar-thumb {
       background: var(--border);
-      border-radius: 3px;
+      border-radius: 4px;
     }
     header {
       background: var(--bg-secondary);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
-      padding: 24px 20px;
+      padding: 28px 24px;
       text-align: center;
-      box-shadow: 0 4px 20px var(--shadow);
+      box-shadow: 0 8px 32px var(--shadow);
       position: relative;
     }
     header h1 {
-      font-size: clamp(28px, 7vw, 36px);
-      margin: 0 0 8px;
+      font-size: clamp(32px, 8vw, 42px);
       font-weight: 800;
       background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
     }
     header p {
-      font-size: clamp(14px, 3.5vw, 16px);
+      font-size: clamp(15px, 4vw, 17px);
       color: var(--text-secondary);
-      margin: 0 auto;
       max-width: 800px;
+      margin: 0 auto;
     }
     .top-left-buttons {
       position: absolute;
-      top: calc(20px + var(--safe-top));
-      left: max(20px, var(--safe-left));
+      top: calc(24px + var(--safe-top));
+      left: max(24px, var(--safe-left));
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 14px;
       z-index: 20;
     }
     .top-left-buttons a {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-card);
+      border-radius: 14px;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
-      background: var(--bg-card);
-      border-radius: 12px;
-      box-shadow: 0 4px 12px var(--shadow);
+      box-shadow: 0 6px 16px var(--shadow);
       transition: var(--transition);
     }
     .top-left-buttons a:hover {
-      transform: translateY(-3px) scale(1.08);
-      box-shadow: 0 8px 20px var(--shadow);
+      transform: translateY(-4px) scale(1.1);
+      box-shadow: 0 12px 28px var(--shadow);
     }
-    .top-left-buttons img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
-    }
+    .top-left-buttons img { width: 30px; height: 30px; object-fit: contain; }
     #clear-btn {
       background: transparent;
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 10px 24px;
+      padding: 12px 28px;
       border-radius: 999px;
       cursor: pointer;
       font-weight: 600;
+      font-size: 15px;
       transition: var(--transition);
-      margin-top: 20px;
+      margin-top: 24px;
     }
     #clear-btn:hover {
       background: var(--accent-primary);
       border-color: var(--accent-primary);
       color: #fff;
+      transform: translateY(-2px);
     }
     #chat-container {
-      padding: 24px 20px 40px; /* Extra bottom padding for input visibility */
+      padding: 28px 24px 20px; /* Reduced bottom padding since main-scroll has extra */
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 24px;
     }
     #welcome-message {
       text-align: center;
-      padding: clamp(40px, 12vh, 80px) 20px 40px;
       color: var(--text-secondary);
       max-width: 900px;
       margin: 0 auto;
+      padding: clamp(50px, 15vh, 100px) 24px 50px;
     }
     #welcome-message h2 {
-      font-size: clamp(24px, 6vw, 32px);
-      margin: 0 0 24px;
+      font-size: clamp(28px, 7vw, 38px);
+      font-weight: 700;
       background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      font-weight: 700;
+      margin-bottom: 28px;
     }
     #welcome-message p {
-      font-size: clamp(16px, 4vw, 18px);
-      margin: 16px 0;
+      font-size: clamp(17px, 4.5vw, 19px);
+      margin: 18px 0;
     }
     #supported {
-      margin: 40px 0;
-      font-size: clamp(15px, 4vw, 17px);
+      margin: 48px 0;
+      font-size: clamp(16px, 4.5vw, 18px);
       font-weight: 600;
       color: var(--accent-primary);
     }
     .message {
-      max-width: 90%;
+      max-width: 85%;
       align-self: flex-start;
       display: flex;
-      gap: 14px;
-      animation: fadeIn 0.4s ease;
+      gap: 16px;
+      animation: fadeIn 0.5s ease;
     }
-    .message.user { align-self: flex-end; flex-direction: row-reverse; }
+    .message.user {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+    }
     .avatar {
-      width: clamp(40px, 9vw, 48px);
-      height: clamp(40px, 9vw, 48px);
+      width: clamp(42px, 10vw, 52px);
+      height: clamp(42px, 10vw, 52px);
       border-radius: 50%;
       background: var(--accent-primary);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: clamp(16px, 4vw, 20px);
+      font-weight: 800;
+      font-size: clamp(18px, 5vw, 22px);
       color: #fff;
       flex-shrink: 0;
-      box-shadow: 0 4px 12px var(--shadow);
+      box-shadow: 0 6px 16px var(--shadow);
     }
-    .message.user .avatar {
-      background: var(--accent-secondary);
-      color: #fff;
-    }
+    .message.user .avatar { background: var(--accent-secondary); }
     .bubble {
       background: var(--bg-card);
-      backdrop-filter: blur(8px);
-      padding: clamp(16px, 4vw, 24px) clamp(20px, 5vw, 32px);
+      backdrop-filter: blur(12px);
+      padding: clamp(18px, 5vw, 28px) clamp(22px, 6vw, 36px);
       border-radius: var(--radius);
-      border-top-left-radius: 4px;
-      font-size: clamp(15px, 4vw, 16px);
-      box-shadow: 0 6px 20px var(--shadow);
+      border-top-left-radius: 6px;
+      font-size: clamp(16px, 4.5vw, 17px);
+      box-shadow: 0 8px 28px var(--shadow);
       word-wrap: break-word;
       white-space: pre-wrap;
       border: 1px solid var(--border);
     }
     .message.user .bubble {
-      border-top-right-radius: 4px;
+      border-top-right-radius: 6px;
       border-top-left-radius: var(--radius);
     }
     .bubble a {
       color: var(--accent-primary);
-      text-decoration: none;
+      text-decoration: underline;
       font-weight: 600;
+      word-break: break-all;
     }
-    .bubble a:hover { text-decoration: underline; }
-    .bubble.error { color: #f87171; }
+    .bubble.error {
+      color: var(--error);
+      background: rgba(248, 113, 113, 0.18);
+      border-color: var(--error);
+    }
     #input-container {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: var(--bg-secondary);
-      backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
       border-top: 1px solid var(--border);
-      padding: 20px max(20px, var(--safe-left)) calc(20px + var(--safe-bottom)) max(20px, var(--safe-right));
+      padding: 24px max(24px, var(--safe-left)) calc(24px + var(--safe-bottom)) max(24px, var(--safe-right));
       display: flex;
-      gap: 16px;
+      gap: 18px;
       align-items: flex-end;
-      box-shadow: 0 -4px 20px var(--shadow);
+      box-shadow: 0 -8px 32px var(--shadow);
       z-index: 10;
     }
     #user-input {
@@ -236,15 +240,16 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 16px 24px;
-      border-radius: 999px;
-      font-size: 16px;
+      padding: 18px 28px;
+      border-radius: 32px;
+      font-size: 17px;
       resize: none;
-      min-height: 56px;
-      max-height: 180px;
+      min-height: 60px;
+      max-height: 200px;
       overflow-y: auto;
       outline: none;
       -webkit-appearance: none;
+      transition: var(--transition);
     }
     #user-input::placeholder {
       color: var(--text-secondary);
@@ -252,84 +257,94 @@
     }
     #user-input:focus {
       border-color: var(--accent-primary);
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+      box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.25);
+      transform: scale(1.02);
     }
     #send-btn {
       background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
-      color: #fff;
       border: none;
-      width: 56px;
-      height: 56px;
+      width: 60px;
+      height: 60px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 16px var(--shadow);
+      box-shadow: 0 6px 20px var(--shadow);
       flex-shrink: 0;
       transition: var(--transition);
     }
-    #send-btn:hover { transform: scale(1.08); }
-    #send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    .send-icon { width: 24px; height: 24px; fill: #fff; }
+    #send-btn:hover { transform: scale(1.12) rotate(8deg); }
+    #send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .send-icon { width: 26px; height: 26px; fill: #fff; }
     @media (max-width: 768px) {
-      header { padding: 20px 16px; }
+      header { padding: 24px 20px; }
       .top-left-buttons {
-        top: calc(16px + var(--safe-top));
-        left: max(16px, var(--safe-left));
-        gap: 10px;
+        top: calc(20px + var(--safe-top));
+        left: max(20px, var(--safe-left));
+        gap: 12px;
       }
-      .top-left-buttons a {
-        width: 40px;
-        height: 40px;
-      }
-      .top-left-buttons img {
-        width: 24px;
-        height: 24px;
-      }
-      #clear-btn {
-        width: 100%;
-        padding: 14px;
-        margin-top: 20px;
-      }
-      #chat-container { padding: 20px 16px 80px; gap: 16px; }
-      #input-container { padding: 16px max(16px, var(--safe-left)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-right)); gap: 12px; }
-      #user-input { padding: 14px 20px; font-size: 16px; min-height: 52px; }
-      #send-btn { width: 52px; height: 52px; }
+      .top-left-buttons a { width: 44px; height: 44px; }
+      .top-left-buttons img { width: 26px; height: 26px; }
+      #clear-btn { width: 100%; padding: 16px; margin-top: 24px; }
+      #chat-container { padding: 24px 20px 20px; gap: 20px; }
+      #main-scroll { padding-bottom: 100px; }
+      #input-container { padding: 20px max(20px, var(--safe-left)) calc(20px + var(--safe-bottom)) max(20px, var(--safe-right)); gap: 14px; }
+      #user-input { padding: 16px 24px; min-height: 56px; font-size: 16px; }
+      #send-btn { width: 56px; height: 56px; }
     }
     @media (max-width: 480px) {
-      #input-container { padding: 12px max(12px, var(--safe-left)) calc(12px + var(--safe-bottom)) max(12px, var(--safe-right)); }
-      #user-input { min-height: 48px; }
-      #send-btn { width: 48px; height: 48px; }
+      #input-container { padding: 16px max(16px, var(--safe-left)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-right)); }
+      #user-input { min-height: 52px; }
+      #send-btn { width: 52px; height: 52px; }
     }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(16px); }
+      from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
+    }
+    /* Typing indicator dots */
+    .bubble span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      margin: 0 4px;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    .bubble span:nth-child(1) { animation-delay: 0s; }
+    .bubble span:nth-child(2) { animation-delay: 0.2s; }
+    .bubble span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
     }
   </style>
 </head>
 <body>
-  <div id="main-scroll">
-    <header>
-      <div class="top-left-buttons">
-        <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
-        </a>
-        <a href="https://discord.gg/7q2TvZ9GYX" target="_blank" rel="noopener noreferrer" aria-label="Join Discord">
-          <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
-        </a>
-      </div>
-      <h1>Script Hub Bypass</h1>
-      <p>Professional & Fast Bypasser for Roblox Scripts, Linkvertise, Work.ink, Lootlinks and more</p>
-      <button id="clear-btn">Clear Chat</button>
-    </header>
-    <div id="chat-container">
-      <div id="welcome-message">
-        <h2>Instant Direct Links – No Ads, No Waiting</h2>
-        <p>Paste any protected link below and get the direct destination instantly.</p>
-        <p>Specialized for Roblox script hubs with key systems, ad-links, and shorteners.</p>
-        <div id="supported">Supported Services: Linkvertise • Work.ink • Lootlinks • Rekonise • Boost.ink • Key Systems • and many more</div>
-        <p>Secure, reliable, and completely free. Start bypassing now! ⚡</p>
+  <div id="app-container">
+    <div id="main-scroll">
+      <header>
+        <div class="top-left-buttons">
+          <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
+          </a>
+          <a href="https://discord.gg/7q2TvZ9GYX" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+            <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
+          </a>
+        </div>
+        <h1>Script Hub Bypass</h1>
+        <p>Professional & Fast Bypasser for Roblox Scripts, Linkvertise, Work.ink, Lootlinks and more</p>
+        <button id="clear-btn">Clear Chat</button>
+      </header>
+      <div id="chat-container">
+        <div id="welcome-message">
+          <h2>Instant Direct Links – No Ads, No Waiting</h2>
+          <p>Paste any protected link below and get the direct destination instantly.</p>
+          <p>Specialized for Roblox script hubs with key systems, ad-links, and shorteners.</p>
+          <div id="supported">Supported Services: Linkvertise • Work.ink • Lootlinks • Rekonise • Boost.ink • Key Systems • and many more</div>
+          <p>Secure, reliable, and completely free. Start bypassing now! ⚡</p>
+        </div>
       </div>
     </div>
   </div>
@@ -339,41 +354,48 @@
       <svg class="send-icon" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
     </button>
   </div>
+
   <script>
     // ===== CONFIG =====
     const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
-    const API_REFRESH_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/refresh';
     const API_METHOD = 'GET';
-    // =================
+
     const chatContainer = document.getElementById('chat-container');
     const mainScroll = document.getElementById('main-scroll');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const clearBtn = document.getElementById('clear-btn');
 
+    // Auto-resize textarea
     userInput.addEventListener('input', () => {
       userInput.style.height = 'auto';
-      userInput.style.height = userInput.scrollHeight + 'px';
+      userInput.style.height = `${userInput.scrollHeight}px`;
       sendBtn.disabled = userInput.value.trim() === '';
     });
 
-    let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
+    let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
     renderChatHistory();
 
     function renderChatHistory() {
       chatContainer.innerHTML = '';
+      const welcome = document.getElementById('welcome-message');
+      if (chatHistory.length === 0 && welcome) {
+        chatContainer.appendChild(welcome.cloneNode(true));
+      }
       chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false, false));
       scrollToBottom();
     }
 
     function addMessage(sender, text, isError = false, animate = true) {
       const msgDiv = document.createElement('div');
-      msgDiv.classList.add('message', sender);
+      msgDiv.className = `message ${sender}`;
+
       const avatar = document.createElement('div');
-      avatar.classList.add('avatar');
+      avatar.className = 'avatar';
       avatar.textContent = sender === 'user' ? 'U' : 'B';
+
       const bubble = document.createElement('div');
-      bubble.classList.add('bubble');
+      bubble.className = 'bubble';
       if (isError) bubble.classList.add('error');
 
       const urlRegex = /(https?:\/\/[^\s]+)/g;
@@ -398,21 +420,25 @@
       msgDiv.appendChild(avatar);
       msgDiv.appendChild(bubble);
       chatContainer.appendChild(msgDiv);
+
       if (animate) scrollToBottom();
     }
 
     function addTypingIndicator() {
       const typingDiv = document.createElement('div');
-      typingDiv.classList.add('message');
+      typingDiv.className = 'message';
       typingDiv.id = 'typing';
+
       const avatar = document.createElement('div');
-      avatar.classList.add('avatar');
+      avatar.className = 'avatar';
       avatar.textContent = 'B';
-      const indicator = document.createElement('div');
-      indicator.classList.add('bubble');
-      indicator.innerHTML = '<span></span><span></span><span></span>';
+
+      const bubble = document.createElement('div');
+      bubble.className = 'bubble';
+      bubble.innerHTML = '<span></span><span></span><span></span>';
+
       typingDiv.appendChild(avatar);
-      typingDiv.appendChild(indicator);
+      typingDiv.appendChild(bubble);
       chatContainer.appendChild(typingDiv);
       scrollToBottom();
     }
@@ -432,82 +458,97 @@
 
     function clearChat() {
       if (chatHistory.length === 0) {
-        alert("Chat is already empty!");
+        alert('Chat is already empty!');
         return;
       }
-      if (confirm("Clear all chat history? This cannot be undone.")) {
+      if (confirm('Clear all chat history? This cannot be undone.')) {
         chatHistory = [];
         localStorage.removeItem('chatHistory');
         renderChatHistory();
       }
     }
 
-    async function bypassLink(link, useRefresh = false) {
+    async function bypassLink(link) {
       try {
-        let url = (useRefresh ? API_REFRESH_ENDPOINT : API_ENDPOINT);
-        url += (url.includes('?') ? '&' : '?') + 'url=' + encodeURIComponent(link.trim());
-        const resp = await fetch(url, { method: API_METHOD, redirect: 'follow', headers: { 'Accept': 'application/json' } });
+        let url = API_ENDPOINT + '?url=' + encodeURIComponent(link.trim());
+        const resp = await fetch(url, {
+          method: API_METHOD,
+          redirect: 'follow',
+          headers: { 'Accept': 'application/json' }
+        });
+
         if (!resp.ok) {
-          const txt = await resp.text().catch(() => null);
-          throw new Error(`HTTP ${resp.status}: ${resp.statusText}${txt ? '\n' + txt : ''}`);
+          const txt = await resp.text();
+          throw new Error(`HTTP ${resp.status}: ${txt || resp.statusText}`);
         }
+
         const contentType = resp.headers.get('content-type') || '';
+        let data;
         if (contentType.includes('application/json')) {
-          const data = await resp.json();
-          if (data.success && data.destination) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.destination}`, isError: false };
-          if (data.status === 'success' && data.result) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.result}`, isError: false };
-          if (data.bypassed || data.direct_url) return { text: `Bypassed successfully! 🎉\nDirect link: ${data.bypassed || data.direct_url}`, isError: false };
-          return { text: `Bypass completed:\n${JSON.stringify(data, null, 2)}`, isError: false };
+          data = await resp.json();
         } else {
-          const text = await resp.text();
-          const m = text.match(/https?:\/\/[^\s'"]+/);
-          if (m) return { text: `Bypassed successfully! 🎉\nDirect link: ${m[0]}`, isError: false };
-          return { text: text || 'Bypass completed (no response body)', isError: false };
+          data = { text: await resp.text() };
         }
+
+        if (data.success && data.destination) return `Bypassed successfully! 🎉\nDirect link: ${data.destination}`;
+        if (data.status === 'success' && data.result) return `Bypassed successfully! 🎉\nDirect link: ${data.result}`;
+        if (data.bypassed || data.direct_url) return `Bypassed successfully! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
+
+        const linkMatch = (typeof data.text === 'string' ? data.text : JSON.stringify(data)).match(/(https?:\/\/[^\s'"]+)/);
+        if (linkMatch) return `Bypassed successfully! 🎉\nDirect link: ${linkMatch[0]}`;
+
+        return `Bypass completed:\n${JSON.stringify(data, null, 2)}`;
       } catch (err) {
         console.error('Bypass error:', err);
-        return { text: `Error: ${err.message}\nPossible causes: CORS/origin not allowed in Worker, API rate limit, or unsupported link.`, isError: true };
+
+        if (err.message.includes('400') || err.message.toLowerCase().includes('unsupported') || err.message.toLowerCase().includes('invalid')) {
+          return "The link is not supported. Please enter a valid link.";
+        }
+
+        return `Error: ${err.message}\nTry again later or check your connection.`;
       }
     }
 
     async function handleSend() {
       const inputText = userInput.value.trim();
       if (!inputText) return;
-      if (!inputText.startsWith('http://') && !inputText.startsWith('https://')) {
+
+      if (!/^https?:\/\//i.test(inputText)) {
         addMessage('bot', 'Please enter a valid URL starting with http:// or https://', true);
         return;
       }
+
       addMessage('user', inputText);
       chatHistory.push({ sender: 'user', text: inputText });
       saveChatHistory();
+
       userInput.value = '';
       userInput.style.height = 'auto';
       sendBtn.disabled = true;
+
       addTypingIndicator();
-      const { text, isError } = await bypassLink(inputText, false);
+
+      const responseText = await bypassLink(inputText);
+      const isError = responseText.includes('not supported') || responseText.startsWith('Error:');
+
       removeTypingIndicator();
-      addMessage('bot', text, isError);
-      chatHistory.push({ sender: 'bot', text, isError });
+      addMessage('bot', responseText, isError);
+      chatHistory.push({ sender: 'bot', text: responseText, isError });
       saveChatHistory();
+
       scrollToBottom();
     }
 
     sendBtn.addEventListener('click', handleSend);
-    userInput.addEventListener('keydown', (e) => {
+    userInput.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         handleSend();
       }
     });
     clearBtn.addEventListener('click', clearChat);
-    sendBtn.disabled = true;
 
-    // Mobile focus improvements: scroll input into view when focused
-    userInput.addEventListener('focus', () => {
-      setTimeout(() => {
-        userInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }, 300);
-    });
+    sendBtn.disabled = true;
   </script>
 </body>
 </html>
