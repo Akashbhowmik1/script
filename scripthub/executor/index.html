@@ -63,7 +63,7 @@
       scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
       padding-top: var(--safe-top);
-      padding-bottom: 120px; /* Extra space on desktop to ensure last message visible above input */
+      padding-bottom: 140px; /* Ensures last message is visible above fixed input on PC */
     }
     #main-scroll::-webkit-scrollbar { width: 8px; }
     #main-scroll::-webkit-scrollbar-thumb {
@@ -78,6 +78,7 @@
       text-align: center;
       box-shadow: 0 8px 32px var(--shadow);
       position: relative;
+      flex-shrink: 0;
     }
     header h1 {
       font-size: clamp(32px, 8vw, 42px);
@@ -137,10 +138,11 @@
       transform: translateY(-2px);
     }
     #chat-container {
-      padding: 28px 24px 20px; /* Reduced bottom padding since main-scroll has extra */
+      padding: 28px 24px 20px;
       display: flex;
       flex-direction: column;
       gap: 24px;
+      min-height: 0; /* Important for flex children */
     }
     #welcome-message {
       text-align: center;
@@ -258,7 +260,6 @@
     #user-input:focus {
       border-color: var(--accent-primary);
       box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.25);
-      transform: scale(1.02);
     }
     #send-btn {
       background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
@@ -288,7 +289,7 @@
       .top-left-buttons img { width: 26px; height: 26px; }
       #clear-btn { width: 100%; padding: 16px; margin-top: 24px; }
       #chat-container { padding: 24px 20px 20px; gap: 20px; }
-      #main-scroll { padding-bottom: 100px; }
+      #main-scroll { padding-bottom: 110px; }
       #input-container { padding: 20px max(20px, var(--safe-left)) calc(20px + var(--safe-bottom)) max(20px, var(--safe-right)); gap: 14px; }
       #user-input { padding: 16px 24px; min-height: 56px; font-size: 16px; }
       #send-btn { width: 56px; height: 56px; }
@@ -302,7 +303,6 @@
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-    /* Typing indicator dots */
     .bubble span {
       display: inline-block;
       width: 8px;
@@ -356,7 +356,6 @@
   </div>
 
   <script>
-    // ===== CONFIG =====
     const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
     const API_METHOD = 'GET';
 
@@ -374,7 +373,6 @@
     });
 
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
-    renderChatHistory();
 
     function renderChatHistory() {
       chatContainer.innerHTML = '';
@@ -421,7 +419,12 @@
       msgDiv.appendChild(bubble);
       chatContainer.appendChild(msgDiv);
 
-      if (animate) scrollToBottom();
+      if (animate) {
+        // Small delay to ensure DOM update before scrolling
+        requestAnimationFrame(() => {
+          scrollToBottom();
+        });
+      }
     }
 
     function addTypingIndicator() {
@@ -470,7 +473,7 @@
 
     async function bypassLink(link) {
       try {
-        let url = API_ENDPOINT + '?url=' + encodeURIComponent(link.trim());
+        const url = API_ENDPOINT + '?url=' + encodeURIComponent(link.trim());
         const resp = await fetch(url, {
           method: API_METHOD,
           redirect: 'follow',
@@ -500,11 +503,9 @@
         return `Bypass completed:\n${JSON.stringify(data, null, 2)}`;
       } catch (err) {
         console.error('Bypass error:', err);
-
         if (err.message.includes('400') || err.message.toLowerCase().includes('unsupported') || err.message.toLowerCase().includes('invalid')) {
           return "The link is not supported. Please enter a valid link.";
         }
-
         return `Error: ${err.message}\nTry again later or check your connection.`;
       }
     }
@@ -535,10 +536,9 @@
       addMessage('bot', responseText, isError);
       chatHistory.push({ sender: 'bot', text: responseText, isError });
       saveChatHistory();
-
-      scrollToBottom();
     }
 
+    // Event Listeners
     sendBtn.addEventListener('click', handleSend);
     userInput.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -548,7 +548,9 @@
     });
     clearBtn.addEventListener('click', clearChat);
 
+    // Initial state
     sendBtn.disabled = true;
+    renderChatHistory();
   </script>
 </body>
 </html>
