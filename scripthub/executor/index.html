@@ -19,6 +19,7 @@
       --shadow: rgba(0, 0, 0, 0.4);
       --transition: all 0.3s ease;
       --radius: 16px;
+      --safe-bottom: env(safe-area-inset-bottom);
     }
     @media (prefers-color-scheme: light) {
       :root {
@@ -46,7 +47,6 @@
       flex-direction: column;
       line-height: 1.6;
     }
-
     /* Main scrollable area that includes header + chat */
     #main-scroll {
       flex: 1;
@@ -62,7 +62,6 @@
       background: var(--border);
       border-radius: 3px;
     }
-
     header {
       background: var(--bg-secondary);
       backdrop-filter: blur(12px);
@@ -87,7 +86,6 @@
       max-width: 800px;
       margin: 0 auto;
     }
-
     /* Top-left social buttons */
     .top-left-buttons {
       position: absolute;
@@ -118,7 +116,6 @@
       height: 28px;
       object-fit: contain;
     }
-
     #clear-btn {
       background: transparent;
       border: 1px solid var(--border);
@@ -135,14 +132,12 @@
       border-color: var(--accent-primary);
       color: #fff;
     }
-
     #chat-container {
       padding: 24px 20px;
       display: flex;
       flex-direction: column;
       gap: 20px;
     }
-
     #welcome-message {
       text-align: center;
       padding: clamp(40px, 12vh, 80px) 20px 40px;
@@ -168,7 +163,6 @@
       font-weight: 600;
       color: var(--accent-primary);
     }
-
     .message {
       max-width: 90%;
       align-self: flex-start;
@@ -219,12 +213,11 @@
     .bubble a:hover { text-decoration: underline; }
     .bubble.success { color: #86efac; }
     .bubble.error { color: #f87171; }
-
     #input-container {
       background: var(--bg-secondary);
       backdrop-filter: blur(12px);
       border-top: 1px solid var(--border);
-      padding: 20px;
+      padding: 20px 20px calc(20px + var(--safe-bottom));
       display: flex;
       gap: 16px;
       align-items: flex-end;
@@ -242,9 +235,13 @@
       min-height: 56px;
       max-height: 180px;
       overflow-y: auto;
+      outline: none;
+    }
+    #user-input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.8;
     }
     #user-input:focus {
-      outline: none;
       border-color: var(--accent-primary);
       box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
     }
@@ -266,7 +263,6 @@
     #send-btn:hover { transform: scale(1.08); }
     #send-btn:disabled { opacity: 0.6; cursor: not-allowed; }
     .send-icon { width: 24px; height: 24px; fill: #fff; }
-
     @media (max-width: 768px) {
       header { padding: 20px 16px; }
       .top-left-buttons {
@@ -288,18 +284,17 @@
         margin-top: 20px;
       }
       #chat-container { padding: 20px 16px; gap: 16px; }
-      #input-container { padding: 16px; gap: 12px; }
+      #input-container { padding: 16px 16px calc(16px + var(--safe-bottom)); gap: 12px; }
       #user-input { padding: 14px 20px; font-size: 16px; min-height: 52px; }
       #send-btn { width: 52px; height: 52px; }
     }
     @media (max-width: 480px) {
-      #input-container { padding: 12px; }
+      #input-container { padding: 12px 12px calc(12px + var(--safe-bottom)); }
       #user-input { min-height: 48px; }
       #send-btn { width: 48px; height: 48px; }
     }
     @supports (padding: max(0px)) {
       header { padding-top: max(20px, env(safe-area-inset-top)); }
-      #input-container { padding-bottom: max(20px, env(safe-area-inset-bottom)); }
     }
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(16px); }
@@ -311,7 +306,7 @@
   <!-- Scrollable container: header + chat -->
   <div id="main-scroll">
     <header>
-      <!-- Top-left YouTube & Discord buttons (3 lines: YouTube, Discord) -->
+      <!-- Top-left YouTube & Discord buttons -->
       <div class="top-left-buttons">
         <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
           <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
@@ -320,12 +315,10 @@
           <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
         </a>
       </div>
-
       <h1>Script Hub Bypass</h1>
       <p>Professional & Fast Bypasser for Roblox Scripts, Linkvertise, Work.ink, Lootlinks and more</p>
       <button id="clear-btn">Clear Chat</button>
     </header>
-
     <div id="chat-container">
       <div id="welcome-message">
         <h2>Instant Direct Links – No Ads, No Waiting</h2>
@@ -336,7 +329,6 @@
       </div>
     </div>
   </div>
-
   <!-- Fixed input bar at bottom -->
   <div id="input-container">
     <textarea id="user-input" rows="1" placeholder="Paste your link here..."></textarea>
@@ -344,47 +336,38 @@
       <svg class="send-icon" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
     </button>
   </div>
-
    <script>
     // ===== CONFIG: point to your Cloudflare Worker (24/7) =====
     const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
     const API_REFRESH_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/refresh';
     const API_METHOD = 'GET';
     // ==========================================================
-
     const chatContainer = document.getElementById('chat-container');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const clearBtn = document.getElementById('clear-btn');
-
     // Auto-resize + enable send
     userInput.addEventListener('input', () => {
       userInput.style.height = 'auto';
       userInput.style.height = userInput.scrollHeight + 'px';
       sendBtn.disabled = userInput.value.trim() === '';
     });
-
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory')) || [];
     renderChatHistory();
-
     function renderChatHistory() {
       chatContainer.innerHTML = '';
       chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false, false));
       scrollToBottom();
     }
-
     function addMessage(sender, text, isError = false, animate = true) {
       const msgDiv = document.createElement('div');
       msgDiv.classList.add('message', sender);
-
       const avatar = document.createElement('div');
       avatar.classList.add('avatar');
       avatar.textContent = sender === 'user' ? 'U' : 'B';
-
       const bubble = document.createElement('div');
       bubble.classList.add('bubble');
       if (isError) bubble.classList.add('error');
-
       const urlRegex = /(https?:\/\/[^\s]+)/g;
       if (urlRegex.test(text)) {
         const parts = text.split(urlRegex);
@@ -403,46 +386,37 @@
       } else {
         bubble.textContent = text;
       }
-
       msgDiv.appendChild(avatar);
       msgDiv.appendChild(bubble);
       chatContainer.appendChild(msgDiv);
-
       if (animate) scrollToBottom();
     }
-
     function addTypingIndicator() {
       const typingDiv = document.createElement('div');
       typingDiv.classList.add('message');
       typingDiv.id = 'typing';
-
       const avatar = document.createElement('div');
       avatar.classList.add('avatar');
       avatar.textContent = 'B';
-
       const indicator = document.createElement('div');
       indicator.classList.add('bubble', 'typing-indicator');
       indicator.innerHTML = '<span></span><span></span><span></span>';
-
       typingDiv.appendChild(avatar);
       typingDiv.appendChild(indicator);
       chatContainer.appendChild(typingDiv);
       scrollToBottom();
     }
-
     function removeTypingIndicator() {
       const typing = document.getElementById('typing');
       if (typing) typing.remove();
     }
-
     function scrollToBottom() {
-      chatContainer.scrollTop = chatContainer.scrollHeight;
+      const mainScroll = document.getElementById('main-scroll');
+      mainScroll.scrollTop = mainScroll.scrollHeight;
     }
-
     function saveChatHistory() {
       localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
     }
-
     function clearChat() {
       if (chatHistory.length === 0) {
         alert("Chat is already empty!");
@@ -454,19 +428,15 @@
         renderChatHistory();
       }
     }
-
     async function bypassLink(link, useRefresh=false) {
       try {
         let url = (useRefresh ? API_REFRESH_ENDPOINT : API_ENDPOINT);
         url += (url.includes('?') ? '&' : '?') + 'url=' + encodeURIComponent(link.trim());
-
         const resp = await fetch(url, { method: API_METHOD, redirect: 'follow', headers: { 'Accept': 'application/json' } });
-
         if (!resp.ok) {
           const txt = await resp.text().catch(()=>null);
           throw new Error(`HTTP ${resp.status}: ${resp.statusText}${txt ? '\n' + txt : ''}`);
         }
-
         const contentType = resp.headers.get('content-type') || '';
         if (contentType.includes('application/json')) {
           const data = await resp.json();
@@ -485,33 +455,26 @@
         return { text: `Error: ${err.message}\nPossible causes: CORS/origin not allowed in Worker, API rate limit, or unsupported link.`, isError:true };
       }
     }
-
     async function handleSend() {
       const inputText = userInput.value.trim();
       if (!inputText) return;
-
       if (!inputText.startsWith('http://') && !inputText.startsWith('https://')) {
         addMessage('bot', 'Please enter a valid URL starting with http:// or https://', true);
         return;
       }
-
       addMessage('user', inputText);
       chatHistory.push({ sender:'user', text:inputText });
       saveChatHistory();
-
       userInput.value = '';
       userInput.style.height = 'auto';
       sendBtn.disabled = true;
-
       addTypingIndicator();
       const { text, isError } = await bypassLink(inputText, false);
       removeTypingIndicator();
-
       addMessage('bot', text, isError);
       chatHistory.push({ sender:'bot', text, isError });
       saveChatHistory();
     }
-
     sendBtn.addEventListener('click', handleSend);
     userInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
@@ -520,8 +483,14 @@
       }
     });
     clearBtn.addEventListener('click', clearChat);
-
     sendBtn.disabled = true;
+
+    // Focus on textarea when tapping it (improves mobile experience)
+    userInput.addEventListener('focus', () => {
+      setTimeout(() => {
+        userInput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 300);
+    });
   </script>
 </body>
 </html>
