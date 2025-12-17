@@ -2,397 +2,420 @@
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=0.85, viewport-fit=cover"/>
-  <meta name="description" content="Script Hub Bypass - Ads are dead. Waiting is over.
-Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, and dozens more in seconds."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <meta name="description" content="Script Hub Bypass - Instant link bypass tool. No ads, no waiting."/>
   <title>Script Hub Bypass</title>
   <script src="https://quge5.com/88/tag.min.js" data-zone="182197" async data-cfasync="false"></script>
   <script src="https://quge5.com/88/tag.min.js" data-zone="156729" async data-cfasync="false"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://scripthub.fun/scripthub/executor/titel.png">
 
   <style>
     :root {
-      --bg-primary: #0a0a0f;
-      --bg-secondary: #111118;
-      --bg-card: rgba(20, 20, 30, 0.7);
+      --bg-primary: #05050f;
+      --bg-secondary: #0b0b1a;
+      --bg-card: rgba(20, 25, 55, 0.85);
+      --bg-input: rgba(30, 35, 75, 0.75);
       --text-primary: #ffffff;
-      --text-secondary: #a0a0c0;
+      --text-secondary: #c8c8e8;
       --accent-primary: #6366f1;
       --accent-secondary: #8b5cf6;
-      --border: #2a2a3a;
-      --shadow: rgba(0, 0, 0, 0.5);
+      --accent-gradient: linear-gradient(135deg, #6366f1, #8b5cf6);
+      --border: rgba(120, 120, 220, 0.25);
+      --shadow-sm: 0 4px 16px rgba(0, 0, 0, 0.4);
+      --shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.6);
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      --radius: 18px;
-      --safe-top: env(safe-area-inset-top);
-      --safe-bottom: env(safe-area-inset-bottom);
-      --safe-left: env(safe-area-inset-left);
-      --safe-right: env(safe-area-inset-right);
+      --radius: 16px;
+      --radius-sm: 12px;
     }
-    @media (prefers-color-scheme: light) {
-      :root {
-        --bg-primary: #f8f9fa;
-        --bg-secondary: #ffffff;
-        --bg-card: rgba(255, 255, 255, 0.85);
-        --text-primary: #1e1e2e;
-        --text-secondary: #64748b;
-        --border: #e2e8f0;
-        --shadow: rgba(0, 0, 0, 0.12);
-      }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     html, body {
       height: 100%;
-      overflow: hidden;
-    }
-    body {
       font-family: 'Inter', system-ui, -apple-system, sans-serif;
       background: var(--bg-primary);
+      background-image: 
+        radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 50%);
       color: var(--text-primary);
-      display: flex;
-      flex-direction: column;
-      line-height: 1.6;
-    }
-    #app-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
       overflow: hidden;
     }
+
+    #app-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
     #main-scroll {
       flex: 1;
       overflow-y: auto;
       overflow-x: hidden;
       scroll-behavior: smooth;
+      padding-bottom: 160px;
       -webkit-overflow-scrolling: touch;
-      padding-top: var(--safe-top);
-      padding-bottom: 140px;
     }
-    #main-scroll::-webkit-scrollbar { width: 8px; }
-    #main-scroll::-webkit-scrollbar-thumb {
-      background: var(--border);
-      border-radius: 4px;
+
+    #main-scroll::-webkit-scrollbar {
+      width: 0;
     }
+
     header {
       background: var(--bg-secondary);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 28px 24px;
+      padding: 28px 20px;
       text-align: center;
-      box-shadow: 0 8px 32px var(--shadow);
       position: relative;
-      flex-shrink: 0;
+      box-shadow: var(--shadow-md);
     }
+
+    .site-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 14px;
+    }
+    .site-logo img {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      border-radius: 18px;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+    }
+
     header h1 {
-      font-size: clamp(32px, 8vw, 42px);
+      font-size: clamp(28px, 7vw, 42px);
       font-weight: 800;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
+
     header p {
-      font-size: clamp(15px, 4vw, 17px);
+      font-size: clamp(14px, 3.5vw, 17px);
       color: var(--text-secondary);
-      max-width: 800px;
-      margin: 0 auto;
+      max-width: 900px;
+      margin: 0 auto 20px;
+      line-height: 1.6;
     }
-    .top-left-buttons {
-      position: absolute;
-      top: calc(24px + var(--safe-top));
-      left: max(24px, var(--safe-left));
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      z-index: 20;
-    }
-    .top-left-buttons a {
-      width: 48px;
-      height: 48px;
-      background: var(--bg-card);
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 16px var(--shadow);
-      transition: var(--transition);
-    }
-    .top-left-buttons a:hover {
-      transform: translateY(-4px) scale(1.1);
-      box-shadow: 0 12px 28px var(--shadow);
-    }
-    .top-left-buttons img { width: 30px; height: 30px; object-fit: contain; }
+
     #clear-btn {
-      background: transparent;
-      border: 1px solid var(--border);
+      background: rgba(99, 102, 241, 0.15);
+      border: 1px solid rgba(99, 102, 241, 0.4);
       color: var(--text-primary);
-      padding: 12px 28px;
+      padding: 10px 24px;
       border-radius: 999px;
       cursor: pointer;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 14px;
       transition: var(--transition);
-      margin-top: 24px;
     }
     #clear-btn:hover {
       background: var(--accent-primary);
-      border-color: var(--accent-primary);
-      color: #fff;
-      transform: translateY(-2px);
     }
-    #chat-container {
-      padding: 28px 24px 20px;
+
+    .top-left-buttons {
+      position: absolute;
+      top: 16px;
+      left: 8px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      min-height: 0;
+      gap: 10px;
+      z-index: 20;
     }
+    .top-left-buttons a {
+      width: 46px;
+      height: 46px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+    .top-left-buttons a:hover {
+      transform: scale(1.12);
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
+    }
+    .top-left-buttons img {
+      width: 33px;
+      height: 28px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .top-right-menu {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      z-index: 20;
+    }
+    #menu-btn {
+      width: 42px;
+      height: 42px;
+      background: var(--bg-card);
+      border: none;
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+      font-size: 26px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      border: 1px solid var(--border);
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      flex-direction: column;
+      min-width: 180px;
+      overflow: hidden;
+      backdrop-filter: blur(16px);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    }
+    .dropdown-menu.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .dropdown-menu button {
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      padding: 14px 20px;
+      text-align: left;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 15px;
+      font-weight: 500;
+      width: 100%;
+    }
+    .dropdown-menu button:hover {
+      background: rgba(99, 102, 241, 0.2);
+    }
+
     #welcome-message {
       text-align: center;
-      color: var(--text-secondary);
       max-width: 900px;
       margin: 0 auto;
-      padding: clamp(50px, 15vh, 100px) 24px 50px;
+      padding: 60px 20px 40px;
     }
     #welcome-message h2 {
-      font-size: clamp(28px, 7vw, 38px);
-      font-weight: 700;
-      background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+      font-size: clamp(24px, 6vw, 36px);
+      font-weight: 800;
+      background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
     #welcome-message p {
-      font-size: clamp(17px, 4.5vw, 19px);
-      margin: 18px 0;
+      font-size: clamp(15px, 3.8vw, 18px);
+      margin: 14px 0;
+      color: var(--text-secondary);
+      line-height: 1.7;
     }
     #supported {
-      margin: 48px 0;
-      font-size: clamp(16px, 4.5vw, 18px);
-      font-weight: 600;
-      color: var(--accent-primary);
+      margin: 40px 0;
+      font-size: clamp(16px, 4vw, 19px);
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
-    .message {
-      max-width: 85%;
-      align-self: flex-start;
+
+    #chat-container {
+      padding: 20px 16px;
       display: flex;
-      gap: 16px;
-      animation: fadeIn 0.5s ease;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .message {
+      max-width: 88%;
+      display: flex;
+      gap: 12px;
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.4s ease forwards;
     }
     .message.user {
       align-self: flex-end;
       flex-direction: row-reverse;
     }
+
     .avatar {
-      width: clamp(42px, 10vw, 52px);
-      height: clamp(42px, 10vw, 52px);
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
       background: var(--accent-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: clamp(18px, 5vw, 22px);
+      font-size: 18px;
       color: #fff;
       flex-shrink: 0;
-      box-shadow: 0 6px 16px var(--shadow);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
     }
-    .message.user .avatar { background: var(--accent-secondary); }
+    .message.user .avatar {
+      background: var(--accent-secondary);
+    }
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
     .bubble {
       background: var(--bg-card);
       backdrop-filter: blur(12px);
-      padding: clamp(18px, 5vw, 28px) clamp(22px, 6vw, 36px);
+      padding: 14px 20px;
       border-radius: var(--radius);
-      border-top-left-radius: 6px;
-      font-size: clamp(16px, 4.5vw, 17px);
-      box-shadow: 0 8px 28px var(--shadow);
-      word-wrap: break-word;
-      white-space: pre-wrap;
+      border-top-left-radius: 8px;
+      font-size: 15px;
+      box-shadow: var(--shadow-sm);
       border: 1px solid var(--border);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      line-height: 1.6;
+      position: relative;
+      overflow-wrap: anywhere; /* Critical fix for long links */
     }
     .message.user .bubble {
-      border-top-right-radius: 6px;
+      border-top-right-radius: 8px;
       border-top-left-radius: var(--radius);
+      background: var(--accent-gradient);
+      color: white;
     }
     .bubble a {
-      color: var(--accent-primary);
+      color: #c8c8ff;
       text-decoration: underline;
       font-weight: 600;
-      word-break: break-all;
+      word-break: break-all; /* Ensures long URLs break properly */
+      overflow-wrap: anywhere;
     }
     .bubble.error {
-      color: var(--error);
-      background: rgba(248, 113, 113, 0.18);
-      border-color: var(--error);
+      background: rgba(239, 68, 68, 0.2);
+      border-color: #ef4444;
+      color: #fca5a5;
     }
+
+    /* Click to copy for bot direct links */
+    .bubble.bot-link {
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+    .bubble.bot-link:hover {
+      background: rgba(99, 102, 241, 0.25);
+      transform: translateY(-2px);
+    }
+    .bubble.bot-link::after {
+      content: "Click to copy";
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.6);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .bubble.bot-link:hover::after {
+      opacity: 1;
+    }
+
     #input-container {
       position: fixed;
       bottom: 0;
       left: 0;
       right: 0;
       background: var(--bg-secondary);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
-      padding: 24px max(24px, var(--safe-left)) calc(24px + var(--safe-bottom)) max(24px, var(--safe-right));
+      padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
       display: flex;
-      gap: 18px;
+      gap: 12px;
       align-items: flex-end;
-      box-shadow: 0 -8px 32px var(--shadow);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
       z-index: 10;
     }
+
     #user-input {
       flex: 1;
-      background: var(--bg-card);
+      background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 18px 28px;
-      border-radius: 32px;
-      font-size: 17px;
+      padding: 14px 20px;
+      border-radius: 28px;
+      font-size: 16px;
       resize: none;
-      min-height: 60px;
-      max-height: 200px;
+      min-height: 52px;
+      max-height: 160px;
       overflow-y: auto;
       outline: none;
-      -webkit-appearance: none;
       transition: var(--transition);
     }
     #user-input::placeholder {
       color: var(--text-secondary);
-      opacity: 0.8;
     }
     #user-input:focus {
       border-color: var(--accent-primary);
-      box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.25);
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
     }
+
     #send-btn {
-      background: linear-gradient(45deg, var(--accent-primary), var(--accent-secondary));
+      background: var(--accent-gradient);
       border: none;
-      width: 60px;
-      height: 60px;
+      width: 52px;
+      height: 52px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 20px var(--shadow);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
       flex-shrink: 0;
-      transition: var(--transition);
     }
-    #send-btn:hover { transform: scale(1.12) rotate(8deg); }
-    #send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .send-icon { width: 26px; height: 26px; fill: #fff; }
-    @media (max-width: 768px) {
-      header { padding: 24px 20px; }
-      .top-left-buttons {
-        top: calc(20px + var(--safe-top));
-        left: max(20px, var(--safe-left));
-        gap: 12px;
-      }
-      .top-left-buttons a { width: 44px; height: 44px; }
-      .top-left-buttons img { width: 26px; height: 26px; }
-      #clear-btn { width: 100%; padding: 16px; margin-top: 24px; }
-      #chat-container { padding: 24px 20px 20px; gap: 20px; }
-      #main-scroll { padding-bottom: 110px; }
-      #input-container { padding: 20px max(20px, var(--safe-left)) calc(20px + var(--safe-bottom)) max(20px, var(--safe-right)); gap: 14px; }
-      #user-input { padding: 16px 24px; min-height: 56px; font-size: 16px; }
-      #send-btn { width: 56px; height: 56px; }
+    #send-btn:hover {
+      transform: scale(1.08);
     }
-    @media (max-width: 480px) {
-      #input-container { padding: 16px max(16px, var(--safe-left)) calc(16px + var(--safe-bottom)) max(16px, var(--safe-right)); }
-      #user-input { min-height: 52px; }
-      #send-btn { width: 52px; height: 52px; }
+    #send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .bubble span {
-      display: inline-block;
-      width: 8px;
-      height: 8px;
-      background: var(--text-secondary);
-      border-radius: 50%;
-      margin: 0 4px;
-      animation: typing 1.4s infinite ease-in-out;
-    }
-    .bubble span:nth-child(1) { animation-delay: 0s; }
-    .bubble span:nth-child(2) { animation-delay: 0.2s; }
-    .bubble span:nth-child(3) { animation-delay: 0.4s; }
-    @keyframes typing {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .send-icon {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
     }
 
-    .top-right-menu {
-      position: absolute;
-      top: calc(24px + var(--safe-top));
-      right: max(24px, var(--safe-right));
-      z-index: 20;
-    }
-    #menu-btn {
-      width: 48px;
-      height: 48px;
-      background: var(--bg-card);
-      border: none;
-      border-radius: 14px;
-      color: var(--text-primary);
-      font-size: 28px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 6px 16px var(--shadow);
-      transition: var(--transition);
-    }
-    #menu-btn:hover {
-      transform: translateY(-4px) scale(1.1);
-      box-shadow: 0 12px 28px var(--shadow);
-    }
-    .dropdown-menu {
-      position: absolute;
-      top: 60px;
-      right: 0;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: 0 12px 32px var(--shadow);
-      display: none;
-      flex-direction: column;
-      min-width: 200px;
-      overflow: hidden;
-    }
-    .dropdown-menu button {
-      background: none;
-      border: none;
-      color: var(--text-primary);
-      padding: 16px 24px;
-      text-align: left;
-      cursor: pointer;
-      transition: var(--transition);
-      font-size: 16px;
-    }
-    .dropdown-menu button:hover {
-      background: rgba(99, 102, 241, 0.2);
-    }
-    @media (max-width: 768px) {
-      .top-right-menu {
-        top: calc(20px + var(--safe-top));
-        right: max(20px, var(--safe-right));
-      }
-      #menu-btn {
-        width: 44px;
-        height: 44px;
-        font-size: 24px;
-      }
-    }
-
+    /* Modal */
     #modal {
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.6);
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
@@ -409,93 +432,109 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
     .modal-content {
       background: var(--bg-secondary);
       border-radius: var(--radius);
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 92%;
+      max-height: 92%;
       width: 800px;
-      overflow: hidden;
-      box-shadow: 0 20px 60px var(--shadow);
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border);
     }
     .modal-header {
-      padding: 20px 28px;
+      padding: 18px 24px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-shrink: 0;
     }
     .modal-header h3 {
-      font-size: 22px;
+      font-size: 20px;
       font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     #close-modal {
       background: none;
       border: none;
       color: var(--text-secondary);
-      font-size: 32px;
+      font-size: 28px;
       cursor: pointer;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    #close-modal:hover {
-      color: var(--text-primary);
     }
     .modal-body {
-      padding: 28px;
+      padding: 24px;
       overflow-y: auto;
-      max-height: calc(90vh - 100px);
+      flex: 1;
+      -webkit-overflow-scrolling: touch;
     }
-    .category {
-      margin-bottom: 32px;
+    .modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-body::-webkit-scrollbar-thumb {
+      background: rgba(140, 140, 240, 0.3);
+      border-radius: 4px;
     }
     .category h4 {
-      font-size: 20px;
+      font-size: 18px;
       margin-bottom: 12px;
       color: var(--accent-primary);
     }
     .category ul {
-      list-style: none;
-      columns: 2;
-      column-gap: 40px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
     }
     .category li {
-      margin-bottom: 8px;
-      padding: 8px 12px;
       background: var(--bg-card);
+      padding: 14px 18px;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
-    @media (max-width: 768px) {
-      .category ul {
-        columns: 1;
-      }
+
+    .typing-indicator span {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--text-secondary);
+      border-radius: 50%;
+      margin: 0 4px;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+    .typing-indicator span:nth-child(1) { animation-delay: 0s; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    @keyframes fadeInUp {
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .site-logo {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 14px;
-}
+    @media (orientation: landscape) and (max-height: 600px) {
+      header { padding: 16px 20px; }
+      .top-left-buttons, .top-right-menu { top: 10px; }
+      .site-logo img { width: 50px; height: 50px; }
+      header h1 { font-size: clamp(22px, 5vw, 30px); }
+      #clear-btn { padding: 8px 20px; font-size: 13px; }
+      #welcome-message { padding: 30px 16px 20px; }
+      #welcome-message h2 { font-size: clamp(20px, 5vw, 28px); }
+      #chat-container { padding: 12px; gap: 12px; }
+      .message { gap: 8px; }
+      .avatar { width: 34px; height: 34px; font-size: 15px; }
+      .bubble { padding: 10px 16px; font-size: 14px; }
+      #input-container { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
+      #user-input { min-height: 44px; padding: 10px 16px; font-size: 15px; }
+      #send-btn { width: 44px; height: 44px; }
+    }
 
-.site-logo img {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px var(--shadow);
-}
-
-@media (max-width: 768px) {
-  .site-logo img {
-    width: 60px;
-    height: 60px;
-  }
-}
-    .avatar img {
-  object-fit: cover;
-}
-
+    @media (max-width: 480px) {
+      .top-left-buttons { left: 6px; }
+      .category ul {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -503,10 +542,10 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
     <div id="main-scroll">
       <header>
         <div class="top-left-buttons">
-          <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+          <a href="https://www.youtube.com/@ScriptFarmer/videos" target="_blank" rel="noopener noreferrer">
             <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" alt="YouTube">
           </a>
-          <a href="https://discord.gg/7q2TvZ9GYX" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+          <a href="https://discord.gg/7q2TvZ9GYX" target="_blank" rel="noopener noreferrer">
             <img src="https://assets-global.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png" alt="Discord">
           </a>
         </div>
@@ -518,27 +557,26 @@ Break through Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex, an
           </div>
         </div>
         <div class="site-logo">
-           <img src="https://scripthub.fun/scripthub/executor/titel.png" alt="Script Hub Logo">
+          <img src="https://scripthub.fun/scripthub/executor/titel.png" alt="Script Hub Logo">
         </div>
         <h1>Script Hub Bypass</h1>
-        <p>No delays. No ads. No tasks.
-Bypass Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex & more — instantly.
-</p>
+        <p>No delays. No ads. No tasks. Instant bypass for all major services.</p>
         <button id="clear-btn">Clear Chat</button>
       </header>
       <div id="chat-container">
         <div id="welcome-message">
-          <h2>Instant Direct Links – No Ads, No Waiting</h2>
-          <p>Paste any protected link below and get the direct destination instantly.</p>
-          <p>Specialized for Roblox script hubs with key systems, ad-links, and shorteners.</p>
-          <div id="supported">Supported Services: Linkvertise • Work.ink • Lootlinks • Rekonise • Boost.ink • Key Systems • and many more</div>
-          <p>Secure, reliable, and completely free. Start bypassing now! ⚡</p>
+          <h2>Instant Direct Links – No Waiting</h2>
+          <p>Paste any protected link and get the direct destination instantly.</p>
+          <p>Specialized for Roblox script hubs with key systems and ad-links.</p>
+          <div id="supported">Supported: Linkvertise • Work.ink • Rekonise • Boost.ink • Sub4Unlock • Key Systems & more</div>
+          <p>Secure • Fast • Free ⚡</p>
         </div>
       </div>
     </div>
   </div>
+
   <div id="input-container">
-    <textarea id="user-input" rows="1" placeholder="Paste your link here..."></textarea>
+    <textarea id="user-input" placeholder="Paste your link here..."></textarea>
     <button id="send-btn" disabled>
       <svg class="send-icon" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
     </button>
@@ -548,63 +586,144 @@ Bypass Linkvertise, Loot-Link, Rekonise, Boost.ink, Sub4Unlock, Codex & more —
     <div class="modal-content">
       <div class="modal-header">
         <h3 id="modal-title"></h3>
-        <button id="close-modal">&times;</button>
+        <button id="close-modal">×</button>
       </div>
       <div class="modal-body" id="modal-body"></div>
     </div>
   </div>
 
   <script>
-    const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
-    const API_METHOD = 'GET';
+    'use strict';
 
+    const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
+
+    // Elements
     const chatContainer = document.getElementById('chat-container');
     const mainScroll = document.getElementById('main-scroll');
     const userInput = document.getElementById('user-input');
     const sendBtn = document.getElementById('send-btn');
     const clearBtn = document.getElementById('clear-btn');
+    const welcomeMessage = document.getElementById('welcome-message');
+    const menuBtn = document.getElementById('menu-btn');
+    const dropdown = document.getElementById('dropdown-menu');
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModal = document.getElementById('close-modal');
 
-    userInput.addEventListener('input', () => {
-      userInput.style.height = 'auto';
-      userInput.style.height = `${userInput.scrollHeight}px`;
-      sendBtn.disabled = userInput.value.trim() === '';
+    // 3-dot menu
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dropdown.classList.toggle('show');
+    });
+    document.addEventListener('click', (e) => {
+      if (!menuBtn.contains(e.target) && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('show');
+      }
     });
 
+    // Modal
+    const openModal = (title, content) => {
+      modalTitle.textContent = title;
+      modalBody.innerHTML = content;
+      modal.classList.add('active');
+    };
+    closeModal.addEventListener('click', () => modal.classList.remove('active'));
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+
+    document.getElementById('supported-links-btn').addEventListener('click', () => {
+      openModal('Supported Links', `
+        <div class="category"><h4>Key Systems</h4><ul>
+          <li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li>
+        </ul></div>
+        <div class="category"><h4>Ad-Links & Shorteners</h4><ul>
+          <li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li>
+          <li>Arolinks</li><li>Socialwolvez</li><li>Mboost</li><li>Linkify</li><li>Scriptpastebins</li><li>and 40+ more</li>
+        </ul></div>
+        <div class="category"><h4>Paste Services</h4><ul>
+          <li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li>
+        </ul></div>
+      `);
+      dropdown.classList.remove('show');
+    });
+
+    document.getElementById('about-us-btn').addEventListener('click', () => {
+      openModal('About Us', `Script Hub Bypass is a free, fast, and secure tool for bypassing ad-links and key systems in Roblox script hubs.<br><br>No data stored. Built for the community.`);
+      dropdown.classList.remove('show');
+    });
+
+    // Copy to clipboard function
+    const copyToClipboard = (text) => {
+      navigator.clipboard.writeText(text).then(() => {
+        const toast = document.createElement('div');
+        toast.textContent = 'Copied to clipboard!';
+        toast.style.position = 'fixed';
+        toast.style.bottom = '80px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.background = 'rgba(0,0,0,0.8)';
+        toast.style.color = 'white';
+        toast.style.padding = '10px 20px';
+        toast.style.borderRadius = '8px';
+        toast.style.zIndex = '1000';
+        toast.style.fontSize = '14px';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+      }).catch(() => {
+        alert('Failed to copy');
+      });
+    };
+
+    // Chat system
     let chatHistory = JSON.parse(localStorage.getItem('chatHistory') || '[]');
 
-    function renderChatHistory() {
-      chatContainer.innerHTML = '';
-      const welcome = document.getElementById('welcome-message');
-      if (chatHistory.length === 0 && welcome) {
-        chatContainer.appendChild(welcome.cloneNode(true));
-      }
-      chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false, false));
-      scrollToBottom();
-    }
+    const scrollToBottom = () => {
+      mainScroll.scrollTop = mainScroll.scrollHeight;
+    };
 
-    function addMessage(sender, text, isError = false, animate = true) {
-      const msgDiv = document.createElement('div');
-      msgDiv.className = `message ${sender}`;
+    const renderChatHistory = () => {
+      chatContainer.innerHTML = '';
+      if (chatHistory.length === 0) {
+        chatContainer.appendChild(welcomeMessage.cloneNode(true));
+      }
+      chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false));
+      scrollToBottom();
+    };
+
+    const addMessage = (sender, text, isError = false) => {
+      const div = document.createElement('div');
+      div.className = `message ${sender}`;
 
       const avatar = document.createElement('div');
-avatar.className = 'avatar';
-
-if (sender === 'bot') {
-  const img = document.createElement('img');
-  img.src = 'https://scripthub.fun/scripthub/executor/titel.png';
-  img.alt = 'Bot Logo';
-  img.style.width = '100%';
-  img.style.height = '100%';
-  img.style.borderRadius = '50%';
-  avatar.appendChild(img);
-} else {
-  avatar.textContent = 'U';
-}
-
+      avatar.className = 'avatar';
+      if (sender === 'bot') {
+        const img = document.createElement('img');
+        img.src = 'https://scripthub.fun/scripthub/executor/titel.png';
+        img.alt = 'Bot';
+        avatar.appendChild(img);
+      } else {
+        avatar.textContent = 'U';
+      }
 
       const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      if (isError) bubble.classList.add('error');
+      bubble.className = `bubble${isError ? ' error' : ''}`;
+
+      // Detect if bot message contains a direct link
+      const hasDirectLink = text.includes('Direct link:') || text.includes('Bypassed successfully');
+
+      if (hasDirectLink && sender === 'bot') {
+        bubble.classList.add('bot-link');
+        bubble.addEventListener('click', () => {
+          const linkMatch = text.match(/(https?:\/\/[^\s\n]+)/);
+          if (linkMatch) {
+            copyToClipboard(linkMatch[0]);
+          } else {
+            copyToClipboard(text);
+          }
+        });
+      }
 
       const urlRegex = /(https?:\/\/[^\s]+)/g;
       if (urlRegex.test(text)) {
@@ -617,7 +736,7 @@ if (sender === 'bot') {
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
             bubble.appendChild(a);
-          } else {
+          } else if (part.trim()) {
             bubble.appendChild(document.createTextNode(part));
           }
         });
@@ -625,290 +744,107 @@ if (sender === 'bot') {
         bubble.textContent = text;
       }
 
-      msgDiv.appendChild(avatar);
-      msgDiv.appendChild(bubble);
-      chatContainer.appendChild(msgDiv);
+      div.appendChild(avatar);
+      div.appendChild(bubble);
+      chatContainer.appendChild(div);
+      scrollToBottom();
+    };
 
-      if (animate) {
-        requestAnimationFrame(() => {
-          scrollToBottom();
-        });
-      }
-    }
-
-    function addTypingIndicator() {
-      const typingDiv = document.createElement('div');
-      typingDiv.className = 'message';
-      typingDiv.id = 'typing';
-
+    const addTypingIndicator = () => {
+      const div = document.createElement('div');
+      div.className = 'message';
+      div.id = 'typing-indicator';
       const avatar = document.createElement('div');
       avatar.className = 'avatar';
-      avatar.textContent = 'B';
-
+      const img = document.createElement('img');
+      img.src = 'https://scripthub.fun/scripthub/executor/titel.png';
+      img.alt = 'Bot';
+      avatar.appendChild(img);
       const bubble = document.createElement('div');
       bubble.className = 'bubble';
-      bubble.innerHTML = '<span></span><span></span><span></span>';
-
-      typingDiv.appendChild(avatar);
-      typingDiv.appendChild(bubble);
-      chatContainer.appendChild(typingDiv);
+      bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+      div.appendChild(avatar);
+      div.appendChild(bubble);
+      chatContainer.appendChild(div);
       scrollToBottom();
-    }
+    };
 
-    function removeTypingIndicator() {
-      const typing = document.getElementById('typing');
-      if (typing) typing.remove();
-    }
+    const removeTypingIndicator = () => {
+      const el = document.getElementById('typing-indicator');
+      if (el) el.remove();
+    };
 
-    function scrollToBottom() {
-      mainScroll.scrollTop = mainScroll.scrollHeight;
-    }
-
-    function saveChatHistory() {
-      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
-    }
-
-    function clearChat() {
-      if (chatHistory.length === 0) {
-        alert('Chat is already empty!');
-        return;
-      }
-      if (confirm('Clear all chat history? This cannot be undone.')) {
+    const clearChat = () => {
+      if (chatHistory.length === 0 || confirm('Clear all chat history?')) {
         chatHistory = [];
         localStorage.removeItem('chatHistory');
         renderChatHistory();
       }
-    }
+    };
 
-    async function bypassLink(link) {
+    const bypassLink = async (link) => {
       try {
-        const url = API_ENDPOINT + '?url=' + encodeURIComponent(link.trim());
-        const resp = await fetch(url, {
-          method: API_METHOD,
-          redirect: 'follow',
-          headers: { 'Accept': 'application/json' }
-        });
+        const resp = await fetch(`${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`);
+        if (!resp.ok) throw new Error('Network error');
+        const data = await resp.json().catch(() => ({ text: 'Bypass successful but no direct link found.' }));
 
-        if (!resp.ok) {
-          const txt = await resp.text();
-          throw new Error(`HTTP ${resp.status}: ${txt || resp.statusText}`);
-        }
+        if (data.success && data.destination) return `Bypassed! 🎉\nDirect link: ${data.destination}`;
+        if (data.status === 'success' && data.result) return `Bypassed! 🎉\nDirect link: ${data.result}`;
+        if (data.bypassed || data.direct_url) return `Bypassed! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
 
-        const contentType = resp.headers.get('content-type') || '';
-        let data;
-        if (contentType.includes('application/json')) {
-          data = await resp.json();
-        } else {
-          data = { text: await resp.text() };
-        }
-
-        if (data.success && data.destination) return `Bypassed successfully! 🎉\nDirect link: ${data.destination}`;
-        if (data.status === 'success' && data.result) return `Bypassed successfully! 🎉\nDirect link: ${data.result}`;
-        if (data.bypassed || data.direct_url) return `Bypassed successfully! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
-
-        const linkMatch = (typeof data.text === 'string' ? data.text : JSON.stringify(data)).match(/(https?:\/\/[^\s'"]+)/);
-        if (linkMatch) return `Bypassed successfully! 🎉\nDirect link: ${linkMatch[0]}`;
-
-        return `Bypass completed:\n${JSON.stringify(data, null, 2)}`;
+        const match = JSON.stringify(data).match(/(https?:\/\/[^\s"']+)/);
+        return match ? `Bypassed! 🎉\nDirect link: ${match[0]}` : `Bypass completed.\n${JSON.stringify(data, null, 2)}`;
       } catch (err) {
-        console.error('Bypass error:', err);
-        if (err.message.includes('400') || err.message.toLowerCase().includes('unsupported') || err.message.toLowerCase().includes('invalid')) {
-          return "The link is not supported. Please enter a valid link.";
-        }
-        return `Error: ${err.message}\nTry again later or check your connection.`;
+        return "Error: Unsupported or invalid link. Please try another.";
       }
-    }
+    };
 
-    async function handleSend() {
-      const inputText = userInput.value.trim();
-      if (!inputText) return;
+    const handleSend = async () => {
+      const text = userInput.value.trim();
+      if (!text) return;
 
-      if (!/^https?:\/\//i.test(inputText)) {
+      if (!/^https?:\/\//i.test(text)) {
         addMessage('bot', 'Please enter a valid URL starting with http:// or https://', true);
         return;
       }
 
-      addMessage('user', inputText);
-      chatHistory.push({ sender: 'user', text: inputText });
-      saveChatHistory();
+      addMessage('user', text);
+      chatHistory.push({ sender: 'user', text });
+      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
 
       userInput.value = '';
-      userInput.style.height = 'auto';
+      userInput.style.height = '52px';
       sendBtn.disabled = true;
-
       addTypingIndicator();
 
-      const responseText = await bypassLink(inputText);
-      const isError = responseText.includes('not supported') || responseText.startsWith('Error:');
-
+      const response = await bypassLink(text);
       removeTypingIndicator();
-      addMessage('bot', responseText, isError);
-      chatHistory.push({ sender: 'bot', text: responseText, isError });
-      saveChatHistory();
-    }
+      const isError = response.includes('Error') || response.includes('unsupported');
+      addMessage('bot', response, isError);
+      chatHistory.push({ sender: 'bot', text: response, isError });
+      localStorage.setItem('chatHistory', JSON.stringify(chatHistory));
+    };
 
-    sendBtn.addEventListener('click', handleSend);
-    userInput.addEventListener('keydown', e => {
+    // Input handling
+    userInput.addEventListener('input', () => {
+      userInput.style.height = '52px';
+      userInput.style.height = `${userInput.scrollHeight}px`;
+      sendBtn.disabled = !userInput.value.trim();
+    });
+
+    userInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
         handleSend();
       }
     });
+
+    sendBtn.addEventListener('click', handleSend);
     clearBtn.addEventListener('click', clearChat);
 
-    sendBtn.disabled = true;
+    // Initialize
     renderChatHistory();
-
-    // New menu functionality
-    const menuBtn = document.getElementById('menu-btn');
-    const dropdown = document.getElementById('dropdown-menu');
-    const supportedBtn = document.getElementById('supported-links-btn');
-    const aboutBtn = document.getElementById('about-us-btn');
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalBody = document.getElementById('modal-body');
-    const closeModal = document.getElementById('close-modal');
-
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      dropdown.style.display = dropdown.style.display === 'flex' ? 'none' : 'flex';
-    });
-
-    document.addEventListener('click', () => {
-      dropdown.style.display = 'none';
-    });
-
-    dropdown.addEventListener('click', (e) => e.stopPropagation());
-
-    function openModal(title, content) {
-      modalTitle.textContent = title;
-      modalBody.innerHTML = content;
-      modal.classList.add('active');
-    }
-
-    supportedBtn.addEventListener('click', () => {
-      openModal('Supported Links', `
-        <div class="category">
-          <h4>Key System</h4>
-          <ul>
-            <li>Platoboost</li>
-            <li>auth.platorelay.com</li>
-            <li>auth.platoboost.me</li>
-            <li>auth.platoboost.app</li>
-            <li>auth.platoboost.net</li>
-            <li>auth.platoboost.click</li>
-            <li>Pandadevelopment</li>
-            <li>pandadevelopment.net</li>
-            <li>Violated</li>
-            <li>violated.lol</li>
-            <li>Blox-script</li>
-            <li>blox-script.com</li>
-            <li>Kapao-hub</li>
-            <li>kapao-hub.vercel.app</li>
-            <li>Overdrivehub</li>
-            <li>overdrivehub.xyz</li>
-            <li>Codex</li>
-          </ul>
-        </div>
-        <div class="category">
-          <h4>Ad-Link</h4>
-          <ul>
-            <li>Linkvertise</li>
-            <li>linkvertise.com</li>
-            <li>link-to.net</li>
-            <li>link-hub.net</li>
-            <li>link-target.org</li>
-            <li>link-target.net</li>
-            <li>link-center.net</li>
-            <li>direct-link.net</li>
-            <li>Admaven (lootlabs, free-content, etc.)</li>
-            <li>loot-link.com</li>
-            <li>lootdest.org</li>
-            <li>free-content.pro</li>
-            <li>lootdest.com</li>
-            <li>bleleadersto.com</li>
-            <li>daughablelea.com</li>
-            <li>fast-links.org</li>
-            <li>best-links.org</li>
-            <li>free-leaks.com</li>
-            <li>discordlink.cc</li>
-            <li>+23 more</li>
-            <li>Workink</li>
-            <li>work.ink</li>
-            <li>workink.net</li>
-            <li>Linkunlocker</li>
-            <li>linkunlocker.com</li>
-            <li>Link-unlock</li>
-            <li>link-unlock.com</li>
-            <li>Arolinks</li>
-            <li>arolinks.com</li>
-            <li>Socialwolvez</li>
-            <li>socialwolvez.com</li>
-            <li>Linkify</li>
-            <li>go.linkify.ru</li>
-            <li>Mboost</li>
-            <li>mboost.me</li>
-            <li>Social-unlock</li>
-            <li>social-unlock.com</li>
-            <li>Rekonise (rekonise.com, rekonise.org)</li>
-            <li>rekonise.com</li>
-            <li>rekonise.org</li>
-            <li>rkns.link</li>
-            <li>Sub2Unlock</li>
-            <li>sub2unlock.com</li>
-            <li>sub2unlock.me</li>
-            <li>Sub4Unlock</li>
-            <li>sub4unlock.com</li>
-            <li>sub4unlock.me</li>
-            <li>sub4unlock.io</li>
-            <li>sub4unlock.pro</li>
-            <li>Scriptpastebins</li>
-            <li>scriptpastebins.com</li>
-            <li>Bstshrt</li>
-            <li>bstshrt.com</li>
-            <li>Sfl.gl</li>
-            <li>sfl.gl</li>
-            <li>Yorurl</li>
-            <li>go.yorurl.com</li>
-            <li>yorurl.com</li>
-            <li>Robloxscripts</li>
-          </ul>
-        </div>
-        <div class="category">
-          <h4>Paste</h4>
-          <ul>
-            <li>Pastebin</li>
-            <li>pastebin.com</li>
-            <li>Paste-Drop</li>
-            <li>paste-drop.com</li>
-            <li>Pastefy</li>
-            <li>pastefy.app</li>
-            <li>Pasterso</li>
-          </ul>
-        </div>
-      `);
-      dropdown.style.display = 'none';
-    });
-
-    aboutBtn.addEventListener('click', () => {
-      openModal('About Us', `Script Hub Bypass is a free, professional tool designed to help Roblox script users bypass annoying ad-links, key systems, and shorteners quickly and securely.<br><br>We support a wide range of popular services and are constantly updating to add more.<br><br>No data is stored, everything happens client-side or via secure bypass API.<br><br>Created with ❤️ for the Scrips Hub community.`);
-      dropdown.style.display = 'none';
-    });
-
-    closeModal.addEventListener('click', () => {
-      modal.classList.remove('active');
-    });
-
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        modal.classList.remove('active');
-      }
-    });
+    sendBtn.disabled = true;
   </script>
 </body>
 </html>
-
-
-
-
-
