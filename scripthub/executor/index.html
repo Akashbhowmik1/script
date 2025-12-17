@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <meta name="description" content="Script Hub Bypass - Instant link bypass tool. No ads, no waiting."/>
   <title>Script Hub Bypass</title>
-  
+ 
   <script src="https://quge5.com/88/tag.min.js" data-zone="156729" async data-cfasync="false"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="https://scripthub.fun/scripthub/assets/titel.png">
@@ -28,26 +28,32 @@
       --radius: 16px;
       --radius-sm: 12px;
     }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     html, body {
       height: 100%;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       background: var(--bg-primary);
       background-image:
         radial-gradient(circle at 10% 90%, rgba(99, 102, 241, 0.18) 0%, transparent 50%),
         radial-gradient(circle at 90% 10%, rgba(139, 92, 246, 0.18) 0%, transparent 50%);
       color: var(--text-primary);
       overflow: hidden;
+      -webkit-text-size-adjust: 100%;
+      -webkit-tap-highlight-color: transparent;
     }
+
     #app-container {
       display: flex;
       flex-direction: column;
       height: 100%;
     }
+
     #main-scroll {
       flex: 1;
       overflow-y: auto;
@@ -56,73 +62,86 @@
       padding-bottom: 160px;
       -webkit-overflow-scrolling: touch;
     }
+
     #main-scroll::-webkit-scrollbar {
       width: 0;
+      height: 0;
     }
+
     header {
       background: var(--bg-secondary);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
-      padding: 28px 20px;
+      padding: 20px 16px;
       text-align: center;
       position: relative;
       box-shadow: var(--shadow-md);
     }
+
     .site-logo {
       display: flex;
       justify-content: center;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
+
     .site-logo img {
-      width: 70px;
-      height: 70px;
+      width: 60px;
+      height: 60px;
       object-fit: contain;
-      border-radius: 18px;
+      border-radius: 16px;
       box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
     }
+
     header h1 {
-      font-size: clamp(28px, 7vw, 42px);
+      font-size: clamp(26px, 6vw, 38px);
       font-weight: 800;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
+
     header p {
-      font-size: clamp(14px, 3.5vw, 17px);
+      font-size: clamp(14px, 3.5vw, 16px);
       color: var(--text-secondary);
       max-width: 900px;
-      margin: 0 auto 20px;
+      margin: 0 auto 16px;
       line-height: 1.6;
     }
+
     #clear-btn {
       background: rgba(99, 102, 241, 0.15);
       border: 1px solid rgba(99, 102, 241, 0.4);
       color: var(--text-primary);
-      padding: 10px 24px;
+      padding: 8px 20px;
       border-radius: 999px;
       cursor: pointer;
       font-weight: 600;
       font-size: 14px;
       transition: var(--transition);
     }
+
     #clear-btn:hover {
       background: var(--accent-primary);
     }
+
     .top-left-buttons {
       position: absolute;
-      top: 16px;
-      left: 8px;
+      top: 12px;
+      left: 12px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
       z-index: 20;
     }
+
     .top-left-buttons a {
-      width: 46px;
-      height: 46px;
+      width: 42px;
+      height: 42px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -131,31 +150,35 @@
       transition: var(--transition);
       border: 1px solid rgba(255, 255, 255, 0.15);
     }
+
     .top-left-buttons a:hover {
       transform: scale(1.12);
       box-shadow: 0 0 20px rgba(99, 102, 241, 0.5);
     }
+
     .top-left-buttons img {
-      width: 33px;
-      height: 28px;
+      width: 28px;
+      height: 24px;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
+
     .top-right-menu {
       position: absolute;
-      top: 16px;
-      right: 16px;
+      top: 12px;
+      right: 12px;
       z-index: 20;
     }
+
     #user-avatar {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: var(--accent-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 17px;
       color: #fff;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
@@ -163,41 +186,49 @@
       transition: var(--transition);
       border: 2px solid transparent;
     }
+
     #user-avatar.online {
       border-color: #43b581;
     }
+
     #user-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .dropdown-menu {
       position: absolute;
-      top: 50px;
+      top: 48px;
       right: 0;
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow-lg);
+      display: flex;
       flex-direction: column;
       min-width: 180px;
       overflow: hidden;
       backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
       transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
     }
+
     .dropdown-menu.show {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
     }
-    .dropdown-menu button, .dropdown-menu div {
+
+    .dropdown-menu button,
+    .dropdown-menu div {
       background: none;
       border: none;
       color: var(--text-primary);
-      padding: 14px 20px;
+      padding: 12px 16px;
       text-align: left;
       cursor: pointer;
       transition: var(--transition);
@@ -205,89 +236,131 @@
       font-weight: 500;
       width: 100%;
     }
-    .dropdown-menu button:hover, .dropdown-menu div:hover {
+
+    .dropdown-menu button:hover,
+    .dropdown-menu div:hover {
       background: rgba(99, 102, 241, 0.2);
     }
+
     #user-stats {
       font-size: 13px;
       color: var(--text-secondary);
-      padding: 12px 20px;
+      padding: 10px 16px;
       border-top: 1px solid var(--border);
       cursor: default;
     }
+
+    /* ========================= BIG WELCOME MESSAGE ========================= */
     #welcome-message {
       text-align: center;
-      max-width: 900px;
+      max-width: 1100px;
       margin: 0 auto;
-      padding: 60px 20px 40px;
+      padding: 60px 20px 50px;
     }
+
     #welcome-message h2 {
-      font-size: clamp(24px, 6vw, 36px);
-      font-weight: 800;
+      font-size: clamp(30px, 8vw, 48px);
+      font-weight: 900;
+      letter-spacing: 0.6px;
+      line-height: 1.2;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
+
     #welcome-message p {
-      font-size: clamp(15px, 3.8vw, 18px);
-      margin: 14px 0;
+      font-size: clamp(16px, 4.5vw, 20px);
+      margin: 18px 0;
       color: var(--text-secondary);
-      line-height: 1.7;
+      line-height: 1.8;
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
     }
+
+    #welcome-message p:first-of-type {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
     #supported {
-      margin: 40px 0;
-      font-size: clamp(16px, 4vw, 19px);
+      margin: 36px 0;
+      font-size: clamp(15px, 4vw, 18px);
       font-weight: 700;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
+    #login-required-notice {
+      text-align: center;
+      padding: 16px;
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      border-radius: 16px;
+      margin: 20px auto;
+      max-width: 90%;
+      color: #fca5a5;
+      font-size: 15px;
+    }
+
+    #login-required-notice strong {
+      color: #ff6b6b;
+    }
+
     #chat-container {
-      padding: 20px 16px;
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
+
     .message {
-      max-width: 88%;
+      max-width: 92%;
       display: flex;
-      gap: 12px;
+      gap: 10px;
       opacity: 0;
       transform: translateY(10px);
       animation: fadeInUp 0.4s ease forwards;
     }
+
     .message.user {
       align-self: flex-end;
       flex-direction: row-reverse;
     }
+
     .avatar {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: var(--accent-primary);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
-      font-size: 18px;
+      font-size: 16px;
       color: #fff;
       flex-shrink: 0;
       box-shadow: var(--shadow-sm);
       overflow: hidden;
     }
+
     .message.user .avatar {
       background: var(--accent-secondary);
     }
+
     .avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
+
     .bubble {
       background: var(--bg-card);
       backdrop-filter: blur(12px);
-      padding: 14px 20px;
+      -webkit-backdrop-filter: blur(12px);
+      padding: 12px 18px;
       border-radius: var(--radius);
       border-top-left-radius: 8px;
       font-size: 15px;
@@ -299,12 +372,14 @@
       position: relative;
       overflow-wrap: anywhere;
     }
+
     .message.user .bubble {
       border-top-right-radius: 8px;
       border-top-left-radius: var(--radius);
       background: var(--accent-gradient);
       color: white;
     }
+
     .bubble a {
       color: #c8c8ff;
       text-decoration: underline;
@@ -312,33 +387,39 @@
       word-break: break-all;
       overflow-wrap: anywhere;
     }
+
     .bubble.error {
       background: rgba(239, 68, 68, 0.2);
       border-color: #ef4444;
       color: #fca5a5;
     }
+
     .bubble.bot-link {
       cursor: pointer;
       transition: var(--transition);
       user-select: none;
     }
+
     .bubble.bot-link:hover {
       background: rgba(99, 102, 241, 0.25);
       transform: translateY(-2px);
     }
+
     .bubble.bot-link::after {
       content: "Click to copy";
       position: absolute;
-      top: 8px;
-      right: 12px;
+      top: 6px;
+      right: 10px;
       font-size: 11px;
       color: rgba(255, 255, 255, 0.6);
       opacity: 0;
       transition: opacity 0.3s;
     }
+
     .bubble.bot-link:hover::after {
       opacity: 1;
     }
+
     #input-container {
       position: fixed;
       bottom: 0;
@@ -346,41 +427,46 @@
       right: 0;
       background: var(--bg-secondary);
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
-      padding: 14px 16px calc(14px + env(safe-area-inset-bottom));
+      padding: 12px 12px calc(12px + env(safe-area-inset-bottom));
       display: flex;
-      gap: 12px;
+      gap: 10px;
       align-items: flex-end;
       box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.5);
       z-index: 10;
     }
+
     #user-input {
       flex: 1;
       background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 14px 20px;
+      padding: 14px 18px;
       border-radius: 28px;
       font-size: 16px;
       resize: none;
-      min-height: 52px;
-      max-height: 160px;
+      min-height: 50px;
+      max-height: 150px;
       overflow-y: auto;
       outline: none;
       transition: var(--transition);
     }
+
     #user-input::placeholder {
       color: var(--text-secondary);
     }
+
     #user-input:focus {
       border-color: var(--accent-primary);
       box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.3);
     }
+
     #send-btn {
       background: var(--accent-gradient);
       border: none;
-      width: 52px;
-      height: 52px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
@@ -390,23 +476,28 @@
       transition: var(--transition);
       flex-shrink: 0;
     }
+
     #send-btn:hover {
       transform: scale(1.08);
     }
+
     #send-btn:disabled {
       opacity: 0.5;
       cursor: not-allowed;
     }
+
     .send-icon {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: #fff;
     }
+
     #modal, #login-modal {
       position: fixed;
       inset: 0;
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -415,10 +506,12 @@
       visibility: hidden;
       transition: var(--transition);
     }
+
     #modal.active, #login-modal.active {
       opacity: 1;
       visibility: visible;
     }
+
     .modal-content {
       background: var(--bg-secondary);
       border-radius: var(--radius);
@@ -430,57 +523,58 @@
       box-shadow: var(--shadow-lg);
       border: 1px solid var(--border);
     }
+
     .modal-header {
-      padding: 18px 24px;
+      padding: 16px 20px;
       border-bottom: 1px solid var(--border);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
     }
+
     .modal-header h3 {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: 700;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     #close-modal, #close-login-modal {
       background: none;
       border: none;
       color: var(--text-secondary);
-      font-size: 28px;
+      font-size: 26px;
       cursor: pointer;
     }
+
     .modal-body {
-      padding: 24px;
+      padding: 20px;
       overflow-y: auto;
       flex: 1;
       -webkit-overflow-scrolling: touch;
     }
-    .modal-body::-webkit-scrollbar {
-      width: 6px;
-    }
-    .modal-body::-webkit-scrollbar-thumb {
-      background: rgba(140, 140, 240, 0.3);
-      border-radius: 4px;
-    }
+
     .category h4 {
-      font-size: 18px;
-      margin-bottom: 12px;
+      font-size: 17px;
+      margin-bottom: 10px;
       color: var(--accent-primary);
     }
+
     .category ul {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 10px;
     }
+
     .category li {
       background: var(--bg-card);
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
+
     .typing-indicator span {
       display: inline-block;
       width: 8px;
@@ -490,68 +584,70 @@
       margin: 0 4px;
       animation: typing 1.4s infinite ease-in-out;
     }
+
     .typing-indicator span:nth-child(1) { animation-delay: 0s; }
     .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
     .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
     @keyframes typing {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+
     @keyframes fadeInUp {
       to { opacity: 1; transform: translateY(0); }
     }
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after { animation: none !important; transition: none !important; }
-    }
-    @media (orientation: landscape) and (max-height: 600px) {
-      header { padding: 16px 20px; }
-      .top-left-buttons, .top-right-menu { top: 10px; }
-      .site-logo img { width: 50px; height: 50px; }
-      header h1 { font-size: clamp(22px, 5vw, 30px); }
-      #clear-btn { padding: 8px 20px; font-size: 13px; }
-      #welcome-message { padding: 30px 16px 20px; }
-      #welcome-message h2 { font-size: clamp(20px, 5vw, 28px); }
-      #chat-container { padding: 12px; gap: 12px; }
-      .message { gap: 8px; }
-      .avatar { width: 34px; height: 34px; font-size: 15px; }
-      .bubble { padding: 10px 16px; font-size: 14px; }
-      #input-container { padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); }
-      #user-input { min-height: 44px; padding: 10px 16px; font-size: 15px; }
-      #send-btn { width: 44px; height: 44px; }
-    }
-    @media (max-width: 480px) {
-      .top-left-buttons { left: 6px; }
-      .category ul {
-        grid-template-columns: 1fr;
-      }
-    }
-    /* Login Modal Styles */
+
+    /* ==================== LOGIN MODAL STYLES ==================== */
     #login-form {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 18px;
+      width: 100%;
     }
+
     #login-form input {
+      width: 100%;
       background: var(--bg-input);
       border: 1px solid var(--border);
       color: var(--text-primary);
-      padding: 14px 20px;
-      border-radius: 12px;
-      font-size: 16px;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 17px;
+      transition: var(--transition);
+      box-sizing: border-box;
     }
+
+    #login-form input::placeholder {
+      color: var(--text-secondary);
+      opacity: 0.8;
+    }
+
+    #login-form input:focus {
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 5px rgba(99, 102, 241, 0.35);
+      outline: none;
+    }
+
     #login-form button {
+      width: 100%;
       background: var(--accent-gradient);
       border: none;
-      padding: 14px;
-      border-radius: 12px;
+      padding: 16px;
+      border-radius: 16px;
       color: white;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 17px;
       cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-md);
     }
-    #login-error {
-      color: #fca5a5;
-      font-size: 14px;
+
+    #login-form button:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
     }
+
     #remember-me {
       display: flex;
       align-items: center;
@@ -559,141 +655,231 @@
       font-size: 15px;
       color: var(--text-secondary);
       cursor: pointer;
+      user-select: none;
     }
-    #remember-me input {
+
+    #remember-me input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
       accent-color: var(--accent-primary);
+      cursor: pointer;
+      border-radius: 4px;
     }
+
+        #login-error {
+      color: #ff6b6b;
+      font-size: 14.5px;
+      font-weight: 500;
+      text-align: center;
+      background: rgba(239, 68, 68, 0.18);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+      min-height: 26px;
+      margin-top: 8px;
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-4px);
+    }
+
+    /* When error is visible (add .show class via JS when error occurs) */
+    #login-error.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     #login-status {
       margin-top: 12px;
       font-size: 15px;
+      font-weight: 600;
       text-align: center;
       color: var(--accent-primary);
+      min-height: 26px;
+      line-height: 1.4;
+      opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(-4px);
     }
-    /* About Us – Premium / Glass UI Styling */
-.about-content {
-  position: relative;
-  text-align: center;
-  line-height: 1.9;
-  font-size: 16.5px;
-  letter-spacing: 0.25px;
-  padding: 22px 26px;
-  border-radius: 16px;
 
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.04),
-    rgba(255, 255, 255, 0.01)
-  );
+    /* When status is visible (add .show class via JS when needed) */
+    #login-status.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
+    /* Mobile adjustment */
+    @media (max-width: 480px) {
+      #login-error,
+      #login-status {
+        font-size: 14px;
+        padding: 9px 12px;
+        min-height: 24px;
+      }
+    }
+    /* ==================== ABOUT US STYLES ==================== */
+    .about-content {
+      line-height: 1.8;
+      font-size: 15px;
+      color: var(--text-primary);
+      text-align: center;
+    }
 
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.45),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    .about-title {
+      font-size: 24px;
+      font-weight: 800;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
 
-  animation: aboutFadeIn 0.5s ease-out both;
-}
+    .about-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
 
-/* Paragraph Styling */
-.about-content p {
-  margin-bottom: 18px;
-  color: var(--text-secondary);
-  opacity: 0.92;
-}
+    .about-credit {
+      margin-top: 20px;
+      font-style: italic;
+      color: var(--text-secondary);
+    }
 
-/* Gradient Highlight Text */
-.about-content strong {
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+    .about-footer {
+      margin-top: 28px;
+      font-size: 17px;
+      font-weight: 700;
+      background: var(--accent-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  font-weight: 700;
-  letter-spacing: 0.3px;
-}
+    /* ==================== MEDIA QUERIES FOR FULL MOBILE RESPONSIVENESS ==================== */
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 12px;
+      }
 
-/* Accent Text (Names / Credits) */
-.about-content b {
-  color: var(--accent-primary);
-  font-weight: 600;
-}
+      .site-logo img {
+        width: 56px;
+        height: 56px;
+      }
 
-/* Divider Line */
-.about-content::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 3px;
-  margin: 22px auto 0;
+      .top-left-buttons {
+        top: 10px;
+        left: 10px;
+        gap: 6px;
+      }
 
-  background: var(--accent-gradient);
-  border-radius: 999px;
-  opacity: 0.8;
-}
+      .top-left-buttons a {
+        width: 38px;
+        height: 38px;
+      }
 
-/* Fade-in Animation */
-@keyframes aboutFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px) scale(0.98);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
+      .top-left-buttons img {
+        width: 24px;
+        height: 20px;
+      }
 
-/* Mobile Optimization */
-@media (max-width: 480px) {
-  .about-content {
-    font-size: 15.5px;
-    padding: 18px 20px;
-  }
-}
+      #welcome-message {
+        padding: 50px 16px 40px;
+      }
 
-/* Title */
-.about-title {
-  font-size: 22px;
-  font-weight: 800;
-  letter-spacing: 0.4px;
-  margin-bottom: 6px;
+      #welcome-message h2 {
+        font-size: clamp(28px, 9vw, 40px);
+      }
 
-  background: var(--accent-gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
+      .modal-content {
+        width: 95%;
+        max-width: none;
+      }
 
-/* Subtitle */
-.about-subtitle {
-  font-size: 14.5px;
-  color: var(--text-secondary);
-  opacity: 0.85;
-  margin-bottom: 18px;
-}
+      #login-modal .modal-content {
+        width: 92%;
+      }
+    }
 
-/* Main paragraphs */
-.about-content p {
-  color: rgba(255, 255, 255, 0.78);
-}
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: clamp(24px, 7vw, 32px);
+      }
 
-/* Credit line */
-.about-credit {
-  margin-top: 22px;
-  font-size: 14px;
-  color: var(--text-secondary);
-}
+      header p {
+        font-size: 14px;
+      }
 
-/* Footer emphasis */
-.about-footer {
-  margin-top: 14px;
-  font-size: 14.5px;
-  letter-spacing: 0.3px;
-}
+      .site-logo img {
+        width: 50px;
+        height: 50px;
+      }
 
-  </style>
+      #welcome-message {
+        padding: 40px 14px 30px;
+      }
+
+      #welcome-message h2 {
+        font-size: clamp(26px, 8vw, 36px);
+      }
+
+      #welcome-message p {
+        font-size: 16px;
+      }
+
+      .message {
+        max-width: 95%;
+      }
+
+      .avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
+      }
+
+      .bubble {
+        padding: 10px 16px;
+        font-size: 14.5px;
+      }
+
+      #input-container {
+        padding: 10px 10px calc(10px + env(safe-area-inset-bottom));
+      }
+
+      #user-input {
+        padding: 12px 16px;
+        font-size: 16px; /* Prevents zoom on iOS */
+        min-height: 48px;
+      }
+
+      #send-btn {
+        width: 48px;
+        height: 48px;
+      }
+
+      .category ul {
+        grid-template-columns: 1fr;
+      }
+
+      .dropdown-menu {
+        min-width: 160px;
+        right: 4px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      #user-input {
+        font-size: 15px;
+      }
+
+      .bubble {
+        font-size: 14px;
+      }
+    }
+</style>
 </head>
 <body>
+  <!-- The rest of your HTML body remains EXACTLY the same as provided -->
   <div id="app-container">
     <div id="main-scroll">
       <header>
@@ -706,11 +892,11 @@
           </a>
         </div>
         <div class="top-right-menu">
-          <div id="user-avatar" title="Login">U</div>
+          <div id="user-avatar" title="Click to login">U</div>
           <div class="dropdown-menu" id="dropdown-menu">
             <button id="supported-links-btn">Supported Links</button>
             <button id="about-us-btn">About Us</button>
-            <div id="user-stats" style="display:none;"></div>
+            <div id="user-stats" style="display:none;">Messages sent: 0</div>
             <button id="logout-btn" style="display:none;">Logout</button>
             <button id="export-users-btn" style="display:none;">Export User Data (Admin Only)</button>
           </div>
@@ -730,6 +916,10 @@
           <div id="supported">Supported: Linkvertise • Work.ink • Rekonise • Boost.ink • Sub4Unlock • Key Systems & more</div>
           <p>Secure • Fast • Free ⚡</p>
         </div>
+        <div id="login-required-notice">
+          <strong>Login required to use the bypass tool</strong><br>
+          Please log in or create an account to start bypassing links.
+        </div>
       </div>
     </div>
   </div>
@@ -739,6 +929,8 @@
       <svg class="send-icon" viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
     </button>
   </div>
+
+  <!-- General Modal -->
   <div id="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -748,15 +940,17 @@
       <div class="modal-body" id="modal-body"></div>
     </div>
   </div>
+
+  <!-- Login Modal -->
   <div id="login-modal">
-    <div class="modal-content" style="width:400px;">
+    <div class="modal-content" style="width:400px;max-width:92%;">
       <div class="modal-header">
         <h3>Login / Register</h3>
         <button id="close-login-modal">×</button>
       </div>
       <div class="modal-body">
         <form id="login-form">
-          <input type="text" id="discord-username" placeholder="Discord Username" required>
+          <input type="text" id="discord-username" placeholder="Username (Discord username)" required>
           <input type="password" id="login-password" placeholder="Password" required>
           <label id="remember-me">
             <input type="checkbox" id="remember-checkbox" checked>
@@ -771,345 +965,441 @@
   </div>
 
   <script>
-    'use strict';
-    const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
-    const ADMIN_USERNAME = 'Akashadmin123'; // Change this to your secret admin username
-    const USER_AVATAR_URL = 'https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png';
+  'use strict';
+  const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
+  const ADMIN_USERNAME = 'Akashadmin123';
+  const USER_AVATAR_URL = 'https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png';
 
-    // Elements (same as before)
-    const chatContainer = document.getElementById('chat-container');
-    const mainScroll = document.getElementById('main-scroll');
-    const userInput = document.getElementById('user-input');
-    const sendBtn = document.getElementById('send-btn');
-    const clearBtn = document.getElementById('clear-btn');
-    const welcomeMessage = document.getElementById('welcome-message');
-    const dropdown = document.getElementById('dropdown-menu');
-    const modal = document.getElementById('modal');
-    const modalTitle = document.getElementById('modal-title');
-    const modalBody = document.getElementById('modal-body');
-    const closeModal = document.getElementById('close-modal');
-    const loginModal = document.getElementById('login-modal');
-    const closeLoginModal = document.getElementById('close-login-modal');
-    const userAvatar = document.getElementById('user-avatar');
-    const logoutBtn = document.getElementById('logout-btn');
-    const exportBtn = document.getElementById('export-users-btn');
-    const userStats = document.getElementById('user-stats');
+  let currentUser = null;
+  let chatHistory = [];
+  const MAX_HISTORY = 50;
+  const CHAT_VERSION = 4;
 
-    let currentUser = null;
-    let chatHistory = [];
-    const MAX_HISTORY = 50;
+  // =============== STORAGE FUNCTIONS ===============
+  const getChatKey = () => currentUser ? `scripthub_chat_v${CHAT_VERSION}_${currentUser}` : null;
 
-    const users = JSON.parse(localStorage.getItem('bypassUsers') || '{}');
-    const saveUsers = () => localStorage.setItem('bypassUsers', JSON.stringify(users));
+  const saveChat = () => {
+    if (!currentUser) return;
+    const key = getChatKey();
+    if (!key) return;
+    const payload = { version: CHAT_VERSION, updatedAt: Date.now(), messages: chatHistory.slice(-MAX_HISTORY) };
+    try {
+      localStorage.setItem(key, JSON.stringify(payload));
+    } catch (e) {
+      console.error('Save chat failed', e);
+    }
+  };
 
-    const updateAvatar = () => {
-      if (!currentUser) {
-        userAvatar.innerHTML = 'U';
-        userAvatar.classList.remove('online');
-        return;
-      }
+  const loadChat = () => {
+    if (!currentUser) return [];
+    const key = getChatKey();
+    if (!key) return [];
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return [];
+      const data = JSON.parse(raw);
+      if (data?.version !== CHAT_VERSION || !Array.isArray(data.messages)) return [];
+      return data.messages.slice(-MAX_HISTORY);
+    } catch (e) {
+      console.error('Load chat failed', e);
+      return [];
+    }
+  };
+
+  // Aggressive auto-save
+  window.addEventListener('beforeunload', saveChat);
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') saveChat();
+  });
+  setInterval(() => { if (currentUser) saveChat(); }, 3000);
+
+  // =============== ELEMENTS ===============
+  const chatContainer = document.getElementById('chat-container');
+  const mainScroll = document.getElementById('main-scroll');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+  const clearBtn = document.getElementById('clear-btn');
+  const welcomeMessage = document.getElementById('welcome-message');
+  const loginRequiredNotice = document.getElementById('login-required-notice');
+  const dropdown = document.getElementById('dropdown-menu');
+  const modal = document.getElementById('modal');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const closeModal = document.getElementById('close-modal');
+  const loginModal = document.getElementById('login-modal');
+  const closeLoginModal = document.getElementById('close-login-modal');
+  const userAvatar = document.getElementById('user-avatar');
+  const logoutBtn = document.getElementById('logout-btn');
+  const exportBtn = document.getElementById('export-users-btn');
+  const userStats = document.getElementById('user-stats');
+
+  // =============== USERS MANAGEMENT ===============
+  let users = {};
+  try {
+    const stored = localStorage.getItem('bypassUsers');
+    if (stored) users = JSON.parse(stored);
+  } catch (e) { users = {}; }
+
+  const saveUsers = () => {
+    try { localStorage.setItem('bypassUsers', JSON.stringify(users)); } catch (e) { console.error(e); }
+  };
+
+  // =============== UI FUNCTIONS ===============
+  const updateAvatar = () => {
+    if (!currentUser) {
+      userAvatar.innerHTML = 'U';
+      userAvatar.classList.remove('online');
+    } else {
       userAvatar.innerHTML = `<img src="${USER_AVATAR_URL}" alt="${currentUser}">`;
       userAvatar.classList.add('online');
-    };
+    }
+  };
 
-    const updateUI = () => {
-      updateAvatar();
-      userAvatar.title = currentUser ? currentUser : 'Click to login';
-      logoutBtn.style.display = currentUser ? 'block' : 'none';
-      exportBtn.style.display = (currentUser === ADMIN_USERNAME) ? 'block' : 'none';
-      if (currentUser && users[currentUser]) {
-        userStats.textContent = `Messages sent: ${users[currentUser].messageCount || 0}`;
-        userStats.style.display = 'block';
-      } else {
-        userStats.style.display = 'none';
+  const updateUI = () => {
+    updateAvatar();
+    userAvatar.title = currentUser ? currentUser : 'Click to login';
+    logoutBtn.style.display = currentUser ? 'block' : 'none';
+    exportBtn.style.display = (currentUser === ADMIN_USERNAME) ? 'block' : 'none';
+    userStats.style.display = currentUser ? 'block' : 'none';
+    userStats.textContent = currentUser && users[currentUser] ? `Messages sent: ${users[currentUser].messageCount || 0}` : '';
+    userInput.disabled = !currentUser;
+    sendBtn.disabled = true;
+    loginRequiredNotice.style.display = currentUser ? 'none' : 'block';
+  };
+
+  const scrollToBottom = () => { mainScroll.scrollTop = mainScroll.scrollHeight; };
+
+  const renderChatHistory = () => {
+    chatContainer.innerHTML = '';
+    if (chatHistory.length === 0) {
+      chatContainer.appendChild(welcomeMessage.cloneNode(true));
+      if (!currentUser) chatContainer.appendChild(loginRequiredNotice.cloneNode(true));
+    }
+    chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError));
+    scrollToBottom();
+  };
+
+  const addMessage = (sender, text, isError = false) => {
+    const div = document.createElement('div');
+    div.className = `message ${sender}`;
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    const img = document.createElement('img');
+    img.src = sender === 'bot' ? 'https://scripthub.fun/scripthub/assets/titel.png' : USER_AVATAR_URL;
+    img.alt = sender === 'bot' ? 'Bot' : currentUser || 'User';
+    avatar.appendChild(img);
+
+    const bubble = document.createElement('div');
+    bubble.className = `bubble${isError ? ' error' : ''}`;
+
+    if (sender === 'bot' && (text.includes('Direct link:') || text.includes('Bypassed!'))) {
+      bubble.classList.add('bot-link');
+      bubble.onclick = () => {
+        const match = text.match(/(https?:\/\/[^\s\n]+)/);
+        const link = match ? match[0] : text;
+        navigator.clipboard.writeText(link);
+        const toast = document.createElement('div');
+        toast.textContent = 'Copied!';
+        toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:10px 20px;border-radius:8px;z-index:1000;font-size:14px;';
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+      };
+    }
+
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    if (urlRegex.test(text)) {
+      const parts = text.split(urlRegex);
+      parts.forEach(part => {
+        if (urlRegex.test(part)) {
+          const a = document.createElement('a');
+          a.href = part;
+          a.textContent = part;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          bubble.appendChild(a);
+        } else if (part.trim()) {
+          bubble.appendChild(document.createTextNode(part));
+        }
+      });
+    } else {
+      bubble.textContent = text;
+    }
+
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    chatContainer.appendChild(div);
+    scrollToBottom();
+  };
+
+  const addTypingIndicator = () => {
+    const div = document.createElement('div');
+    div.className = 'message';
+    div.id = 'typing-indicator';
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    const img = document.createElement('img');
+    img.src = 'https://scripthub.fun/scripthub/assets/titel.png';
+    img.alt = 'Bot';
+    avatar.appendChild(img);
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    chatContainer.appendChild(div);
+    scrollToBottom();
+  };
+
+  const removeTypingIndicator = () => {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  };
+
+  const clearChat = () => {
+    if (chatHistory.length === 0 || confirm('Clear all chat history?')) {
+      chatHistory = [];
+      const key = getChatKey();
+      if (key) localStorage.removeItem(key);
+      renderChatHistory();
+    }
+  };
+
+ const bypassLink = async (link) => {
+  try {
+    const resp = await fetch(
+      `${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`,
+      {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-store' // prevents browser upgrade → no preflight
       }
-      userInput.disabled = !currentUser;
-      sendBtn.disabled = true;
-    };
+    );
 
-    const scrollToBottom = () => mainScroll.scrollTop = mainScroll.scrollHeight;
+    if (!resp.ok) {
+      const t = await resp.text();
+      throw new Error(`HTTP ${resp.status}: ${t}`);
+    }
 
-    const renderChatHistory = () => {
-      chatContainer.innerHTML = '';
-      if (chatHistory.length === 0) chatContainer.appendChild(welcomeMessage.cloneNode(true));
-      chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError || false));
-      scrollToBottom();
-    };
+    const data = await resp.json().catch(() => ({}));
 
-    const addMessage = (sender, text, isError = false) => {
-      const div = document.createElement('div');
-      div.className = `message ${sender}`;
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      if (sender === 'bot') {
-        const img = document.createElement('img');
-        img.src = 'https://scripthub.fun/scripthub/assets/titel.png';
-        img.alt = 'Bot';
-        avatar.appendChild(img);
-      } else {
-        const img = document.createElement('img');
-        img.src = USER_AVATAR_URL;
-        img.alt = currentUser || 'User';
-        avatar.appendChild(img);
-      }
-      const bubble = document.createElement('div');
-      bubble.className = `bubble${isError ? ' error' : ''}`;
-      if (sender === 'bot' && (text.includes('Direct link:') || text.includes('Bypassed!'))) {
-        bubble.classList.add('bot-link');
-        bubble.onclick = () => {
-          const match = text.match(/(https?:\/\/[^\s\n]+)/);
-          const link = match ? match[0] : text;
-          navigator.clipboard.writeText(link);
-          const toast = document.createElement('div');
-          toast.textContent = 'Copied!';
-          toast.style.position = 'fixed';
-          toast.style.bottom = '80px';
-          toast.style.left = '50%';
-          toast.style.transform = 'translateX(-50%)';
-          toast.style.background = 'rgba(0,0,0,0.8)';
-          toast.style.color = 'white';
-          toast.style.padding = '10px 20px';
-          toast.style.borderRadius = '8px';
-          toast.style.zIndex = '1000';
-          toast.style.fontSize = '14px';
-          document.body.appendChild(toast);
-          setTimeout(() => toast.remove(), 2000);
-        };
-      }
-      const urlRegex = /(https?:\/\/[^\s]+)/g;
-      if (urlRegex.test(text)) {
-        const parts = text.split(urlRegex);
-        parts.forEach(part => {
-          if (urlRegex.test(part)) {
-            const a = document.createElement('a');
-            a.href = part;
-            a.textContent = part;
-            a.target = '_blank';
-            a.rel = 'noopener noreferrer';
-            bubble.appendChild(a);
-          } else if (part.trim()) {
-            bubble.appendChild(document.createTextNode(part));
-          }
-        });
-      } else {
-        bubble.textContent = text;
-      }
-      div.appendChild(avatar);
-      div.appendChild(bubble);
-      chatContainer.appendChild(div);
-      scrollToBottom();
-    };
+    if (data?.success && data.destination)
+      return `Bypassed! 🎉\nDirect link: ${data.destination}`;
 
-    const addTypingIndicator = () => {
-      const div = document.createElement('div');
-      div.className = 'message';
-      div.id = 'typing-indicator';
-      const avatar = document.createElement('div');
-      avatar.className = 'avatar';
-      const img = document.createElement('img');
-      img.src = 'https://scripthub.fun/scripthub/assets/titel.png';
-      img.alt = 'Bot';
-      avatar.appendChild(img);
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
-      div.appendChild(avatar);
-      div.appendChild(bubble);
-      chatContainer.appendChild(div);
-      scrollToBottom();
-    };
+    if (data?.status === 'success' && data.result)
+      return `Bypassed! 🎉\nDirect link: ${data.result}`;
 
-    const removeTypingIndicator = () => {
-      const el = document.getElementById('typing-indicator');
-      if (el) el.remove();
-    };
+    if (data?.bypassed || data?.direct_url)
+      return `Bypassed! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
 
-    const clearChat = () => {
-      if (chatHistory.length === 0 || confirm('Clear all chat history?')) {
-        chatHistory = [];
-        renderChatHistory();
-      }
-    };
+    const match = JSON.stringify(data).match(/https?:\/\/[^\s"']+/);
+    return match
+      ? `Bypassed! 🎉\nDirect link: ${match[0]}`
+      : 'Error: API returned no direct link.';
 
-    const bypassLink = async (link) => {
-      try {
-        const resp = await fetch(`${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`);
-        if (!resp.ok) throw new Error('Network error');
-        const data = await resp.json().catch(() => ({}));
-        if (data.success && data.destination) return `Bypassed! 🎉\nDirect link: ${data.destination}`;
-        if (data.status === 'success' && data.result) return `Bypassed! 🎉\nDirect link: ${data.result}`;
-        if (data.bypassed || data.direct_url) return `Bypassed! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
-        const match = JSON.stringify(data).match(/(https?:\/\/[^\s"']+)/);
-        return match ? `Bypassed! 🎉\nDirect link: ${match[0]}` : `Bypass completed.\n${JSON.stringify(data, null, 2)}`;
-      } catch (err) {
-        return "Error: Unsupported or invalid link. Please try another.";
-      }
-    };
+  } catch (err) {
+    console.error('Bypass failed:', err);
+    return 'Error: Unsupported or invalid link. Please try another.';
+  }
+};
 
-    const handleSend = async () => {
-      if (!currentUser) return;
-      const text = userInput.value.trim();
-      if (!text) return;
-      if (!/^https?:\/\//i.test(text)) {
-        addMessage('bot', 'Please enter a valid URL starting with http:// or https://', true);
-        return;
-      }
-      addMessage('user', text);
-      chatHistory.push({ sender: 'user', text });
-      if (chatHistory.length > MAX_HISTORY) chatHistory.shift();
-      users[currentUser].messageCount = (users[currentUser].messageCount || 0) + 1;
-      saveUsers();
+
+
+  // =============== MAIN SEND HANDLER (FIXED) ===============
+  const handleSend = async () => {
+    if (!currentUser) return;
+
+    const text = userInput.value.trim();
+    if (!text) return;
+
+    // Always save user's message (valid or invalid)
+    addMessage('user', text);
+    chatHistory.push({ sender: 'user', text });
+    chatHistory = chatHistory.slice(-MAX_HISTORY);
+    saveChat();
+
+    // Update message count
+    users[currentUser] = users[currentUser] || { messageCount: 0 };
+    users[currentUser].messageCount++;
+    saveUsers();
+
+    // Check for valid URL
+    if (!/^https?:\/\//i.test(text)) {
+      const errorMsg = 'Please enter a valid URL starting with http:// or https://';
+      addMessage('bot', errorMsg, true);
+      chatHistory.push({ sender: 'bot', text: errorMsg, isError: true });
+      chatHistory = chatHistory.slice(-MAX_HISTORY);
+      saveChat();
+
       userInput.value = '';
       userInput.style.height = '52px';
       sendBtn.disabled = true;
-      addTypingIndicator();
-      const response = await bypassLink(text);
-      removeTypingIndicator();
-      const isError = response.includes('Error') || response.includes('unsupported');
-      addMessage('bot', response, isError);
-      chatHistory.push({ sender: 'bot', text: response, isError });
-      if (chatHistory.length > MAX_HISTORY) chatHistory.shift();
-    };
+      return;
+    }
 
-    // Login System
-    document.getElementById('login-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const username = document.getElementById('discord-username').value.trim();
-      const password = document.getElementById('login-password').value;
-      const remember = document.getElementById('remember-checkbox').checked;
-      if (!username || !password) return;
-      document.getElementById('login-status').textContent = 'Processing...';
-      setTimeout(() => {
-        if (users[username] && users[username].password === password) {
-          currentUser = username;
-          if (remember) localStorage.setItem('currentBypassUser', username);
-          updateUI();
-          loginModal.classList.remove('active');
-          document.getElementById('login-status').textContent = 'Welcome back!';
-          setTimeout(() => document.getElementById('login-status').textContent = '', 2000);
-          renderChatHistory();
-        } else if (!users[username]) {
-          users[username] = { password, messageCount: 0 };
-          saveUsers();
-          currentUser = username;
-          if (remember) localStorage.setItem('currentBypassUser', username);
-          updateUI();
-          loginModal.classList.remove('active');
-          document.getElementById('login-status').textContent = 'Account created!';
-          setTimeout(() => document.getElementById('login-status').textContent = '', 2000);
-          renderChatHistory();
-        } else {
-          document.getElementById('login-error').textContent = 'Invalid password';
-          document.getElementById('login-status').textContent = '';
-        }
-      }, 800);
-    });
+    // Valid URL → proceed with bypass
+    userInput.value = '';
+    userInput.style.height = '52px';
+    sendBtn.disabled = true;
+    addTypingIndicator();
 
-    userAvatar.addEventListener('click', () => currentUser ? dropdown.classList.toggle('show') : loginModal.classList.add('active'));
-    logoutBtn.addEventListener('click', () => {
-      currentUser = null;
-      localStorage.removeItem('currentBypassUser');
-      chatHistory = [];
+    const response = await bypassLink(text);
+    removeTypingIndicator();
+
+    const isError = response.startsWith('Error:');
+    addMessage('bot', response, isError);
+    chatHistory.push({ sender: 'bot', text: response, isError });
+    chatHistory = chatHistory.slice(-MAX_HISTORY);
+    saveChat();
+  };
+
+  // =============== LOGIN SYSTEM ===============
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('discord-username').value.trim();
+    const password = document.getElementById('login-password').value;
+    const remember = document.getElementById('remember-checkbox').checked;
+    const statusEl = document.getElementById('login-status');
+    const errorEl = document.getElementById('login-error');
+
+    if (!username || !password) {
+      errorEl.textContent = 'Please fill all fields';
+      return;
+    }
+
+    errorEl.textContent = '';
+    statusEl.textContent = 'Processing...';
+
+    setTimeout(() => {
+      if (users[username] && users[username].password !== password) {
+        errorEl.textContent = 'Invalid password';
+        statusEl.textContent = '';
+        return;
+      }
+
+      if (!users[username]) {
+        users[username] = { password, messageCount: 0 };
+        saveUsers();
+        statusEl.textContent = 'Account created!';
+      } else {
+        statusEl.textContent = 'Welcome back!';
+      }
+
+      currentUser = username;
+      if (remember) localStorage.setItem('currentBypassUser', username);
+      else localStorage.removeItem('currentBypassUser');
+
+      chatHistory = loadChat();
       updateUI();
       renderChatHistory();
+      loginModal.classList.remove('active');
+      setTimeout(() => statusEl.textContent = '', 2000);
+    }, 800);
+  });
+
+  // =============== AVATAR & DROPDOWN ===============
+  userAvatar.addEventListener('click', () => {
+    if (currentUser) {
+      dropdown.classList.toggle('show');
+    } else {
+      loginModal.classList.add('active');
+    }
+  });
+
+  document.addEventListener('click', e => {
+    if (!userAvatar.contains(e.target) && !dropdown.contains(e.target)) {
       dropdown.classList.remove('show');
-    });
-    exportBtn.addEventListener('click', () => {
-      const blob = new Blob([JSON.stringify(users, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'scripthub_users.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      dropdown.classList.remove('show');
-    });
+    }
+  });
 
-    document.addEventListener('click', e => {
-      if (!userAvatar.contains(e.target) && !dropdown.contains(e.target)) dropdown.classList.remove('show');
-    });
-
-    closeModal.onclick = () => modal.classList.remove('active');
-    modal.onclick = e => { if (e.target === modal) modal.classList.remove('active'); };
-    closeLoginModal.onclick = () => loginModal.classList.remove('active');
-    loginModal.onclick = e => { if (e.target === loginModal) loginModal.classList.remove('active'); };
-
-    document.getElementById('supported-links-btn').addEventListener('click', () => {
-      openModal('Supported Links', `
-        <div class="category"><h4>Key Systems</h4><ul>
-          <li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li>
-        </ul></div>
-        <div class="category"><h4>Ad-Links & Shorteners</h4><ul>
-          <li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li>
-          <li>Arolinks</li><li>Socialwolvez</li><li>Mboost</li><li>Linkify</li><li>Scriptpastebins</li><li>and 40+ more</li>
-        </ul></div>
-        <div class="category"><h4>Paste Services</h4><ul>
-          <li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li>
-        </ul></div>
-      `);
-      dropdown.classList.remove('show');
-    });
-
-    document.getElementById('about-us-btn').addEventListener('click', () => {
-      openModal('About Us', `
-  <div class="about-content">
-
-    <p class="about-title">
-      Script Hub Bypass
-    </p>
-
-    <p class="about-subtitle">
-      A fast, free, and privacy-focused bypass solution built for modern Roblox script hubs.
-    </p>
-
-    <p>
-      Developed by the <strong>Script Hub community</strong>, this tool helps you bypass ad-links and key systems
-      without unnecessary waits or intrusive tracking.
-    </p>
-
-    <p>
-      No user data is stored on servers. The platform is designed with a privacy-first mindset,
-      ensuring a smooth, transparent, and secure experience for everyone.
-    </p>
-
-    <p class="about-credit">
-      Created and maintained by <strong>Akash</strong> <span>(Discord: <b>akash5608</b>)</span>
-    </p>
-
-    <p class="about-footer">
-      <strong>Built by the community, for the community.</strong>
-    </p>
-
-  </div>
-`);
-      dropdown.classList.remove('show');
-    });
-
-    const openModal = (title, content) => {
-      modalTitle.textContent = title;
-      modalBody.innerHTML = content;
-      modal.classList.add('active');
-    };
-
-    userInput.addEventListener('input', () => {
-      userInput.style.height = '52px';
-      userInput.style.height = `${userInput.scrollHeight}px`;
-      sendBtn.disabled = !userInput.value.trim();
-    });
-    userInput.addEventListener('keydown', e => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        handleSend();
-      }
-    });
-    sendBtn.addEventListener('click', handleSend);
-    clearBtn.addEventListener('click', clearChat);
-
-    const savedUser = localStorage.getItem('currentBypassUser');
-    if (savedUser && users[savedUser]) currentUser = savedUser;
+  logoutBtn.addEventListener('click', () => {
+    currentUser = null;
+    chatHistory = [];
+    localStorage.removeItem('currentBypassUser');
     updateUI();
     renderChatHistory();
-  </script>
+    dropdown.classList.remove('show');
+  });
+
+  exportBtn.addEventListener('click', () => {
+    const blob = new Blob([JSON.stringify(users, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'scripthub_users.json';
+    a.click();
+    URL.revokeObjectURL(url);
+    dropdown.classList.remove('show');
+  });
+
+  // =============== MODALS ===============
+  document.getElementById('supported-links-btn').addEventListener('click', () => {
+    modalTitle.textContent = 'Supported Links';
+    modalBody.innerHTML = `
+      <div class="category"><h4>Key Systems</h4><ul>
+        <li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li>
+      </ul></div>
+      <div class="category"><h4>Ad-Links & Shorteners</h4><ul>
+        <li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li>
+        <li>and 40+ more</li>
+      </ul></div>
+      <div class="category"><h4>Paste Services</h4><ul>
+        <li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li>
+      </ul></div>
+    `;
+    modal.classList.add('active');
+    dropdown.classList.remove('show');
+  });
+
+  document.getElementById('about-us-btn').addEventListener('click', () => {
+    modalTitle.textContent = 'About Us';
+    modalBody.innerHTML = `
+      <div class="about-content">
+        <p class="about-title">Script Hub Bypass</p>
+        <p class="about-subtitle">A fast, free, and privacy-focused bypass solution built for modern Roblox script hubs.</p>
+        <p>Developed by the <strong>Script Hub community</strong>, this tool helps you bypass ad-links and key systems without unnecessary waits or intrusive tracking.</p>
+        <p>No user data is stored on servers. Everything is saved locally in your browser.</p>
+        <p class="about-credit">Created and maintained by <strong>Akash</strong> <span>(Discord: <b>akash5608</b>)</span></p>
+        <p class="about-footer"><strong>Built by the community, for the community.</strong></p>
+      </div>
+    `;
+    modal.classList.add('active');
+    dropdown.classList.remove('show');
+  });
+
+  closeModal.onclick = () => modal.classList.remove('active');
+  closeLoginModal.onclick = () => loginModal.classList.remove('active');
+  modal.onclick = e => { if (e.target === modal) modal.classList.remove('active'); };
+  loginModal.onclick = e => { if (e.target === loginModal) loginModal.classList.remove('active'); };
+
+  // =============== INPUT & BUTTONS ===============
+  userInput.addEventListener('input', () => {
+    userInput.style.height = '52px';
+    userInput.style.height = `${userInput.scrollHeight}px`;
+    sendBtn.disabled = !userInput.value.trim();
+  });
+
+  userInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  });
+
+  sendBtn.addEventListener('click', handleSend);
+  clearBtn.addEventListener('click', clearChat);
+
+  // =============== INITIAL LOAD ===============
+  const initApp = () => {
+    const savedUser = localStorage.getItem('currentBypassUser');
+    if (savedUser && users[savedUser]) {
+      currentUser = savedUser;
+      chatHistory = loadChat();
+    }
+    updateUI();
+    renderChatHistory();
+  };
+
+  initApp();
+</script>
 </body>
 </html>
-
