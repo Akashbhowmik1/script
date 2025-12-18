@@ -197,6 +197,25 @@
       object-fit: cover;
     }
 
+    /* ===== Login button state (before login) ===== */
+#user-avatar.login-btn {
+  width: auto;
+  height: 40px;
+  padding: 0 18px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+}
+
+/* Hover effect */
+#user-avatar.login-btn:hover {
+  transform: scale(1.06);
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.6);
+}
+
+
     .dropdown-menu {
       position: absolute;
       top: 48px;
@@ -892,7 +911,10 @@
           </a>
         </div>
         <div class="top-right-menu">
-          <div id="user-avatar" title="Click to login">U</div>
+          <div id="user-avatar" class="login-btn" title="Click to login">
+           Login
+          </div>
+
           <div class="dropdown-menu" id="dropdown-menu">
             <button id="supported-links-btn">Supported Links</button>
             <button id="about-us-btn">About Us</button>
@@ -1046,14 +1068,17 @@
 
   // =============== UI FUNCTIONS ===============
   const updateAvatar = () => {
-    if (!currentUser) {
-      userAvatar.innerHTML = 'U';
-      userAvatar.classList.remove('online');
-    } else {
-      userAvatar.innerHTML = `<img src="${USER_AVATAR_URL}" alt="${currentUser}">`;
-      userAvatar.classList.add('online');
-    }
-  };
+  if (!currentUser) {
+    userAvatar.textContent = 'Login';
+    userAvatar.classList.add('login-btn');
+    userAvatar.classList.remove('online');
+  } else {
+    userAvatar.innerHTML = `<img src="${USER_AVATAR_URL}" alt="${currentUser}">`;
+    userAvatar.classList.remove('login-btn');
+    userAvatar.classList.add('online');
+  }
+};
+
 
   const updateUI = () => {
     updateAvatar();
