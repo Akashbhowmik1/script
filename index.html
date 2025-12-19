@@ -4,39 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>ScriptHub.fun - Free Roblox Scripts, Executors & Hacks</title>
-    <!-- Poppins Font -->
-    <link rel="website icon" type="image/jpg" href="/scripthub/assets/title.png" alt="ScriptHub Roblox Scripts Icon">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/scripthub/assets/title.png" alt="ScriptHub Roblox Scripts Icon">
+    
+    <!-- Google Fonts - Poppins (only one link needed) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
     <!-- Highlight.js for syntax highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/lua.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Meta tags -->
     <meta name="keywords" content="roblox scripts, free roblox scripts, roblox hacks, roblox executors, blox fruits script, adopt me script, brookhaven hacks, arsenal cheats, pet simulator x script, roblox script hub, keyless roblox exploits, safe roblox scripts, roblox game mods, anime fighting simulator script" />
     <meta name="description" content="ScriptHub.fun: Get the best free Roblox scripts, executors, and hacks for games like Blox Fruits, Adopt Me, Brookhaven, and more. 100% safe, keyless, and updated daily for ultimate Roblox cheating and modding." />
     <meta name="google-site-verification" content="0z3NeCZiYD_LQb6kj_y4O-Y7zLwrEZFuu2oEdBEh9dw" />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href="https://scripthub.fun/" />
+    
     <!-- Open Graph Meta Tags -->
     <meta property="og:title" content="ScriptHub.fun - Free Roblox Scripts & Hacks" />
     <meta property="og:description" content="Discover free Roblox scripts, executors, and game hacks at ScriptHub.fun. Safe and updated for popular games like Blox Fruits and Adopt Me." />
     <meta property="og:image" content="https://scripthub.fun/assets/title.png" />
     <meta property="og:url" content="https://scripthub.fun/" />
     <meta property="og:type" content="website" />
+    
     <meta name="bitmedia-site-verification" content="ed254df71ef30644ba9658997f4b3ad5" />
-    <script type="text/javascript" data-cfasync="false">
+    
+    <!-- Ad / Analytics Scripts (fixed - no nested <script> tags) -->
     <script src="https://fpyf8.com/88/tag.min.js" data-zone="156729" async data-cfasync="false"></script>
-    <script>(function(s){s.dataset.zone='9558028',s.src='https://gizokraijaw.net/vignette.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>
-    <script>(function(s){s.dataset.zone='10127539',s.src='https://al5sm.com/tag.min.js'})([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')))</script>    
+    <script>
+        (function(s) {
+            s.dataset.zone = '9558028';
+            s.src = 'https://gizokraijaw.net/vignette.min.js';
+        })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    </script>
+    <script>
+        (function(s) {
+            s.dataset.zone = '10127539';
+            s.src = 'https://al5sm.com/tag.min.js';
+        })([document.documentElement, document.body].filter(Boolean).pop().appendChild(document.createElement('script')));
+    </script>
     <script src="https://fpyf8.com/88/tag.min.js" data-zone="182197" async data-cfasync="false"></script>
-
-    <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3db1c187868f49b89511065631773273"}'></script><!-- End Cloudflare Web Analytics -->
-</script>
+    
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3db1c187868f49b89511065631773273"}'></script>
+    
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Custom CSS & JS -->
     <link rel="stylesheet" href="/scripthub/style.css">
     <link rel="stylesheet" href="/scripthub/assets/timer.css">
     <script defer src="/scripthub/assets/timer.js"></script>
@@ -130,6 +151,7 @@
             <button id="nextPage" aria-label="Next page">Next <i class="fas fa-chevron-right"></i></button>
         </div>
     </div>
+    
     <!-- Overlay Menu -->
     <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
         <div class="overlay-content">
@@ -144,6 +166,7 @@
             <button id="aboutBtn" aria-label="About us"><i class="fas fa-info-circle"></i> About</button>
         </div>
     </div>
+    
     <!-- Modal for displaying script details -->
     <div id="scriptModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
@@ -154,6 +177,7 @@
             <pre><code id="modalCode" class="lua"></code></pre>
         </div>
     </div>
+    
     <!-- Modal for About section -->
     <div id="aboutModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
@@ -162,6 +186,7 @@
             <p>We are a passionate team of script developers dedicated to enhancing the Roblox gaming experience. With a deep love for coding and gaming, we create innovative, reliable, and user-friendly scripts for popular Roblox games like Blox Fruits, Adopt Me, and more. Our mission is to empower players with tools that make gameplay more exciting and rewarding. Join our growing community on YouTube and Discord to stay updated on the latest scripts, share feedback, and connect with fellow Roblox enthusiasts!</p>
         </div>
     </div>
+    
     <!-- Modal for Contact Us -->
     <div id="contactModal" class="modal" role="dialog" aria-modal="true" tabindex="-1">
         <div class="modal-content">
@@ -175,8 +200,3 @@
     </div>
 </body>
 </html>
-
-
-
-
-
