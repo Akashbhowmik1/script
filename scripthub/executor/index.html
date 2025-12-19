@@ -991,11 +991,15 @@
   const API_ENDPOINT = 'https://steep-pine-9afc.akashbhowmik110.workers.dev/bypass';
   const ADMIN_USERNAME = 'Akashadmin123';
   const USER_AVATAR_URL = 'https://www.pngitem.com/pimgs/m/22-220721_circled-user-male-type-user-colorful-icon-png.png';
+  const ANALYTICS_ENDPOINT = 'https://user-listd638.akashbhowmik110.workers.dev/track';
 
   let currentUser = null;
   let chatHistory = [];
   const MAX_HISTORY = 50;
   const CHAT_VERSION = 4;
+
+
+    
 
   // =============== STORAGE FUNCTIONS ===============
   const getChatKey = () => currentUser ? `scripthub_chat_v${CHAT_VERSION}_${currentUser}` : null;
@@ -1229,53 +1233,60 @@
 
 
 
-  // =============== MAIN SEND HANDLER (FIXED) ===============
-  const handleSend = async () => {
-    if (!currentUser) return;
+  // =============== MAIN SEND HANDLER (FINAL FIXED) ===============
+const handleSend = async () => {
+  if (!currentUser) return;
 
-    const text = userInput.value.trim();
-    if (!text) return;
+  const text = userInput.value.trim();
+  if (!text) return;
 
-    // Always save user's message (valid or invalid)
-    addMessage('user', text);
-    chatHistory.push({ sender: 'user', text });
+  // Always save user's message locally
+  addMessage('user', text);
+  chatHistory.push({ sender: 'user', text });
+  chatHistory = chatHistory.slice(-MAX_HISTORY);
+  saveChat();
+
+  // Update local message count
+  users[currentUser] = users[currentUser] || { messageCount: 0 };
+  users[currentUser].messageCount++;
+  saveUsers();
+
+  // Clear input UI
+  userInput.value = '';
+  userInput.style.height = '52px';
+  sendBtn.disabled = true;
+
+  // ❌ Validate URL FIRST
+  if (!/^https?:\/\//i.test(text)) {
+    const errorMsg = 'Please enter a valid URL starting with http:// or https://';
+    addMessage('bot', errorMsg, true);
+    chatHistory.push({ sender: 'bot', text: errorMsg, isError: true });
     chatHistory = chatHistory.slice(-MAX_HISTORY);
     saveChat();
+    return;
+  }
 
-    // Update message count
-    users[currentUser] = users[currentUser] || { messageCount: 0 };
-    users[currentUser].messageCount++;
-    saveUsers();
+  // ✅ GLOBAL ANALYTICS (ONLY FOR VALID LINKS)
+  fetch(ANALYTICS_ENDPOINT, {
 
-    // Check for valid URL
-    if (!/^https?:\/\//i.test(text)) {
-      const errorMsg = 'Please enter a valid URL starting with http:// or https://';
-      addMessage('bot', errorMsg, true);
-      chatHistory.push({ sender: 'bot', text: errorMsg, isError: true });
-      chatHistory = chatHistory.slice(-MAX_HISTORY);
-      saveChat();
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ username: currentUser })
+  }).catch(() => {});
 
-      userInput.value = '';
-      userInput.style.height = '52px';
-      sendBtn.disabled = true;
-      return;
-    }
+  // Valid URL → proceed with bypass
+  addTypingIndicator();
 
-    // Valid URL → proceed with bypass
-    userInput.value = '';
-    userInput.style.height = '52px';
-    sendBtn.disabled = true;
-    addTypingIndicator();
+  const response = await bypassLink(text);
+  removeTypingIndicator();
 
-    const response = await bypassLink(text);
-    removeTypingIndicator();
-
-    const isError = response.startsWith('Error:');
-    addMessage('bot', response, isError);
-    chatHistory.push({ sender: 'bot', text: response, isError });
-    chatHistory = chatHistory.slice(-MAX_HISTORY);
-    saveChat();
-  };
+  const isError = response.startsWith('Error:');
+  addMessage('bot', response, isError);
+  chatHistory.push({ sender: 'bot', text: response, isError });
+  chatHistory = chatHistory.slice(-MAX_HISTORY);
+  saveChat();
+};
+     
 
   // =============== LOGIN SYSTEM ===============
   document.getElementById('login-form').addEventListener('submit', e => {
@@ -1428,5 +1439,3 @@
 </script>
 </body>
 </html>
-
-
