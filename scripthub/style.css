@@ -232,6 +232,16 @@ header {
     to { opacity: 1; transform: translate(-50%, 0); }
 }
 
+/* ============================= */
+/* Desktop-only adjustments */
+/* ============================= */
+@media (min-width: 1024px) {
+    .top-center-text {
+        top: clamp(8px, 2.5vw, 20px);     /* move up slightly */
+        font-size: clamp(24px, 4vw, 42px); /* slightly smaller text */
+    }
+}
+
 /* Form inputs and selects */
 #searchInput, #gameFilter, #categoryFilter, #sortFilter {
     padding: clamp(12px, 2vw, 16px);
@@ -324,16 +334,22 @@ html[data-theme="light"] #searchInput::placeholder {
     box-shadow: 0 8px 20px rgba(0, 255, 204, 0.5);
 }
 
-/* Code button */
+/* ============================= */
+/* Code Button (Default = Mobile) */
+/* ============================= */
 .code-button {
     position: absolute;
     top: 6.6rem;
-    left: 9rem;
+    left: 9rem; /* MOBILE position stays same */
     padding: 14px 28px;
     font-size: clamp(16px, 2vw, 18px);
     font-weight: 600;
     color: var(--dark, #0a0a0a);
-    background: linear-gradient(45deg, var(--primary, #00ffcc), var(--primary-dark, #00d1aa));
+    background: linear-gradient(
+        45deg,
+        var(--primary, #00ffcc),
+        var(--primary-dark, #00d1aa)
+    );
     border: none;
     border-radius: 12px;
     text-decoration: none;
@@ -346,7 +362,28 @@ html[data-theme="light"] #searchInput::placeholder {
     transform: translate(-50%, -50%);
 }
 
-/* Hover and active effects */
+/* ============================= */
+/* Desktop / PC positioning */
+/* ============================= */
+@media (min-width: 1024px) {
+    .code-button {
+        left: 60%;              /* Center horizontally */
+        top: 10.2rem;              /* Optional fine-tune */
+        transform: translateX(-50%);
+    }
+
+    .code-button:hover {
+        transform: translateX(-50%) translateY(-6px) scale(1.05);
+    }
+
+    .code-button:active {
+        transform: translateX(-50%) scale(0.95);
+    }
+}
+
+/* ============================= */
+/* Hover and active effects (Mobile) */
+/* ============================= */
 .code-button:hover {
     transform: translate(-50%, -52%) scale(1.05);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
