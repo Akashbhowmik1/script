@@ -964,7 +964,7 @@
                             <p style="color: var(--text-secondary);">Your link is ready! Share it with your audience.</p>
                             <div class="qr-code">
                                 <canvas id="qrCanvas"></canvas>
-                                <p id="publishUrl" style="color: var(--text-muted);">https://yoursite.com/unlock/your-slug</p>
+                                <p id="publishUrl" style="color: var(--text-muted);">https://scripthub.fun/bypass/sub.html/unlock/your-slug</p>
                                 <button onclick="navigator.clipboard.writeText(document.getElementById('publishUrl').textContent); alert('Copied!');" class="btn-primary mt-4">Copy Link</button>
                             </div>
                             <div class="flex justify-between mt-8">
@@ -1415,11 +1415,11 @@
                                     <div>
                                         <h4 class="font-medium mb-1" style="color: var(--text-primary);">${link.title}</h4>
                                         <p class="text-sm" style="color: var(--text-muted);">Views: ${linkViews} | Unlocks: ${linkUnlocks}</p>
-                                        <p class="text-xs" style="color: var(--text-muted);">https://yoursite.com/unlock/${link.slug}</p>
+                                        <p class="text-xs" style="color: var(--text-muted);">https://scripthub.fun/bypass/sub.html/unlock/${link.slug}</p>
                                         <span class="status-badge ${badgeClass} mt-2 inline-block">${isExpired ? 'Expired' : status.charAt(0).toUpperCase() + status.slice(1)}</span>
                                     </div>
                                     <div class="flex space-x-2">
-                                        <button onclick="navigator.clipboard.writeText('https://yoursite.com/unlock/${link.slug}'); alert('Copied!');" class="btn-primary px-4 py-2 text-sm">Copy</button>
+                                        <button onclick="navigator.clipboard.writeText('https://scripthub.fun/bypass/sub.html/unlock/${link.slug}'); alert('Copied!');" class="btn-primary px-4 py-2 text-sm">Copy</button>
                                         <button onclick="App.analytics.showForLink('${link._id}')" class="btn-secondary px-4 py-2 text-sm">Analytics</button>
                                         <button onclick="App.links.toggleStatus('${link._id}')" class="btn-secondary px-4 py-2 text-sm">${status === 'paused' ? 'Resume' : 'Pause'}</button>
                                     </div>
