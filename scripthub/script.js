@@ -386,6 +386,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     dateAdded: "2025-12-12"
 },
 
+    {
+    name: "Bee Swarm Simulator Script",
+    game: "Bee Swarm Simulator",
+    category: "Simulation",
+    description: "A powerful script for Bee Swarm Simulator, featuring farming, quests, and quality-of-life enhancements.",
+    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`,
+    popularity: 92,
+    dateAdded: "2025-12-31"
+}
+
 
 
 
@@ -913,6 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
