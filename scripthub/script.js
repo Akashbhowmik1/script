@@ -372,7 +372,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     game: "The Forge",
     category: "Simulation",
     description: "A script for The Forge providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://haze.wtf/api/script"))()`,
+    code: `loadstring(game:HttpGet("https://getgold.cc"))()`,
     popularity: 0,
     dateAdded: "2025-12-09"
 },
@@ -923,6 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
