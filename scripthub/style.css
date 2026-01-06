@@ -68,7 +68,7 @@
   --font-md: clamp(16px, 1.8vw, 18px);
   --font-lg: clamp(20px, 2.5vw, 26px);
   --font-xl: clamp(28px, 4vw, 42px);
-   --card-radius: 20px;
+  --card-radius: 20px;
   --card-radius-lg: 24px;
   --glass-bg: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
   --panel-border: rgba(255,255,255,0.06);
@@ -169,7 +169,6 @@ body {
             #06080f 100%
         );
 
-    background-attachment: fixed;
     background-size: cover;
 
     color: var(--light, #ffffff);
@@ -199,13 +198,35 @@ body::before {
     z-index: -1;
 }
 
-/* Smooth, subtle motion */
-@keyframes lights {
-    0%   { background-position: 0% 50%; }
-    50%  { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.bg-animation::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.25);
 }
 
+.blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(140px);
+    opacity: 0.18;
+
+    will-change: transform;
+    animation: blobFloat 28s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .blob {
+        filter: blur(100px);
+        opacity: 0.14;
+    }
+    body {
+        background-size: auto;
+    }
+    body::before {
+        display: none;
+    }
+}
 
 /* Buttons and inputs: better UX on touch devices */
 button,
@@ -242,9 +263,6 @@ body::-webkit-scrollbar-thumb {
     z-index: -1;
     overflow: hidden;
 
-    /* Soft blur for depth */
-    filter: blur(0px);
-
     /* Prevent GPU jank */
     will-change: transform, opacity;
 
@@ -265,8 +283,6 @@ body::-webkit-scrollbar-thumb {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.25);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 }
 
 
@@ -275,8 +291,8 @@ body::-webkit-scrollbar-thumb {
 .blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(140px);
-    opacity: 0.18;
+    filter: blur(80px);
+    opacity: 0.12;
 
     will-change: transform;
     animation: blobFloat 28s ease-in-out infinite;
@@ -335,15 +351,6 @@ body::-webkit-scrollbar-thumb {
     }
 }
 
-@media (max-width: 768px) {
-    .blob {
-        filter: blur(100px);
-        opacity: 0.14;
-    }
-}
-
-
-
 /* Premium container for large screens */
 .container {
     max-width: min(92%, 1360px);
@@ -361,7 +368,6 @@ body::-webkit-scrollbar-thumb {
 }
 .container--floating {
     background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(6px);
     border-radius: 24px;
 }
 
@@ -487,9 +493,6 @@ header {
             rgba(255, 255, 255, 0.10),
             rgba(255, 255, 255, 0.04)
         );
-
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
 
     color: var(--light, #ffffff);
 
@@ -765,8 +768,6 @@ html[data-theme="light"] #sortFilter {
 
     background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
     border: 1px solid rgba(255,255,255,0.04);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
 
     color: var(--light, #ffffff);
     font-size: clamp(1.75rem, 4vw, 2.4rem);
@@ -871,7 +872,6 @@ html[data-theme="light"] #sortFilter {
     width: 100%;
     height: 100%;
     background: var(--glass-dark, rgba(0, 0, 0, 0.4));
-    backdrop-filter: blur(var(--blur, 12px));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -965,9 +965,6 @@ html[data-theme="light"] #sortFilter {
     box-shadow:
         0 10px 30px rgba(2,6,8,0.55),
         0 2px 6px rgba(255,255,255,0.02) inset;
-
-    backdrop-filter: blur(var(--blur, 12px));
-    -webkit-backdrop-filter: blur(var(--blur, 12px));
 
     border: 1px solid rgba(255,255,255,0.06);
     animation: slideUpPremium 0.72s ease-out both;
@@ -1105,8 +1102,6 @@ html[data-theme="light"] #sortFilter {
   background: var(--glass-bg);
   border-radius: var(--card-radius-lg);
   padding: clamp(20px, 3.8vw, 34px);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--panel-border);
   box-shadow: var(--shadow-deep), inset 0 1px 0 rgba(255,255,255,0.02);
   transition:
@@ -1301,7 +1296,6 @@ html[data-theme="light"] #sortFilter {
     letter-spacing: 0.5px;
     line-height: 1.5;
     padding: 0 clamp(10px, 3vw, 20px);
-    backdrop-filter: blur(4px);
 }
 
 /* Optional subtle glow on dark backgrounds */
@@ -1392,7 +1386,6 @@ html[data-theme="light"] #sortFilter {
     box-shadow: var(--shadow, 0 10px 30px rgba(0, 0, 0, 0.5));
     position: relative;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(var(--blur, 12px));
 }
 
 .modal-content h2 {
@@ -1555,7 +1548,6 @@ html[data-theme="light"] #sortFilter {
     animation: fadeIn 0.8s ease-out forwards;
     font-weight: 600;
     letter-spacing: 0.3px;
-    backdrop-filter: blur(3px);
 }
 
 /* Premium spinning loader */
@@ -1753,8 +1745,8 @@ html[data-theme="light"] .copy-btn {
     }
     .blob {
         animation: none;
-        filter: blur(40px);
-        opacity: 0.2;
+        filter: blur(60px);
+        opacity: 0.1;
     }
     .filter-bar, .overlay-menu, .modal-content, .top-center-text {
         backdrop-filter: none;
@@ -1825,6 +1817,48 @@ html[data-theme="light"] .copy-btn {
     .code-button:active {
         transform: translateX(-50%) scale(1.05);
     }
+    /* Further optimizations for performance */
+    .script-card:hover,
+    .script-card:focus-within {
+        transform: none;
+        box-shadow: var(--shadow-deep);
+    }
+    .script-card button:hover,
+    .script-card button:focus {
+        transform: none;
+    }
+    .executor-button:hover,
+    .executor-button:active {
+        transform: none;
+    }
+    .code-button:hover,
+    .code-button:active {
+        transform: none;
+    }
+    .close-btn:hover,
+    .close-btn:active {
+        transform: none;
+    }
+    .copy-btn:hover,
+    .copy-btn:active {
+        transform: none;
+    }
+    .overlay-content a:hover,
+    .overlay-content button:hover {
+        transform: none;
+    }
+    .pagination button:hover {
+        transform: none;
+    }
+    .favorite-toggle:hover {
+        transform: none;
+    }
+    .filter-bar .filter-item:hover {
+        transform: none;
+    }
+    .hamburger:hover {
+        transform: none;
+    }
 }
 
 /* Small mobile devices (up to 480px) */
@@ -1846,8 +1880,8 @@ html[data-theme="light"] .copy-btn {
         width: 95%;
     }
     .executor-button {
-        font-size: 14px;
         padding: 10px 20px;
+        font-size: 14px;
         min-width: 90px;
     }
     .hamburger {
