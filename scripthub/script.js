@@ -25,11 +25,11 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-10-15"
     },
     {
-        name: "Brookhaven Exploit script",
+        name: "Brookhaven  script",
         game: "Brookhaven",
         category: "Roleplay",
         description: "All-in-one script for unlocking key Brookhaven features and tools in one place.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OpenSourceEngine/Script/refs/heads/main/Brookhaven.lua"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/as6cd0/SP_Hub/refs/heads/main/Brookhaven"))()`,
         popularity: 85,
         dateAdded: "2025-03-20"  
     },
@@ -923,6 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
