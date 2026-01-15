@@ -227,7 +227,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Murder Mystery 2",
         category: "Action",
         description: "A script for Murder Mystery 2 to automatically win rounds.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/C Gomez/Official/refs/heads/main/freemium"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/j8nzi/project/refs/heads/main/main.lua", true))()`,
         popularity: 85,
         dateAdded: "2025-05-20"
     },
@@ -923,6 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
