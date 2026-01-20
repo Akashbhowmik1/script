@@ -20,7 +20,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Adopt Me",
         category: "Simulation",
         description: "A script for Adopt Me with pet auto-collect.",
-        code: `loadstring(game:HttpGet(request({Url='https://aussie.productions/script'}).Body))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/jazzedd/JazradScript/refs/heads/main/Script"))()`,
         popularity: 90,
         dateAdded: "2025-10-15"
     },
@@ -923,6 +923,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
