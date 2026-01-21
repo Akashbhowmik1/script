@@ -394,7 +394,20 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`,
     popularity: 92,
     dateAdded: "2025-12-31"
-}
+},
+
+    
+    {
+        name: "Escape Tsunami for Brainrots Script",
+        game: "Escape Tsunami for Brainrots",
+        category: "Simulation",
+        description: "A script for Escape Tsunami for Brainrots with automation and gameplay enhancements.",
+        code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/832af29a13a41951e31129a974a1e8cc.lua"))()',
+        popularity: 90,
+        dateAdded: "2026-01-21"
+    },
+
+
 
 
 
@@ -923,6 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
