@@ -119,7 +119,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Jujutsu Shenanigans",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/PawsThePaw/Plutonium.AA/main/Plutonium.Loader.lua", true))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))()`,
         popularity: 70,
         dateAdded: "2025-05-03"
     },
@@ -936,6 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
