@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Professional assignment help services for school and college students. Affordable, confidential, and on-time delivery.">
+    <meta name="keywords" content="assignment help, school assignments, college assignments, educational assistance, homework help">
+    <title>Assignment Help Services - Professional Academic Support</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+    :root {
+        /* Educational Theme Colors */
+        --primary: #2563eb; /* Trustworthy blue for learning */
+        --secondary: #7c3aed; /* Creative purple for innovation */
+        --accent: #f59e0b; /* Energetic amber for highlights */
+        --success: #10b981; /* Green for growth/success */
+        --light-blue: #e0f2fe; /* Soft blue for backgrounds */
+        --light-purple: #f5f3ff; /* Soft purple for accents */
+        --dark: #1e293b; /* Dark text */
+        --gray: #64748b; /* Gray text */
+        --bg-gradient: linear-gradient(135deg, #e0f2fe 0%, #f5f3ff 100%);
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --shadow: rgba(0, 0, 0, 0.08);
+        --hover-shadow: rgba(37, 99, 235, 0.15);
+    }
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+        background: var(--bg-gradient);
+        color: var(--dark);
+        line-height: 1.6;
+        font-size: 16px;
+        overflow-x: hidden;
+        min-height: 100vh;
+    }
+
+    /* Background pattern for educational theme */
+    body::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: 
+            radial-gradient(circle at 20% 80%, rgba(124, 58, 237, 0.05) 0%, transparent 20%),
+            radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.05) 0%, transparent 20%),
+            radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.03) 0%, transparent 30%);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    /* Reduced motion preference */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation: none !important;
+            transition: none !important;
+        }
+    }
+
+    /* NAVIGATION */
+    nav {
+        background: var(--card-bg);
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        padding: 1.2rem 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .nav-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        text-decoration: none;
+    }
+
+    .logo-icon {
+        color: var(--secondary);
+    }
+
+    .nav-links {
+        display: flex;
+        list-style: none;
+        gap: 2.5rem;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--dark);
+        font-weight: 600;
+        position: relative;
+        padding: 0.5rem 0;
+        transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: var(--secondary);
+        border-radius: 10px;
+        transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+        color: var(--primary);
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    /* Mobile menu button */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.8rem;
+        color: var(--primary);
+        cursor: pointer;
+    }
+
+    /* HEADER */
+    header {
+        padding: 8rem 2rem 6rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        max-width: 1280px;
+        margin: 0 auto;
+    }
+
+    .header-content {
+        position: relative;
+        z-index: 2;
+        animation: fadeInUp 1s ease-out;
+    }
+
+    .header-title {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        line-height: 1.2;
+    }
+
+    .header-subtitle {
+        font-size: 1.3rem;
+        color: var(--gray);
+        max-width: 700px;
+        margin: 0 auto 2.5rem;
+        font-weight: 400;
+    }
+
+    .cta-container {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .cta {
+        display: inline-block;
+        padding: 1.2rem 2.5rem;
+        border-radius: 50px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+    }
+
+    .cta-primary {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+    }
+
+    .cta-secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+
+    .cta:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+    }
+
+    .cta-secondary:hover {
+        background: rgba(37, 99, 235, 0.05);
+    }
+
+    /* Floating elements in header */
+    .floating-element {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        z-index: 1;
+        animation: float 6s ease-in-out infinite;
+    }
+
+    .floating-element:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+        left: 10%;
+        animation-delay: 0s;
+        background: rgba(124, 58, 237, 0.1);
+    }
+
+    .floating-element:nth-child(2) {
+        width: 120px;
+        height: 120px;
+        bottom: 20%;
+        right: 10%;
+        animation-delay: 2s;
+        background: rgba(37, 99, 235, 0.1);
+    }
+
+    .floating-element:nth-child(3) {
+        width: 60px;
+        height: 60px;
+        top: 40%;
+        right: 15%;
+        animation-delay: 4s;
+        background: rgba(245, 158, 11, 0.1);
+    }
+
+    /* SECTIONS */
+    section {
+        padding: 5rem 2rem;
+        margin: 2rem auto;
+        max-width: 1280px;
+    }
+
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        position: relative;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: var(--dark);
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    .section-title p {
+        color: var(--gray);
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .title-decoration {
+        width: 80px;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+        border-radius: 10px;
+        margin: 1rem auto;
+    }
+
+    /* SERVICES */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+    }
+
+    .service-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem 2rem;
+        text-align: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: linear-gradient(90deg, var(--primary), var(--secondary));
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px var(--hover-shadow);
+    }
+
+    .service-icon {
+        font-size: 3rem;
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+    }
+
+    .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .service-card p {
+        color: var(--gray);
+    }
+
+    /* HOW IT WORKS & WHY US */
+    .process-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        margin-top: 2rem;
+    }
+
+    .process-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px var(--shadow);
+        transition: transform 0.3s ease;
+    }
+
+    .process-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .process-card h3 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .process-card ul {
+        list-style: none;
+    }
+
+    .process-card ul li {
+        margin-bottom: 1rem;
+        padding-left: 2rem;
+        position: relative;
+        color: var(--dark);
+    }
+
+    .process-card ul li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--success);
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    /* PRICING */
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .pricing-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 3rem 2rem;
+        text-align: center;
+        transition: all 0.4s ease;
+        box-shadow: 0 10px 30px var(--shadow);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .pricing-card.popular {
+        border: 2px solid var(--primary);
+        transform: scale(1.05);
+    }
+
+    .popular-badge {
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        background: var(--accent);
+        color: white;
+        padding: 0.5rem 1.5rem;
+        border-radius: 0 0 10px 10px;
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+
+    .price {
+        font-size: 3.5rem;
+        font-weight: 800;
+        color: var(--dark);
+        margin: 1.5rem 0;
+    }
+
+    .price span {
+        font-size: 1.5rem;
+        color: var(--gray);
+    }
+
+    .pricing-features {
+        list-style: none;
+        margin: 2rem 0;
+        text-align: left;
+    }
+
+    .pricing-features li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+    }
+
+    .pricing-features li:last-child {
+        border-bottom: none;
+    }
+
+    .feature-check {
+        color: var(--success);
+        margin-right: 0.8rem;
+        font-size: 1.2rem;
+    }
+
+    /* TESTIMONIALS */
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .testimonial-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px var(--shadow);
+        transition: all 0.4s ease;
+        position: relative;
+    }
+
+    .testimonial-card::before {
+        content: '"';
+        position: absolute;
+        top: 1rem;
+        left: 1.5rem;
+        font-size: 5rem;
+        color: var(--primary);
+        opacity: 0.1;
+        font-family: serif;
+        line-height: 1;
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px var(--hover-shadow);
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 2rem;
+        color: var(--dark);
+        position: relative;
+        z-index: 1;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .author-avatar {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: var(--light-blue);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: var(--primary);
+        border: 3px solid var(--primary);
+    }
+
+    .author-info h4 {
+        color: var(--dark);
+        margin-bottom: 0.3rem;
+    }
+
+    .author-info p {
+        color: var(--gray);
+        font-size: 0.9rem;
+    }
+
+    /* BLOG */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .blog-card {
+        background: var(--card-bg);
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px var(--shadow);
+        transition: all 0.4s ease;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px var(--hover-shadow);
+    }
+
+    .blog-image {
+        height: 200px;
+        width: 100%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 4rem;
+    }
+
+    .blog-content {
+        padding: 2rem;
+    }
+
+    .blog-category {
+        display: inline-block;
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+        padding: 0.3rem 1rem;
+        border-radius: 50px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+
+    .blog-content h4 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .blog-content p {
+        color: var(--gray);
+        margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: gap 0.3s;
+    }
+
+    .read-more:hover {
+        gap: 1rem;
+    }
+
+    /* FAQ */
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .faq-item {
+        background: var(--card-bg);
+        border-radius: 15px;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        transition: all 0.3s ease;
+    }
+
+    .faq-item.active {
+        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.1);
+    }
+
+    .faq-question {
+        padding: 1.5rem 2rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: var(--dark);
+        transition: background 0.3s;
+    }
+
+    .faq-question:hover {
+        background: rgba(37, 99, 235, 0.03);
+    }
+
+    .faq-icon {
+        color: var(--primary);
+        font-size: 1.5rem;
+        transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-icon {
+        transform: rotate(45deg);
+    }
+
+    .faq-answer {
+        padding: 0 2rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.5s ease;
+    }
+
+    .faq-item.active .faq-answer {
+        padding: 0 2rem 2rem;
+        max-height: 500px;
+    }
+
+    /* CONTACT */
+    .contact-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+        align-items: start;
+    }
+
+    .contact-info h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+    }
+
+    .contact-details {
+        list-style: none;
+        margin-top: 2rem;
+    }
+
+    .contact-details li {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+        color: var(--gray);
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(37, 99, 235, 0.1);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--primary);
+        font-size: 1.3rem;
+    }
+
+    .contact-form {
+        background: var(--card-bg);
+        padding: 2.5rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px var(--shadow);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--dark);
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        font-size: 1rem;
+        transition: border 0.3s;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: var(--primary);
+    }
+
+    textarea.form-control {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        border-radius: 10px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    /* FOOTER */
+    footer {
+         background: #0f172a; /* deep slate / dark navy */
+         color: #f8fafc;
+        padding: 5rem 2rem 2rem;
+        margin-top: 5rem;
+    }
+
+    .footer-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+    }
+
+    .footer-logo {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .footer-about p {
+        color: rgba(255, 255, 255, 0.7);
+        margin-top: 1rem;
+    }
+
+    .footer-links h4 {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+        position: relative;
+        padding-bottom: 0.5rem;
+    }
+
+    .footer-links h4::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: var(--primary);
+    }
+
+    .footer-links ul {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+        color: rgba(255, 255, 255, 0.7);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: white;
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    .social-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        transition: all 0.3s;
+    }
+
+    .social-link:hover {
+        background: var(--primary);
+        transform: translateY(-3px);
+    }
+
+    .copyright {
+        text-align: center;
+        padding-top: 3rem;
+        margin-top: 3rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.5);
+        font-size: 0.9rem;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(5deg);
+        }
+    }
+
+    /* Staggered animations for cards */
+    .service-card, .pricing-card, .testimonial-card, .blog-card {
+        animation: fadeInUp 0.6s ease-out forwards;
+        opacity: 0;
+    }
+
+    .service-card:nth-child(1) { animation-delay: 0.1s; }
+    .service-card:nth-child(2) { animation-delay: 0.2s; }
+    .service-card:nth-child(3) { animation-delay: 0.3s; }
+    .service-card:nth-child(4) { animation-delay: 0.4s; }
+
+    /* RESPONSIVE DESIGN */
+    /* Tablets */
+    @media (max-width: 992px) {
+        .header-title {
+            font-size: 2.8rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+        }
+        
+        .pricing-card.popular {
+            transform: none;
+        }
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+        nav {
+            padding: 1rem;
+        }
+        
+        .nav-container {
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .nav-links {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+            width: 100%;
+            display: none;
+        }
+        
+        .nav-links.active {
+            display: flex;
+        }
+        
+        .menu-toggle {
+            display: block;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        
+        header {
+            padding: 6rem 1rem 4rem;
+        }
+        
+        .header-title {
+            font-size: 2.2rem;
+        }
+        
+        .header-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        .cta-container {
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .cta {
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+        }
+        
+        section {
+            padding: 3rem 1rem;
+            margin: 1rem auto;
+        }
+        
+        .section-title h2 {
+            font-size: 1.8rem;
+        }
+        
+        .floating-element {
+            display: none;
+        }
+        
+        .service-card, .pricing-card, .testimonial-card, .blog-card {
+            padding: 2rem 1.5rem;
+        }
+        
+        .contact-form {
+            padding: 2rem 1.5rem;
+        }
+        
+        .footer-container {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+        
+        .footer-links h4::after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 480px) {
+        .header-title {
+            font-size: 1.8rem;
+        }
+        
+        .header-subtitle {
+            font-size: 1rem;
+        }
+        
+        .section-title h2 {
+            font-size: 1.6rem;
+        }
+        
+        .service-card, .pricing-card, .testimonial-card, .blog-card {
+            padding: 1.5rem;
+        }
+        
+        .price {
+            font-size: 2.8rem;
+        }
+        
+        .contact-form {
+            padding: 1.5rem;
+        }
+    }
+
+    /* Dark mode support */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --primary: #3b82f6;
+            --secondary: #8b5cf6;
+            --accent: #f59e0b;
+            --dark: #f1f5f9;
+            --gray: #cbd5e1;
+            --light-blue: #0f172a;
+            --light-purple: #1e1b4b;
+            --card-bg: rgba(30, 41, 59, 0.9);
+            --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+        
+        body::before {
+            opacity: 0.3;
+        }
+        
+        .service-card, .pricing-card, .testimonial-card, .blog-card, .contact-form {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .form-control {
+            background: rgba(15, 23, 42, 0.7);
+            color: white;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+    }
+
+    /* Import fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fas fa-graduation-cap logo-icon"></i>
+                AssignmentHelp
+            </a>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#how-it-works">Process</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header id="home">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <div class="header-content">
+            <h1 class="header-title">Professional Assignment Help for Students</h1>
+            <p class="header-subtitle">Get expert assistance with school and college assignments. Affordable, confidential, and delivered on time by academic professionals.</p>
+            
+            <div class="cta-container">
+                <a href="https://wa.me/8798141965" class="cta cta-primary">
+                    <i class="fab fa-whatsapp"></i> Get Help on WhatsApp
+                </a>
+                <a href="#contact" class="cta cta-secondary">
+                    <i class="fas fa-phone-alt"></i> Call Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Services -->
+    <section id="services">
+        <div class="section-title">
+            <h2>Our Services</h2>
+            <p>Comprehensive academic support for all educational levels</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fas fa-book service-icon"></i>
+                <h3>School Assignments</h3>
+                <p>Complete assistance for classes 6-12 across all subjects</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-university service-icon"></i>
+                <h3>College Projects</h3>
+                <p>Professional help with university-level assignments and projects</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-file-alt service-icon"></i>
+                <h3>Essays & Reports</h3>
+                <p>Well-researched and properly formatted academic writing</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-calculator service-icon"></i>
+                <h3>Math & Science</h3>
+                <p>Step-by-step solutions for complex problems</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-code service-icon"></i>
+                <h3>Programming Help</h3>
+                <p>Coding assignments in Java, Python, C++, and more</p>
+            </div>
+            
+            <div class="service-card">
+                <i class="fas fa-chart-bar service-icon"></i>
+                <h3>PPT & Presentations</h3>
+                <p>Professional slides with engaging content and design</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing">
+        <div class="section-title">
+            <h2>Affordable Pricing</h2>
+            <p>Quality assistance at student-friendly prices</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Class 6 – 9</h3>
+                <div class="price">₹50<span>/assignment</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check feature-check"></i> Basic to moderate level work</li>
+                    <li><i class="fas fa-check feature-check"></i> Quick turnaround</li>
+                    <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
+                    <li><i class="fas fa-check feature-check"></i> Simple revisions included</li>
+                </ul>
+                <a href="https://wa.me/8798141965?text=I need help with Class 6-9 assignment" class="cta cta-primary">Get Help Now</a>
+            </div>
+            
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Class 10 – 12</h3>
+                <div class="price">₹70<span>/assignment</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check feature-check"></i> Advanced subjects covered</li>
+                    <li><i class="fas fa-check feature-check"></i> Board exam preparation</li>
+                    <li><i class="fas fa-check feature-check"></i> Detailed explanations</li>
+                    <li><i class="fas fa-check feature-check"></i> Priority support</li>
+                </ul>
+                <a href="https://wa.me/8798141965?text=I need help with Class 10-12 assignment" class="cta cta-primary">Get Help Now</a>
+            </div>
+            
+            <div class="pricing-card">
+                <h3>College / University</h3>
+                <div class="price">Custom<span>/project</span></div>
+                <ul class="pricing-features">
+                    <li><i class="fas fa-check feature-check"></i> Any stream or subject</li>
+                    <li><i class="fas fa-check feature-check"></i> Research-based work</li>
+                    <li><i class="fas fa-check feature-check"></i> Professional formatting</li>
+                    <li><i class="fas fa-check feature-check"></i> Citation and references</li>
+                </ul>
+                <a href="https://wa.me/8798141965?text=I need help with college/university assignment" class="cta cta-primary">Get Quote</a>
+            </div>
+        </div>
+        
+        <p style="text-align: center; margin-top: 2rem; color: var(--gray);">
+            Prices may vary based on deadline and complexity. Discounts available for multiple assignments.
+        </p>
+    </section>
+
+    <!-- How It Works & Why Choose Us -->
+    <section id="how-it-works">
+        <div class="section-title">
+            <h2>Our Process & Advantages</h2>
+            <p>Simple steps to get quality academic assistance</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="process-container">
+            <div class="process-card">
+                <h3><i class="fas fa-list-ol"></i> How It Works</h3>
+                <ul>
+                    <li>Contact us via WhatsApp or call</li>
+                    <li>Share assignment details and requirements</li>
+                    <li>Confirm pricing and deadline</li>
+                    <li>Receive high-quality work on time</li>
+                    <li>Request revisions if necessary</li>
+                </ul>
+            </div>
+            
+            <div class="process-card">
+                <h3><i class="fas fa-star"></i> Why Choose Us</h3>
+                <ul>
+                    <li>100% Confidential and Secure</li>
+                    <li>Guaranteed On-Time Delivery</li>
+                    <li>Affordable Rates for Students</li>
+                    <li>Work Reviewed by Experts</li>
+                    <li>24/7 Customer Support</li>
+                    <li>Plagiarism-Free Content</li>
+                    <li>Satisfaction Guarantee</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+        <div class="section-title">
+            <h2>Student Testimonials</h2>
+            <p>What our clients say about our services</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Outstanding help with my science project. Delivered on time and helped me score better!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">R</div>
+                    <div class="author-info">
+                        <h4>Rohan Sharma</h4>
+                        <p>Class 8 Student</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Professional and affordable. My essay was perfect and original. Highly recommended!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">P</div>
+                    <div class="author-info">
+                        <h4>Priya Patel</h4>
+                        <p>Class 11 Student</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-text">
+                    "Reliable service for math assignments. They explained complex problems in simple terms."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">A</div>
+                    <div class="author-info">
+                        <h4>Amit Kumar</h4>
+                        <p>Class 10 Student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog">
+        <div class="section-title">
+            <h2>Educational Resources</h2>
+            <p>Helpful tips and insights for academic success</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-lightbulb"></i>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-category">Study Tips</div>
+                    <h4>Effective Study Tips for Exams</h4>
+                    <p>Discover proven strategies to boost your academic performance and achieve better grades in exams.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-category">Guidance</div>
+                    <h4>Choosing the Right Assignment Help</h4>
+                    <p>Key considerations for selecting reliable educational support that meets your academic needs.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            
+            <div class="blog-card">
+                <div class="blog-image">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="blog-content">
+                    <div class="blog-category">Productivity</div>
+                    <h4>Time Management for Students</h4>
+                    <p>Practical advice to balance studies, assignments, and extracurricular activities effectively.</p>
+                    <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+        <div class="section-title">
+            <h2>Frequently Asked Questions</h2>
+            <p>Quick answers to common questions about our services</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    How do I place an order?
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Contact us via WhatsApp or call, provide your assignment details (subject, topic, requirements, deadline), and we'll guide you through the process with a quick quote.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Is the work original and plagiarism-free?
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, all assignments are custom-written from scratch by our experts and checked for plagiarism using professional tools to ensure 100% originality.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    What if I need revisions?
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    We offer free revisions to ensure complete satisfaction. Just let us know what needs to be changed within the agreed timeframe.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    How is payment handled?
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    We offer secure payment options including UPI, bank transfer, and digital wallets. Payment details are provided upon order confirmation.
+                </div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">
+                    Can you handle urgent assignments?
+                    <i class="fas fa-plus faq-icon"></i>
+                </div>
+                <div class="faq-answer">
+                    Yes, we accommodate urgent deadlines based on availability. Please contact us as soon as possible to check if we can help with your urgent assignment.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="section-title">
+            <h2>Contact Us</h2>
+            <p>Get in touch for assignment help and support</p>
+            <div class="title-decoration"></div>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Get Professional Assignment Help</h3>
+                <p>We're here to assist with all your academic needs. Contact us through any of the following methods:</p>
+                
+                <ul class="contact-details">
+                    <li>
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Call Us</h4>
+                            <p><a href="tel:+918798141965" style="color: var(--primary); text-decoration: none;">+91 8798141965</a></p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="contact-icon">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div>
+                            <h4>WhatsApp</h4>
+                            <p><a href="https://wa.me/918798141965" style="color: var(--primary); text-decoration: none;">Chat on WhatsApp</a></p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4>Email</h4>
+                            <p><a href="mailto:akashbhowmik110@gmail.com" style="color: var(--primary); text-decoration: none;">akashbhowmik110@gmail.com</a></p>
+                        </div>
+                    </li>
+                    
+                    <li>
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Availability</h4>
+                            <p>24/7 Support</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="contact-form">
+                <h3>Quick Inquiry</h3>
+                <form id="inquiryForm">
+                    <div class="form-group">
+                        <label for="name">Your Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact">Contact Number</label>
+                        <input type="tel" id="contact" class="form-control" placeholder="Enter your phone number" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Assignment Details</label>
+                        <textarea id="message" class="form-control" placeholder="Describe your assignment requirements, subject, and deadline..." required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-about">
+                <div class="footer-logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    AssignmentHelp
+                </div>
+                <p>Providing professional academic assistance to school and college students since 2020. We help students achieve better grades with timely, quality assignments.</p>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#how-it-works">Process</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#services">School Assignments</a></li>
+                    <li><a href="#services">College Projects</a></li>
+                    <li><a href="#services">Essays & Reports</a></li>
+                    <li><a href="#services">Math & Science</a></li>
+                    <li><a href="#services">Programming Help</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-links">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2026 Assignment Help Services. All Rights Reserved.</p>
+            <p>Educational Assistance Only | This service is intended for guidance and reference purposes.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            menuToggle.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+        
+        // FAQ functionality
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+                
+                // Close other FAQs
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    if (otherItem !== parent) {
+                        otherItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+        
+        // Form submission
+        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const contact = document.getElementById('contact').value;
+            const message = document.getElementById('message').value;
+            
+            // Create WhatsApp message
+            const whatsappMessage = `Hello, I'm interested in assignment help.%0A%0AName: ${name}%0AContact: ${contact}%0ARequirements: ${message}`;
+            
+            // Redirect to WhatsApp
+            window.open(`https://wa.me/918798141965?text=${whatsappMessage}`, '_blank');
+            
+            // Reset form
+            this.reset();
+            
+            // Show success message
+            alert('Thank you! You will be redirected to WhatsApp to continue.');
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe service cards
+        document.querySelectorAll('.service-card, .pricing-card, .testimonial-card, .blog-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
