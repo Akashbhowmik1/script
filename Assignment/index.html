@@ -8,20 +8,18 @@
     <title>Assignment Help Services - Professional Academic Support</title>
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
     :root {
-        --primary: #1d4ed8;      /* Vibrant Education Blue - symbolizes trust and knowledge */
-        --secondary: #3b82f6;    /* Fresh Learning Blue - for energy and growth */
-        --accent: #10b981;       /* Green accent for success and learning progress */
-        --success: #22c55e;      /* Brighter green for positive feedback */
-        --teal: #06b6d4;         /* Teal for creativity and innovation */
-        --navy: #172554;         /* Deep navy for text and depth */
-        --light-blue: #f0f9ff;   /* Softer light blue for backgrounds */
+        --primary: #1d4ed8; /* Vibrant Education Blue - symbolizes trust and knowledge */
+        --secondary: #3b82f6; /* Fresh Learning Blue - for energy and growth */
+        --accent: #10b981; /* Green accent for success and learning progress */
+        --success: #22c55e; /* Brighter green for positive feedback */
+        --teal: #06b6d4; /* Teal for creativity and innovation */
+        --navy: #172554; /* Deep navy for text and depth */
+        --light-blue: #f0f9ff; /* Softer light blue for backgrounds */
         --light-purple: #f9fafb; /* Neutral light for clean look */
-        --dark: #0f172a;         /* Retained for contrast */
-        --gray: #6b7280;         /* Softer gray for secondary text */
-
+        --dark: #0f172a; /* Retained for contrast */
+        --gray: #6b7280; /* Softer gray for secondary text */
         --bg-gradient: linear-gradient(135deg, #f9fafb 0%, #f0f9ff 100%);
         --gradient-primary: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
         --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
@@ -29,14 +27,12 @@
         --hover-shadow: rgba(29, 78, 216, 0.15); /* Blue-tinted hover shadow */
         --card-bg: rgba(255, 255, 255, 0.98); /* More transparent for light feel */
     }
-
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
         font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
     }
-
     body {
         background: var(--bg-gradient);
         color: var(--dark);
@@ -47,7 +43,6 @@
         font-weight: 400;
         position: relative;
     }
-
     /* Enhanced Animated Background with Floating Study Items */
     .animated-bg {
         position: fixed;
@@ -58,7 +53,6 @@
         z-index: -2;
         overflow: hidden;
     }
-
     .animated-bg::before,
     .animated-bg::after {
         content: '';
@@ -68,7 +62,6 @@
         opacity: 0.08;
         filter: blur(40px);
     }
-
     .animated-bg::before {
         width: 500px;
         height: 500px;
@@ -80,7 +73,6 @@
         animation-duration: 20s, 8s;
         animation-iteration-count: infinite, infinite;
     }
-
     .animated-bg::after {
         width: 400px;
         height: 400px;
@@ -92,7 +84,6 @@
         animation-duration: 25s, 10s;
         animation-iteration-count: infinite, infinite;
     }
-
     .bg-element {
         position: absolute;
         border-radius: 50%;
@@ -101,7 +92,6 @@
         filter: blur(30px);
         animation: float 30s infinite linear reverse;
     }
-
     .bg-element:nth-child(1) {
         width: 300px;
         height: 300px;
@@ -109,7 +99,6 @@
         right: 10%;
         animation-delay: -5s;
     }
-
     .bg-element:nth-child(2) {
         width: 200px;
         height: 200px;
@@ -118,8 +107,7 @@
         background: var(--teal);
         animation-delay: -15s;
     }
-
-    /* Adding Floating Study Items */
+    /* Adding Floating Study Items - Fixed with ::before */
     .study-item {
         position: absolute;
         font-size: clamp(2rem, 5vw, 3rem);
@@ -129,44 +117,52 @@
         z-index: -1;
         pointer-events: none;
     }
-
-    .study-item.book {
+    .study-item::before {
+        content: '';
+        display: block;
+    }
+    .study-item.book::before {
         content: '📚';
+    }
+    .study-item.book {
         top: 15%;
         left: 20%;
         animation-delay: 0s;
     }
-
-    .study-item.pencil {
+    .study-item.pencil::before {
         content: '✏️';
+    }
+    .study-item.pencil {
         bottom: 25%;
         right: 15%;
         animation-delay: -5s;
         font-size: clamp(1.5rem, 4vw, 2.5rem);
     }
-
-    .study-item.grad-cap {
+    .study-item.grad-cap::before {
         content: '🎓';
+    }
+    .study-item.grad-cap {
         top: 40%;
         left: 60%;
         animation-delay: -10s;
     }
-
-    .study-item.globe {
+    .study-item.globe::before {
         content: '🌍';
+    }
+    .study-item.globe {
         bottom: 10%;
         left: 40%;
         animation-delay: -15s;
     }
-
-    .study-item.lightbulb {
+    .study-item.lightbulb::before {
         content: '💡';
+    }
+    .study-item.lightbulb {
         top: 60%;
         right: 25%;
         animation-delay: -20s;
         font-size: clamp(1.8rem, 4.5vw, 2.8rem);
     }
-
     /* NAVIGATION - Polished with softer transitions */
     nav {
         background: rgba(255, 255, 255, 0.98);
@@ -179,7 +175,6 @@
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         border-bottom: 1px solid rgba(226, 232, 240, 0.8);
     }
-
     .nav-container {
         max-width: 1280px;
         margin: 0 auto;
@@ -187,7 +182,6 @@
         justify-content: space-between;
         align-items: center;
     }
-
     .logo {
         font-size: 1.8rem;
         font-weight: 700;
@@ -203,11 +197,9 @@
         transition: all 0.3s ease;
         z-index: 1001;
     }
-
     .logo:hover {
         transform: translateY(-1px);
     }
-
     .logo-icon {
         background: var(--gradient-primary);
         -webkit-background-clip: text;
@@ -215,13 +207,11 @@
         color: transparent;
         font-size: 2rem;
     }
-
     .nav-links {
         display: flex;
         list-style: none;
         gap: 2.5rem;
     }
-
     .nav-links a {
         text-decoration: none;
         color: var(--dark);
@@ -232,7 +222,6 @@
         font-size: 1.05rem;
         letter-spacing: -0.2px;
     }
-
     .nav-links a::after {
         content: '';
         position: absolute;
@@ -244,16 +233,13 @@
         border-radius: 4px;
         transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .nav-links a:hover {
         color: var(--primary);
         font-weight: 600;
     }
-
     .nav-links a:hover::after {
         width: 100%;
     }
-
     /* Mobile menu button - Polished */
     .menu-toggle {
         display: none;
@@ -269,12 +255,10 @@
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1001;
     }
-
     .menu-toggle:hover {
         transform: translateY(-2px);
         box-shadow: 0 6px 16px var(--hover-shadow);
     }
-
     /* Mobile Navigation */
     .mobile-nav {
         position: fixed;
@@ -289,32 +273,26 @@
         padding: 100px 2rem 2rem;
         overflow-y: auto;
     }
-
     .mobile-nav.active {
         right: 0;
     }
-
     .mobile-nav .nav-links {
         flex-direction: column;
         gap: 0;
     }
-
     .mobile-nav .nav-links li {
         width: 100%;
     }
-
     .mobile-nav .nav-links a {
         display: block;
         padding: 1rem 0;
         border-bottom: 1px solid rgba(226, 232, 240, 0.8);
         font-size: 1.1rem;
     }
-
     .mobile-nav .nav-links a:hover {
         color: var(--primary);
         padding-left: 10px;
     }
-
     /* Mobile overlay */
     .mobile-overlay {
         position: fixed;
@@ -329,12 +307,10 @@
         visibility: hidden;
         transition: all 0.3s ease;
     }
-
     .mobile-overlay.active {
         opacity: 1;
         visibility: visible;
     }
-
     /* HEADER - Enhanced for education theme */
     header {
         padding: 8rem 2rem 6rem;
@@ -344,13 +320,11 @@
         max-width: 1280px;
         margin: 0 auto;
     }
-
     .header-content {
         position: relative;
         z-index: 2;
         animation: fadeInUp 0.8s ease-out;
     }
-
     .header-title {
         font-size: clamp(2.2rem, 5vw, 3.5rem);
         font-weight: 800;
@@ -365,7 +339,6 @@
         margin-left: auto;
         margin-right: auto;
     }
-
     .header-subtitle {
         font-size: clamp(1rem, 2.5vw, 1.25rem);
         color: var(--gray);
@@ -374,7 +347,6 @@
         font-weight: 400;
         line-height: 1.8;
     }
-
     .cta-container {
         display: flex;
         gap: 1.5rem;
@@ -382,7 +354,6 @@
         flex-wrap: wrap;
         margin-top: 3rem;
     }
-
     .cta {
         display: inline-flex;
         align-items: center;
@@ -402,7 +373,6 @@
         flex: 1;
         max-width: 300px;
     }
-
     .cta::before {
         content: '';
         position: absolute;
@@ -413,39 +383,32 @@
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.7s ease;
     }
-
     .cta:hover::before {
         left: 100%;
     }
-
     .cta-primary {
         background: var(--gradient-primary);
         color: white;
         box-shadow: 0 4px 15px var(--hover-shadow);
     }
-
     .cta-secondary {
         background: white;
         color: var(--primary);
         border: 1.5px solid var(--primary);
         box-shadow: 0 2px 8px var(--shadow);
     }
-
     .cta:hover {
         transform: translateY(-3px);
     }
-
     .cta-primary:hover {
         box-shadow: 0 8px 25px var(--hover-shadow);
     }
-
     .cta-secondary:hover {
         background: var(--primary);
         color: white;
         border-color: var(--primary);
         box-shadow: 0 4px 15px var(--hover-shadow);
     }
-
     /* Floating elements - Adjusted for education theme */
     .floating-element {
         position: absolute;
@@ -457,7 +420,6 @@
         box-shadow: 0 8px 32px var(--shadow);
         border: 1px solid rgba(255, 255, 255, 0.8);
     }
-
     .floating-element:nth-child(1) {
         width: 70px;
         height: 70px;
@@ -466,7 +428,6 @@
         animation-delay: 0s;
         background: linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(16, 185, 129, 0.1));
     }
-
     .floating-element:nth-child(2) {
         width: 100px;
         height: 100px;
@@ -475,7 +436,6 @@
         animation-delay: 2s;
         background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(29, 78, 216, 0.1));
     }
-
     .floating-element:nth-child(3) {
         width: 50px;
         height: 50px;
@@ -484,20 +444,17 @@
         animation-delay: 4s;
         background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
     }
-
     /* SECTIONS - Polished padding and shadows */
     section {
         padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 2rem);
         margin: 2rem auto;
         max-width: 1280px;
     }
-
     .section-title {
         text-align: center;
         margin-bottom: clamp(2.5rem, 6vw, 4rem);
         position: relative;
     }
-
     .section-title h2 {
         font-size: clamp(1.8rem, 4vw, 2.5rem);
         color: var(--navy);
@@ -506,7 +463,6 @@
         font-weight: 700;
         letter-spacing: -0.5px;
     }
-
     .section-title p {
         color: var(--gray);
         max-width: 600px;
@@ -515,7 +471,6 @@
         line-height: 1.7;
         padding: 0 1rem;
     }
-
     .title-decoration {
         width: 80px;
         height: 4px;
@@ -523,7 +478,6 @@
         border-radius: 2px;
         margin: 1.5rem auto;
     }
-
     /* SERVICES - Enhanced card design */
     .services-grid {
         display: grid;
@@ -531,7 +485,6 @@
         gap: clamp(1.5rem, 4vw, 2rem);
         padding: 0 1rem;
     }
-
     .service-card {
         background: var(--card-bg);
         border-radius: 20px; /* Softer corners */
@@ -544,7 +497,6 @@
         overflow: hidden;
         width: 100%;
     }
-
     .service-card::before {
         content: '';
         position: absolute;
@@ -555,7 +507,6 @@
         background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
-
     .service-card::after {
         content: '';
         position: absolute;
@@ -565,13 +516,11 @@
         height: 100%;
         background: var(--gradient-primary);
     }
-
     .service-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px var(--hover-shadow);
         border-color: rgba(29, 78, 216, 0.2);
     }
-
     .service-icon {
         font-size: clamp(2.5rem, 6vw, 3rem);
         margin-bottom: 1.5rem;
@@ -580,20 +529,17 @@
         background-clip: text;
         color: transparent;
     }
-
     .service-card h3 {
         font-size: clamp(1.2rem, 3vw, 1.4rem);
         margin-bottom: 1rem;
         color: var(--navy);
         font-weight: 600;
     }
-
     .service-card p {
         color: var(--gray);
         line-height: 1.7;
         font-size: clamp(0.9rem, 2vw, 1rem);
     }
-
     /* HOW IT WORKS & WHY US - Polished */
     .process-container {
         display: grid;
@@ -602,7 +548,6 @@
         margin-top: 2rem;
         padding: 0 1rem;
     }
-
     .process-card {
         background: var(--card-bg);
         border-radius: 20px; /* Softer */
@@ -614,7 +559,6 @@
         overflow: hidden;
         width: 100%;
     }
-
     .process-card::before {
         content: '';
         position: absolute;
@@ -625,13 +569,11 @@
         background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
-
     .process-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px var(--hover-shadow);
         border-color: rgba(29, 78, 216, 0.2);
     }
-
     .process-card h3 {
         color: var(--primary);
         margin-bottom: 1.5rem;
@@ -641,11 +583,9 @@
         gap: 0.75rem;
         font-weight: 600;
     }
-
     .process-card ul {
         list-style: none;
     }
-
     .process-card ul li {
         margin-bottom: 1rem;
         padding-left: 2rem;
@@ -654,7 +594,6 @@
         line-height: 1.6;
         font-size: clamp(0.95rem, 2vw, 1rem);
     }
-
     .process-card ul li::before {
         content: '✓';
         position: absolute;
@@ -663,7 +602,6 @@
         font-weight: bold;
         font-size: 1.1rem;
     }
-
     /* PRICING - Enhanced polish */
     .pricing-grid {
         display: grid;
@@ -671,7 +609,6 @@
         gap: clamp(1.5rem, 4vw, 2rem);
         padding: 0 1rem;
     }
-
     .pricing-card {
         background: var(--card-bg);
         border-radius: 20px;
@@ -684,7 +621,6 @@
         overflow: hidden;
         width: 100%;
     }
-
     .pricing-card::before {
         content: '';
         position: absolute;
@@ -695,13 +631,11 @@
         background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
-
     .pricing-card.popular {
         border: 2px solid var(--primary);
         transform: scale(1.05);
         box-shadow: 0 15px 40px var(--hover-shadow);
     }
-
     .popular-badge {
         position: absolute;
         top: 0;
@@ -714,7 +648,6 @@
         font-size: clamp(0.75rem, 2vw, 0.85rem);
         letter-spacing: 0.5px;
     }
-
     .price {
         font-size: clamp(2.5rem, 6vw, 3.2rem);
         font-weight: 700;
@@ -726,7 +659,6 @@
         gap: 0.1rem;
         flex-wrap: wrap;
     }
-
     .price span {
         font-size: clamp(0.9rem, 2vw, 1rem);
         color: var(--gray);
@@ -734,13 +666,11 @@
         align-self: flex-end;
         margin-bottom: 0.5rem;
     }
-
     .pricing-features {
         list-style: none;
         margin: 2rem 0;
         text-align: left;
     }
-
     .pricing-features li {
         padding: 0.8rem 0;
         border-bottom: 1px solid rgba(226, 232, 240, 0.8);
@@ -749,18 +679,15 @@
         font-size: clamp(0.9rem, 2vw, 1rem);
         color: var(--dark);
     }
-
     .pricing-features li:last-child {
         border-bottom: none;
     }
-
     .feature-check {
         color: var(--success);
         margin-right: 0.8rem;
         font-size: 1.1rem;
         min-width: 20px;
     }
-
     /* TESTIMONIALS - Polished */
     .testimonials-grid {
         display: grid;
@@ -768,7 +695,6 @@
         gap: clamp(1.5rem, 4vw, 2rem);
         padding: 0 1rem;
     }
-
     .testimonial-card {
         background: var(--card-bg);
         border-radius: 20px;
@@ -779,7 +705,6 @@
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
     }
-
     .testimonial-card::before {
         content: '"';
         position: absolute;
@@ -795,7 +720,6 @@
         line-height: 1;
         font-weight: bold;
     }
-
     .testimonial-card::after {
         content: '';
         position: absolute;
@@ -807,13 +731,11 @@
         z-index: -1;
         border-radius: 20px;
     }
-
     .testimonial-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px var(--hover-shadow);
         border-color: rgba(29, 78, 216, 0.2);
     }
-
     .testimonial-text {
         font-style: italic;
         margin-bottom: 2rem;
@@ -823,13 +745,11 @@
         font-size: clamp(0.95rem, 2vw, 1.05rem);
         line-height: 1.7;
     }
-
     .testimonial-author {
         display: flex;
         align-items: center;
         gap: clamp(0.75rem, 2vw, 1rem);
     }
-
     .author-avatar {
         width: clamp(50px, 10vw, 60px);
         height: clamp(50px, 10vw, 60px);
@@ -845,19 +765,16 @@
         font-size: clamp(1rem, 2.5vw, 1.3rem);
         flex-shrink: 0;
     }
-
     .author-info h4 {
         color: var(--navy);
         margin-bottom: 0.3rem;
         font-size: clamp(1rem, 2.5vw, 1.1rem);
         font-weight: 600;
     }
-
     .author-info p {
         color: var(--gray);
         font-size: clamp(0.8rem, 2vw, 0.9rem);
     }
-
     /* BLOG - Polished */
     .blog-grid {
         display: grid;
@@ -865,7 +782,6 @@
         gap: clamp(1.5rem, 4vw, 2rem);
         padding: 0 1rem;
     }
-
     .blog-card {
         background: var(--card-bg);
         border-radius: 20px;
@@ -875,13 +791,11 @@
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
     }
-
     .blog-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px var(--hover-shadow);
         border-color: rgba(29, 78, 216, 0.2);
     }
-
     .blog-image {
         height: clamp(180px, 40vw, 200px);
         width: 100%;
@@ -894,7 +808,6 @@
         position: relative;
         overflow: hidden;
     }
-
     .blog-image::before {
         content: '';
         position: absolute;
@@ -904,11 +817,9 @@
         height: 100%;
         background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
     }
-
     .blog-content {
         padding: clamp(1.5rem, 4vw, 2rem);
     }
-
     .blog-category {
         display: inline-block;
         background: rgba(29, 78, 216, 0.1);
@@ -920,7 +831,6 @@
         margin-bottom: 1rem;
         letter-spacing: 0.3px;
     }
-
     .blog-content h4 {
         font-size: clamp(1.1rem, 3vw, 1.3rem);
         margin-bottom: 1rem;
@@ -928,14 +838,12 @@
         font-weight: 600;
         line-height: 1.4;
     }
-
     .blog-content p {
         color: var(--gray);
         margin-bottom: 1.5rem;
         line-height: 1.7;
         font-size: clamp(0.9rem, 2vw, 1rem);
     }
-
     .read-more {
         color: var(--primary);
         text-decoration: none;
@@ -946,19 +854,16 @@
         transition: all 0.3s ease;
         font-size: clamp(0.9rem, 2vw, 1rem);
     }
-
     .read-more:hover {
         gap: 0.75rem;
         color: var(--secondary);
     }
-
     /* FAQ - Polished */
     .faq-container {
         max-width: 800px;
         margin: 0 auto;
         padding: 0 1rem;
     }
-
     .faq-item {
         background: var(--card-bg);
         border-radius: 16px;
@@ -969,12 +874,10 @@
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
     }
-
     .faq-item.active {
         box-shadow: 0 10px 25px var(--hover-shadow);
         border-color: rgba(29, 78, 216, 0.2);
     }
-
     .faq-question {
         padding: clamp(1.25rem, 4vw, 1.5rem) clamp(1.5rem, 4vw, 2rem);
         font-weight: 600;
@@ -987,11 +890,9 @@
         font-size: clamp(1rem, 2.5vw, 1.1rem);
         background: rgba(248, 250, 252, 0.5);
     }
-
     .faq-question:hover {
         background: rgba(29, 78, 216, 0.03);
     }
-
     .faq-icon {
         color: var(--primary);
         font-size: clamp(1.1rem, 2.5vw, 1.3rem);
@@ -999,30 +900,25 @@
         flex-shrink: 0;
         margin-left: 1rem;
     }
-
     .faq-item.active .faq-icon {
         transform: rotate(45deg);
         color: var(--secondary);
     }
-
     .faq-answer {
         padding: 0 clamp(1.5rem, 4vw, 2rem);
         max-height: 0;
         overflow: hidden;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     .faq-item.active .faq-answer {
         padding: 0 clamp(1.5rem, 4vw, 2rem) clamp(1.5rem, 4vw, 2rem);
         max-height: 500px;
     }
-
     .faq-answer p {
         color: var(--gray);
         line-height: 1.7;
         font-size: clamp(0.95rem, 2vw, 1rem);
     }
-
     /* CONTACT - Polished */
     .contact-container {
         display: grid;
@@ -1031,19 +927,16 @@
         align-items: start;
         padding: 0 1rem;
     }
-
     .contact-info h3 {
         font-size: clamp(1.5rem, 4vw, 1.8rem);
         margin-bottom: 1.5rem;
         color: var(--navy);
         font-weight: 700;
     }
-
     .contact-details {
         list-style: none;
         margin-top: 2rem;
     }
-
     .contact-details li {
         display: flex;
         align-items: center;
@@ -1053,11 +946,9 @@
         transition: all 0.3s;
         flex-wrap: wrap;
     }
-
     .contact-details li:hover {
         transform: translateX(3px);
     }
-
     .contact-icon {
         width: clamp(45px, 10vw, 50px);
         height: clamp(45px, 10vw, 50px);
@@ -1072,11 +963,9 @@
         transition: all 0.3s;
         flex-shrink: 0;
     }
-
     .contact-details li:hover .contact-icon {
         transform: scale(1.05);
     }
-
     .contact-form {
         background: var(--card-bg);
         padding: clamp(2rem, 5vw, 2.5rem);
@@ -1085,18 +974,15 @@
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
     }
-
     .contact-form h3 {
         font-size: clamp(1.3rem, 4vw, 1.6rem);
         margin-bottom: 1.5rem;
         color: var(--navy);
         font-weight: 700;
     }
-
     .form-group {
         margin-bottom: 1.5rem;
     }
-
     .form-group label {
         display: block;
         margin-bottom: 0.5rem;
@@ -1104,7 +990,6 @@
         color: var(--dark);
         font-size: clamp(0.95rem, 2vw, 1rem);
     }
-
     .form-control {
         width: 100%;
         padding: clamp(0.875rem, 2vw, 1rem);
@@ -1114,18 +999,15 @@
         transition: all 0.3s;
         background: white;
     }
-
     .form-control:focus {
         outline: none;
         border-color: var(--primary);
         box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
     }
-
     textarea.form-control {
         min-height: clamp(120px, 30vw, 150px);
         resize: vertical;
     }
-
     .btn-submit {
         background: var(--gradient-primary);
         color: white;
@@ -1142,7 +1024,6 @@
         position: relative;
         overflow: hidden;
     }
-
     .btn-submit::before {
         content: '';
         position: absolute;
@@ -1153,16 +1034,13 @@
         background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
         transition: left 0.7s ease;
     }
-
     .btn-submit:hover {
         transform: translateY(-3px);
         box-shadow: 0 8px 25px var(--hover-shadow);
     }
-
     .btn-submit:hover::before {
         left: 100%;
     }
-
     /* FOOTER - Adjusted for theme */
     footer {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
@@ -1172,7 +1050,6 @@
         position: relative;
         overflow: hidden;
     }
-
     footer::before {
         content: '';
         position: absolute;
@@ -1182,7 +1059,6 @@
         height: 4px;
         background: var(--gradient-primary);
     }
-
     .footer-container {
         max-width: 1280px;
         margin: 0 auto;
@@ -1192,7 +1068,6 @@
         position: relative;
         z-index: 1;
     }
-
     .footer-logo {
         font-size: clamp(1.5rem, 4vw, 1.8rem);
         font-weight: 700;
@@ -1202,14 +1077,12 @@
         align-items: center;
         gap: 0.75rem;
     }
-
     .footer-about p {
         color: rgba(255, 255, 255, 0.7);
         margin-top: 1rem;
         line-height: 1.7;
         font-size: clamp(0.9rem, 2vw, 1rem);
     }
-
     .footer-links h4 {
         font-size: clamp(1.1rem, 3vw, 1.2rem);
         margin-bottom: 1.5rem;
@@ -1217,7 +1090,6 @@
         padding-bottom: 0.5rem;
         color: white;
     }
-
     .footer-links h4::after {
         content: '';
         position: absolute;
@@ -1228,15 +1100,12 @@
         background: var(--primary);
         border-radius: 2px;
     }
-
     .footer-links ul {
         list-style: none;
     }
-
     .footer-links li {
         margin-bottom: 0.8rem;
     }
-
     .footer-links a {
         color: rgba(255, 255, 255, 0.7);
         text-decoration: none;
@@ -1244,19 +1113,16 @@
         font-size: clamp(0.9rem, 2vw, 1rem);
         display: inline-block;
     }
-
     .footer-links a:hover {
         color: white;
         transform: translateX(5px);
     }
-
     .social-links {
         display: flex;
         gap: 1rem;
         margin-top: 1.5rem;
         flex-wrap: wrap;
     }
-
     .social-link {
         display: flex;
         align-items: center;
@@ -1271,12 +1137,10 @@
         font-size: clamp(1rem, 2.5vw, 1.1rem);
         flex-shrink: 0;
     }
-
     .social-link:hover {
         background: var(--primary);
         transform: translateY(-3px);
     }
-
     .copyright {
         text-align: center;
         padding-top: clamp(2rem, 5vw, 3rem);
@@ -1286,7 +1150,6 @@
         font-size: clamp(0.8rem, 2vw, 0.9rem);
         line-height: 1.6;
     }
-
     /* ANIMATIONS */
     @keyframes fadeInUp {
         from {
@@ -1298,7 +1161,6 @@
             transform: translateY(0);
         }
     }
-
     @keyframes float {
         0%, 100% {
             transform: translate(0, 0) rotate(0deg);
@@ -1313,7 +1175,6 @@
             transform: translate(15px, 10px) rotate(3deg);
         }
     }
-
     @keyframes pulse {
         0%, 100% {
             opacity: 0.08;
@@ -1322,22 +1183,18 @@
             opacity: 0.12;
         }
     }
-
     /* Staggered animations for cards */
     .service-card, .pricing-card, .testimonial-card, .blog-card {
         animation: fadeInUp 0.6s ease-out forwards;
         opacity: 0;
     }
-
     .service-card:nth-child(1) { animation-delay: 0.1s; }
     .service-card:nth-child(2) { animation-delay: 0.2s; }
     .service-card:nth-child(3) { animation-delay: 0.3s; }
     .service-card:nth-child(4) { animation-delay: 0.4s; }
     .service-card:nth-child(5) { animation-delay: 0.5s; }
     .service-card:nth-child(6) { animation-delay: 0.6s; }
-
     /* RESPONSIVE DESIGN - Ensured full mobile responsiveness */
-
     /* Large Desktop */
     @media (min-width: 1600px) {
         .nav-container,
@@ -1347,123 +1204,120 @@
             max-width: 1400px;
         }
     }
-
     /* Tablet Landscape */
     @media (max-width: 1199px) {
         .header-title {
             font-size: clamp(2rem, 4vw, 2.8rem);
         }
-        
+      
         .section-title h2 {
             font-size: clamp(1.6rem, 3.5vw, 2.2rem);
         }
-        
+      
         .pricing-card.popular {
             transform: none;
         }
-        
+      
         .process-container {
             grid-template-columns: 1fr;
         }
-        
+      
         .nav-links {
             gap: 2rem;
         }
     }
-
     /* Tablet Portrait */
     @media (max-width: 900px) {
         nav {
             padding: 1rem;
         }
-        
+      
         .nav-links {
             display: none;
         }
-        
+      
         .menu-toggle {
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
+      
         .logo {
             font-size: 1.6rem;
         }
-        
+      
         .logo-icon {
             font-size: 1.8rem;
         }
-        
+      
         .cta-container {
             flex-direction: column;
             align-items: center;
         }
-        
+      
         .cta {
             width: 100%;
             max-width: 350px;
         }
-        
+      
         .header-subtitle {
             padding: 0 1rem;
         }
-        
+      
         .floating-element {
             display: none;
         }
-        
+      
         .service-card, .pricing-card, .testimonial-card, .blog-card {
             padding: 2rem 1.5rem;
         }
-        
+      
         .contact-form {
             padding: 2rem 1.5rem;
         }
-        
+      
         .footer-container {
             grid-template-columns: repeat(2, 1fr);
         }
-        
+      
         .footer-links h4::after {
             left: 0;
             transform: none;
         }
-        
+      
         .study-item {
             font-size: clamp(1.5rem, 4vw, 2rem); /* Smaller on tablet */
         }
     }
-
     /* Mobile */
     @media (max-width: 768px) {
         .header-title {
             font-size: clamp(1.8rem, 6vw, 2.2rem);
             padding: 0 1rem;
         }
-        
+      
         .header-subtitle {
             font-size: clamp(0.95rem, 3vw, 1.1rem);
             padding: 0 1rem;
         }
-        
+      
         section {
             padding: 3rem 1rem;
             margin: 1rem auto;
         }
-        
+      
         .section-title {
             margin-bottom: 3rem;
         }
-        
+      
         .section-title h2 {
             font-size: clamp(1.6rem, 5vw, 1.8rem);
         }
-        
+      
         .section-title p {
             padding: 0;
         }
-        
+      
         .services-grid,
         .pricing-grid,
         .testimonials-grid,
@@ -1471,135 +1325,150 @@
             grid-template-columns: 1fr;
             padding: 0;
         }
-        
+      
         .service-card, .pricing-card, .testimonial-card, .blog-card {
             padding: 1.8rem;
         }
-        
+      
         .price {
             font-size: clamp(2.2rem, 7vw, 2.8rem);
         }
-        
+      
         .contact-form {
             padding: 1.8rem;
         }
-        
+      
         .contact-container {
             grid-template-columns: 1fr;
         }
-        
+      
         .footer-container {
             grid-template-columns: 1fr;
             text-align: center;
         }
-        
+      
         .footer-links h4::after {
             left: 50%;
             transform: translateX(-50%);
         }
-        
+      
         .footer-links a:hover {
             transform: none;
         }
-        
+      
         .animated-bg::before,
         .animated-bg::after {
             width: 300px;
             height: 300px;
         }
-        
+      
         .study-item {
             font-size: clamp(1.2rem, 3.5vw, 1.8rem); /* Adjusted for mobile */
         }
-
         .bg-element {
             display: none; /* Hide large blobs on small screens */
         }
+        /* Reduce animation complexity on mobile for performance */
+        .animated-bg::before, .animated-bg::after {
+            animation-duration: 30s, 12s; /* Slower for better performance */
+            filter: blur(20px); /* Less blur to reduce load */
+        }
+        .study-item {
+            animation-duration: 35s; /* Slower animation */
+            opacity: 0.1; /* Slightly less opacity */
+        }
     }
-
     /* Small Mobile */
     @media (max-width: 480px) {
         .header-title {
             font-size: 1.6rem;
             line-height: 1.3;
         }
-        
+      
         .header-subtitle {
             font-size: 0.95rem;
         }
-        
+      
         .section-title h2 {
             font-size: 1.4rem;
         }
-        
+      
         .service-card, .pricing-card, .testimonial-card, .blog-card {
             padding: 1.5rem;
         }
-        
+      
         .price {
             font-size: 2rem;
         }
-        
+      
         .contact-form {
             padding: 1.5rem;
         }
-        
+      
         .contact-details li {
             flex-direction: column;
             align-items: flex-start;
             gap: 0.75rem;
         }
-        
+      
         .cta {
             padding: 0.875rem 1.5rem;
             font-size: 0.95rem;
         }
-        
+      
         .mobile-nav {
             width: 100%;
             padding: 90px 1.5rem 2rem;
         }
-        
+      
         .menu-toggle {
             width: 42px;
             height: 42px;
             font-size: 1.2rem;
         }
-
         .study-item {
             font-size: clamp(1rem, 3vw, 1.5rem); /* Even smaller */
         }
+        /* Further optimize for small phones */
+        .animated-bg::before, .animated-bg::after {
+            width: 200px;
+            height: 200px;
+        }
+        .cta-container {
+            gap: 1rem;
+        }
     }
-
     /* Extra Small Mobile */
     @media (max-width: 360px) {
         .header-title {
             font-size: 1.4rem;
         }
-        
+      
         .section-title h2 {
             font-size: 1.3rem;
         }
-        
+      
         .service-card, .pricing-card, .testimonial-card, .blog-card {
             padding: 1.25rem;
         }
-        
+      
         .cta {
             min-width: 100%;
         }
-        
+      
         .popular-badge {
             right: 1rem;
             padding: 0.4rem 1rem;
             font-size: 0.75rem;
         }
-
         .study-item {
-            display: none; /* Hide on very small screens to avoid clutter */
+            font-size: clamp(0.8rem, 2.5vw, 1.2rem); /* Even smaller */
+        }
+        /* Hide some study items on very small screens to avoid clutter */
+        .study-item.lightbulb, .study-item.globe {
+            display: none;
         }
     }
-
     /* Dark mode support - Adjusted for education theme */
     @media (prefers-color-scheme: dark) {
         :root {
@@ -1613,60 +1482,58 @@
             --card-bg: rgba(30, 41, 59, 0.9);
             --shadow: rgba(0, 0, 0, 0.2);
         }
-        
+      
         body::before {
             opacity: 0.1;
         }
-        
+      
         .service-card, .pricing-card, .testimonial-card, .blog-card, .contact-form, .faq-item, .process-card {
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
-        
+      
         .form-control {
             background: rgba(15, 23, 42, 0.7);
             color: white;
             border-color: rgba(255, 255, 255, 0.1);
         }
-        
+      
         .form-control:focus {
             border-color: var(--primary);
             box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
         }
-        
+      
         footer {
             background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
         }
-        
+      
         .cta-secondary {
             background: rgba(30, 41, 59, 0.8);
             border-color: var(--primary);
         }
-        
+      
         .animated-bg::before,
         .animated-bg::after,
         .bg-element {
             opacity: 0.05;
         }
-        
+      
         .mobile-nav {
             background: #0f172a;
         }
-        
+      
         .mobile-nav .nav-links a {
             color: #f1f5f9;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
+      
         .mobile-nav .nav-links a:hover {
             color: var(--primary);
         }
-
         .study-item {
             color: var(--secondary);
             opacity: 0.2;
         }
     }
-
     /* Touch device optimizations */
     @media (hover: none) and (pointer: coarse) {
         .service-card:hover,
@@ -1676,36 +1543,36 @@
         .process-card:hover {
             transform: none;
         }
-        
+      
         .cta:hover {
             transform: none;
         }
-        
+      
         .cta-primary:hover,
         .cta-secondary:hover {
             transform: none;
         }
-        
+      
         .nav-links a:hover::after {
             width: 0;
         }
-        
+      
         .contact-details li:hover {
             transform: none;
         }
-        
+      
         .contact-details li:hover .contact-icon {
             transform: none;
         }
-        
+      
         .social-link:hover {
             transform: none;
         }
-        
+      
         .footer-links a:hover {
             transform: none;
         }
-        
+      
         /* Add active states for touch */
         .service-card:active,
         .pricing-card:active,
@@ -1714,14 +1581,12 @@
             transform: translateY(-8px);
             transition: transform 0.1s;
         }
-        
+      
         .cta:active {
             transform: translateY(-3px);
             transition: transform 0.1s;
         }
     }
-
-
     /* Founder & Developer Credit */
 .footer-credit {
     text-align: center;
@@ -1731,12 +1596,10 @@
     font-size: 0.95rem;
     color: rgba(255, 255, 255, 0.75);
 }
-
 .footer-credit p {
     margin: 0;
     line-height: 1.6;
 }
-
 .credit-name {
     font-weight: 700;
     background: linear-gradient(135deg, #60a5fa, #818cf8);
@@ -1746,65 +1609,55 @@
     letter-spacing: 0.4px;
     transition: all 0.3s ease;
 }
-
 .credit-role {
     font-size: 0.9rem;
     color: rgba(255, 255, 255, 0.65);
 }
-
 .credit-separator {
     margin: 0 0.4rem;
     opacity: 0.6;
 }
-
 /* Hover effect */
 .footer-credit:hover .credit-name {
     filter: brightness(1.2);
     letter-spacing: 0.8px;
 }
-
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .footer-credit {
         font-size: 0.9rem;
         padding-top: 1.2rem;
     }
-
     .credit-separator {
         display: none;
     }
-
     .footer-credit p {
         display: flex;
         flex-direction: column;
         gap: 0.3rem;
     }
 }
-
 @media (max-width: 480px) {
     .footer-credit {
         font-size: 0.85rem;
     }
-
     .credit-role {
         font-size: 0.8rem;
     }
 }
-
-
-
     /* Import fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 </style>
 <div class="animated-bg">
-    <div class="study-item book">📚</div>
-    <div class="study-item pencil">✏️</div>
-    <div class="study-item grad-cap">🎓</div>
-    <div class="study-item globe">🌍</div>
-    <div class="study-item lightbulb">💡</div>
+    <div class="bg-element"></div>
+    <div class="bg-element"></div>
+    <div class="study-item book"></div>
+    <div class="study-item pencil"></div>
+    <div class="study-item grad-cap"></div>
+    <div class="study-item globe"></div>
+    <div class="study-item lightbulb"></div>
 </div>
 </head>
-
 <body>
     <!-- Navigation -->
     <nav>
@@ -1813,11 +1666,11 @@
                 <i class="fas fa-graduation-cap logo-icon"></i>
                 AssignmentPro
             </a>
-            
+          
             <button class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
             </button>
-            
+          
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
                 <li><a href="#services"><i class="fas fa-tasks"></i> Services</a></li>
@@ -1827,17 +1680,16 @@
             </ul>
         </div>
     </nav>
-
     <!-- Header -->
     <header id="home">
         <div class="floating-element"></div>
         <div class="floating-element"></div>
         <div class="floating-element"></div>
-        
+      
         <div class="header-content">
-            <h1 class="header-title">Premium Assignment Help for Academic Success</h1>
+            <h1 class="header-title"> Assignment Help for Academic Success</h1>
             <p class="header-subtitle">Get expert assistance with school and college assignments. Our professional tutors deliver high-quality, plagiarism-free work on time. Affordable pricing with 24/7 support for students worldwide.</p>
-            
+          
             <div class="cta-container">
                 <a href="https://wa.me/918798141965?text=Hello%20I%20need%20assignment%20help%20services" class="cta cta-primary">
                     <i class="fab fa-whatsapp"></i> WhatsApp Now
@@ -1848,46 +1700,45 @@
             </div>
         </div>
     </header>
-
     <!-- Services -->
     <section id="services">
         <div class="section-title">
-            <h2>Our Premium Services</h2>
+            <h2>Our  Services</h2>
             <p>Comprehensive academic support tailored for all educational levels</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="services-grid">
             <div class="service-card">
                 <i class="fas fa-book-open service-icon"></i>
                 <h3>School Assignments</h3>
                 <p>Complete assistance for classes 6-12 across all subjects and boards</p>
             </div>
-            
+          
             <div class="service-card">
                 <i class="fas fa-university service-icon"></i>
                 <h3>College Projects</h3>
                 <p>Professional help with university-level assignments, reports, and projects</p>
             </div>
-            
+          
             <div class="service-card">
                 <i class="fas fa-file-alt service-icon"></i>
                 <h3>Essays & Research</h3>
                 <p>Well-researched, properly formatted academic writing with citations</p>
             </div>
-            
+          
             <div class="service-card">
                 <i class="fas fa-calculator service-icon"></i>
                 <h3>Math & Science</h3>
                 <p>Step-by-step solutions for complex problems with detailed explanations</p>
             </div>
-            
+          
             <div class="service-card">
                 <i class="fas fa-code service-icon"></i>
                 <h3>Programming Help</h3>
                 <p>Coding assignments in Java, Python, C++, Web Development and more</p>
             </div>
-            
+          
             <div class="service-card">
                 <i class="fas fa-chart-line service-icon"></i>
                 <h3>PPT & Presentations</h3>
@@ -1895,7 +1746,6 @@
             </div>
         </div>
     </section>
-
     <!-- Pricing -->
     <section id="pricing">
         <div class="section-title">
@@ -1903,9 +1753,8 @@
             <p>High-quality assistance at student-friendly prices with no hidden fees</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="pricing-grid">
-
     <!-- Class 6-7 -->
     <div class="pricing-card">
         <h3>School Level (6–7)</h3>
@@ -1914,7 +1763,7 @@
             <li><i class="fas fa-check feature-check"></i> Basic level assignments</li>
             <li><i class="fas fa-check feature-check"></i> 24–48 hour turnaround</li>
             <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
-            
+          
             <li><i class="fas fa-check feature-check"></i> 100% plagiarism-free</li>
         </ul>
         <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%206-7%20assignment"
@@ -1922,7 +1771,6 @@
             <i class="fab fa-whatsapp"></i> Get Help Now
         </a>
     </div>
-
     <!-- Class 8-9 -->
     <div class="pricing-card">
         <h3>School Level (8–9)</h3>
@@ -1931,7 +1779,7 @@
             <li><i class="fas fa-check feature-check"></i> Moderate difficulty level</li>
             <li><i class="fas fa-check feature-check"></i> Concept-based explanations</li>
             <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
-            
+          
             <li><i class="fas fa-check feature-check"></i> Plagiarism-free guarantee</li>
         </ul>
         <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%208-9%20assignment"
@@ -1939,7 +1787,6 @@
             <i class="fab fa-whatsapp"></i> Get Help Now
         </a>
     </div>
-
     <!-- Class 10-12 -->
     <div class="pricing-card popular">
         <div class="popular-badge">MOST POPULAR</div>
@@ -1950,14 +1797,13 @@
             <li><i class="fas fa-check feature-check"></i> Board exam preparation help</li>
             <li><i class="fas fa-check feature-check"></i> Detailed explanations</li>
             <li><i class="fas fa-check feature-check"></i> Priority 24/7 support</li>
-           
+         
         </ul>
         <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%2010-12%20assignment"
            class="cta cta-primary">
             <i class="fab fa-whatsapp"></i> Get Help Now
         </a>
     </div>
-
     <!-- College -->
     <div class="pricing-card">
         <h3>College & University</h3>
@@ -1974,24 +1820,21 @@
             <i class="fas fa-comment-dollar"></i> Get Custom Quote
         </a>
     </div>
-
 </div>
-
-        
+      
         <p style="text-align: center; margin-top: 3rem; color: var(--gray); font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
             Prices are indicative and may vary based on deadline, complexity, and subject. Contact us for exact pricing. Bulk order discounts available.
         </p>
     </section>
-
     <!-- How It Works & Why Choose Us -->
     <section id="how-it-works">
         <div class="section-title">
             <h2>Simple Process & Key Benefits</h2>
-            <p>Four easy steps to get premium academic assistance</p>
+            <p>Four easy steps to get  academic assistance</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="process-container">
             <div class="process-card">
                 <h3><i class="fas fa-list-ol"></i> How It Works</h3>
@@ -2004,7 +1847,7 @@
                     <li><strong>Step 6:</strong> Request unlimited revisions if needed</li>
                 </ul>
             </div>
-            
+          
             <div class="process-card">
                 <h3><i class="fas fa-award"></i> Why Choose Us</h3>
                 <ul>
@@ -2020,7 +1863,6 @@
             </div>
         </div>
     </section>
-
     <!-- Testimonials -->
     <section id="testimonials">
         <div class="section-title">
@@ -2028,7 +1870,7 @@
             <p>What students say about our services</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-text">
@@ -2042,7 +1884,7 @@
                     </div>
                 </div>
             </div>
-            
+          
             <div class="testimonial-card">
                 <div class="testimonial-text">
                     "Professional and affordable service. My 15-page essay was perfectly written with proper citations. Got an A grade! Highly recommended for college students."
@@ -2055,7 +1897,7 @@
                     </div>
                 </div>
             </div>
-            
+          
             <div class="testimonial-card">
                 <div class="testimonial-text">
                     "Reliable service for complex math assignments. They explained each step in simple terms. Helped me understand concepts better while saving time."
@@ -2070,7 +1912,6 @@
             </div>
         </div>
     </section>
-
     <!-- FAQ -->
     <section id="faq">
         <div class="section-title">
@@ -2078,7 +1919,7 @@
             <p>Quick answers to common questions about our services</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="faq-container">
             <div class="faq-item active">
                 <div class="faq-question">
@@ -2089,7 +1930,7 @@
                     <p>Simply contact us via WhatsApp at +91 8798141965 or call us. Provide your assignment details (subject, topic, requirements, deadline, word count), and we'll guide you through the process with a quick quote. You can also fill the contact form on this page.</p>
                 </div>
             </div>
-            
+          
             <div class="faq-item">
                 <div class="faq-question">
                     Is the work original and plagiarism-free?
@@ -2099,7 +1940,7 @@
                     <p>Yes, absolutely! All assignments are custom-written from scratch by our expert tutors and checked for plagiarism using professional tools like Turnitin and Copyscape. We provide a plagiarism report upon request to ensure 100% originality.</p>
                 </div>
             </div>
-            
+          
             <div class="faq-item">
                 <div class="faq-question">
                     What if I need revisions or modifications?
@@ -2109,7 +1950,7 @@
                     <p>We offer free unlimited revisions to ensure complete satisfaction. Just let us know what needs to be changed within 7 days of delivery, and our experts will modify the work according to your feedback at no extra cost.</p>
                 </div>
             </div>
-            
+          
             <div class="faq-item">
                 <div class="faq-question">
                     How is payment handled? Is it secure?
@@ -2119,17 +1960,17 @@
                     <p>We offer secure payment options including UPI, bank transfer, PayPal, and digital wallets. Payment is required upfront for new clients. For regular clients, we offer partial payment options. All transactions are secure and confidential.</p>
                 </div>
             </div>
-            
+          
             <div class="faq-item">
                 <div class="faq-question">
                     Can you handle urgent assignments with short deadlines?
                     <i class="fas fa-plus faq-icon"></i>
                 </div>
                 <div class="faq-answer">
-                    <p>Yes, we specialize in urgent assignments! We can handle deadlines as short as 6-12 hours for certain subjects, based on availability. Urgent assignments may have a slight premium charge. Please contact us as soon as possible to check availability.</p>
+                    <p>Yes, we specialize in urgent assignments! We can handle deadlines as short as 6-12 hours for certain subjects, based on availability. Urgent assignments may have a slight charge. Please contact us as soon as possible to check availability.</p>
                 </div>
             </div>
-            
+          
             <div class="faq-item">
                 <div class="faq-question">
                     Who will be working on my assignment?
@@ -2141,7 +1982,6 @@
             </div>
         </div>
     </section>
-
     <!-- Contact -->
     <section id="contact">
         <div class="section-title">
@@ -2149,12 +1989,12 @@
             <p>Get in touch for assignment help and academic support</p>
             <div class="title-decoration"></div>
         </div>
-        
+      
         <div class="contact-container">
             <div class="contact-info">
                 <h3>Get Professional Assignment Help 24/7</h3>
                 <p>We're here to assist with all your academic needs. Contact us through any of the following methods for fast, reliable support:</p>
-                
+              
                 <ul class="contact-details">
                     <li>
                         <div class="contact-icon">
@@ -2166,7 +2006,7 @@
                             <p style="color: rgba(100, 116, 139, 0.8); font-size: 0.95rem; margin-top: 0.3rem;">Available 24/7</p>
                         </div>
                     </li>
-                    
+                  
                     <li>
                         <div class="contact-icon">
                             <i class="fab fa-whatsapp"></i>
@@ -2177,7 +2017,7 @@
                             <p style="color: rgba(100, 116, 139, 0.8); font-size: 0.95rem; margin-top: 0.3rem;">Fastest response</p>
                         </div>
                     </li>
-                    
+                  
                     <li>
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
@@ -2188,7 +2028,7 @@
                             <p style="color: rgba(100, 116, 139, 0.8); font-size: 0.95rem; margin-top: 0.3rem;">Response within 2 hours</p>
                         </div>
                     </li>
-                    
+                  
                     <li>
                         <div class="contact-icon">
                             <i class="fas fa-clock"></i>
@@ -2200,13 +2040,13 @@
                         </div>
                     </li>
                 </ul>
-                
+              
                 <div style="margin-top: 3rem; background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(236, 72, 153, 0.05)); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--primary);">
                     <h4 style="color: var(--primary); margin-bottom: 0.5rem;"><i class="fas fa-lightbulb"></i> Quick Tip</h4>
                     <p style="color: var(--gray); font-size: 0.95rem;">For fastest response, contact us via WhatsApp with your assignment details ready (subject, deadline, word count).</p>
                 </div>
             </div>
-            
+          
             <div class="contact-form">
                 <h3>Send Quick Inquiry</h3>
                 <p style="color: var(--gray); margin-bottom: 2rem;">Fill this form and we'll get back to you within 15 minutes</p>
@@ -2215,22 +2055,22 @@
                         <label for="name"><i class="fas fa-user"></i> Your Name</label>
                         <input type="text" id="name" class="form-control" placeholder="Enter your full name" required>
                     </div>
-                    
+                  
                     <div class="form-group">
                         <label for="contact"><i class="fas fa-phone"></i> Contact Number</label>
                         <input type="tel" id="contact" class="form-control" placeholder="Enter your phone number with country code" required>
                     </div>
-                    
+                  
                     <div class="form-group">
                         <label for="email"><i class="fas fa-envelope"></i> Email Address</label>
                         <input type="email" id="email" class="form-control" placeholder="Enter your email address" required>
                     </div>
-                    
+                  
                     <div class="form-group">
                         <label for="message"><i class="fas fa-file-alt"></i> Assignment Details</label>
                         <textarea id="message" class="form-control" placeholder="Describe your assignment requirements, subject, topic, deadline, word count, and any special instructions..." required rows="4"></textarea>
                     </div>
-                    
+                  
                     <button type="submit" class="btn-submit">
                         <i class="fas fa-paper-plane"></i> Submit Inquiry
                     </button>
@@ -2238,7 +2078,6 @@
             </div>
         </div>
     </section>
-
     <!-- Footer -->
     <footer>
         <div class="footer-container">
@@ -2247,8 +2086,8 @@
                     <i class="fas fa-graduation-cap"></i>
                     AssignmentPro
                 </div>
-                <p>Providing premium academic assistance to school and college students since 2020. We help students achieve better grades with timely, high-quality assignments while maintaining complete confidentiality.</p>
-                
+                <p>Providing  academic assistance to school and college students since 2020. We help students achieve better grades with timely, high-quality assignments while maintaining complete confidentiality.</p>
+              
                 <div class="social-links">
                     <!-- <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a> -->
@@ -2256,7 +2095,7 @@
                     <a href="https://www.instagram.com/sntn.7u____?igsh=MThrdXB2M2h5ZGhzbw==" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            
+          
             <div class="footer-links">
                 <h4>Quick Links</h4>
                 <ul>
@@ -2268,7 +2107,7 @@
                     <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
                 </ul>
             </div>
-            
+          
             <div class="footer-links">
                 <h4>Our Services</h4>
                 <ul>
@@ -2280,7 +2119,7 @@
                     <li><a href="#services"><i class="fas fa-chevron-right"></i> PPT & Presentations</a></li>
                 </ul>
             </div>
-            
+          
             <div class="footer-links">
                 <h4>Legal & Policies</h4>
                 <ul>
@@ -2293,40 +2132,37 @@
                 </ul>
             </div>
         </div>
-        
+      
         <div class="copyright">
             <p>© 2026 AssignmentPro Academic Services. All Rights Reserved.</p>
             <p>This service provides educational assistance and guidance. Clients are responsible for using the work as a reference model for their own original work.</p>
             <p style="margin-top: 1rem; font-size: 0.85rem;">Contact: +91 8798141965 | Email: akashbhowmik110@gmail.com</p>
         </div>
-
        <!-- Founder & Developer -->
 <div class="footer-credit">
     <p>
-        Founded by 
-        <span class="credit-name">Shantanu Biswas</span> 
+        Founded by
+        <span class="credit-name">Shantanu Biswas</span>
         <span class="credit-separator">•</span>
-        Developed by 
+        Developed by
         <span class="credit-name">Akash Bhowmik</span>
         <span class="credit-separator">•</span>
         <span class="credit-role">Full Stack Developer</span>
     </p>
 </div>
-
     </footer>
-
     <script>
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
-        
+      
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            menuToggle.innerHTML = navLinks.classList.contains('active') 
-                ? '<i class="fas fa-times"></i>' 
+            menuToggle.innerHTML = navLinks.classList.contains('active')
+                ? '<i class="fas fa-times"></i>'
                 : '<i class="fas fa-bars"></i>';
         });
-        
+      
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
@@ -2334,13 +2170,13 @@
                 menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
-        
+      
         // FAQ functionality
         document.querySelectorAll('.faq-question').forEach(item => {
             item.addEventListener('click', () => {
                 const parent = item.parentElement;
                 parent.classList.toggle('active');
-                
+              
                 // Close other FAQs
                 document.querySelectorAll('.faq-item').forEach(otherItem => {
                     if (otherItem !== parent && otherItem.classList.contains('active')) {
@@ -2349,37 +2185,37 @@
                 });
             });
         });
-        
+      
         // Form submission
         document.getElementById('inquiryForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+          
             const name = document.getElementById('name').value;
             const contact = document.getElementById('contact').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
-            
+          
             // Create WhatsApp message
             const whatsappMessage = `Hello, I'm interested in assignment help.%0A%0A*Name:* ${name}%0A*Contact:* ${contact}%0A*Email:* ${email}%0A*Requirements:* ${message}`;
-            
+          
             // Redirect to WhatsApp
             window.open(`https://wa.me/918798141965?text=${whatsappMessage}`, '_blank');
-            
+          
             // Reset form
             this.reset();
-            
+          
             // Show success message
             alert('Thank you for your inquiry! You will be redirected to WhatsApp to continue the conversation.');
         });
-        
+      
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                
+              
                 const targetId = this.getAttribute('href');
                 if (targetId === '#') return;
-                
+              
                 const targetElement = document.querySelector(targetId);
                 if (targetElement) {
                     window.scrollTo({
@@ -2389,14 +2225,14 @@
                 }
             });
         });
-        
+      
         // Animate elements on scroll
         const observerOptions = {
             root: null,
             rootMargin: '0px',
             threshold: 0.1
         };
-        
+      
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -2405,12 +2241,12 @@
                 }
             });
         }, observerOptions);
-        
+      
         // Observe all animated cards
         document.querySelectorAll('.service-card, .pricing-card, .testimonial-card, .blog-card, .process-card').forEach(card => {
             observer.observe(card);
         });
-        
+      
         // Add scroll effect to navbar
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
