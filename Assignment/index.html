@@ -11,25 +11,23 @@
 
     <style>
     :root {
-        /* Professional Academic Color Palette */
-        --primary: #2563eb; /* Trustworthy Royal Blue */
-        --secondary: #7e22ce; /* Professional Purple */
-        --accent: #f59e0b; /* Gold for highlights */
-        --success: #10b981; /* Success Emerald */
-        --teal: #0d9488; /* Sophisticated Teal */
-        --navy: #1e3a8a; /* Deep Navy */
-        --light-blue: #dbeafe; /* Soft Blue Background */
-        --light-purple: #f5f3ff; /* Soft Purple Background */
-        --dark: #1e293b; /* Dark Text */
-        --gray: #64748b; /* Gray Text */
-        --light-gray: #f8fafc; /* Light Background */
-        --bg-gradient: linear-gradient(135deg, #f0f9ff 0%, #fdf4ff 100%);
-        --card-bg: rgba(255, 255, 255, 0.98);
-        --shadow: rgba(0, 0, 0, 0.06);
-        --hover-shadow: rgba(37, 99, 235, 0.12);
-        --gradient-primary: linear-gradient(135deg, #2563eb 0%, #7e22ce 100%);
-        --gradient-secondary: linear-gradient(135deg, #7e22ce 0%, #0d9488 100%);
-        --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+        --primary: #1d4ed8;      /* Vibrant Education Blue - symbolizes trust and knowledge */
+        --secondary: #3b82f6;    /* Fresh Learning Blue - for energy and growth */
+        --accent: #10b981;       /* Green accent for success and learning progress */
+        --success: #22c55e;      /* Brighter green for positive feedback */
+        --teal: #06b6d4;         /* Teal for creativity and innovation */
+        --navy: #172554;         /* Deep navy for text and depth */
+        --light-blue: #f0f9ff;   /* Softer light blue for backgrounds */
+        --light-purple: #f9fafb; /* Neutral light for clean look */
+        --dark: #0f172a;         /* Retained for contrast */
+        --gray: #6b7280;         /* Softer gray for secondary text */
+
+        --bg-gradient: linear-gradient(135deg, #f9fafb 0%, #f0f9ff 100%);
+        --gradient-primary: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 100%);
+        --gradient-secondary: linear-gradient(135deg, #3b82f6 0%, #10b981 100%);
+        --shadow: rgba(0, 0, 0, 0.05); /* Softer shadows for polished look */
+        --hover-shadow: rgba(29, 78, 216, 0.15); /* Blue-tinted hover shadow */
+        --card-bg: rgba(255, 255, 255, 0.98); /* More transparent for light feel */
     }
 
     * {
@@ -50,7 +48,7 @@
         position: relative;
     }
 
-    /* Animated Background */
+    /* Enhanced Animated Background with Floating Study Items */
     .animated-bg {
         position: fixed;
         top: 0;
@@ -67,7 +65,7 @@
         position: absolute;
         border-radius: 50%;
         animation: float 20s infinite linear;
-        opacity: 0.1;
+        opacity: 0.08;
         filter: blur(40px);
     }
 
@@ -95,11 +93,11 @@
         animation-iteration-count: infinite, infinite;
     }
 
-    .animated-bg .bg-element {
+    .bg-element {
         position: absolute;
         border-radius: 50%;
         background: var(--accent);
-        opacity: 0.08;
+        opacity: 0.06;
         filter: blur(30px);
         animation: float 30s infinite linear reverse;
     }
@@ -121,11 +119,59 @@
         animation-delay: -15s;
     }
 
-    /* NAVIGATION */
+    /* Adding Floating Study Items */
+    .study-item {
+        position: absolute;
+        font-size: clamp(2rem, 5vw, 3rem);
+        opacity: 0.15;
+        animation: float 25s infinite ease-in-out;
+        color: var(--primary);
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    .study-item.book {
+        content: '📚';
+        top: 15%;
+        left: 20%;
+        animation-delay: 0s;
+    }
+
+    .study-item.pencil {
+        content: '✏️';
+        bottom: 25%;
+        right: 15%;
+        animation-delay: -5s;
+        font-size: clamp(1.5rem, 4vw, 2.5rem);
+    }
+
+    .study-item.grad-cap {
+        content: '🎓';
+        top: 40%;
+        left: 60%;
+        animation-delay: -10s;
+    }
+
+    .study-item.globe {
+        content: '🌍';
+        bottom: 10%;
+        left: 40%;
+        animation-delay: -15s;
+    }
+
+    .study-item.lightbulb {
+        content: '💡';
+        top: 60%;
+        right: 25%;
+        animation-delay: -20s;
+        font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+    }
+
+    /* NAVIGATION - Polished with softer transitions */
     nav {
         background: rgba(255, 255, 255, 0.98);
         backdrop-filter: blur(20px);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 2px 20px var(--shadow);
         position: sticky;
         top: 0;
         z-index: 1000;
@@ -208,7 +254,7 @@
         width: 100%;
     }
 
-    /* Mobile menu button */
+    /* Mobile menu button - Polished */
     .menu-toggle {
         display: none;
         background: var(--gradient-primary);
@@ -219,14 +265,14 @@
         font-size: 1.4rem;
         color: white;
         cursor: pointer;
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 12px var(--hover-shadow);
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 1001;
     }
 
     .menu-toggle:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 6px 16px var(--hover-shadow);
     }
 
     /* Mobile Navigation */
@@ -237,7 +283,7 @@
         width: 300px;
         height: 100vh;
         background: white;
-        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+        box-shadow: -10px 0 30px var(--shadow);
         z-index: 999;
         transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         padding: 100px 2rem 2rem;
@@ -289,7 +335,7 @@
         visibility: visible;
     }
 
-    /* HEADER */
+    /* HEADER - Enhanced for education theme */
     header {
         padding: 8rem 2rem 6rem;
         text-align: center;
@@ -309,7 +355,7 @@
         font-size: clamp(2.2rem, 5vw, 3.5rem);
         font-weight: 800;
         margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, var(--navy) 0%, var(--primary) 30%, var(--secondary) 70%);
+        background: var(--gradient-primary);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -375,14 +421,14 @@
     .cta-primary {
         background: var(--gradient-primary);
         color: white;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 15px var(--hover-shadow);
     }
 
     .cta-secondary {
         background: white;
         color: var(--primary);
         border: 1.5px solid var(--primary);
-        box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        box-shadow: 0 2px 8px var(--shadow);
     }
 
     .cta:hover {
@@ -390,26 +436,25 @@
     }
 
     .cta-primary:hover {
-        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
-        background: linear-gradient(135deg, #1d4ed8 0%, #6d28d9 100%);
+        box-shadow: 0 8px 25px var(--hover-shadow);
     }
 
     .cta-secondary:hover {
         background: var(--primary);
         color: white;
         border-color: var(--primary);
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 15px var(--hover-shadow);
     }
 
-    /* Floating elements */
+    /* Floating elements - Adjusted for education theme */
     .floating-element {
         position: absolute;
-        border-radius: 20px;
+        border-radius: 50%;
         background: rgba(255, 255, 255, 0.9);
         backdrop-filter: blur(10px);
         z-index: 1;
         animation: float 8s ease-in-out infinite;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 8px 32px var(--shadow);
         border: 1px solid rgba(255, 255, 255, 0.8);
     }
 
@@ -419,7 +464,7 @@
         top: 20%;
         left: 10%;
         animation-delay: 0s;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(126, 34, 206, 0.1));
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.1), rgba(16, 185, 129, 0.1));
     }
 
     .floating-element:nth-child(2) {
@@ -428,7 +473,7 @@
         bottom: 20%;
         right: 10%;
         animation-delay: 2s;
-        background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(16, 185, 129, 0.1));
+        background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(29, 78, 216, 0.1));
     }
 
     .floating-element:nth-child(3) {
@@ -437,10 +482,10 @@
         top: 40%;
         right: 15%;
         animation-delay: 4s;
-        background: linear-gradient(135deg, rgba(13, 148, 136, 0.1), rgba(30, 58, 138, 0.1));
+        background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(59, 130, 246, 0.1));
     }
 
-    /* SECTIONS */
+    /* SECTIONS - Polished padding and shadows */
     section {
         padding: clamp(3rem, 8vw, 5rem) clamp(1rem, 4vw, 2rem);
         margin: 2rem auto;
@@ -479,7 +524,7 @@
         margin: 1.5rem auto;
     }
 
-    /* SERVICES */
+    /* SERVICES - Enhanced card design */
     .services-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -489,7 +534,7 @@
 
     .service-card {
         background: var(--card-bg);
-        border-radius: 16px;
+        border-radius: 20px; /* Softer corners */
         padding: clamp(2rem, 5vw, 2.5rem) clamp(1.5rem, 4vw, 2rem);
         text-align: center;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -507,7 +552,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(126, 34, 206, 0.02));
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
 
@@ -524,7 +569,7 @@
     .service-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px var(--hover-shadow);
-        border-color: rgba(37, 99, 235, 0.2);
+        border-color: rgba(29, 78, 216, 0.2);
     }
 
     .service-icon {
@@ -549,7 +594,7 @@
         font-size: clamp(0.9rem, 2vw, 1rem);
     }
 
-    /* HOW IT WORKS & WHY US */
+    /* HOW IT WORKS & WHY US - Polished */
     .process-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
@@ -560,7 +605,7 @@
 
     .process-card {
         background: var(--card-bg);
-        border-radius: 16px;
+        border-radius: 20px; /* Softer */
         padding: clamp(2rem, 5vw, 2.5rem);
         box-shadow: 0 10px 30px var(--shadow);
         transition: all 0.3s ease;
@@ -577,14 +622,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(126, 34, 206, 0.02));
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
 
     .process-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px var(--hover-shadow);
-        border-color: rgba(37, 99, 235, 0.2);
+        border-color: rgba(29, 78, 216, 0.2);
     }
 
     .process-card h3 {
@@ -619,7 +664,7 @@
         font-size: 1.1rem;
     }
 
-    /* PRICING */
+    /* PRICING - Enhanced polish */
     .pricing-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -629,7 +674,7 @@
 
     .pricing-card {
         background: var(--card-bg);
-        border-radius: 16px;
+        border-radius: 20px;
         padding: clamp(2rem, 5vw, 3rem) clamp(1.5rem, 4vw, 2rem);
         text-align: center;
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -647,21 +692,21 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(126, 34, 206, 0.02));
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
     }
 
     .pricing-card.popular {
         border: 2px solid var(--primary);
         transform: scale(1.05);
-        box-shadow: 0 15px 40px rgba(37, 99, 235, 0.15);
+        box-shadow: 0 15px 40px var(--hover-shadow);
     }
 
     .popular-badge {
         position: absolute;
         top: 0;
         right: clamp(1rem, 3vw, 2rem);
-        background: var(--gradient-accent);
+        background: var(--gradient-secondary);
         color: white;
         padding: 0.5rem clamp(1rem, 3vw, 1.5rem);
         border-radius: 0 0 8px 8px;
@@ -716,7 +761,7 @@
         min-width: 20px;
     }
 
-    /* TESTIMONIALS */
+    /* TESTIMONIALS - Polished */
     .testimonials-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -726,7 +771,7 @@
 
     .testimonial-card {
         background: var(--card-bg);
-        border-radius: 16px;
+        border-radius: 20px;
         padding: clamp(2rem, 5vw, 2.5rem);
         box-shadow: 0 10px 30px var(--shadow);
         transition: all 0.3s ease;
@@ -758,15 +803,15 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.02), rgba(126, 34, 206, 0.02));
+        background: linear-gradient(135deg, rgba(29, 78, 216, 0.02), rgba(16, 185, 129, 0.02));
         z-index: -1;
-        border-radius: 16px;
+        border-radius: 20px;
     }
 
     .testimonial-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 15px 35px var(--hover-shadow);
-        border-color: rgba(37, 99, 235, 0.2);
+        border-color: rgba(29, 78, 216, 0.2);
     }
 
     .testimonial-text {
@@ -796,7 +841,7 @@
         font-weight: bold;
         color: white;
         border: 3px solid white;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 4px 12px var(--shadow);
         font-size: clamp(1rem, 2.5vw, 1.3rem);
         flex-shrink: 0;
     }
@@ -813,7 +858,7 @@
         font-size: clamp(0.8rem, 2vw, 0.9rem);
     }
 
-    /* BLOG */
+    /* BLOG - Polished */
     .blog-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -823,7 +868,7 @@
 
     .blog-card {
         background: var(--card-bg);
-        border-radius: 16px;
+        border-radius: 20px;
         overflow: hidden;
         box-shadow: 0 10px 30px var(--shadow);
         transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -834,7 +879,7 @@
     .blog-card:hover {
         transform: translateY(-8px);
         box-shadow: 0 20px 40px var(--hover-shadow);
-        border-color: rgba(37, 99, 235, 0.2);
+        border-color: rgba(29, 78, 216, 0.2);
     }
 
     .blog-image {
@@ -866,7 +911,7 @@
 
     .blog-category {
         display: inline-block;
-        background: rgba(37, 99, 235, 0.1);
+        background: rgba(29, 78, 216, 0.1);
         color: var(--primary);
         padding: 0.3rem clamp(0.75rem, 2vw, 1rem);
         border-radius: 20px;
@@ -907,7 +952,7 @@
         color: var(--secondary);
     }
 
-    /* FAQ */
+    /* FAQ - Polished */
     .faq-container {
         max-width: 800px;
         margin: 0 auto;
@@ -916,18 +961,18 @@
 
     .faq-item {
         background: var(--card-bg);
-        border-radius: 12px;
+        border-radius: 16px;
         margin-bottom: 1rem;
         overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+        box-shadow: 0 5px 15px var(--shadow);
         transition: all 0.3s ease;
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
     }
 
     .faq-item.active {
-        box-shadow: 0 10px 25px rgba(37, 99, 235, 0.08);
-        border-color: rgba(37, 99, 235, 0.2);
+        box-shadow: 0 10px 25px var(--hover-shadow);
+        border-color: rgba(29, 78, 216, 0.2);
     }
 
     .faq-question {
@@ -944,7 +989,7 @@
     }
 
     .faq-question:hover {
-        background: rgba(37, 99, 235, 0.03);
+        background: rgba(29, 78, 216, 0.03);
     }
 
     .faq-icon {
@@ -978,7 +1023,7 @@
         font-size: clamp(0.95rem, 2vw, 1rem);
     }
 
-    /* CONTACT */
+    /* CONTACT - Polished */
     .contact-container {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
@@ -1023,7 +1068,7 @@
         justify-content: center;
         color: white;
         font-size: clamp(1rem, 2.5vw, 1.2rem);
-        box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 12px var(--hover-shadow);
         transition: all 0.3s;
         flex-shrink: 0;
     }
@@ -1035,7 +1080,7 @@
     .contact-form {
         background: var(--card-bg);
         padding: clamp(2rem, 5vw, 2.5rem);
-        border-radius: 16px;
+        border-radius: 20px;
         box-shadow: 0 15px 35px var(--shadow);
         border: 1px solid rgba(226, 232, 240, 0.6);
         width: 100%;
@@ -1073,7 +1118,7 @@
     .form-control:focus {
         outline: none;
         border-color: var(--primary);
-        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
     }
 
     textarea.form-control {
@@ -1093,7 +1138,7 @@
         width: 100%;
         font-size: clamp(1rem, 2.5vw, 1.05rem);
         letter-spacing: 0.3px;
-        box-shadow: 0 4px 15px rgba(37, 99, 235, 0.2);
+        box-shadow: 0 4px 15px var(--hover-shadow);
         position: relative;
         overflow: hidden;
     }
@@ -1111,14 +1156,14 @@
 
     .btn-submit:hover {
         transform: translateY(-3px);
-        box-shadow: 0 8px 25px rgba(37, 99, 235, 0.3);
+        box-shadow: 0 8px 25px var(--hover-shadow);
     }
 
     .btn-submit:hover::before {
         left: 100%;
     }
 
-    /* FOOTER */
+    /* FOOTER - Adjusted for theme */
     footer {
         background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
         color: #f8fafc;
@@ -1271,10 +1316,10 @@
 
     @keyframes pulse {
         0%, 100% {
-            opacity: 0.1;
+            opacity: 0.08;
         }
         50% {
-            opacity: 0.15;
+            opacity: 0.12;
         }
     }
 
@@ -1291,7 +1336,7 @@
     .service-card:nth-child(5) { animation-delay: 0.5s; }
     .service-card:nth-child(6) { animation-delay: 0.6s; }
 
-    /* RESPONSIVE DESIGN - Enhanced for all devices */
+    /* RESPONSIVE DESIGN - Ensured full mobile responsiveness */
 
     /* Large Desktop */
     @media (min-width: 1600px) {
@@ -1384,6 +1429,10 @@
             left: 0;
             transform: none;
         }
+        
+        .study-item {
+            font-size: clamp(1.5rem, 4vw, 2rem); /* Smaller on tablet */
+        }
     }
 
     /* Mobile */
@@ -1455,7 +1504,16 @@
         
         .animated-bg::before,
         .animated-bg::after {
-            display: none;
+            width: 300px;
+            height: 300px;
+        }
+        
+        .study-item {
+            font-size: clamp(1.2rem, 3.5vw, 1.8rem); /* Adjusted for mobile */
+        }
+
+        .bg-element {
+            display: none; /* Hide large blobs on small screens */
         }
     }
 
@@ -1507,6 +1565,10 @@
             height: 42px;
             font-size: 1.2rem;
         }
+
+        .study-item {
+            font-size: clamp(1rem, 3vw, 1.5rem); /* Even smaller */
+        }
     }
 
     /* Extra Small Mobile */
@@ -1532,13 +1594,17 @@
             padding: 0.4rem 1rem;
             font-size: 0.75rem;
         }
+
+        .study-item {
+            display: none; /* Hide on very small screens to avoid clutter */
+        }
     }
 
-    /* Dark mode support */
+    /* Dark mode support - Adjusted for education theme */
     @media (prefers-color-scheme: dark) {
         :root {
-            --primary: #3b82f6;
-            --secondary: #8b5cf6;
+            --primary: #60a5fa;
+            --secondary: #4ade80;
             --navy: #1e40af;
             --dark: #f1f5f9;
             --gray: #94a3b8;
@@ -1564,7 +1630,7 @@
         
         .form-control:focus {
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            box-shadow: 0 0 0 3px rgba(96, 165, 250, 0.1);
         }
         
         footer {
@@ -1593,6 +1659,11 @@
         
         .mobile-nav .nav-links a:hover {
             color: var(--primary);
+        }
+
+        .study-item {
+            color: var(--secondary);
+            opacity: 0.2;
         }
     }
 
@@ -1650,9 +1721,88 @@
         }
     }
 
+
+    /* Founder & Developer Credit */
+.footer-credit {
+    text-align: center;
+    margin-top: 2.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px dashed rgba(255, 255, 255, 0.15);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.footer-credit p {
+    margin: 0;
+    line-height: 1.6;
+}
+
+.credit-name {
+    font-weight: 700;
+    background: linear-gradient(135deg, #60a5fa, #818cf8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease;
+}
+
+.credit-role {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.credit-separator {
+    margin: 0 0.4rem;
+    opacity: 0.6;
+}
+
+/* Hover effect */
+.footer-credit:hover .credit-name {
+    filter: brightness(1.2);
+    letter-spacing: 0.8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .footer-credit {
+        font-size: 0.9rem;
+        padding-top: 1.2rem;
+    }
+
+    .credit-separator {
+        display: none;
+    }
+
+    .footer-credit p {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-credit {
+        font-size: 0.85rem;
+    }
+
+    .credit-role {
+        font-size: 0.8rem;
+    }
+}
+
+
+
     /* Import fonts */
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 </style>
+<div class="animated-bg">
+    <div class="study-item book">📚</div>
+    <div class="study-item pencil">✏️</div>
+    <div class="study-item grad-cap">🎓</div>
+    <div class="study-item globe">🌍</div>
+    <div class="study-item lightbulb">💡</div>
+</div>
 </head>
 
 <body>
@@ -1755,55 +1905,78 @@
         </div>
         
         <div class="pricing-grid">
-            <div class="pricing-card">
-                <h3>School Level (6-9)</h3>
-                <div class="price">₹50<span>/page</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check feature-check"></i> Basic to moderate level work</li>
-                    <li><i class="fas fa-check feature-check"></i> 24-48 hour turnaround</li>
-                    <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
-                    <li><i class="fas fa-check feature-check"></i> 2 free revisions included</li>
-                    <li><i class="fas fa-check feature-check"></i> Plagiarism-free guarantee</li>
-                </ul>
-                <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%206-9%20assignment" 
-                   class="cta cta-primary">
-                   <i class="fab fa-whatsapp"></i> Get Help Now
-                </a>
-            </div>
+
+    <!-- Class 6-7 -->
+    <div class="pricing-card">
+        <h3>School Level (6–7)</h3>
+        <div class="price">₹40<span>/subject</span></div>
+        <ul class="pricing-features">
+            <li><i class="fas fa-check feature-check"></i> Basic level assignments</li>
+            <li><i class="fas fa-check feature-check"></i> 24–48 hour turnaround</li>
+            <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
             
-            <div class="pricing-card popular">
-                <div class="popular-badge">MOST POPULAR</div>
-                <h3>High School (10-12)</h3>
-                <div class="price">₹70<span>/page</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check feature-check"></i> Advanced subjects covered</li>
-                    <li><i class="fas fa-check feature-check"></i> Board exam preparation help</li>
-                    <li><i class="fas fa-check feature-check"></i> Detailed explanations</li>
-                    <li><i class="fas fa-check feature-check"></i> Priority 24/7 support</li>
-                    <li><i class="fas fa-check feature-check"></i> 3 free revisions</li>
-                </ul>
-                <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%2010-12%20assignment" 
-                   class="cta cta-primary">
-                   <i class="fab fa-whatsapp"></i> Get Help Now
-                </a>
-            </div>
+            <li><i class="fas fa-check feature-check"></i> 100% plagiarism-free</li>
+        </ul>
+        <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%206-7%20assignment"
+           class="cta cta-primary">
+            <i class="fab fa-whatsapp"></i> Get Help Now
+        </a>
+    </div>
+
+    <!-- Class 8-9 -->
+    <div class="pricing-card">
+        <h3>School Level (8–9)</h3>
+        <div class="price">₹50<span>/subject</span></div>
+        <ul class="pricing-features">
+            <li><i class="fas fa-check feature-check"></i> Moderate difficulty level</li>
+            <li><i class="fas fa-check feature-check"></i> Concept-based explanations</li>
+            <li><i class="fas fa-check feature-check"></i> All subjects covered</li>
             
-            <div class="pricing-card">
-                <h3>College & University</h3>
-                <div class="price">Custom<span>/project</span></div>
-                <ul class="pricing-features">
-                    <li><i class="fas fa-check feature-check"></i> Any stream or subject</li>
-                    <li><i class="fas fa-check feature-check"></i> Research-based work</li>
-                    <li><i class="fas fa-check feature-check"></i> Professional formatting</li>
-                    <li><i class="fas fa-check feature-check"></i> Citation and references</li>
-                    <li><i class="fas fa-check feature-check"></i> Urgent delivery available</li>
-                </ul>
-                <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20a%20quote%20for%20college%20assignment" 
-                   class="cta cta-primary">
-                   <i class="fas fa-comment-dollar"></i> Get Custom Quote
-                </a>
-            </div>
-        </div>
+            <li><i class="fas fa-check feature-check"></i> Plagiarism-free guarantee</li>
+        </ul>
+        <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%208-9%20assignment"
+           class="cta cta-primary">
+            <i class="fab fa-whatsapp"></i> Get Help Now
+        </a>
+    </div>
+
+    <!-- Class 10-12 -->
+    <div class="pricing-card popular">
+        <div class="popular-badge">MOST POPULAR</div>
+        <h3>High School (10–12)</h3>
+        <div class="price">₹70<span>/subject</span></div>
+        <ul class="pricing-features">
+            <li><i class="fas fa-check feature-check"></i> Advanced subjects covered</li>
+            <li><i class="fas fa-check feature-check"></i> Board exam preparation help</li>
+            <li><i class="fas fa-check feature-check"></i> Detailed explanations</li>
+            <li><i class="fas fa-check feature-check"></i> Priority 24/7 support</li>
+           
+        </ul>
+        <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20help%20with%20Class%2010-12%20assignment"
+           class="cta cta-primary">
+            <i class="fab fa-whatsapp"></i> Get Help Now
+        </a>
+    </div>
+
+    <!-- College -->
+    <div class="pricing-card">
+        <h3>College & University</h3>
+        <div class="price">Custom<span>/project</span></div>
+        <ul class="pricing-features">
+            <li><i class="fas fa-check feature-check"></i> Any stream or subject</li>
+            <li><i class="fas fa-check feature-check"></i> Research-based work</li>
+            <li><i class="fas fa-check feature-check"></i> Professional formatting</li>
+            <li><i class="fas fa-check feature-check"></i> Citation & references</li>
+            <li><i class="fas fa-check feature-check"></i> Urgent delivery available</li>
+        </ul>
+        <a href="https://wa.me/918798141965?text=Hi,%20I%20need%20a%20quote%20for%20college%20assignment"
+           class="cta cta-primary">
+            <i class="fas fa-comment-dollar"></i> Get Custom Quote
+        </a>
+    </div>
+
+</div>
+
         
         <p style="text-align: center; margin-top: 3rem; color: var(--gray); font-size: 1.1rem; max-width: 800px; margin-left: auto; margin-right: auto;">
             <i class="fas fa-info-circle" style="color: var(--primary); margin-right: 0.5rem;"></i>
@@ -1852,14 +2025,14 @@
     <section id="testimonials">
         <div class="section-title">
             <h2>Student Success Stories</h2>
-            <p>What thousands of students say about our services</p>
+            <p>What students say about our services</p>
             <div class="title-decoration"></div>
         </div>
         
         <div class="testimonials-grid">
             <div class="testimonial-card">
                 <div class="testimonial-text">
-                    "Outstanding help with my science project. They delivered before deadline and helped me score 95/100! The explanations were so clear that I could present confidently."
+                    "Outstanding help with my science project. They delivered before deadline and helped me.The explanations were so clear that I could present confidently."
                 </div>
                 <div class="testimonial-author">
                     <div class="author-avatar">R</div>
@@ -1877,8 +2050,8 @@
                 <div class="testimonial-author">
                     <div class="author-avatar">P</div>
                     <div class="author-info">
-                        <h4>Priya Patel</h4>
-                        <p>BA English Student, Delhi University</p>
+                        <h4>Priya Das</h4>
+                        <p>BA English Student,</p>
                     </div>
                 </div>
             </div>
@@ -2077,10 +2250,10 @@
                 <p>Providing premium academic assistance to school and college students since 2020. We help students achieve better grades with timely, high-quality assignments while maintaining complete confidentiality.</p>
                 
                 <div class="social-links">
-                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    <!-- <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a> -->
+                    <a href="https://www.instagram.com/akash.dv__?igsh=aHo3c2dtemJ6Z2J1" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.instagram.com/sntn.7u____?igsh=MThrdXB2M2h5ZGhzbw==" class="social-link"><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
             
@@ -2126,6 +2299,20 @@
             <p>This service provides educational assistance and guidance. Clients are responsible for using the work as a reference model for their own original work.</p>
             <p style="margin-top: 1rem; font-size: 0.85rem;">Contact: +91 8798141965 | Email: akashbhowmik110@gmail.com</p>
         </div>
+
+       <!-- Founder & Developer -->
+<div class="footer-credit">
+    <p>
+        Founded by 
+        <span class="credit-name">Shantanu Biswas</span> 
+        <span class="credit-separator">•</span>
+        Developed by 
+        <span class="credit-name">Akash Bhowmik</span>
+        <span class="credit-separator">•</span>
+        <span class="credit-role">Full Stack Developer</span>
+    </p>
+</div>
+
     </footer>
 
     <script>
