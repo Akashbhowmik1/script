@@ -102,8 +102,6 @@
     --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-
-
 /* ===== CSS Reset & Defaults ===== */
 *,
 *::before,
@@ -120,7 +118,7 @@ html {
 
 body {
     min-height: 100vh;
-        background: var(--bg-gradient);
+    background: var(--bg-gradient);
     color: var(--dark);
     font-family: var(--font-main);
     font-size: var(--text-base);
@@ -154,9 +152,7 @@ p {
 
 /* ===== Card / Surface Utility ===== */
 .card {
-     background: var(--card-bg);
-    backdrop-filter: var(--card-blur);
-    box-shadow: var(--shadow-sm);
+    background: var(--card-bg);
     backdrop-filter: var(--card-blur);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -169,7 +165,7 @@ p {
     box-shadow: var(--hover-shadow);
 }
 
-    /* ===== Animated Background Wrapper ===== */
+/* ===== Animated Background Wrapper ===== */
 .animated-bg {
     position: fixed;
     inset: 0;
@@ -178,6 +174,10 @@ p {
     z-index: -2;
     overflow: hidden;
     pointer-events: none;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform;
 }
 
 /* ===== Base Floating Blobs ===== */
@@ -188,8 +188,9 @@ p {
     border-radius: 50%;
     opacity: 0.18;
     filter: blur(clamp(24px, 6vw, 40px));
-    animation: float 22s linear infinite, pulse 9s ease-in-out infinite;
+    animation: float 18s linear infinite, pulse 7s ease-in-out infinite;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 /* Primary Blob */
@@ -208,7 +209,7 @@ p {
     background: var(--secondary);
     bottom: -12%;
     right: -12%;
-    animation-duration: 28s, 11s;
+    animation-duration: 22s, 9s;
 }
 
 /* ===== Extra Floating Elements ===== */
@@ -217,8 +218,9 @@ p {
     border-radius: 50%;
     opacity: 0.06;
     filter: blur(clamp(20px, 5vw, 32px));
-    animation: float 34s linear infinite reverse;
+    animation: float 28s linear infinite reverse;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
 }
 
 /* Element 1 */
@@ -242,13 +244,13 @@ p {
 /* ===== Animations ===== */
 @keyframes float {
     0% {
-        transform: translateY(0) translateX(0);
+        transform: translate3d(0, 0, 0);
     }
     50% {
-        transform: translateY(-40px) translateX(30px);
+        transform: translate3d(30px, -40px, 0);
     }
     100% {
-        transform: translateY(0) translateX(0);
+        transform: translate3d(0, 0, 0);
     }
 }
 
@@ -261,45 +263,20 @@ p {
     }
 }
 
-/* ===== Mobile Optimization ===== */
-@media (max-width: 768px) {
-    .animated-bg::before {
-        top: -8%;
-        left: -20%;
-    }
-
-    .animated-bg::after {
-        bottom: -8%;
-        right: -20%;
-    }
-
-    .bg-element {
-        opacity: 0.05;
-        animation-duration: 40s;
-    }
-}
-
-/* ===== Reduced Motion (Accessibility) ===== */
-@media (prefers-reduced-motion: reduce) {
-    .animated-bg::before,
-    .animated-bg::after,
-    .bg-element {
-        animation: none;
-        transform: none;
-    }
-}
-
-    /* ===== Floating Study Items ===== */
+/* ===== Floating Study Items - OPTIMIZED FOR MOBILE ===== */
 .study-item {
     position: absolute;
     font-size: clamp(1.6rem, 4.5vw, 3rem);
     opacity: 0.14;
-    animation: study-float 28s ease-in-out infinite;
+    animation: study-float 22s ease-in-out infinite;
     color: var(--primary);
     z-index: -1;
     pointer-events: none;
     filter: drop-shadow(0 6px 12px rgba(29, 78, 216, 0.15));
     will-change: transform;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
 }
 
 .study-item::before {
@@ -323,7 +300,7 @@ p {
 .study-item.pencil {
     bottom: 22%;
     right: 12%;
-    animation-delay: -6s;
+    animation-delay: -4s;
     font-size: clamp(1.4rem, 4vw, 2.4rem);
 }
 
@@ -333,7 +310,7 @@ p {
 .study-item.grad-cap {
     top: 42%;
     left: 58%;
-    animation-delay: -12s;
+    animation-delay: -8s;
 }
 
 .study-item.globe::before {
@@ -342,7 +319,7 @@ p {
 .study-item.globe {
     bottom: 12%;
     left: 38%;
-    animation-delay: -18s;
+    animation-delay: -12s;
 }
 
 .study-item.lightbulb::before {
@@ -351,64 +328,144 @@ p {
 .study-item.lightbulb {
     top: 62%;
     right: 22%;
-    animation-delay: -24s;
+    animation-delay: -16s;
     font-size: clamp(1.6rem, 4.2vw, 2.7rem);
 }
 
-/* ===== Animation ===== */
+/* ===== Faster Animation ===== */
 @keyframes study-float {
     0% {
-        transform: translateY(0) rotate(0deg);
+        transform: translate3d(0, 0, 0) rotate(0deg);
     }
-    50% {
-        transform: translateY(-40px) rotate(6deg);
+    33% {
+        transform: translate3d(20px, -30px, 0) rotate(4deg);
+    }
+    66% {
+        transform: translate3d(-15px, 20px, 0) rotate(-3deg);
     }
     100% {
-        transform: translateY(0) rotate(0deg);
+        transform: translate3d(0, 0, 0) rotate(0deg);
     }
 }
 
 /* ===== Mobile Optimization ===== */
 @media (max-width: 768px) {
     .study-item {
-        opacity: 0.1;
-        animation-duration: 36s;
+        opacity: 0.12;
+        animation-duration: 18s;
         filter: drop-shadow(0 4px 8px rgba(29, 78, 216, 0.12));
     }
-
+    
     .study-item.book {
         top: 10%;
-        left: 8%;
+        left: 10%;
     }
-
+    
+    .study-item.pencil {
+        bottom: 20%;
+        right: 10%;
+    }
+    
     .study-item.grad-cap {
         top: 35%;
-        left: 50%;
+        left: 55%;
     }
-
+    
+    .study-item.globe {
+        bottom: 15%;
+        left: 35%;
+    }
+    
     .study-item.lightbulb {
-        top: 55%;
-        right: 10%;
+        top: 60%;
+        right: 15%;
+    }
+    
+    .animated-bg::before,
+    .animated-bg::after {
+        animation-duration: 25s, 10s;
+        opacity: 0.12;
+    }
+    
+    .bg-element {
+        display: block;
+        opacity: 0.04;
+        animation-duration: 35s;
     }
 }
 
-/* ===== Reduced Motion ===== */
+/* ===== Small Mobile Optimization ===== */
+@media (max-width: 480px) {
+    .study-item {
+        animation-duration: 16s;
+        font-size: clamp(1.2rem, 3.5vw, 1.8rem);
+        opacity: 0.1;
+    }
+    
+    .study-item.book {
+        top: 8%;
+        left: 8%;
+    }
+    
+    .study-item.pencil {
+        bottom: 18%;
+        right: 8%;
+    }
+    
+    .study-item.grad-cap {
+        top: 30%;
+        left: 60%;
+    }
+    
+    .study-item.globe {
+        bottom: 10%;
+        left: 30%;
+    }
+    
+    .study-item.lightbulb {
+        top: 65%;
+        right: 10%;
+    }
+    
+    .animated-bg::before {
+        width: 200px;
+        height: 200px;
+        top: -5%;
+        left: -10%;
+    }
+    
+    .animated-bg::after {
+        width: 180px;
+        height: 180px;
+        bottom: -5%;
+        right: -10%;
+    }
+    
+    .bg-element {
+        opacity: 0.03;
+    }
+}
+
+/* ===== Reduced Motion (Accessibility) ===== */
 @media (prefers-reduced-motion: reduce) {
+    .animated-bg::before,
+    .animated-bg::after,
+    .bg-element,
     .study-item {
         animation: none;
         transform: none;
     }
 }
+
 /* ===== NAVIGATION ===== */
 nav {
     position: sticky;
     top: 0;
     z-index: 1000;
-        background: rgba(15, 23, 42, 0.85);
+    background: rgba(15, 23, 42, 0.85);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border-bottom: 1px solid rgba(226, 232, 240, 0.7);
     box-shadow: 0 6px 30px rgba(15, 23, 42, 0.06);
     padding: clamp(0.75rem, 2vw, 1.1rem)
              clamp(1rem, 4vw, 2rem);
@@ -580,6 +637,7 @@ nav {
         place-items: center;
     }
 }
+
 /* ===== HEADER ===== */
 header {
     position: relative;
@@ -647,6 +705,7 @@ header {
     transition: transform 0.25s ease,
                 box-shadow 0.25s ease;
     border: none;
+    text-decoration: none;
 }
 
 .cta::before {
@@ -784,7 +843,7 @@ header {
     }
 }
 
-    /* =========================================================
+/* =========================================================
    SECTIONS – PREMIUM SPACING & TYPOGRAPHY
 ========================================================= */
 section {
@@ -944,7 +1003,7 @@ section {
     }
 }
 
-   /* =========================================================
+/* =========================================================
    HOW IT WORKS / WHY US
 ========================================================= */
 .process-container {
@@ -1159,30 +1218,6 @@ section {
 }
 
 /* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .pricing-card.popular {
-        transform: none;
-    }
-
-    .process-card,
-    .pricing-card {
-        transform: none !important;
-    }
-}
-
-/* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .process-card,
-    .pricing-card {
-        transition: none;
-    }
-}
-
-    /* =========================================================
    TESTIMONIALS
 ========================================================= */
 .testimonials-grid {
@@ -1306,24 +1341,6 @@ section {
 }
 
 /* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .testimonial-card {
-        transform: none !important;
-    }
-}
-
-/* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .testimonial-card {
-        transition: none;
-    }
-}
-
-    /* =========================================================
    BLOG
 ========================================================= */
 .blog-grid {
@@ -1572,46 +1589,6 @@ section {
 }
 
 /* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .faq-question {
-        font-size: 1rem;
-        padding: 1.2rem 1.4rem;
-    }
-
-    .faq-answer {
-        padding-inline: 1.4rem;
-    }
-}
-
-/* =========================================================
-   TOUCH OPTIMIZATION
-========================================================= */
-@media (hover: none) and (pointer: coarse) {
-    .faq-question:hover {
-        background: inherit;
-    }
-
-    .faq-question:active {
-        background: rgba(59, 130, 246, 0.12);
-    }
-}
-
-/* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .faq-answer,
-    .faq-icon,
-    .faq-question {
-        transition: none;
-        transform: none;
-    }
-}
-
-
-    /* =========================================================
    CONTACT
 ========================================================= */
 .contact-container {
@@ -1621,13 +1598,14 @@ section {
     align-items: start;
     padding-inline: 1rem;
 }
+
 /* =========================================================
    CONTACT INFO – DARK & PREMIUM
 ========================================================= */
 .contact-info h3 {
     font-size: clamp(1.5rem, 4vw, 1.85rem);
     margin-bottom: 1.25rem;
-    color: #e0e7ff; /* brighter than navy for dark bg */
+    color: #e0e7ff;
     font-weight: 700;
     letter-spacing: -0.03em;
 }
@@ -1661,40 +1639,6 @@ section {
         color 0.25s ease;
 }
 
-/* Soft hover glow (desktop only) */
-@media (hover: hover) {
-    .contact-details li:hover {
-        transform: translateX(6px);
-        color: #f9fafb;
-        background: linear-gradient(
-            90deg,
-            rgba(59, 130, 246, 0.12),
-            rgba(59, 130, 246, 0.04),
-            transparent
-        );
-    }
-}
-
-/* =========================================================
-   MOBILE TOUCH FEEDBACK
-========================================================= */
-@media (hover: none) and (pointer: coarse) {
-    .contact-details li:active {
-        background: rgba(59, 130, 246, 0.15);
-        transform: scale(0.98);
-    }
-}
-
-/* =========================================================
-   SMALL SCREEN OPTIMIZATION
-========================================================= */
-@media (max-width: 480px) {
-    .contact-details li {
-        gap: 0.9rem;
-        padding: 0.65rem 0.4rem;
-    }
-}
-
 /* Contact Icon */
 .contact-icon {
     width: clamp(46px, 10vw, 52px);
@@ -1710,19 +1654,11 @@ section {
     justify-content: center;
     flex-shrink: 0;
 
-    box-shadow:
-        0 10px 28px rgba(59, 130, 246, 0.45);
+    box-shadow: 0 10px 28px rgba(59, 130, 246, 0.45);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-}
-
-@media (hover: hover) {
-    .contact-details li:hover .contact-icon {
-        transform: scale(1.1);
-        box-shadow: 0 14px 36px rgba(59, 130, 246, 0.6);
-    }
 }
 
 /* =========================================================
@@ -1774,31 +1710,6 @@ section {
 
     letter-spacing: 0.02em;
 }
-
-/* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .contact-details li {
-        gap: 1rem;
-        margin-bottom: 1.4rem;
-    }
-
-    .contact-form {
-        padding: 1.8rem;
-    }
-}
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .contact-details li,
-    .contact-icon {
-        transition: none;
-    }
-}
-
 
 /* =========================================================
    INPUTS / TEXTAREA – PREMIUM & MOBILE FRIENDLY
@@ -1897,73 +1808,6 @@ textarea.form-control {
     );
     transform: translateX(-120%);
     transition: transform 0.7s ease;
-}
-
-/* Hover (desktop only) */
-@media (hover: hover) {
-    .btn-submit:hover {
-        transform: translateY(-3px);
-        box-shadow:
-            0 20px 50px rgba(59, 130, 246, 0.55),
-            inset 0 1px 0 rgba(255, 255, 255, 0.25);
-        filter: brightness(1.05);
-    }
-
-    .btn-submit:hover::before {
-        transform: translateX(120%);
-    }
-}
-
-/* Active (mobile tap feedback) */
-.btn-submit:active {
-    transform: translateY(-1px) scale(0.98);
-    box-shadow:
-        0 10px 22px rgba(59, 130, 246, 0.4);
-}
-
-/* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .form-control {
-        border-radius: 16px;
-        font-size: 1rem;
-    }
-
-    .btn-submit {
-        border-radius: 18px;
-    }
-}
-
-/* =========================================================
-   REDUCED MOTION (ACCESSIBILITY)
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .form-control,
-    .btn-submit,
-    .btn-submit::before {
-        transition: none;
-    }
-}
-
-
-/* =========================================================
-   MOBILE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    .contact-details li {
-        transform: none !important;
-    }
-}
-
-/* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .contact-details li,
-    .btn-submit {
-        transition: none;
-    }
 }
 
 /* =========================================================
@@ -2119,15 +1963,6 @@ footer::before {
                 box-shadow 0.25s ease;
 }
 
-/* Desktop hover only */
-@media (hover: hover) {
-    .social-link:hover {
-        background: var(--primary);
-        transform: translateY(-4px);
-        box-shadow: 0 10px 25px rgba(29, 78, 216, 0.4);
-    }
-}
-
 /* =========================================================
    FOOTER BOTTOM (TEXT FIXED & CENTERED)
 ========================================================= */
@@ -2143,16 +1978,8 @@ footer::before {
 
     display: flex;
     flex-direction: column;
-    align-items: center;     /* HARD CENTER */
+    align-items: center;
     text-align: center;
-}
-
-/* Constrain text block width */
-.footer-bottom p,
-.footer-credit {
-    max-width: 720px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Text */
@@ -2227,57 +2054,6 @@ footer::before {
 }
 
 /* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .footer-links a,
-    .social-link {
-        transition: none;
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-@media (max-width: 900px) {
-    .footer-container {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2.5rem;
-    }
-}
-
-@media (max-width: 600px) {
-    .footer-container {
-        grid-template-columns: 1fr;
-        text-align: center;
-    }
-
-    .footer-about p {
-        margin-inline: auto;
-    }
-
-    .footer-links h4::after {
-        left: 50%;
-        transform: translateX(-50%);
-    }
-
-    .social-links {
-        justify-content: center;
-    }
-}
-
-/* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    .footer-links a,
-    .social-link {
-        transition: none;
-    }
-}
-
-/* =========================================================
    ANIMATIONS
 ========================================================= */
 
@@ -2291,68 +2067,6 @@ footer::before {
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* Floating background motion */
-@keyframes float {
-    0%, 100% {
-        transform: translate(0, 0) rotate(0deg);
-    }
-    25% {
-        transform: translate(18px, -18px) rotate(4deg);
-    }
-    50% {
-        transform: translate(-14px, 14px) rotate(-4deg);
-    }
-    75% {
-        transform: translate(14px, 10px) rotate(3deg);
-    }
-}
-
-/* Soft pulse (background only) */
-@keyframes pulse {
-    0%, 100% {
-        opacity: 0.08;
-    }
-    50% {
-        opacity: 0.12;
-    }
-}
-
-/* =========================================================
-   STAGGERED CARD ANIMATION (DESKTOP ONLY)
-========================================================= */
-@media (hover: hover) {
-    .service-card,
-    .pricing-card,
-    .testimonial-card,
-    .blog-card {
-        opacity: 0;
-        animation: fadeInUp 0.6s ease-out forwards;
-    }
-
-    .service-card:nth-child(1),
-    .pricing-card:nth-child(1),
-    .testimonial-card:nth-child(1),
-    .blog-card:nth-child(1) { animation-delay: 0.1s; }
-
-    .service-card:nth-child(2),
-    .pricing-card:nth-child(2),
-    .testimonial-card:nth-child(2),
-    .blog-card:nth-child(2) { animation-delay: 0.2s; }
-
-    .service-card:nth-child(3),
-    .pricing-card:nth-child(3),
-    .testimonial-card:nth-child(3),
-    .blog-card:nth-child(3) { animation-delay: 0.3s; }
-
-    .service-card:nth-child(4),
-    .pricing-card:nth-child(4),
-    .testimonial-card:nth-child(4),
-    .blog-card:nth-child(4) { animation-delay: 0.4s; }
-
-    .service-card:nth-child(5) { animation-delay: 0.5s; }
-    .service-card:nth-child(6) { animation-delay: 0.6s; }
 }
 
 /* =========================================================
@@ -2449,10 +2163,6 @@ footer::before {
     .footer-container {
         grid-template-columns: repeat(2, 1fr);
     }
-
-    .study-item {
-        font-size: clamp(1.5rem, 4vw, 2rem);
-    }
 }
 
 /* =========================================================
@@ -2525,43 +2235,6 @@ footer::before {
 }
 
 /* =========================================================
-   ACCESSIBILITY – REDUCED MOTION
-========================================================= */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-        transform: none !important;
-    }
-}
-
-        /* =========================================================
-   MOBILE PERFORMANCE OPTIMIZATION
-========================================================= */
-@media (max-width: 768px) {
-    /* Study items (icons) */
-    .study-item {
-        font-size: clamp(1.2rem, 3.5vw, 1.8rem);
-        animation-duration: 35s;
-        opacity: 0.1;
-    }
-
-    /* Hide heavy background blobs */
-    .bg-element {
-        display: none;
-    }
-
-    /* Simplify animated background */
-    .animated-bg::before,
-    .animated-bg::after {
-        animation-duration: 30s, 12s;
-        filter: blur(20px);
-    }
-}
-
-/* =========================================================
    SMALL MOBILE
 ========================================================= */
 @media (max-width: 480px) {
@@ -2618,114 +2291,63 @@ footer::before {
         width: 100%;
         padding: 90px 1.5rem 2rem;
     }
+}
 
-    .study-item {
-        font-size: clamp(1rem, 3vw, 1.5rem);
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .service-card:hover,
+    .pricing-card:hover,
+    .testimonial-card:hover,
+    .blog-card:hover,
+    .process-card:hover {
+        transform: none;
     }
-
-    .animated-bg::before,
-    .animated-bg::after {
-        width: 200px;
-        height: 200px;
+  
+    .cta:hover {
+        transform: none;
+    }
+  
+    .cta-primary:hover,
+    .cta-secondary:hover {
+        transform: none;
+    }
+  
+    .nav-links a:hover::after {
+        width: 0;
+    }
+  
+    .contact-details li:hover {
+        transform: none;
+    }
+  
+    .contact-details li:hover .contact-icon {
+        transform: none;
+    }
+  
+    .social-link:hover {
+        transform: none;
+    }
+  
+    .footer-links a:hover {
+        transform: none;
+    }
+  
+    /* Add active states for touch */
+    .service-card:active,
+    .pricing-card:active,
+    .testimonial-card:active,
+    .blog-card:active {
+        transform: translateY(-8px);
+        transition: transform 0.1s;
+    }
+  
+    .cta:active {
+        transform: translateY(-3px);
+        transition: transform 0.1s;
     }
 }
 
-/* =========================================================
-   EXTRA SMALL MOBILE
-========================================================= */
-@media (max-width: 360px) {
-    .header-title {
-        font-size: 1.4rem;
-    }
-
-    .section-title h2 {
-        font-size: 1.3rem;
-    }
-
-    .service-card,
-    .pricing-card,
-    .testimonial-card,
-    .blog-card {
-        padding: 1.25rem;
-    }
-
-    .cta {
-        min-width: 100%;
-    }
-
-    .popular-badge {
-        right: 1rem;
-        padding: 0.4rem 1rem;
-        font-size: 0.75rem;
-    }
-
-    .study-item {
-        font-size: clamp(0.8rem, 2.5vw, 1.2rem);
-    }
-
-    /* Reduce visual clutter */
-    .study-item.lightbulb,
-    .study-item.globe {
-        display: none;
-    }
-}
-
-   
-    
-    /* Touch device optimizations */
-    @media (hover: none) and (pointer: coarse) {
-        .service-card:hover,
-        .pricing-card:hover,
-        .testimonial-card:hover,
-        .blog-card:hover,
-        .process-card:hover {
-            transform: none;
-        }
-      
-        .cta:hover {
-            transform: none;
-        }
-      
-        .cta-primary:hover,
-        .cta-secondary:hover {
-            transform: none;
-        }
-      
-        .nav-links a:hover::after {
-            width: 0;
-        }
-      
-        .contact-details li:hover {
-            transform: none;
-        }
-      
-        .contact-details li:hover .contact-icon {
-            transform: none;
-        }
-      
-        .social-link:hover {
-            transform: none;
-        }
-      
-        .footer-links a:hover {
-            transform: none;
-        }
-      
-        /* Add active states for touch */
-        .service-card:active,
-        .pricing-card:active,
-        .testimonial-card:active,
-        .blog-card:active {
-            transform: translateY(-8px);
-            transition: transform 0.1s;
-        }
-      
-        .cta:active {
-            transform: translateY(-3px);
-            transition: transform 0.1s;
-        }
-    }
-    /* Founder & Developer Credit */
+/* Founder & Developer Credit */
 .footer-credit {
     text-align: center;
     margin-top: 2.5rem;
@@ -2783,8 +2405,9 @@ footer::before {
         font-size: 0.8rem;
     }
 }
-    /* Import fonts */
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap');
 </style>
 <div class="animated-bg">
     <div class="bg-element"></div>
@@ -2805,9 +2428,9 @@ footer::before {
                 AssignmentPro
             </a>
           
-            <button class="menu-toggle" id="menuToggle">
+            <!-- <button class="menu-toggle" id="menuToggle">
                 <i class="fas fa-bars"></i>
-            </button>
+            </button> -->
           
             <ul class="nav-links" id="navLinks">
                 <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
@@ -3320,18 +2943,29 @@ footer::before {
         // Mobile menu toggle
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
+        const mobileOverlay = document.createElement('div');
+        mobileOverlay.className = 'mobile-overlay';
+        document.body.appendChild(mobileOverlay);
       
         menuToggle.addEventListener('click', () => {
             navLinks.classList.toggle('active');
+            mobileOverlay.classList.toggle('active');
             menuToggle.innerHTML = navLinks.classList.contains('active')
                 ? '<i class="fas fa-times"></i>'
                 : '<i class="fas fa-bars"></i>';
+        });
+      
+        mobileOverlay.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            mobileOverlay.classList.remove('active');
+            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
         });
       
         // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 navLinks.classList.remove('active');
+                mobileOverlay.classList.remove('active');
                 menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
             });
         });
@@ -3376,6 +3010,8 @@ footer::before {
         // Smooth scrolling for navigation links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                if(this.getAttribute('href') === '#') return;
+                
                 e.preventDefault();
               
                 const targetId = this.getAttribute('href');
@@ -3391,27 +3027,6 @@ footer::before {
             });
         });
       
-        // Animate elements on scroll
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-      
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-      
-        // Observe all animated cards
-        document.querySelectorAll('.service-card, .pricing-card, .testimonial-card, .blog-card, .process-card').forEach(card => {
-            observer.observe(card);
-        });
-      
         // Add scroll effect to navbar
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
@@ -3423,6 +3038,15 @@ footer::before {
                 nav.style.padding = '1.2rem 2rem';
             }
         });
+        
+        // Performance optimization for mobile animations
+        if ('ontouchstart' in window || navigator.maxTouchPoints) {
+            // Reduce animation complexity on touch devices
+            const studyItems = document.querySelectorAll('.study-item');
+            studyItems.forEach(item => {
+                item.style.animationDuration = '16s';
+            });
+        }
     </script>
 </body>
 </html>
