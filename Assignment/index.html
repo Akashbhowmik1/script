@@ -96,8 +96,9 @@
         }
 
         html {
-            scroll-behavior: smooth;
-            -webkit-text-size-adjust: 100%;
+               scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: hidden;
         }
 
         body {
@@ -1990,6 +1991,9 @@
                 transform: translateX(100%);
                 transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 999;
+                touch-action: none;
+                overscroll-behavior: contain;
+
             }
 
             /* Open state */
@@ -2178,6 +2182,9 @@
                     180deg,
                     rgba(15, 23, 42, 0.95),
                     rgba(17, 28, 58, 0.95)
+
+                
+                    
                 );
                 backdrop-filter: blur(20px);
                 -webkit-backdrop-filter: blur(20px);
@@ -2191,10 +2198,14 @@
                 transform: translateX(100%);
                 transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
                 z-index: 999;
+                pointer-events: none;
+                touch-action: none;
+
             }
 
             .nav-links.active {
                 transform: translateX(0); /* ✅ NO display:block */
+                 pointer-events: auto;   /* ✅ allow clicks when open */
             }
 
             .nav-links li {
@@ -2379,6 +2390,12 @@
             filter: brightness(1.2);
             letter-spacing: 0.8px;
         }
+
+        body.menu-open {
+    overflow: hidden;
+    touch-action: none;
+}
+
     </style>
 </head>
 <body>
@@ -2887,104 +2904,168 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
-        const menuToggle = document.getElementById('menuToggle');
-        const navLinks = document.getElementById('navLinks');
-        const mobileOverlay = document.getElementById('mobileOverlay');
+/* =====================================================
+   MOBILE NAVIGATION (CLICK ONLY – NO SWIPE)
+===================================================== */
+const menuToggle = document.getElementById('menuToggle');
+const navLinks = document.getElementById('navLinks');
+const mobileOverlay = document.getElementById('mobileOverlay');
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-            mobileOverlay.classList.toggle('active');
-            menuToggle.innerHTML = navLinks.classList.contains('active')
-                ? '<i class="fas fa-times"></i>'
-                : '<i class="fas fa-bars"></i>';
-        });
+function openMenu() {
+    navLinks.classList.add('active');
+    mobileOverlay.classList.add('active');
+    document.body.classList.add('menu-open');
+    menuToggle.innerHTML = '<i class="fas fa-times"></i>';
+}
 
-        mobileOverlay.addEventListener('click', () => {
-            navLinks.classList.remove('active');
-            mobileOverlay.classList.remove('active');
-            menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-        });
+function closeMenu() {
+    navLinks.classList.remove('active');
+    mobileOverlay.classList.remove('active');
+    document.body.classList.remove('menu-open');
+    menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+}
 
-        // Close mobile menu when clicking a link
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-                mobileOverlay.classList.remove('active');
-                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-            });
-        });
+menuToggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (navLinks.classList.contains('active')) {
+        closeMenu();
+    } else {
+        openMenu();
+    }
+});
 
-        // FAQ functionality
-        document.querySelectorAll('.faq-question').forEach(item => {
-            item.addEventListener('click', () => {
-                const parent = item.parentElement;
-                parent.classList.toggle('active');
+/* Close menu when clicking overlay */
+mobileOverlay.addEventListener('click', closeMenu);
 
-                // Close other FAQs
-                document.querySelectorAll('.faq-item').forEach(otherItem => {
-                    if (otherItem !== parent && otherItem.classList.contains('active')) {
-                        otherItem.classList.remove('active');
-                    }
-                });
-            });
-        });
+/* Close menu when clicking a nav link */
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+});
 
-        // Form submission
-        document.getElementById('inquiryForm').addEventListener('submit', function(e) {
+/* Close menu on ESC key (accessibility) */
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+        closeMenu();
+    }
+});
+
+/* =====================================================
+   PREVENT ANY TOUCH / SWIPE OPENING
+===================================================== */
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+}, { passive: true });
+
+document.addEventListener('touchmove', (e) => {
+    if (!navLinks.classList.contains('active')) {
+        const dx = Math.abs(e.touches[0].clientX - touchStartX);
+        const dy = Math.abs(e.touches[0].clientY - touchStartY);
+
+        /* Block horizontal swipe gestures */
+        if (dx > dy && dx > 10) {
             e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const contact = document.getElementById('contact').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            // Create WhatsApp message
-            const whatsappMessage = `Hello, I'm interested in assignment help.%0A%0A*Name:* ${name}%0A*Contact:* ${contact}%0A*Email:* ${email}%0A*Requirements:* ${message}`;
-            // Redirect to WhatsApp
-            window.open(`https://wa.me/918798141965?text=${whatsappMessage}`, '_blank');
-            // Reset form
-            this.reset();
-            // Show success message
-            alert('Thank you for your inquiry! You will be redirected to WhatsApp to continue the conversation.');
-        });
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                if(this.getAttribute('href') === '#') return;
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.12)';
-                nav.style.padding = '0.8rem 2rem';
-            } else {
-                nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08)';
-                nav.style.padding = '1.2rem 2rem';
-            }
-        });
-
-        // Performance optimization for mobile animations
-        if ('ontouchstart' in window || navigator.maxTouchPoints) {
-            // Reduce animation complexity on touch devices
-            const studyItems = document.querySelectorAll('.study-item');
-            studyItems.forEach(item => {
-                item.style.animationDuration = '16s';
-            });
         }
-    </script>
+    }
+}, { passive: false });
+
+/* =====================================================
+   FAQ ACCORDION
+===================================================== */
+document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', () => {
+        const parent = question.parentElement;
+        const isOpen = parent.classList.contains('active');
+
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+        });
+
+        if (!isOpen) parent.classList.add('active');
+    });
+});
+
+/* =====================================================
+   CONTACT FORM → WHATSAPP
+===================================================== */
+const inquiryForm = document.getElementById('inquiryForm');
+
+if (inquiryForm) {
+    inquiryForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const contact = document.getElementById('contact').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const message = document.getElementById('message').value.trim();
+
+        const whatsappMessage =
+            `Hello, I need assignment help.%0A%0A` +
+            `*Name:* ${name}%0A` +
+            `*Contact:* ${contact}%0A` +
+            `*Email:* ${email}%0A` +
+            `*Requirements:* ${message}`;
+
+        window.open(
+            `https://wa.me/918798141965?text=${whatsappMessage}`,
+            '_blank'
+        );
+
+        inquiryForm.reset();
+        alert('Thank you! You are being redirected to WhatsApp.');
+    });
+}
+
+/* =====================================================
+   SMOOTH SCROLLING (OFFSET FIXED)
+===================================================== */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+
+        const target = document.querySelector(targetId);
+        if (!target) return;
+
+        e.preventDefault();
+
+        const yOffset = -100;
+        const y =
+            target.getBoundingClientRect().top +
+            window.pageYOffset +
+            yOffset;
+
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    });
+});
+
+/* =====================================================
+   NAVBAR SCROLL EFFECT
+===================================================== */
+const nav = document.querySelector('nav');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        nav.style.boxShadow = '0 10px 40px rgba(0, 0, 0, 0.12)';
+        nav.style.padding = '0.8rem 2rem';
+    } else {
+        nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.08)';
+        nav.style.padding = '1.2rem 2rem';
+    }
+});
+
+/* =====================================================
+   MOBILE PERFORMANCE TWEAK
+===================================================== */
+if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+    document.querySelectorAll('.study-item').forEach(item => {
+        item.style.animationDuration = '16s';
+    });
+}
+</script>
+
 </body>
 </html>
