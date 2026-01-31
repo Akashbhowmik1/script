@@ -102,6 +102,27 @@
     --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* Prevent rendering offscreen content */
+section,
+header,
+footer {
+    content-visibility: auto;
+    contain-intrinsic-size: 800px;
+}
+
+/* Force GPU compositing (safe) */
+.animated-bg,
+.bg-element,
+.study-item,
+.floating-element,
+.card,
+.service-card,
+.pricing-card,
+.testimonial-card,
+.blog-card {
+    will-change: transform, opacity;
+}
+
 /* ===== CSS Reset & Defaults ===== */
 *,
 *::before,
@@ -187,7 +208,8 @@ p {
     position: absolute;
     border-radius: 50%;
     opacity: 0.18;
-    filter: blur(clamp(24px, 6vw, 40px));
+    filter: blur(min(24px, 4vw));
+
     animation: float 18s linear infinite, pulse 7s ease-in-out infinite;
     will-change: transform;
     transform: translate3d(0, 0, 0);
@@ -217,11 +239,11 @@ p {
     position: absolute;
     border-radius: 50%;
     opacity: 0.06;
-    filter: blur(clamp(20px, 5vw, 32px));
-    animation: float 28s linear infinite reverse;
+    filter: blur(min(18px, 4vw));
+    animation: float 32s linear infinite reverse;
     will-change: transform;
-    transform: translate3d(0, 0, 0);
 }
+
 
 /* Element 1 */
 .bg-element:nth-child(1) {
@@ -256,12 +278,13 @@ p {
 
 @keyframes pulse {
     0%, 100% {
-        transform: scale(1);
+        opacity: 0.18;
     }
     50% {
-        transform: scale(1.08);
+        opacity: 0.26;
     }
 }
+
 
 /* ===== Floating Study Items - OPTIMIZED FOR MOBILE ===== */
 .study-item {
@@ -756,12 +779,10 @@ header {
 .floating-element {
     position: absolute;
     border-radius: 50%;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
     box-shadow: 0 20px 40px rgba(15, 23, 42, 0.15);
     animation: glass-float 10s ease-in-out infinite;
-    z-index: 1;
 }
+
 
 .floating-element:nth-child(1) {
     width: clamp(50px, 10vw, 80px);
@@ -1828,7 +1849,11 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    content-visibility: auto;
+    contain-intrinsic-size: 600px;
 }
+
 
 /* Top accent line */
 footer::before {
