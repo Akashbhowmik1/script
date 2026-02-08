@@ -245,7 +245,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Anime Fighting Simulator",
         category: "Fighting",
         description: "A script for Anime Fighting Simulator to automate training and power-ups.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/DIMENSION-6-Anime-Fighting-Simulator-Data-Roll-back-7000"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/Universal/main/NSHUB"))()`,
         popularity: 95,
         dateAdded: "2025-05-21"
     },
@@ -936,6 +936,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
