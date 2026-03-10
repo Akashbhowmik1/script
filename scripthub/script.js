@@ -407,6 +407,15 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
         dateAdded: "2026-01-21"
     },
 
+    {
+    name: "Sailor Piece Script",
+    game: "Sailor Piece",
+    category: "Adventure",
+    description: "A script for Sailor Piece with automation features and gameplay enhancements.",
+    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/HybridE3/HybridE3/refs/heads/main/Sailor%20Piece"))()',
+    popularity: 85,
+    dateAdded: "2026-03-10"
+},
 
 
 
@@ -936,6 +945,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     init();
 });
+
 
 
 
