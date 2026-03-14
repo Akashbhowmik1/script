@@ -268,7 +268,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-05-21"
     },
     {
-        name: "Arc hub script",
+        name: "King Legacy script",
         game: "King Legacy",
         category: "Adventure",
         description: "A script for King Legacy to auto-farm and level up like a pirate king.",
