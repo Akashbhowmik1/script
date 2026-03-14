@@ -272,7 +272,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "King Legacy",
         category: "Adventure",
         description: "A script for King Legacy to auto-farm and level up like a pirate king.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ChopLoris/ArcHub/main/main.lua"))()`,
+        code: `loadstring(game:HttpGet('https://zuwz.me/Ls-Zee-Hub-KL'))()`,
         popularity: 90,
         dateAdded: "2025-05-21"
     },
