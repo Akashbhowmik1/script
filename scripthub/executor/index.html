@@ -1030,7 +1030,7 @@
           </div>
 
           <div class="dropdown-menu" id="dropdown-menu">
-           
+            <button id="supported-links-btn"></button>
             <button id="supported-services-btn">📋 Supported Services (Full List)</button>
             <button id="about-us-btn">About Us</button>
             <div id="user-stats" style="display:none;">Messages sent: 0</div>
@@ -1417,12 +1417,12 @@
     dropdown.classList.remove('show');
   });
 
-  document.getElementById('supported-links-btn').addEventListener('click', () => {
-    modalTitle.textContent = 'Supported Links';
-    modalBody.innerHTML = `<div class="category"><h4>Key Systems</h4><ul><li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li></ul></div><div class="category"><h4>Ad-Links & Shorteners</h4><ul><li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li><li>and 40+ more</li></ul></div><div class="category"><h4>Paste Services</h4><ul><li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li></ul></div>`;
-    modal.classList.add('active');
-    dropdown.classList.remove('show');
-  });
+  // document.getElementById('supported-links-btn').addEventListener('click', () => {
+  //   modalTitle.textContent = 'Supported Links';
+  //   modalBody.innerHTML = `<div class="category"><h4>Key Systems</h4><ul><li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li></ul></div><div class="category"><h4>Ad-Links & Shorteners</h4><ul><li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li><li>and 40+ more</li></ul></div><div class="category"><h4>Paste Services</h4><ul><li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li></ul></div>`;
+  //   modal.classList.add('active');
+  //   dropdown.classList.remove('show');
+  // });
   document.getElementById('about-us-btn').addEventListener('click', () => {
     modalTitle.textContent = 'About Us';
     modalBody.innerHTML = `<div class="about-content"><p class="about-title">Script Hub Bypass</p><p class="about-subtitle">A fast, free, and privacy-focused bypass solution built for modern Roblox script hubs.</p><p>Developed by the <strong>Script Hub community</strong>, this tool helps you bypass ad-links and key systems without unnecessary waits or intrusive tracking.</p><p>No user data is stored on servers. Everything is saved locally in your browser.</p><p class="about-credit">Created and maintained by <strong>Akash</strong> <span>(Discord: <b>akash5608</b>)</span></p><p class="about-footer"><strong>Built by the community, for the community.</strong></p></div>`;
