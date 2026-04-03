@@ -1260,6 +1260,7 @@
     chatHistory.forEach(msg => addMessage(msg.sender, msg.text, msg.isError));
     scrollToBottom();
   };
+  
   const addMessage = (sender, text, isError = false) => {
     const div = document.createElement('div');
     div.className = `message ${sender}`;
@@ -1303,8 +1304,96 @@
     chatContainer.appendChild(div);
     scrollToBottom();
   };
-  const addTypingIndicator = () => { /* simplified for brevity, same as original */ };
-  const removeTypingIndicator = () => {};
+
+  // =============== NEW TYPEWRITER FUNCTION ===============
+  const typeMessage = async (text, isError = false) => {
+    const div = document.createElement('div');
+    div.className = 'message bot';
+
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    const img = document.createElement('img');
+    img.src = 'https://scripthub.fun/scripthub/assets/titel.png';
+    avatar.appendChild(img);
+
+    const bubble = document.createElement('div');
+    bubble.className = `bubble${isError ? ' error' : ''}`;
+    // Optional: add typing class for blinking cursor
+    bubble.classList.add('typing');
+
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    chatContainer.appendChild(div);
+    scrollToBottom();
+
+    // Type each character
+    let i = 0;
+    const typeInterval = setInterval(() => {
+      if (i < text.length) {
+        bubble.textContent += text.charAt(i);
+        i++;
+        scrollToBottom();
+      } else {
+        clearInterval(typeInterval);
+        bubble.classList.remove('typing');
+        // Apply link detection and click-to-copy AFTER typing finishes
+        if (text.includes('Direct link:') || text.includes('Bypassed!')) {
+          bubble.classList.add('bot-link');
+          bubble.onclick = () => {
+            const match = text.match(/(https?:\/\/[^\s\n]+)/);
+            const link = match ? match[0] : text;
+            navigator.clipboard.writeText(link);
+            const toast = document.createElement('div');
+            toast.textContent = 'Copied!';
+            toast.style.cssText = 'position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.8);color:white;padding:10px 20px;border-radius:8px;z-index:1000;font-size:14px;';
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+          };
+        }
+        // Convert URLs to clickable links (replace plain text with anchors)
+        const urlRegex = /(https?:\/\/[^\s]+)/g;
+        if (urlRegex.test(text)) {
+          const parts = text.split(urlRegex);
+          bubble.innerHTML = '';
+          parts.forEach(part => {
+            if (urlRegex.test(part)) {
+              const a = document.createElement('a');
+              a.href = part;
+              a.textContent = part;
+              a.target = '_blank';
+              a.rel = 'noopener noreferrer';
+              bubble.appendChild(a);
+            } else if (part.trim()) {
+              bubble.appendChild(document.createTextNode(part));
+            }
+          });
+        }
+      }
+    }, 15);
+  };
+
+  const addTypingIndicator = () => {
+    const div = document.createElement('div');
+    div.className = 'message';
+    div.id = 'typing-indicator';
+    const avatar = document.createElement('div');
+    avatar.className = 'avatar';
+    const img = document.createElement('img');
+    img.src = 'https://scripthub.fun/scripthub/assets/titel.png';
+    avatar.appendChild(img);
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+    div.appendChild(avatar);
+    div.appendChild(bubble);
+    chatContainer.appendChild(div);
+    scrollToBottom();
+  };
+  const removeTypingIndicator = () => {
+    const el = document.getElementById('typing-indicator');
+    if (el) el.remove();
+  };
+
   const clearChat = () => { if (chatHistory.length === 0 || confirm('Clear all chat history?')) { chatHistory = []; const key = getChatKey(); if (key) localStorage.removeItem(key); renderChatHistory(); } };
   const bypassLink = async (link) => {
     try {
@@ -1318,6 +1407,7 @@
       return match ? `Bypassed! 🎉\nDirect link: ${match[0]}` : 'Error: API returned no direct link.';
     } catch (err) { return 'Error: Unsupported or invalid link. Please try another.'; }
   };
+
   const handleSend = async () => {
     if (!currentUser) return;
     const text = userInput.value.trim();
@@ -1341,11 +1431,16 @@
       return;
     }
     fetch(ANALYTICS_ENDPOINT, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ username: currentUser }) }).catch(() => {});
+    
     addTypingIndicator();
     const response = await bypassLink(text);
     removeTypingIndicator();
+    // Small delay before typewriter starts (looks natural)
+    await new Promise(res => setTimeout(res, 300));
     const isError = response.startsWith('Error:');
-    addMessage('bot', response, isError);
+    // Use typewriter instead of instant message
+    await typeMessage(response, isError);
+    // Store in chat history (without the typing animation object)
     chatHistory.push({ sender: 'bot', text: response, isError });
     chatHistory = chatHistory.slice(-MAX_HISTORY);
     saveChat();
@@ -1417,12 +1512,6 @@
     dropdown.classList.remove('show');
   });
 
-  // document.getElementById('supported-links-btn').addEventListener('click', () => {
-  //   modalTitle.textContent = 'Supported Links';
-  //   modalBody.innerHTML = `<div class="category"><h4>Key Systems</h4><ul><li>Platoboost</li><li>Pandadevelopment</li><li>Violated</li><li>Blox-script</li><li>Kapao-hub</li><li>Overdrivehub</li><li>Codex</li></ul></div><div class="category"><h4>Ad-Links & Shorteners</h4><ul><li>Linkvertise</li><li>Work.ink</li><li>Loot-Link</li><li>Rekonise</li><li>Boost.ink</li><li>Sub4Unlock</li><li>Sub2Unlock</li><li>and 40+ more</li></ul></div><div class="category"><h4>Paste Services</h4><ul><li>Pastebin</li><li>Paste-Drop</li><li>Pastefy</li><li>Pasterso</li></ul></div>`;
-  //   modal.classList.add('active');
-  //   dropdown.classList.remove('show');
-  // });
   document.getElementById('about-us-btn').addEventListener('click', () => {
     modalTitle.textContent = 'About Us';
     modalBody.innerHTML = `<div class="about-content"><p class="about-title">Script Hub Bypass</p><p class="about-subtitle">A fast, free, and privacy-focused bypass solution built for modern Roblox script hubs.</p><p>Developed by the <strong>Script Hub community</strong>, this tool helps you bypass ad-links and key systems without unnecessary waits or intrusive tracking.</p><p>No user data is stored on servers. Everything is saved locally in your browser.</p><p class="about-credit">Created and maintained by <strong>Akash</strong> <span>(Discord: <b>akash5608</b>)</span></p><p class="about-footer"><strong>Built by the community, for the community.</strong></p></div>`;
@@ -1446,11 +1535,19 @@
     renderChatHistory();
   };
   initApp();
-  // Helper stubs for typing
-  window.addTypingIndicator = () => { const div = document.createElement('div'); div.className = 'message'; div.id = 'typing-indicator'; const avatar = document.createElement('div'); avatar.className = 'avatar'; const img = document.createElement('img'); img.src = 'https://scripthub.fun/scripthub/assets/titel.png'; avatar.appendChild(img); const bubble = document.createElement('div'); bubble.className = 'bubble'; bubble.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>'; div.appendChild(avatar); div.appendChild(bubble); chatContainer.appendChild(div); scrollToBottom(); };
-  window.removeTypingIndicator = () => { const el = document.getElementById('typing-indicator'); if (el) el.remove(); };
-  window.addTypingIndicator = window.addTypingIndicator.bind(this);
-  window.removeTypingIndicator = window.removeTypingIndicator.bind(this);
-  </script>
+</script>
+
+<style>
+  /* Add this to your existing CSS for the blinking cursor effect */
+  .bubble.typing::after {
+    content: '|';
+    animation: blink 1s infinite;
+    margin-left: 2px;
+  }
+  @keyframes blink {
+    0%, 50%, 100% { opacity: 1; }
+    25%, 75% { opacity: 0; }
+  }
+</style>
 </body>
 </html>
