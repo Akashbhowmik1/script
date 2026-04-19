@@ -413,7 +413,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     game: "Sailor Piece",
     category: "Adventure",
     description: "A script for Sailor Piece with automation features and gameplay enhancements.",
-    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/HybridE3/HybridE3/refs/heads/main/Sailor%20Piece"))()',
+    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()',
     popularity: 85,
     dateAdded: "2026-03-10"
 },
