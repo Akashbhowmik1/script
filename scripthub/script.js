@@ -47,8 +47,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         game: "Dead Rails",
         category: "Adventure",
         description: "A script for Dead Rails to automate resource gathering.",
-        code: `_G.TzuanWebhook = "https://discord.com/api/webhooks/1450743059301273744/AjBhSZvjtjfATLEbrCq4nfl2Nwz7KYvtYQUp2jEEHF66soLawUGMwTiGCknkIs5tk9Vv"
-loadstring(game:HttpGet("https://raw.githubusercontent.com/tzuanyeuban/TzuanHub/refs/heads/main/autobondnew.lua"))()`,
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/erewe23/deadrailsring.github.io/refs/heads/main/ringta.lua"))()`,
         popularity: 90,
         dateAdded: "2026-04-07"
     },
