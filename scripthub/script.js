@@ -115,13 +115,14 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-04-05"
     },
     {
-        name: "Jujutsu Shenanigans Auto Skill",
-        game: "Jujutsu Shenanigans",
+        name: "Jujutsu Shenanigans ",
+        game: "Jujutsu Shenanigans Black Flash Chain script ",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))()`,
+        code: `getgenv().SCRIPT_KEY = "KEYLESS"
+loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab3568c5078b6fd8c1e1043c1f91a0abeb575ae984ee3dfb7fddef6ddb/download"))()`,
         popularity: 70,
-        dateAdded: "2025-05-03"
+        dateAdded: "2026-05-01"
     },
     {
         name: "Realistic Street Soccer Hit-Box Boost etc.",
