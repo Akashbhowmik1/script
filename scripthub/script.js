@@ -115,7 +115,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/tlredz/Scripts/refs/h
         dateAdded: "2025-04-05"
     },
     {
-        name: "Jujutsu Shenanigans ",
+        name: "Jujutsu Shenanigans Black Flash Chain ",
         game: "Jujutsu Shenanigans Black Flash Chain script ",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
