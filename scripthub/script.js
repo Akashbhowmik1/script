@@ -126,8 +126,8 @@ loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab
     },
 
     {
-        name: "Jujutsu Shenanigans Auto Skill ",
-        game: "Jujutsu Shenanigans  script ",
+        name: "Jujutsu Shenanigans Tbo Hub ",
+        game: "Jujutsu Shenanigans   ",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
         code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))()`,
