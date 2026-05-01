@@ -124,6 +124,17 @@ loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab
         popularity: 70,
         dateAdded: "2026-05-01"
     },
+
+    {
+        name: "Jujutsu Shenanigans Auto Skill ",
+        game: "Jujutsu Shenanigans  script ",
+        category: "Fighting",
+        description: "A script for Jujutsu Shenanigans to automate skill usage.",
+        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))()`,
+        popularity: 75,
+        dateAdded: "2026-05-01"
+    },
+    
     {
         name: "Realistic Street Soccer Hit-Box Boost etc.",
         game: "Realistic Street Soccer",
