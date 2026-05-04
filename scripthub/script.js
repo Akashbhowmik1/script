@@ -1,14 +1,6 @@
 // Define scripts array with corrected entries
 const scripts = [
-    {
-        name: "Blox Fruit Redz Hub script",
-        game: "Blox Fruits",
-        category: "Adventure",
-        description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://pastebin.com/raw/uECLqG3j", true))()`,
-        popularity: 100,
-        dateAdded: "2025-05-01"
-    },
+
     {
         name: "Adopt Me Script",
         game: "Adopt Me",
