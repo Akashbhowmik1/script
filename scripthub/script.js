@@ -5,7 +5,7 @@ const scripts = [
         game: "Blox Fruits",
         category: "Adventure",
         description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://pastebin.com/raw/uECLqG3j", true))()`
+        code: `loadstring(game:HttpGet("https://pastebin.com/raw/uECLqG3j", true))()`,
         popularity: 100,
         dateAdded: "2025-05-01"
     },
