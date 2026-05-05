@@ -2,7 +2,7 @@
 const scripts = [
 
         {
-        name: "Blox Fruit Redz Hub script",
+        name: "Blox Fruit Xynapse  Hub script",
         game: "Blox Fruits",
         category: "Adventure",
         description: "A script for Blox Fruits with auto-farm and stats boost.",
