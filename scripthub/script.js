@@ -126,7 +126,7 @@ loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab
         game: "Jujutsu Shenanigans   ",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/cool5013/TBO/main/TBOscript"))()`,
+        code: `loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/d335b231e325660b47574aee1afcfbbbe9abfda63104172ce0d44dd4b3d9b8bc/download"))()`,
         popularity: 75,
         dateAdded: "2026-05-01"
     },
