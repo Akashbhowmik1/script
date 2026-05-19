@@ -385,7 +385,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     dateAdded: "2025-12-09"
 },
 {
-    name: "Rivals Script",
+    name: "Rivals NullZen Hub",
     game: "Rivals",
     category: "Simulation",
     description: "A script for Rivals providing automation and gameplay enhancements.",
@@ -423,6 +423,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()',
     popularity: 85,
     dateAdded: "2026-03-10"
+},
+
+ {
+    name: "Jujutsu Shenanigans Auto Play",
+    game: "Jujutsu Shenanigans",
+    category: "Fighting",
+    description: "An auto play script for Jujutsu Shenanigans with automated combat and gameplay features.",
+    code: 'getgenv().SCRIPT_KEY = "KEYLESS"\nloadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/f2eaf0a65645254ba73231a63924ab9eadbec288a6d717fc4f4cdc68b24edb0e/download"))()',
+    popularity: 90,
+    dateAdded: "2026-05-19"
 },
 
 
