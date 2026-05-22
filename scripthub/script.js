@@ -3,7 +3,7 @@ const scripts = [
 
         {
         name: "Blox Fruit Xynapse  Hub script",
-        game: "Blox Fruits",
+        game: "Blox Fruit",
         category: "Adventure",
         description: "A script for Blox Fruits with auto-farm and stats boost.",
         code: `loadstring(game:HttpGet("https://pastebin.com/raw/uECLqG3j", true))()`,
@@ -112,7 +112,7 @@ const scripts = [
     },
     {
         name: "Jujutsu Shenanigans Black Flash Chain ",
-        game: "Jujutsu Shenanigans Black Flash Chain script ",
+        game: "Jujutsu Shenanigans",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
         code: `getgenv().SCRIPT_KEY = "KEYLESS"
@@ -123,7 +123,7 @@ loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab
 
     {
         name: "Jujutsu Shenanigans Tbo Hub ",
-        game: "Jujutsu Shenanigans   ",
+        game: "Jujutsu Shenanigans",
         category: "Fighting",
         description: "A script for Jujutsu Shenanigans to automate skill usage.",
         code: `loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/d335b231e325660b47574aee1afcfbbbe9abfda63104172ce0d44dd4b3d9b8bc/download"))()`,
