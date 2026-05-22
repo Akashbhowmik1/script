@@ -434,7 +434,15 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     popularity: 90,
     dateAdded: "2026-05-19"
 },
-
+{
+    name: "Rivals Skins Unlocker",
+    game: "Rivals",
+    category: "Shooter",
+    description: "A script for Rivals that unlocks skins and provides additional customization features.",
+    code: 'getgenv().SCRIPT_KEY = "KEYLESS"\nloadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/738d2f252b6cc61416487e8ec5a094d29c0eda19f1415d68a4c770aef3a6de6d/download"))()',
+    popularity: 88,
+    dateAdded: "2026-05-22"
+},
 
 
 
