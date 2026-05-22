@@ -874,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 script.description.toLowerCase()
             ];
             const matchesSearch = searchTerm === '' || searchFields.some(field => field.includes(searchTerm));
-            const matchesGame = selectedGame === '' || script.game === selectedGame;
+            const matchesGame = selectedGame === '' || script.game.trim() === selectedGame.trim();
             const matchesCategory = selectedCategory === '' || script.category === selectedCategory;
             const matchesFavorites = !showFavoritesOnly || isFavorite(script.name);
             return matchesSearch && matchesGame && matchesCategory && matchesFavorites;
@@ -961,6 +961,22 @@ document.addEventListener('DOMContentLoaded', () => {
      */
     const init = () => {
         try {
+                const gameFilter = document.getElementById('gameFilter');
+
+if (gameFilter) {
+    const uniqueGames = [...new Set(
+        scripts.map(script => script.game.trim())
+    )].sort();
+
+    gameFilter.innerHTML = '<option value="">All Games</option>';
+
+    uniqueGames.forEach(game => {
+        const option = document.createElement('option');
+        option.value = game;
+        option.textContent = game;
+        gameFilter.appendChild(option);
+    });
+}
             initEventListeners();
             filterScripts();
         } catch (error) {
