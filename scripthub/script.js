@@ -445,6 +445,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
 },
 
 
+{
+    name: "Jujutsu Shenanigans SYNQ Hub",
+    game: "Jujutsu Shenanigans",
+    category: "Fighting",
+    description: "A SYNQ Hub script for Jujutsu Shenanigans featuring automation tools and combat enhancements.",
+    code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/f0465c0000aaa63b0c3037c561a4ba9c.lua"))()',
+    popularity: 92,
+    dateAdded: "2026-05-27"
+},
+
 
 
 ];
