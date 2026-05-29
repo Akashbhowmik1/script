@@ -455,6 +455,16 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
     dateAdded: "2026-05-27"
 },
 
+{
+    name: "Heroes Battlegrounds Script",
+    game: "Heroes Battlegrounds",
+    category: "Fighting",
+    description: "A Heroes Battlegrounds script featuring combat utilities, automation tools, and gameplay enhancements.",
+    code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/f0465c0000aaa63b0c3037c561a4ba9c.lua"))()',
+    popularity: 92,
+    dateAdded: "2026-05-29"
+},
+        
 
 
 ];
