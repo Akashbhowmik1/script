@@ -48,10 +48,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     
     <!-- Custom CSS & JS -->
-    <link rel="stylesheet" href="/scripthub/style.css">
+    <link rel="stylesheet" href="scripthub/style.css">
     <link rel="stylesheet" href="/scripthub/assets/timer.css">
     <script defer src="/scriptshub/assets/timer.js"></script>
-    <script defer src="/scripthub/script.js"></script>
+    <script defer src="scripthub/script.js"></script>
 </head>
 <body>
     <h1 class="top-center-text">ScriptsHub.fun - Free Roblox Scripts Hub</h1>
@@ -145,6 +145,11 @@
     <!-- Overlay Menu -->
     <div class="overlay-menu" id="overlayMenu" aria-hidden="true">
         <div class="overlay-content">
+
+            <button id="addScriptBtn">
+                <i class="fas fa-plus"></i> Add Script
+            </button>
+
             <a href="https://www.youtube.com/@ScriptFarmer" target="_blank" aria-label="Visit our YouTube channel">
                 <i class="fab fa-youtube"></i> YouTube
             </a>
@@ -188,6 +193,103 @@
             <p>Interested in promoting your Roblox content or scripts? Feel free to email us to discuss partnership opportunities!</p>
         </div>
     </div>
+
+
+
+    <!-- Password Modal -->
+<div id="passwordModal" class="modal">
+    <div class="modal-content">
+
+        <button
+            class="close-btn"
+            onclick="closeModal('passwordModal')">
+
+            <i class="fas fa-times"></i>
+
+        </button>
+
+        <h2>Admin Access</h2>
+
+    
+        <input
+            type="password"
+            id="adminKey"
+            placeholder="Enter Secret Key"
+        >
+
+        <button id="verifyKeyBtn">
+            Verify
+        </button>
+    </div>
+</div>
+
+   <!-- Add Script Modal -->
+<div id="addScriptModal" class="modal">
+    <div class="modal-content">
+
+        <button
+            class="close-btn"
+            onclick="closeModal('addScriptModal')">
+
+            <i class="fas fa-times"></i>
+
+        </button>
+
+        <h2>Add New Script</h2>
+    
+
+        
+
+       <input
+    type="text"
+    id="gameName"
+    placeholder="Game Name"
+    required
+>
+         <select id="categoryName" required>
+    <option value="">Select Category</option>
+
+    <option value="Action">Action</option>
+    <option value="Adventure">Adventure</option>
+    <option value="Fighting">Fighting</option>
+    <option value="Simulation">Simulation</option>
+    <option value="Sports">Sports</option>
+    <option value="Strategy">Strategy</option>
+    <option value="Horror">Horror</option>
+    <option value="Roleplay">Roleplay</option>
+    <option value="Open World">Open World</option>
+    <option value="Parkour">Parkour</option>
+    <option value="Shooter">Shooter</option>
+</select>
+        <input
+            type="text"
+            id="scriptName"
+            placeholder="Script Name"
+             required
+        >
+
+        <textarea
+            id="scriptDescription"
+            placeholder="Description"
+             required
+        ></textarea>
+
+        <textarea
+            id="scriptCode"
+            spellcheck="false"
+            placeholder="Paste Script Code"
+            required
+        ></textarea>
+
+        <button id="saveScriptBtn">
+            Add Script
+        </button>
+
+    </div>
+</div>
+
+
+
 </body>
 </html>
 
