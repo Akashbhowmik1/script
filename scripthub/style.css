@@ -1669,6 +1669,52 @@ html[data-theme="light"] .copy-btn {
 }
 
 
+
+.modal input,
+.modal textarea,
+.modal select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    background: #1b1b1b;
+    color: white;
+
+    border: 1px solid #444;
+    border-radius: 10px;
+}
+
+.modal textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.modal select {
+    cursor: pointer;
+}
+
+.modal textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+#verifyKeyBtn,
+#saveScriptBtn {
+    width: 100%;
+    padding: 12px;
+
+    background: #00ffcc;
+    color: black;
+
+    border: none;
+    border-radius: 10px;
+
+    cursor: pointer;
+    font-weight: bold;
+}
+
+
 /* Media Queries for Responsiveness */
 
 /* Large screens (up to 1200px) */
