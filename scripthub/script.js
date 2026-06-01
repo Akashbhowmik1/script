@@ -472,6 +472,7 @@ loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259
 let favorites = [];
 let currentPage = 1;
 const scriptsPerPage = 15;
+let adminSessionKey = null;
 
 // Initialize favorites from localStorage with error handling
 try {
@@ -690,6 +691,159 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+
+
+       const addScriptBtn = document.getElementById("addScriptBtn");
+
+if (addScriptBtn) {
+    addScriptBtn.addEventListener("click", () => {
+        document.getElementById("passwordModal").style.display = "flex";
+    });
+}
+
+
+
+const verifyKeyBtn =
+document.getElementById("verifyKeyBtn");
+
+if (verifyKeyBtn) {
+verifyKeyBtn.addEventListener("click", async () => {
+
+    const key =
+        document.getElementById("adminKey")
+        .value
+        .trim();
+
+    try {
+
+        const res = await fetch(
+            "https://scriptshub-api.akashbhowmik110.workers.dev/verify-key",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ key })
+            }
+        );
+
+        if (!res.ok) {
+            alert("Wrong Key");
+            return;
+        }
+
+        adminSessionKey = key;
+
+        document.getElementById(
+            "passwordModal"
+        ).style.display = "none";
+
+        document.getElementById(
+            "addScriptModal"
+        ).style.display = "flex";
+
+    }
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "Server Error"
+        );
+
+    }
+    
+
+});
+}
+
+
+ 
+
+   const saveScriptBtn =
+document.getElementById("saveScriptBtn");
+
+if (saveScriptBtn) {
+saveScriptBtn.addEventListener("click", async () => {
+
+    const game =
+        document.getElementById("gameName").value;
+
+            const category =
+    document.getElementById("categoryName").value;
+
+    const name =
+        document.getElementById("scriptName").value;
+
+    const description =
+        document.getElementById("scriptDescription").value;
+
+    const code =
+        document.getElementById("scriptCode").value;
+
+    if(
+        !game ||
+        !category ||
+        !name ||
+        !description ||
+        !code
+    ){
+        alert("Fill all fields");
+        return;
+    }
+
+    try {
+
+    const response = await fetch(
+        "https://scriptshub-api.akashbhowmik110.workers.dev/add-script",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+            body: JSON.stringify({
+                key: adminSessionKey,
+                game,
+                script_name: name,
+                 category,
+                description,
+                code
+            })
+        }
+    );
+
+    if (!response.ok) {
+
+        alert("Failed To Save Script");
+
+        return;
+
+    }
+
+    alert("Script Added Successfully");
+
+    document.getElementById(
+        "addScriptModal"
+    ).style.display = "none";
+
+}
+catch(error){
+
+    console.error(error);
+
+    alert("Server Error");
+
+    return;
+
+}
+
+});
+}
+
+
 
     // Consolidated modal event handling
     const modals = [
