@@ -1435,10 +1435,10 @@
     const response = await bypassLink(text);
     removeTypingIndicator();
     // Small delay before typewriter starts (looks natural)
-    await new Promise(res => setTimeout(res, 300));
+    
     const isError = response.startsWith('Error:');
     // Use typewriter instead of instant message
-    await typeMessage(response, isError);
+    addMessage('bot', response, isError);
     // Store in chat history (without the typing animation object)
     chatHistory.push({ sender: 'bot', text: response, isError });
     chatHistory = chatHistory.slice(-MAX_HISTORY);
