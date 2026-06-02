@@ -1,5 +1,63 @@
+async function loadScriptsFromDatabase() {
+
+    try {
+
+        const response = await fetch(
+            "https://scriptshub-api.akashbhowmik110.workers.dev/scripts"
+        );
+
+        const data = await response.json();
+        scripts = scripts.filter(
+    script => !script.fromDatabase
+);
+
+        data.forEach(item => {
+
+            const exists = scripts.some(
+    script =>
+    script.name === item.script_name &&
+    script.game === item.game
+);
+
+            if (!exists) {
+
+               scripts.unshift({
+    name: item.script_name,
+    game: item.game,
+    category: item.category,
+    description: item.description,
+    code: item.code,
+    popularity: 0,
+    dateAdded: item.date_added,
+    fromDatabase: true
+});
+
+            }
+
+        });
+
+
+     console.log("D1 data:", data);
+console.log("Scripts array:", scripts.length);
+
+currentPage = 1;
+
+
+
+    }
+    catch(error){
+
+        console.error(
+            "Failed to load scripts:",
+            error
+        );
+
+    }
+
+}
+
 // Define scripts array with corrected entries
-const scripts = [
+let scripts = [
 
         {
         name: "Blox Fruit Xynapse  Hub script",
@@ -698,7 +756,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
 if (addScriptBtn) {
     addScriptBtn.addEventListener("click", () => {
+
+        // Close hamburger menu
+        if (overlayMenu && hamburger) {
+            overlayMenu.classList.remove("active");
+            hamburger.classList.remove("active");
+            hamburger.setAttribute("aria-expanded", "false");
+            overlayMenu.setAttribute("aria-hidden", "true");
+        }
+
+        // Open password modal
         document.getElementById("passwordModal").style.display = "flex";
+        document.getElementById("passwordModal")
+            .setAttribute("aria-hidden", "false");
     });
 }
 
@@ -825,9 +895,12 @@ saveScriptBtn.addEventListener("click", async () => {
 
     alert("Script Added Successfully");
 
-    document.getElementById(
-        "addScriptModal"
-    ).style.display = "none";
+document.getElementById(
+    "addScriptModal"
+).style.display = "none";
+
+currentPage = 1;
+loadScriptsFromDatabase();
 
 }
 catch(error){
@@ -1068,10 +1141,25 @@ catch(error){
     /**
      * Apply filters, reset page, and display scripts
      */
-    const filterScripts = () => {
-        currentPage = 1;
-        displayScripts(getFilteredScripts());
-    };
+   const filterScripts = () => {
+
+    console.log(
+        "filterScripts called"
+    );
+
+    const filtered =
+    getFilteredScripts();
+
+    console.log(
+        "Filtered:",
+        filtered.length
+    );
+
+    currentPage = 1;
+
+    displayScripts(filtered);
+
+};
 
     /**
      * Initialize event listeners for filters and pagination
@@ -1130,44 +1218,70 @@ catch(error){
         });
     };
 
-    /**
-     * Initialize the application
-     */
-    const init = () => {
-        try {
-                const gameFilter = document.getElementById('gameFilter');
 
-if (gameFilter) {
-    const uniqueGames = [...new Set(
-        scripts.map(script => script.game.trim())
-    )].sort();
+    function rebuildGameFilter() {
 
-    gameFilter.innerHTML = '<option value="">All Games</option>';
+    const gameFilter =
+    document.getElementById("gameFilter");
+
+    if (!gameFilter) return;
+
+    const uniqueGames = [
+        ...new Set(
+            scripts.map(
+                script => script.game.trim()
+            )
+        )
+    ].sort();
+
+    gameFilter.innerHTML =
+    '<option value="">All Games</option>';
 
     uniqueGames.forEach(game => {
-        const option = document.createElement('option');
+
+        const option =
+        document.createElement("option");
+
         option.value = game;
         option.textContent = game;
+
         gameFilter.appendChild(option);
+
     });
+
 }
-            initEventListeners();
-            filterScripts();
-        } catch (error) {
-            console.error('Initialization failed:', error);
-            alert('Failed to initialize the application. Please refresh the page.');
-        }
-    };
 
-    init();
+const init = async () => {
+
+    try {
+
+        rebuildGameFilter();
+
+        initEventListeners();
+
+        await loadScriptsFromDatabase();
+
+        filterScripts();
+
+    }
+    catch (error) {
+
+        console.error(
+            'Initialization failed:',
+            error
+        );
+
+        alert(
+            'Failed to initialize the application. Please refresh the page.'
+        );
+
+    }
+
+};
+
+init();
+
 });
-
-
-
-
-
-
-
 
 
 
