@@ -1891,34 +1891,9 @@ background:#3b82f6;
         min-height: 40px;
         min-width: 80px;
     }
-@media (max-width: 768px){
-
-.code-button{
-    width: 210px;
-    max-width: 210px;
-    min-width: 210px;
-
-    height: 50px;
-
-    font-size: 15px;
-    font-weight: 700;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    margin-top: 10px;
-}
 
 
-.header-right{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
 
-}
     .code-button:hover,
     .code-button:active {
         transform: translateX(-50%) scale(1.05);
@@ -1990,6 +1965,33 @@ background:#3b82f6;
         font-size: 14px;
         min-width: 90px;
     }
+
+    .code-button{
+    min-width: 110px !important;
+    width: 110px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+
+    padding: 0 10px !important;
+
+    font-size: 12px !important;
+}
+
+
+.hamburger{
+    width: 48px !important;
+    height: 48px !important;
+
+    min-width: 48px !important;
+    min-height: 48px !important;
+
+    padding: 4px !important;
+}
+
+.hamburger span{
+    width: 22px !important;
+    height: 3px !important;
+}
    @media (max-width: 480px) {
 
     .hamburger {
@@ -2634,7 +2636,7 @@ header{
 @media (max-width: 480px){
 
 .code-button{
-    width: 120px !important;
+    
     max-width: 120px !important;
     min-width: 120px !important;
 
@@ -2654,5 +2656,72 @@ header{
 
     height: 50px;
 }
+
+}
+
+/* MOBILE BUTTON FIX */
+
+@media (max-width:768px){
+
+    .header-right{
+        display:flex;
+        flex-direction:column;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+    }
+
+    .executor-button,
+    .code-button{
+        width:200px;
+        height:42px;
+        min-width:200px;
+        max-width:200px;
+
+        display:flex;
+        align-items:center;
+        justify-content:center;
+
+        font-size:14px;
+        margin:0;
+    }
+
+}
+
+
+
+.pagination{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.page-info{
+    font-size:18px;
+    font-weight:700;
+    color:white;
+}
+
+.pagination-buttons{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.pagination-buttons button{
+    width:140px;
+    min-width:140px;
+}
+
+@media(max-width:480px){
+
+    .pagination-buttons button{
+        width:120px;
+        min-width:120px;
+    }
 
 }
