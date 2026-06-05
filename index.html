@@ -68,7 +68,7 @@
     <h1 class="top-center-text">ScriptsHub.fun - Free Roblox Scripts Hub</h1>
     <div class="intro-text" style="display: none;">
         <p>Welcome to ScriptsHub.fun, your ultimate source for free Roblox scripts, hacks, and executors. Find top scripts for Roblox games like Blox Fruits, Adopt Me, Arsenal, and more. All keyless, safe, and community-driven for the best Roblox cheating experience.</p>
-       </div>
+    </div>
     <!-- <a href="https://scriptshub.fun/scripthub/executor/index.html" target="_blank" class="code-button">Link Bypass</a> -->
     <div class="bg-animation">
         <div class="blob blob1"></div>
@@ -77,16 +77,45 @@
     </div>
     <div class="container">
         <header>
-            <div class="header-buttons">
-                <a href="executor.html" target="_blank">
-                    <button class="executor-button"><i class="fas fa-code"></i> Executors</button>
-                </a>
-                <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
+           <div class="header-buttons">
+
+    <div class="buttons-wrapper">
+
+        <a
+        href="executor.html"
+        target="_blank">
+
+            <button class="executor-button">
+                <i class="fas fa-code"></i>
+                Executors
+            </button>
+
+        </a>
+
+        <a
+        href="https://scriptshub.fun/scripthub/executor/index.html"
+        target="_blank">
+
+            <button class="code-button">
+                Link Bypass
+            </button>
+
+        </a>
+
+    </div>
+
+    <button
+        class="hamburger"
+        aria-label="Toggle menu"
+        aria-expanded="false">
+
+        <span></span>
+        <span></span>
+        <span></span>
+
+    </button>
+
+</div>
         </header>
         <div class="filter-bar">
             <input type="text" id="searchInput" placeholder="Search scripts (e.g., Blox Fruit)" aria-label="Search scripts">
@@ -161,6 +190,11 @@
                 <i class="fas fa-plus"></i> Add Script
             </button>
 
+
+             <button id="adminAccessBtn">
+        <i class="fas fa-user-shield"></i> Admin Access
+    </button>
+
             <a href="https://www.youtube.com/@ScriptFarmer" target="_blank" aria-label="Visit our YouTube channel">
                 <i class="fab fa-youtube"></i> YouTube
             </a>
@@ -234,6 +268,8 @@
     </div>
 </div>
 
+
+
    <!-- Add Script Modal -->
 <div id="addScriptModal" class="modal">
     <div class="modal-content">
@@ -300,10 +336,73 @@
 </div>
 
 
+<div id="editScriptModal" class="modal">
+
+    <div class="modal-content">
+
+        <button
+            class="close-btn"
+            onclick="closeModal('editScriptModal')">
+
+            <i class="fas fa-times"></i>
+
+        </button>
+
+        <input
+            type="hidden"
+            id="editScriptId"
+        >
+
+        <input
+            type="text"
+            id="editGameName"
+            placeholder="Game Name"
+        >
+
+        <select id="editCategoryName">
+
+            <option value="Action">
+                Action
+            </option>
+
+            <option value="Adventure">
+                Adventure
+            </option>
+
+            <option value="Simulation">
+                Simulation
+            </option>
+
+        </select>
+
+        <input
+            type="text"
+            id="editScriptName"
+            placeholder="Script Name"
+        >
+
+        <textarea
+            id="editScriptDescription"
+        ></textarea>
+
+        <textarea
+            id="editScriptCode"
+        ></textarea>
+
+        <button
+            id="saveEditBtn"
+        >
+            Save Changes
+        </button>
+
+    </div>
+
+</div>
+
+
 
 </body>
 </html>
-
 
 
 
