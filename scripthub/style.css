@@ -381,7 +381,7 @@ header {
     flex-wrap: wrap;
 
     gap: clamp(14px, 1.8vw, 24px);
-    margin-bottom: clamp(72px, 9vw, 96px);
+     margin-bottom: 20px;
     min-height: 64px;
 
     position: relative;
@@ -1777,8 +1777,8 @@ background:#3b82f6;
 @media (max-width: 768px) {
     header {
         justify-content: flex-end;
-        margin-bottom: clamp(80px, 12vw, 100px);
-        padding-top: 60px;
+          margin-bottom: 10px;
+        padding-top: 20px;
     }
     .header-right {
         width: auto;
@@ -1803,7 +1803,7 @@ background:#3b82f6;
         align-items: stretch;
         padding: 15px;
         gap: 10px;
-        margin-top: 100px;
+        margin-top: 30px;
     }
     #searchInput, #gameFilter, #categoryFilter, #sortFilter {
         max-width: 100%;
@@ -1891,9 +1891,32 @@ background:#3b82f6;
         min-height: 40px;
         min-width: 80px;
     }
- .code-button {
-    padding: 8px 14px;
-    font-size: 12px;
+@media (max-width: 768px){
+
+.code-button{
+    width: 210px;
+    max-width: 210px;
+    min-width: 210px;
+
+    height: 50px;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    margin-top: 10px;
+}
+
+
+.header-right{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+}
 
 }
     .code-button:hover,
@@ -1953,8 +1976,8 @@ background:#3b82f6;
         padding: 15px;
     }
     header {
-        margin-bottom: clamp(70px, 15vw, 90px);
-        padding-top: 50px;
+        margin-bottom: 5px;
+        padding-top: 10px;
     }
     .top-center-text {
         top: 5px;
@@ -2592,4 +2615,44 @@ header{
 .script-card button.favorite-btn {
     width: 48px !important;
     flex-shrink: 0;
+}
+
+
+@media (max-width: 768px){
+
+    .filter-bar{
+        margin-top: 15px !important;
+    }
+
+    .buttons-wrapper{
+        margin-bottom: 10px !important;
+    }
+
+}
+
+
+@media (max-width: 480px){
+
+.code-button{
+    width: 120px !important;
+    max-width: 120px !important;
+    min-width: 120px !important;
+
+    height: 42px;
+    font-size: 12px;
+}
+
+}
+
+
+@media (max-width: 480px){
+
+.code-button{
+    width: 210px !important;
+    max-width: 210px !important;
+    min-width: 210px !important;
+
+    height: 50px;
+}
+
 }
