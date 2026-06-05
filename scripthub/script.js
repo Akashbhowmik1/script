@@ -11,30 +11,36 @@ async function loadScriptsFromDatabase() {
     script => !script.fromDatabase
 );
 
-        data.forEach(item => {
-
-            const exists = scripts.some(
-    script =>
-    script.name === item.script_name &&
-    script.game === item.game
+       const existing =
+new Set(
+    scripts.map(
+        s => `${s.name}|${s.game}`
+    )
 );
 
-            if (!exists) {
+for (const item of data) {
 
-               scripts.unshift({
-    name: item.script_name,
-    game: item.game,
-    category: item.category,
-    description: item.description,
-    code: item.code,
-    popularity: 0,
-    dateAdded: item.date_added,
-    fromDatabase: true
-});
+    const key =
+    `${item.script_name}|${item.game}`;
 
-            }
+    if (existing.has(key))
+        continue;
 
-        });
+    existing.add(key);
+
+    scripts.push({
+        id: item.id,
+        name: item.script_name,
+        game: item.game,
+        category: item.category,
+        description: item.description,
+        code: item.code,
+        popularity: 0,
+        dateAdded: item.date_added,
+        fromDatabase: true
+    });
+
+}
 
 
      console.log("D1 data:", data);
@@ -57,480 +63,41 @@ currentPage = 1;
 }
 
 // Define scripts array with corrected entries
-let scripts = [
-
-        {
-        name: "Blox Fruit Xynapse  Hub script",
-        game: "Blox Fruit",
-        category: "Adventure",
-        description: "A script for Blox Fruits with auto-farm and stats boost.",
-        code: `loadstring(game:HttpGet("https://pastebin.com/raw/uECLqG3j", true))()`,
-        popularity: 100,
-        dateAdded: "2025-05-01"
-    } ,
-    
-    {
-        name: "Adopt Me Script",
-        game: "Adopt Me",
-        category: "Simulation",
-        description: "A script for Adopt Me with pet auto-collect.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/jazzedd/JazradScript/refs/heads/main/Script"))()`,
-        popularity: 90,
-        dateAdded: "2025-10-15"
-    },
-    {
-        name: "Brookhaven  script",
-        game: "Brookhaven",
-        category: "Roleplay",
-        description: "All-in-one script for unlocking key Brookhaven features and tools in one place.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/as6cd0/SP_Hub/refs/heads/main/Brookhaven"))()`,
-        popularity: 85,
-        dateAdded: "2025-03-20"  
-    },
-    {
-        name: "Steal a brainrot hack script",
-        game: "Steal a Brainrot",
-        category: "Simulation",
-        description: "A script for Steal a Brainrot to automate resource collection and hacks.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/steal%20a%20brainrot"))()`,
-        popularity: 90,
-        dateAdded: "2025-04-15"
-    },
-    {
-        name: "Dead Rails Auto Bonds And More",
-        game: "Dead Rails",
-        category: "Adventure",
-        description: "A script for Dead Rails to automate resource gathering.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/erewe23/deadrailsring.github.io/refs/heads/main/ringta.lua"))()`,
-        popularity: 90,
-        dateAdded: "2026-04-07"
-    },
-    {
-        name: "Blue Lock Rivals Script",
-        game: "Blue Lock Rivals",
-        category: "Sports",
-        description: "A script for Blue Lock Rivals to enhance player skills.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/BexruzScripts/Blue-lock-no-cd-reo-get-any-style-script.-WORKS-WITH-WORLD-CLASSES-/refs/heads/main/script.lua"))()`,
-        popularity: 65,
-        dateAdded: "2025-04-25"
-    },
-    {
-        name: "Arise Crossover Auto Farm",
-        game: "Arise Crossover",
-        category: "Adventure",
-        description: "A script for Arise Crossover to automate farming tasks.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Omgshit/Scripts/main/MainLoader.lua"))()`,
-        popularity: 60,
-        dateAdded: "2025-05-05"
-    },
-    {
-        name: "Doors Speedrun Hack",
-        game: "Doors",
-        category: "Horror",
-        description: "A script for Doors to speed up navigation through levels.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/CatEnddroid/Kitty-Cats-Doors-Beta/refs/heads/main/hub.lua"))()`,
-        popularity: 75,
-        dateAdded: "2025-04-10"
-    },
-    {
-        name: "Forsaken script",
-        game: "Forsaken",
-        category: "Action",
-        description: "A script for Forsaken to automate combat sequences.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/zxcursedsocute/Forsaken-Script/refs/heads/main/lua"))()`,
-        popularity: 80,
-        dateAdded: "2025-07-16"
-    },
-    {
-        name: "Tower Defense Simulator Auto Wave",
-        game: "Tower Defense Simulator",
-        category: "Strategy",
-        description: "A script for Tower Defense Simulator to automate wave defense.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Prosexy/Demonic-HUB-V2/main/DemonicHub_V2.lua", true))()`,
-        popularity: 85,
-        dateAdded: "2025-04-20"
-    },
-    {
-        name: "The Strongest Battlegrounds Combo Hack",
-        game: "The Strongest Battlegrounds",
-        category: "Fighting",
-        description: "A script for The Strongest Battlegrounds to optimize combat combos.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/yes1nt/yes/refs/heads/main/CHAINSAW%20MAN/Chainsaw%20Man%20(Obfuscated).txt"))()`,
-        popularity: 95,
-        dateAdded: "2025-05-08"
-    },
-    {
-        name: "Fisch Auto Farm",
-        game: "Fisch",
-        category: "Simulation",
-        description: "A script for Fisch to automate resource collection.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Skzuppy/forge-hub/main/loader.lua"))()`,
-        popularity: 60,
-        dateAdded: "2025-04-05"
-    },
-    {
-        name: "Jujutsu Shenanigans Black Flash Chain ",
-        game: "Jujutsu Shenanigans",
-        category: "Fighting",
-        description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `getgenv().SCRIPT_KEY = "KEYLESS"
-loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/8bd0e0ab3568c5078b6fd8c1e1043c1f91a0abeb575ae984ee3dfb7fddef6ddb/download"))()`,
-        popularity: 70,
-        dateAdded: "2026-05-01"
-    },
-
-    {
-        name: "Jujutsu Shenanigans Tbo Hub ",
-        game: "Jujutsu Shenanigans",
-        category: "Fighting",
-        description: "A script for Jujutsu Shenanigans to automate skill usage.",
-        code: `loadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/d335b231e325660b47574aee1afcfbbbe9abfda63104172ce0d44dd4b3d9b8bc/download"))()`,
-        popularity: 75,
-        dateAdded: "2026-05-01"
-    },
-    
-    {
-        name: "Realistic Street Soccer Hit-Box Boost etc.",
-        game: "Realistic Street Soccer",
-        category: "Sports",
-        description: "A script for Realistic Street Soccer to enhance trick performance.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Realistic-Street-Soccer-rayan-s-hub-SOlARA-SUPORT-39402"))()`,
-        popularity: 65,
-        dateAdded: "2025-04-12"
-    },
-    {
-        name: "Bubble Gum Simulator Auto Bubble",
-        game: "Bubble Gum Simulator",
-        category: "Simulation",
-        description: "A script for Bubble Gum Simulator to automate bubble collection.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/MIKEDRIPZOWSKU/test/refs/heads/main/SmorgsHubBGSI.lua", true))()`,
-        popularity: 95,
-        dateAdded: "2025-04-12"
-    },
-    {
-        name: "Grow a Garden No Lag Hub Script.",
-        game: "Grow a Garden",
-        category: "Simulation",
-        description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
-        code: `loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/NoLag-id/No-Lag-HUB/refs/heads/main/Loader/LoaderV1.lua"))()`,
-        popularity: 75,
-        dateAdded: "2025-05-15"
-    },
-    {
-        name: "Grow a Garden THAN HUB Script.",
-        game: "Grow a Garden",
-        category: "Simulation",
-        description: "A script for Grow a Garden to automate plant harvesting and resource collection.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/thantzy/thanhub/refs/heads/main/thanv1"))()`,
-        popularity: 80,
-        dateAdded: "2025-08-17"
-    },
-    {
-        name: "99 Nights In The Forest Script",
-        game: "99 Nights In The Forest",
-        category: "Adventure",
-        description: "A script for 99 Nights In The Forest hack.",
-        code: `loadstring(game:HttpGet("https://obj.wearedevs.net/203720/scripts/99%20nights%20in%20a%20forest%20voidware.lua"))()`,
-        popularity: 70,
-        dateAdded: "2025-04-18"
-    },
-    {
-        name: "Attack on Titan Revolution Titan Slayer",
-        game: "Attack on Titan Revolution",
-        category: "Action",
-        description: "A script for Attack on Titan Revolution to optimize titan slaying.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/zerunquist/TekkitAotr/refs/heads/main/main"))()`,
-        popularity: 85,
-        dateAdded: "2025-05-09"
-    },
-    {
-        name: "Blade Ball Auto Dodge",
-        game: "Blade Ball",
-        category: "Sports",
-        description: "A script for Blade Ball to automate dodging mechanics.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ImNotRox1/Trous-Hub/refs/heads/main/blade-ball.lua"))`,
-        popularity: 90,
-        dateAdded: "2025-04-22"
-    },
-    {
-        name: "Pet Simulator 99 Auto Pet",
-        game: "Pet Simulator 99",
-        category: "Simulation",
-        description: "A script for Pet Simulator 99 to automate pet collection.",
-        code: `loadstring(game:HttpGet('https://zaphub.xyz/Exec'))()`,
-        popularity: 95,
-        dateAdded: "2025-05-11"
-    },
-    {
-        name: "Arsenal aim bot",
-        game: "Arsenal",
-        category: "Action",
-        description: "A script for Arsenal with silent aimbot and wallbang features.",
-        code: `loadstring(game:HttpGet("https://rawscripts.net/raw/Universal-Script-Express-Hub-Free-Universal-GUI-V6-30568"))()`,
-        popularity: 80,
-        dateAdded: "2025-05-11"
-    },
-    {
-        name: "Tower Of Hell speed hack",
-        game: "Tower of Hell",
-        category: "Parkour",
-        description: "A script for Tower of Hell to boost walk speed and jump power.",
-        code: `loadstring(game:HttpGet("https://gist.githubusercontent.com/BloxiYT/85f97364b6367baac677e109488c9905/raw/c2972a2b892c4193509ddb2fe1ba3061435e1a8a/gistfile1.txt"))()`,
-        popularity: 80,
-        dateAdded: "2025-05-11"
-    },
-    {
-        name: "Jailbreak Auto Rob And More",
-        game: "Jailbreak",
-        category: "Open World",
-        description: "A script for Jailbreak to automate robbing and other tasks.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/BlitzIsKing/UniversalFarm/main/Loader/Regular'))()`,
-        popularity: 90,
-        dateAdded: "2025-05-11"
-    },
-    {
-        name: "Murder Mystery 2 Auto Win",
-        game: "Murder Mystery 2",
-        category: "Action",
-        description: "A script for Murder Mystery 2 to automatically win rounds.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/j8nzi/project/refs/heads/main/main.lua", true))()`,
-        popularity: 85,
-        dateAdded: "2025-05-20"
-    },
-    {
-        name: "Phantom Forces Aimbot",
-        game: "Phantom Forces",
-        category: "Action",
-        description: "A script for Phantom Forces to assist with aiming and shooting.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/dementiaenjoyer/homohack/main/homohack.lua"))()`,
-        popularity: 90,
-        dateAdded: "2025-05-20"
-    },
-    {
-        name: "Anime Fighting Simulator Auto Train",
-        game: "Anime Fighting Simulator",
-        category: "Fighting",
-        description: "A script for Anime Fighting Simulator to automate training and power-ups.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/OhhMyGehlee/Universal/main/NSHUB"))()`,
-        popularity: 95,
-        dateAdded: "2025-05-21"
-    },
-    {
-        name: "Pet Simulator X Auto Farm",
-        game: "Pet Simulator X",
-        category: "Simulation",
-        description: "A script for Pet Simulator X to automate pet collection and farming.",
-        code: `loadstring(game:HttpGet('https://raw.githubusercontent.com/RunDTM/ZeeroxHub/main/Loader.lua'))()`,
-        popularity: 90,
-        dateAdded: "2025-05-21"
-    },
-    {
-        name: "Basketball Zero script",
-        game: "Basketball Zero",
-        category: "Sports",
-        description: "A script for Basketball Zero to automate shooting and performance.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/roscripts749/loader/refs/heads/main/loader"))()`,
-        popularity: 90,
-        dateAdded: "2025-05-21"
-    },
-    {
-        name: "King Legacy script",
-        game: "King Legacy",
-        category: "Adventure",
-        description: "A script for King Legacy to auto-farm and level up like a pirate king.",
-        code: `loadstring(game:HttpGet('https://zuwz.me/Ls-Zee-Hub-KL'))()`,
-        popularity: 90,
-        dateAdded: "2025-05-21"
-    },
-     {
-        name: "Grow A Garden Dark Spawner script",
-        game: "Grow a Garden",
-        category: "Simulation",
-        description: "A script for Grow A Garden auto pets etc.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Anoonymouss69/ScriptHUB/refs/heads/main/Spawner.lua"))()`,
-        popularity: 90,
-        dateAdded: "2025-05-21"
-    },
-    {
-        name: "Grow a Garden Thunderz Hub Script",
-        game: "Grow a Garden",
-        category: "Simulation",
-        description: "A script for Grow a Garden to auto-farm, buy, and sell, turning your garden into a profit machine.",
-        code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/ThundarZ/Welcome/main/Main/GaG/Main.lua"))()`,
-        popularity: 90,
-        dateAdded: "2025-05-21"
-    },
-    {
-    name: "Ink Game Script",
-    game: "Ink Game",
-    category: "Action",
-    description: "A script for [HIDE AND SEEK] Ink Game that provides features like ESP, auto-hide, and seeker avoidance for easy wins.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/wefwef127382/inkgames.github.io/refs/heads/main/ringta.lua"))()`,
-    popularity: 85,
-    dateAdded: "2025-07-18"
-},
-   {
-    name: "prospecting Script",
-    game: "prospecting",
-    category: "Action",
-    description: "A script for prospecting Game that provides features for easy game.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()`,
-    popularity: 85,
-    dateAdded: "2025-07-30"
-},
-{
-    name: "TYPE://SOUL Script",
-    game: "TYPE://SOUL",
-    category: "Action",
-    description: "A script for TYPE://SOUL that provides enhanced gameplay features and automation.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/0xCiel/scripts/refs/heads/main/typesoul.lua"))()`,
-    popularity: 92,
-    dateAdded: "2025-08-05"
-},
-{
-    name: "Blox Fruit HoHo Hub script",
-    game: "Blox Fruit",
-    category: "Action",
-    description: "A powerful hub for Blox Fruit that provides multiple features, automation, and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/acsu123/HOHO_H/main/Loading_UI"))()`,
-    popularity: 95,
-    dateAdded: "2025-08-24"
-},
-{
-    name: "Hunty Zombie Script",
-    game: "Hunty Zombie",
-    category: "Action",
-    description: "A Luarmor-protected script for Hunty Zombie with secure key system and gameplay enhancements.",
-    code: `script_key="https://ads.luarmor.net/get_key?for=Hunty_Zombie_1-MDSCIjQlKacW";
-loadstring(game:HttpGet("https://api.luarmor.net/files/v3/loaders/f506b1e1bf8259b8178f83b65751dcf8.lua"))()`,
-    popularity: 90,
-    dateAdded: "2025-08-30"
-},
-{
-    name: "Fish It Script",
-    game: "Fish It",
-    category: "Simulation",
-    description: "A script for Fish It providing enhanced gameplay automation and fishing features.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/stormskmonkey/JinkX/refs/heads/main/Loader.lua"))()`,
-    popularity: 85,
-    dateAdded: "2025-09-11"
-},
-{
-    name: "Plants Vs Brainrots Script",
-    game: "Plants Vs Brainrots",
-    category: "Simulation",
-    description: "A script for Plants Vs Brainrots providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mynamewendel-ctrl/Blessed-Hub-X-/refs/heads/main/Plants-Vs-Brainrots.lua"))()`,
-    popularity: 72,
-    dateAdded: "2025-10-01"
-},
-{
-    name: "Anime Eternal Script",
-    game: "Anime Eternal",
-    category: "Simulation",
-    description: "A script for Anime Eternal providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()`,
-    popularity: 72,
-    dateAdded: "2025-10-08"
-},
-{
-    name: "The Forge Script",
-    game: "The Forge",
-    category: "Simulation",
-    description: "A script for The Forge providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://getgold.cc"))()`,
-    popularity: 0,
-    dateAdded: "2025-12-09"
-},
-{
-    name: "Rivals NullZen Hub",
-    game: "Rivals",
-    category: "Simulation",
-    description: "A script for Rivals providing automation and gameplay enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/axleoislost/Accent/main/Rivals"))()`,
-    popularity: 80,
-    dateAdded: "2025-12-12"
-},
-
-    {
-    name: "Bee Swarm Simulator Script",
-    game: "Bee Swarm Simulator",
-    category: "Simulation",
-    description: "A powerful script for Bee Swarm Simulator, featuring farming, quests, and quality-of-life enhancements.",
-    code: `loadstring(game:HttpGet("https://raw.githubusercontent.com/Chris12089/atlasbss/main/script.lua"))()`,
-    popularity: 92,
-    dateAdded: "2025-12-31"
-},
-
-    
-    {
-        name: "Escape Tsunami for Brainrots Script",
-        game: "Escape Tsunami for Brainrots",
-        category: "Simulation",
-        description: "A script for Escape Tsunami for Brainrots with automation and gameplay enhancements.",
-        code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/832af29a13a41951e31129a974a1e8cc.lua"))()',
-        popularity: 90,
-        dateAdded: "2026-01-21"
-    },
-
-    {
-    name: "Sailor Piece Script",
-    game: "Sailor Piece",
-    category: "Adventure",
-    description: "A script for Sailor Piece with automation features and gameplay enhancements.",
-    code: 'loadstring(game:HttpGet("https://raw.githubusercontent.com/mazino45/main/refs/heads/main/MainScript.lua"))()',
-    popularity: 85,
-    dateAdded: "2026-03-10"
-},
-
- {
-    name: "Jujutsu Shenanigans Auto Play",
-    game: "Jujutsu Shenanigans",
-    category: "Fighting",
-    description: "An auto play script for Jujutsu Shenanigans with automated combat and gameplay features.",
-    code: 'getgenv().SCRIPT_KEY = "KEYLESS"\nloadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/f2eaf0a65645254ba73231a63924ab9eadbec288a6d717fc4f4cdc68b24edb0e/download"))()',
-    popularity: 90,
-    dateAdded: "2026-05-19"
-},
-{
-    name: "Rivals Skins Unlocker",
-    game: "Rivals",
-    category: "Shooter",
-    description: "A script for Rivals that unlocks skins and provides additional customization features.",
-    code: 'getgenv().SCRIPT_KEY = "KEYLESS"\nloadstring(game:HttpGet("https://api.jnkie.com/api/v1/luascripts/public/738d2f252b6cc61416487e8ec5a094d29c0eda19f1415d68a4c770aef3a6de6d/download"))()',
-    popularity: 88,
-    dateAdded: "2026-05-22"
-},
-
-
-{
-    name: "Jujutsu Shenanigans SYNQ Hub",
-    game: "Jujutsu Shenanigans",
-    category: "Fighting",
-    description: "A SYNQ Hub script for Jujutsu Shenanigans featuring automation tools and combat enhancements.",
-    code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/f0465c0000aaa63b0c3037c561a4ba9c.lua"))()',
-    popularity: 92,
-    dateAdded: "2026-05-27"
-},
-
-{
-    name: "Heroes Battlegrounds Script",
-    game: "Heroes Battlegrounds",
-    category: "Fighting",
-    description: "A Heroes Battlegrounds script featuring combat utilities, automation tools, and gameplay enhancements.",
-    code: 'loadstring(game:HttpGet("https://api.luarmor.net/files/v4/loaders/f0465c0000aaa63b0c3037c561a4ba9c.lua"))()',
-    popularity: 92,
-    dateAdded: "2026-05-29"
-},
-        
-
-
-];
+let scripts = [];
 
 let favorites = [];
 let currentPage = 1;
 const scriptsPerPage = 15;
 let adminSessionKey = null;
+let isAdmin = false;
+let loginMode = "";
+
+
+
+function showToast(message, type = "success") {
+
+    const toast = document.createElement("div");
+
+    toast.className = `toast ${type}`;
+
+    toast.textContent = message;
+
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+        toast.classList.add("show");
+    }, 10);
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+
+    }, 3000);
+}
 
 // Initialize favorites from localStorage with error handling
 try {
@@ -638,7 +205,10 @@ function showCode(scriptName) {
 
     if (!script || !modal || !modalTitle || !modalGame || !modalDescription || !modalCode || !modalContent) {
         console.error('Script or modal elements not found.');
-        alert(`Script '${scriptName}' not found or modal elements missing.`);
+       showToast(
+`Script '${scriptName}' not found`,
+'error'
+);
         return;
     }
 
@@ -667,7 +237,10 @@ function showCode(scriptName) {
             })
             .catch(err => {
                 console.error('Failed to copy code:', err);
-                alert('Failed to copy code. Please try again.');
+               showToast(
+'Failed to copy code. Please try again.',
+'error'
+);
             });
     };
 
@@ -750,6 +323,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+          
+        const adminAccessBtn =
+document.getElementById(
+    "adminAccessBtn"
+);
+
+if (adminAccessBtn) {
+
+    adminAccessBtn.addEventListener(
+    "click",
+    () => {
+
+        if (overlayMenu && hamburger) {
+
+            overlayMenu.classList.remove(
+                "active"
+            );
+
+            hamburger.classList.remove(
+                "active"
+            );
+
+        }
+
+       loginMode = "edit";
+
+document.getElementById(
+    "passwordModal"
+).style.display = "flex";
+
+    });
+
+}
+
 
 
        const addScriptBtn = document.getElementById("addScriptBtn");
@@ -766,7 +373,11 @@ if (addScriptBtn) {
         }
 
         // Open password modal
-        document.getElementById("passwordModal").style.display = "flex";
+        loginMode = "add";
+
+document.getElementById(
+    "passwordModal"
+).style.display = "flex";
         document.getElementById("passwordModal")
             .setAttribute("aria-hidden", "false");
     });
@@ -787,42 +398,60 @@ verifyKeyBtn.addEventListener("click", async () => {
 
     try {
 
-        const res = await fetch(
-            "https://scriptshub-api.akashbhowmik110.workers.dev/verify-key",
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ key })
-            }
-        );
+       const endpoint =
+loginMode === "edit"
+? "https://scriptshub-api.akashbhowmik110.workers.dev/verify-edit-key"
+: "https://scriptshub-api.akashbhowmik110.workers.dev/verify-key";
+
+const res = await fetch(
+    endpoint,
+    {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ key })
+    }
+);
 
         if (!res.ok) {
-            alert("Wrong Key");
+            showToast("Wrong Key", "error");
             return;
         }
 
-        adminSessionKey = key;
+      document.getElementById(
+    "passwordModal"
+).style.display = "none";
 
-        document.getElementById(
-            "passwordModal"
-        ).style.display = "none";
+if (loginMode === "edit") {
 
-        document.getElementById(
-            "addScriptModal"
-        ).style.display = "flex";
+    adminSessionKey = key;
+    isAdmin = true;
 
+    showToast("Admin Mode Enabled");
+
+    filterScripts();
+
+} else {
+
+    adminSessionKey = key;
+
+    document.getElementById(
+        "addScriptModal"
+    ).style.display = "flex";
+
+}
     }
     catch(error){
 
-        console.error(error);
+    console.error(error);
 
-        alert(
-            "Server Error"
-        );
+    showToast(
+        "Server Error",
+        "error"
+    );
 
-    }
+}
     
 
 });
@@ -859,7 +488,7 @@ saveScriptBtn.addEventListener("click", async () => {
         !description ||
         !code
     ){
-        alert("Fill all fields");
+        showToast("Fill all fields", "error");
         return;
     }
 
@@ -887,33 +516,130 @@ saveScriptBtn.addEventListener("click", async () => {
 
     if (!response.ok) {
 
-        alert("Failed To Save Script");
+       showToast("Failed To Save Script", "error");
 
         return;
 
     }
 
-    alert("Script Added Successfully");
+    showToast("Script Added Successfully");
 
 document.getElementById(
     "addScriptModal"
 ).style.display = "none";
 
 currentPage = 1;
-loadScriptsFromDatabase();
+
+await loadScriptsFromDatabase();
+
+rebuildGameFilter();
+
+filterScripts();
 
 }
 catch(error){
 
     console.error(error);
 
-    alert("Server Error");
+    showToast("Server Error", "error");
 
     return;
 
 }
 
 });
+}
+
+     
+
+
+             const saveEditBtn =
+document.getElementById("saveEditBtn");
+
+if (saveEditBtn) {
+
+    saveEditBtn.addEventListener(
+    "click",
+    async () => {
+
+        const id =
+        document.getElementById(
+        "editScriptId"
+        ).value;
+        console.log("EDIT ID =", id);
+
+        const game =
+        document.getElementById(
+        "editGameName"
+        ).value;
+
+        const category =
+        document.getElementById(
+        "editCategoryName"
+        ).value;
+
+        const script_name =
+        document.getElementById(
+        "editScriptName"
+        ).value;
+
+        const description =
+        document.getElementById(
+        "editScriptDescription"
+        ).value;
+
+        const code =
+        document.getElementById(
+        "editScriptCode"
+        ).value;
+
+        const response =
+        await fetch(
+        "https://scriptshub-api.akashbhowmik110.workers.dev/edit-script",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type":
+                "application/json"
+            },
+            body: JSON.stringify({
+                key: adminSessionKey,
+                id,
+                game,
+                category,
+                script_name,
+                description,
+                code
+            })
+        });
+
+        console.log(
+    "Status:",
+    response.status
+);
+
+        if (!response.ok) {
+
+           showToast("Failed To Update", "error");
+
+            return;
+
+        }
+
+       showToast("Script Updated");
+
+closeModal(
+"editScriptModal"
+);
+
+await loadScriptsFromDatabase();
+
+rebuildGameFilter();
+
+filterScripts();
+
+    });
+
 }
 
 
@@ -1032,8 +758,26 @@ catch(error){
         favoriteButton.setAttribute('aria-label', isFavorite(script.name) ? `Remove ${script.name} from favorites` : `Add ${script.name} to favorites`);
         favoriteButton.innerHTML = isFavorite(script.name) ? '<i class="fas fa-heart"></i>' : '<i class="far fa-heart"></i>';
 
-        buttonsDiv.appendChild(viewCodeButton);
-        buttonsDiv.appendChild(favoriteButton);
+       buttonsDiv.appendChild(viewCodeButton);
+buttonsDiv.appendChild(favoriteButton);
+
+if (isAdmin && script.id) {
+
+    const editBtn =
+    document.createElement("button");
+
+    editBtn.innerHTML =
+    '<i class="fas fa-edit"></i>';
+
+    editBtn.className =
+    "edit-script-btn";
+
+    editBtn.onclick = () =>
+    openEditModal(script);
+
+    buttonsDiv.appendChild(editBtn);
+
+}
 
         scriptCard.appendChild(title);
         scriptCard.appendChild(game);
@@ -1259,9 +1003,11 @@ const init = async () => {
 
         initEventListeners();
 
-        await loadScriptsFromDatabase();
+await loadScriptsFromDatabase();
 
-        filterScripts();
+rebuildGameFilter();
+
+filterScripts();
 
     }
     catch (error) {
@@ -1271,18 +1017,54 @@ const init = async () => {
             error
         );
 
-        alert(
-            'Failed to initialize the application. Please refresh the page.'
-        );
+       showToast(
+    'Failed to initialize the application. Please refresh the page.',
+    'error'
+);
 
     }
 
 };
 
+
+
+function openEditModal(script) {
+
+    document.getElementById(
+        "editScriptId"
+    ).value = script.id;
+
+    document.getElementById(
+        "editGameName"
+    ).value = script.game;
+
+    document.getElementById(
+        "editCategoryName"
+    ).value = script.category;
+
+    document.getElementById(
+        "editScriptName"
+    ).value = script.name;
+
+    document.getElementById(
+        "editScriptDescription"
+    ).value = script.description;
+
+    document.getElementById(
+        "editScriptCode"
+    ).value = script.code;
+
+    document.getElementById(
+        "editScriptModal"
+    ).style.display = "flex";
+
+}
+
+
+
 init();
 
 });
-
 
 
 
