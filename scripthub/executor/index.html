@@ -1396,8 +1396,16 @@
   const bypassLink = async (link) => {
     try {
       const resp = await fetch(`${API_ENDPOINT}?url=${encodeURIComponent(link.trim())}`, { method: 'GET', mode: 'cors', cache: 'no-store' });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const data = await resp.json().catch(() => ({}));
+     const data = await resp.json();
+
+if (resp.status === 429) {
+  return `⏳ Rate Limit Reached\n\nYou have used your 1 bypasses for this minute.\nPlease wait ${data.retry_after} seconds and try again.`;
+}
+
+if (!resp.ok) {
+  throw new Error(`HTTP ${resp.status}`);
+}
+     
       if (data?.success && data.destination) return `Bypassed! 🎉\nDirect link: ${data.destination}`;
       if (data?.status === 'success' && data.result) return `Bypassed! 🎉\nDirect link: ${data.result}`;
       if (data?.bypassed || data?.direct_url) return `Bypassed! 🎉\nDirect link: ${data.bypassed || data.direct_url}`;
