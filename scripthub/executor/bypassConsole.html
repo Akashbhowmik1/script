@@ -753,16 +753,25 @@ let countdownVal = 5;
 const REFRESH_SECS = 5;
 let countdownTimer = null;
 
+function toDate(ts) {
+  if (!ts) return null;
+  // Server timestamps sometimes arrive without a timezone marker (e.g. "2025-01-01 12:00:00"
+  // or "2025-01-01T12:00:00"). Without a "Z"/offset, JS parses that as LOCAL browser time,
+  // which silently shifts every timestamp by the browser's UTC offset (+5:30 in India) and
+  // throws off "last 1h" / "last 24h" counts, sorting, and displayed time. Normalize to UTC.
+  const str = String(ts).trim();
+  const hasTz = /Z$|[+-]\d{2}:?\d{2}$/.test(str);
+  const isoish = str.includes(" ") && !str.includes("T") ? str.replace(" ", "T") : str;
+  return new Date(hasTz ? isoish : isoish + "Z");
+}
+
 function fmtTime(ts) {
-  // Force UTC if missing
-  const fixed = ts.includes("Z") ? ts : ts.replace(" ", "T") + "Z";
-
-  const date = new Date(fixed);
-
+  const date = toDate(ts);
+  if (!date || isNaN(date.getTime())) return "-";
   return new Intl.DateTimeFormat("en-IN", {
     timeZone: "Asia/Kolkata",
-    dateStyle: "medium",
-    timeStyle: "medium",
+    day: "2-digit", month: "short", year: "numeric",
+    hour: "2-digit", minute: "2-digit", second: "2-digit",
     hour12: true
   }).format(date);
 }
@@ -807,7 +816,7 @@ function getFiltered() {
   }
   d = [...d].sort((a, b) => {
     let va = a[sortKey], vb = b[sortKey];
-    if (sortKey === "created_at") { va = new Date(va).getTime(); vb = new Date(vb).getTime(); }
+    if (sortKey === "created_at") { va = toDate(va)?.getTime() ?? 0; vb = toDate(vb)?.getTime() ?? 0; }
     if (va == null) va = sortDir === "asc" ? Infinity : -Infinity;
     if (vb == null) vb = sortDir === "asc" ? Infinity : -Infinity;
     if (typeof va === "string") va = va.toLowerCase();
@@ -828,10 +837,11 @@ function renderStats(data) {
   const apiCount = {};
 
   data.forEach(log => {
-    const t = new Date(log.created_at).getTime();
+    const parsed = toDate(log.created_at);
+    const t = parsed ? parsed.getTime() : NaN;
     const diff = now - t;
-    if (diff < 3600000) hour++;
-    if (diff < 86400000) day++;
+    if (!isNaN(diff) && diff >= 0 && diff < 3600000) hour++;
+    if (!isNaN(diff) && diff >= 0 && diff < 86400000) day++;
     if (log.status === "success") success++;
     if (log.status === "failed") failed++;
     if (log.response_time != null) {
@@ -899,7 +909,9 @@ function renderTable() {
     table.innerHTML = pageData.map(log => `
       <tr class="fade-in">
         <td class="id-cell" title="click to copy" data-copy="${log.id}">${log.id}</td>
-        <td class="domain-cell">${log.domain || "-"}</td>
+        <td class="domain-cell" title="${log.url}">
+  ${log.domain || "-"}
+</td>
         <td class="result-cell" onclick="toggleExpand(this)">${log.result || "-"}</td>
         <td>${log.api_used || "-"}</td>
         <td>${speedBadge(log.response_time)}</td>
@@ -939,7 +951,12 @@ async function loadLogs(isManual) {
     const res = await fetch(API);
     if (!res.ok) throw new Error("HTTP " + res.status);
     const data = await res.json();
-    allLogs = Array.isArray(data) ? data : [];
+    allLogs = Array.isArray(data)
+      ? data
+      : Array.isArray(data?.logs) ? data.logs
+      : Array.isArray(data?.results) ? data.results
+      : Array.isArray(data?.data) ? data.data
+      : [];
     setConn(true);
     renderAll();
     document.getElementById("lastUpdated").innerText = "last updated " + new Date().toLocaleTimeString("en-IN", { hour12: false });
