@@ -1656,24 +1656,36 @@ html[data-theme="light"] .copy-btn {
 @media (max-width: 768px) {
   /* Heavy decorative layers off on small devices – the static
      gradients on <body> keep the page looking rich without any cost */
-  .blob,
-  .bg-animation,
   body::before {
     display: none;
+  }
+
+  /* Phones keep a bright aurora, but the blobs are static (no animation = no lag) */
+  .blob {
+    animation: none;
+    will-change: auto;
+    opacity: 0.38;
+  }
+  .blob1 { width: 420px; height: 420px; top: -150px; right: -160px; }
+  .blob2 { width: 400px; height: 400px; bottom: -150px; left: -170px; }
+  .blob3 { width: 320px; height: 320px; top: 38%; right: -120px; }
+
+  .bg-animation::before {
+    background-size: 40px 40px;
   }
 
   body {
     background-attachment: scroll;
     background:
-      radial-gradient(600px circle at 15% 0%, rgba(99, 102, 241, 0.20), transparent 60%),
-      radial-gradient(600px circle at 90% 30%, rgba(236, 72, 153, 0.12), transparent 60%),
-      radial-gradient(700px circle at 50% 100%, rgba(0, 255, 204, 0.10), transparent 60%),
-      linear-gradient(180deg, #070a14 0%, #0b1020 50%, #06080f 100%);
+      radial-gradient(520px circle at 10% 0%, rgba(99, 102, 241, 0.38), transparent 62%),
+      radial-gradient(520px circle at 95% 28%, rgba(236, 72, 153, 0.26), transparent 62%),
+      radial-gradient(620px circle at 50% 100%, rgba(0, 255, 204, 0.24), transparent 62%),
+      linear-gradient(180deg, #0a0f24 0%, #0f1630 50%, #090d1c 100%);
   }
   html[data-theme="light"] body {
     background:
-      radial-gradient(600px circle at 15% 0%, rgba(99, 102, 241, 0.10), transparent 60%),
-      radial-gradient(700px circle at 50% 100%, rgba(34, 211, 238, 0.10), transparent 60%),
+      radial-gradient(520px circle at 10% 0%, rgba(99, 102, 241, 0.16), transparent 62%),
+      radial-gradient(620px circle at 50% 100%, rgba(34, 211, 238, 0.16), transparent 62%),
       linear-gradient(180deg, #f8fafc 0%, #eef2f7 50%, #e8edf4 100%);
   }
 
@@ -2005,6 +2017,256 @@ html[data-theme="light"] .copy-btn {
   }
   .modal-content {
     max-width: 1000px;
+  }
+}
+
+/* =====================================================================
+   12b. COMPACT PHONE SIZING (smaller buttons, text, spacing)
+   ===================================================================== */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .container {
+    padding: 12px 12px 24px;
+  }
+
+  header {
+    gap: 10px;
+    padding-top: 8px;
+  }
+
+  .top-center-text {
+    margin-bottom: 8px;
+    padding-inline: 52px;
+    font-size: clamp(16px, 4.6vw, 22px);
+    letter-spacing: 0;
+  }
+
+  .hamburger {
+    --bar-height: 3px;
+    --bar-gap: 5px;
+    --bar-width: 20px;
+    top: 4px;
+    right: 4px;
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 4px;
+    border-radius: 12px;
+  }
+
+  .header-buttons,
+  .buttons-wrapper {
+    gap: 8px;
+  }
+
+  .executor-button,
+  .code-button {
+    width: min(170px, 70vw);
+    min-height: 38px;
+    padding: 6px 14px;
+    font-size: 13px;
+    border-radius: 12px;
+  }
+
+  .filter-bar {
+    gap: 8px;
+    margin: 12px 0;
+    padding: 10px;
+    border-radius: 16px;
+  }
+
+  #searchInput,
+  #gameFilter,
+  #categoryFilter,
+  #sortFilter {
+    min-height: 40px;
+    padding: 8px 14px;
+    font-size: 16px; /* keep 16px so iOS does not zoom on focus */
+  }
+
+  .favorite-toggle {
+    gap: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+  .favorite-toggle input {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    min-height: 22px;
+    border-radius: 6px;
+  }
+  .favorite-toggle i {
+    font-size: 16px;
+  }
+
+  .scripts-grid {
+    gap: 12px;
+    padding: 12px 0;
+  }
+
+  .script-card {
+    padding: 12px;
+    border-radius: 16px;
+  }
+  .script-card .thumb {
+    height: 110px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+  .script-card h3 {
+    margin-bottom: 6px;
+    font-size: 1.05rem;
+  }
+  .script-card p {
+    margin-bottom: 10px;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+  .script-card .buttons {
+    gap: 8px;
+  }
+  .script-card button {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 38px;
+    padding: 7px 12px;
+    gap: 6px;
+    font-size: 0.85rem;
+    border-radius: 11px;
+  }
+  .script-card button.favorite-btn {
+    flex: 0 0 38px;
+    width: 38px;
+    min-width: 38px;
+    padding: 6px;
+  }
+  .script-card .badge {
+    padding: 4px 9px;
+    font-size: 0.75rem;
+  }
+
+  .overlay-content {
+    gap: 12px;
+    padding: 16px;
+  }
+  .overlay-content a,
+  .overlay-content button {
+    max-width: 300px;
+    min-height: 42px;
+    padding: 9px 20px;
+    font-size: 0.95rem;
+    border-radius: 12px;
+  }
+
+  .pagination {
+    gap: 8px;
+    margin: 14px 0;
+  }
+  .page-info {
+    font-size: 14px;
+  }
+  .pagination button {
+    min-height: 38px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    border-radius: 11px;
+  }
+  .pagination-buttons {
+    gap: 8px;
+  }
+  .pagination-buttons button {
+    width: 110px;
+    min-width: 110px;
+  }
+
+  .modal {
+    padding: 10px;
+  }
+  .modal-content {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  .modal-content h2 {
+    padding-right: 44px;
+    font-size: 1.25rem;
+  }
+  .modal-content p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+  .modal-content pre {
+    padding: 10px;
+    font-size: 0.78rem;
+  }
+  .close-btn {
+    top: 8px;
+    right: 8px;
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+    min-height: 34px;
+    font-size: 0.95rem;
+  }
+  .copy-btn {
+    min-height: 40px;
+    margin-bottom: 12px;
+    padding: 8px 18px;
+    font-size: 0.9rem;
+    border-radius: 12px;
+  }
+  .modal input,
+  .modal textarea,
+  .modal select {
+    margin: 6px 0;
+    padding: 9px 12px;
+    font-size: 16px;
+  }
+  #verifyKeyBtn,
+  #saveScriptBtn {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  #noResults {
+    margin: 24px 0;
+    font-size: 1.1rem;
+  }
+
+  .toast {
+    top: 10px;
+    right: 10px;
+    padding: 9px 14px;
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .script-card button {
+    flex: 1 1 0;
+    width: auto;
+  }
+  .script-card button.favorite-btn {
+    flex: 0 0 38px;
+    width: 38px;
+  }
+  .executor-button,
+  .code-button {
+    width: min(160px, 70vw);
+  }
+  .hamburger {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+  }
+  .copy-btn {
+    width: 100%;
   }
 }
 
