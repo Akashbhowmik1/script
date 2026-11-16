@@ -29,16 +29,17 @@ for (const item of data) {
     existing.add(key);
 
     scripts.push({
-        id: item.id,
-        name: item.script_name,
-        game: item.game,
-        category: item.category,
-        description: item.description,
-        code: item.code,
-        popularity: 0,
-        dateAdded: item.date_added,
-        fromDatabase: true
-    });
+    id: item.id,
+    name: item.script_name,
+    game: item.game,
+    category: item.category,
+    description: item.description,
+    code: item.code,
+    popularity: 0,
+    dateAdded: item.date_added,
+    top_rank: item.top_rank ?? null,
+    fromDatabase: true
+});
 
 }
 
@@ -871,13 +872,36 @@ if (isAdmin && script.id) {
             return matchesSearch && matchesGame && matchesCategory && matchesFavorites;
         });
 
-        if (sortBy === 'popularity') {
-            filteredScripts.sort((a, b) => b.popularity - a.popularity);
-        } else if (sortBy === 'newest') {
-            filteredScripts.sort((a, b) => new Date(b.dateAdded) - new Date(a.dateAdded));
-        } else {
-            filteredScripts.sort((a, b) => a.name.localeCompare(b.name));
-        }
+       // Always show manually ranked scripts first.
+// Apply the selected sorting option only after rank priority.
+filteredScripts.sort((a, b) => {
+
+    const rankA = Number(a.top_rank);
+    const rankB = Number(b.top_rank);
+
+    const hasRankA = Number.isInteger(rankA) && rankA > 0;
+    const hasRankB = Number.isInteger(rankB) && rankB > 0;
+
+    // Ranked scripts always appear before unranked scripts.
+    if (hasRankA && !hasRankB) return -1;
+    if (!hasRankA && hasRankB) return 1;
+
+    // Ranked scripts follow their assigned rank.
+    if (hasRankA && hasRankB) {
+        return rankA - rankB;
+    }
+
+    // Normal sorting for all unranked scripts.
+    if (sortBy === 'popularity') {
+        return (b.popularity || 0) - (a.popularity || 0);
+    }
+
+    if (sortBy === 'newest') {
+        return new Date(b.dateAdded) - new Date(a.dateAdded);
+    }
+
+    return a.name.localeCompare(b.name);
+});
 
         return filteredScripts;
     };
