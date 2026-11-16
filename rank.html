@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<title>Script Hub — Ranking Manager</title>
+<style>
+:root{color-scheme:dark;--bg:#080d19;--panel:#101a2b;--panel2:#142238;--line:#26364d;--text:#edf4ff;--muted:#8fa2bc;--mint:#35e0bd;--blue:#78a9ff;--danger:#ff7185;--shadow:0 20px 60px #0005}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 15% -10%,#163c49 0,transparent 36%),radial-gradient(ellipse at 100% 0,#20274c 0,transparent 34%),var(--bg);color:var(--text);font:15px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer}.wrap{width:min(1180px,calc(100% - 32px));margin:38px auto 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:25px}.brand{display:flex;align-items:center;gap:13px}.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#35e0bd,#568bff);color:#06131d;font-weight:900;font-size:19px;box-shadow:0 8px 25px #35e0bd30}.eyebrow{color:var(--mint);font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800}.brand h1{font-size:21px;margin:1px 0 0;letter-spacing:-.03em}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:13px}.dot{width:8px;height:8px;border-radius:50%;background:#718096}.dot.ok{background:var(--mint);box-shadow:0 0 12px #35e0bd}.dot.bad{background:var(--danger)}
+.hero{padding:28px;border:1px solid #31445c;border-radius:22px;background:linear-gradient(120deg,#14283aee,#111a2bee);box-shadow:var(--shadow);margin-bottom:18px}.hero h2{font-size:clamp(24px,4vw,34px);letter-spacing:-.04em;margin:0 0 7px}.hero p{margin:0;color:var(--muted);max-width:700px}.config{display:grid;grid-template-columns:minmax(220px,1fr) minmax(220px,1fr) auto;gap:12px;margin-top:22px;align-items:end}.field label{display:block;color:#a9bad0;font-size:12px;font-weight:700;margin:0 0 7px}.field input{width:100%;height:44px;border:1px solid var(--line);border-radius:11px;background:#091321;color:var(--text);padding:0 13px;outline:none}.field input:focus,.search:focus,select:focus{border-color:var(--mint);box-shadow:0 0 0 3px #35e0bd18}.btn{height:44px;border:0;border-radius:11px;padding:0 18px;font-weight:800;background:linear-gradient(135deg,var(--mint),#72b5ff);color:#07131c;transition:transform .15s,filter .15s}.btn:hover{filter:brightness(1.08);transform:translateY(-1px)}.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}.btn.secondary{background:#1b2b40;color:var(--text);border:1px solid var(--line)}.btn.danger{background:#3a1d2b;color:#ffb3bf;border:1px solid #713447}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}.stat{border:1px solid var(--line);border-radius:15px;background:#101a2bd9;padding:16px 18px}.stat strong{display:block;font-size:25px;letter-spacing:-.04em}.stat span{color:var(--muted);font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:18px;align-items:start}.panel{border:1px solid var(--line);border-radius:18px;background:#101a2bf2;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:12px}.panel-head h3{margin:0;font-size:15px}.panel-head small{color:var(--muted)}.tools{padding:13px 16px;border-bottom:1px solid var(--line)}.search{width:100%;height:42px;border:1px solid var(--line);border-radius:10px;background:#091321;color:var(--text);padding:0 13px;outline:none}.script-list{max-height:650px;overflow:auto}.script{display:grid;grid-template-columns:minmax(0,1fr) 116px;gap:12px;align-items:center;padding:14px 17px;border-bottom:1px solid #213047}.script:last-child{border-bottom:0}.script-name{font-weight:750;overflow-wrap:anywhere}.script-meta{font-size:12px;color:var(--muted);margin-top:3px}.rank-select{width:100%;height:39px;border:1px solid var(--line);border-radius:10px;background:#0a1422;color:var(--text);padding:0 9px;outline:none}.rank-select.assigned{border-color:#258d7d;background:#102a2b}.rank-label{font-size:10px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);display:block;margin-bottom:4px}
+.rank-list{padding:8px 16px 16px}.rank-item{display:flex;align-items:center;gap:11px;padding:11px 0;border-bottom:1px solid #213047}.rank-item:last-child{border:0}.rank-num{width:30px;height:30px;flex:0 0 30px;border-radius:9px;display:grid;place-items:center;background:#1d3344;color:var(--mint);font-weight:900;font-size:12px}.rank-info{min-width:0;flex:1}.rank-info strong{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rank-info small{color:var(--muted);font-size:11px}.remove{border:0;background:transparent;color:var(--muted);font-size:19px;padding:3px 7px}.remove:hover{color:var(--danger)}.empty{padding:30px 16px;text-align:center;color:var(--muted);font-size:13px}.side-foot{padding:14px 17px;border-top:1px solid var(--line);display:grid;gap:9px}.side-foot .btn{width:100%}.hint{font-size:11px;color:var(--muted);margin:0}.message{display:none;margin:15px 0 0;padding:11px 14px;border-radius:10px;font-size:13px}.message.show{display:block}.message.ok{background:#10332f;color:#9cf2df;border:1px solid #236e60}.message.error{background:#3a1d2b;color:#ffc0ca;border:1px solid #713447}.login-note{font-size:12px;color:var(--muted);margin-top:9px}.hidden{display:none!important}.footer{text-align:center;color:#687c96;font-size:11px;margin-top:22px}
+@media(max-width:850px){.layout{grid-template-columns:1fr}.script-list{max-height:520px}.config{grid-template-columns:1fr 1fr}.config .btn{grid-column:1/-1}.top{align-items:flex-start}.status{padding-top:8px}}
+@media(max-width:540px){.wrap{width:min(100% - 22px,1180px);margin:20px auto 45px}.hero{padding:20px}.config{grid-template-columns:1fr}.config .btn{grid-column:auto}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:21px}.script{grid-template-columns:minmax(0,1fr) 105px;padding:12px}.panel-head{padding:15px}.brand h1{font-size:18px}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <header class="top">
+    <div class="brand"><div class="logo">SH</div><div><div class="eyebrow">Script Hub / Admin</div><h1>Ranking Manager</h1></div></div>
+    <div class="status"><i class="dot" id="statusDot"></i><span id="statusText">Not connected</span></div>
+  </header>
+
+  <section class="hero">
+    <h2>Control your script rankings.</h2>
+    <p>Load scripts from your D1 database, assign positions 1–20, and publish the ranking order. Unranked scripts stay in your regular list.</p>
+    <div class="config">
+      <div class="field"><label for="apiUrl">Cloudflare Worker URL</label><input id="apiUrl" type="url" placeholder="https://your-worker.workers.dev"></div>
+      <div class="field"><label for="adminKey">Admin key</label><input id="adminKey" type="password" placeholder="Enter your ADMIN_KEY" autocomplete="current-password"></div>
+      <button class="btn" id="connectBtn">Connect & load</button>
+    </div>
+    <div class="login-note">Your key is kept only in this page's memory and is not saved in browser storage.</div>
+    <div class="message" id="message" role="status"></div>
+  </section>
+
+  <section class="stats">
+    <div class="stat"><strong id="totalCount">—</strong><span>Total scripts loaded</span></div>
+    <div class="stat"><strong id="rankedCount">0 / 20</strong><span>Ranking positions used</span></div>
+    <div class="stat"><strong id="normalCount">—</strong><span>Unranked scripts</span></div>
+  </section>
+
+  <section class="layout hidden" id="dashboard">
+    <div class="panel">
+      <div class="panel-head"><div><h3>All database scripts</h3><small id="listSub">Choose a rank for any script</small></div><small id="shownCount"></small></div>
+      <div class="tools"><input class="search" id="search" type="search" placeholder="Search by script name, game or category…"></div>
+      <div class="script-list" id="scriptList"><div class="empty">No scripts loaded.</div></div>
+    </div>
+    <aside class="panel">
+      <div class="panel-head"><div><h3>Published order preview</h3><small>Rank 1 appears first</small></div><small>TOP 20</small></div>
+      <div class="rank-list" id="rankList"></div>
+      <div class="side-foot">
+        <button class="btn" id="saveBtn">Save rankings</button>
+        <button class="btn secondary" id="reloadBtn">Reload from database</button>
+        <button class="btn danger" id="clearBtn">Clear all rankings</button>
+        <p class="hint">Saving replaces the current ranking assignments with the selections shown here.</p>
+      </div>
+    </aside>
+  </section>
+  <div class="footer">SCRIPT HUB · PRIVATE ADMIN TOOL</div>
+</main>
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let scripts = [];
+  let ranks = new Map();
+  let apiBase = "";
+  let adminKey = "";
+
+  function showMessage(text, type="ok") {
+    const el = $("message");
+    el.textContent = text;
+    el.className = `message show ${type}`;
+  }
+  function setStatus(text, kind="") {
+    $("statusText").textContent = text;
+    $("statusDot").className = `dot ${kind}`;
+  }
+  function normalizeBase(value) {
+    return value.trim().replace(/\/+$/, "");
+  }
+  async function api(path, options={}) {
+    const response = await fetch(apiBase + path, {
+      ...options,
+      headers: { "Content-Type": "application/json", ...(options.headers || {}) }
+    });
+    const text = await response.text();
+    let data;
+    try { data = text ? JSON.parse(text) : {}; }
+    catch { data = text; }
+    if (!response.ok) {
+      const detail = typeof data === "string" ? data : (data.error || data.message || "");
+      throw new Error(`HTTP ${response.status}${detail ? ": " + detail : ""}`);
+    }
+    return data;
+  }
+  function idOf(s) { return String(s.id); }
+  function rankOf(s) {
+    const value = s.top_rank;
+    return value === null || value === undefined || value === "" ? null : Number(value);
+  }
+  function render() {
+    const query = $("search").value.trim().toLowerCase();
+    const filtered = scripts.filter(s =>
+      [s.script_name, s.game, s.category, s.description]
+        .some(v => String(v || "").toLowerCase().includes(query))
+    );
+    $("totalCount").textContent = scripts.length;
+    $("rankedCount").textContent = `${ranks.size} / 20`;
+    $("normalCount").textContent = scripts.length - ranks.size;
+    $("shownCount").textContent = `${filtered.length} shown`;
+
+    const list = $("scriptList");
+    if (!filtered.length) {
+      list.innerHTML = `<div class="empty">${scripts.length ? "No scripts match your search." : "No scripts found in the database."}</div>`;
+    } else {
+      list.innerHTML = filtered.map(s => {
+        const id = idOf(s);
+        const current = ranks.has(id) ? String(ranks.get(id)) : "";
+        const title = escapeHtml(s.script_name || "Untitled script");
+        const game = escapeHtml(s.game || "Unknown game");
+        const category = escapeHtml(s.category || "Other");
+        const options = ['<option value="">Not ranked</option>'];
+        for (let i=1;i<=20;i++) options.push(`<option value="${i}" ${current===String(i)?"selected":""}>Rank ${i}</option>`);
+        return `<article class="script">
+          <div><div class="script-name">${title}</div><div class="script-meta">${game} · ${category} · ID ${escapeHtml(id)}</div></div>
+          <div><span class="rank-label">Position</span><select class="rank-select ${current?"assigned":""}" data-id="${escapeHtml(id)}">${options.join("")}</select></div>
+        </article>`;
+      }).join("");
+    }
+
+    const ranked = [...ranks.entries()].sort((a,b)=>a[1]-b[1]);
+    $("rankList").innerHTML = ranked.length ? ranked.map(([id,rank]) => {
+      const s = scripts.find(x=>idOf(x)===id);
+      if (!s) return "";
+      return `<div class="rank-item"><div class="rank-num">${rank}</div><div class="rank-info"><strong>${escapeHtml(s.script_name || "Untitled script")}</strong><small>${escapeHtml(s.game || "Unknown game")} · ID ${escapeHtml(id)}</small></div><button class="remove" data-remove="${escapeHtml(id)}" title="Remove ranking" aria-label="Remove ranking">×</button></div>`;
+    }).join("") : `<div class="empty">No rankings selected yet.<br>Choose a position from the script list.</div>`;
+  }
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+  }
+  async function loadScripts() {
+    const data = await api("/scripts");
+    if (!Array.isArray(data)) throw new Error("The /scripts endpoint did not return a JSON array.");
+    scripts = data;
+    ranks = new Map();
+    for (const s of scripts) {
+      const r = rankOf(s);
+      if (r !== null && Number.isInteger(r) && r >= 1 && r <= 20) ranks.set(idOf(s), r);
+    }
+    $("dashboard").classList.remove("hidden");
+    render();
+    setStatus("Connected", "ok");
+    showMessage(`Loaded ${scripts.length} scripts from your database.`);
+  }
+
+  $("connectBtn").addEventListener("click", async () => {
+    apiBase = normalizeBase($("apiUrl").value);
+    adminKey = $("adminKey").value;
+    if (!/^https?:\/\//i.test(apiBase)) return showMessage("Enter your full Worker URL, including https://.", "error");
+    if (!adminKey) return showMessage("Enter your admin key.", "error");
+    $("connectBtn").disabled = true;
+    $("connectBtn").textContent = "Connecting…";
+    setStatus("Connecting…");
+    try {
+      // Verify the entered key using the existing Worker endpoint.
+      await api("/verify-key", { method:"POST", body:JSON.stringify({key:adminKey}) });
+      await loadScripts();
+    } catch (e) {
+      setStatus("Connection failed", "bad");
+      showMessage(e.message + (String(e.message).includes("Failed to fetch") ? " Check your Worker URL and CORS settings." : ""), "error");
+    } finally {
+      $("connectBtn").disabled = false;
+      $("connectBtn").textContent = "Connect & load";
+    }
+  });
+
+  $("scriptList").addEventListener("change", e => {
+    if (!e.target.matches(".rank-select")) return;
+    const id = e.target.dataset.id;
+    const value = e.target.value;
+    if (!value) {
+      ranks.delete(id);
+      render();
+      return;
+    }
+    const rank = Number(value);
+    const conflict = [...ranks.entries()].find(([otherId, otherRank]) => otherRank === rank && otherId !== id);
+    if (conflict) {
+      showMessage(`Rank ${rank} is already assigned. Remove or change that script's rank first.`, "error");
+      e.target.value = ranks.has(id) ? String(ranks.get(id)) : "";
+      return;
+    }
+    ranks.set(id, rank);
+    render();
+    showMessage(`Assigned ${e.target.closest(".script").querySelector(".script-name").textContent} to rank ${rank}.`);
+  });
+  $("rankList").addEventListener("click", e => {
+    const button = e.target.closest("[data-remove]");
+    if (!button) return;
+    ranks.delete(button.dataset.remove);
+    render();
+  });
+  $("search").addEventListener("input", render);
+
+  $("saveBtn").addEventListener("click", async () => {
+    const ids = [...ranks.entries()].sort((a,b)=>a[1]-b[1]).map(([id])=> {
+      const s = scripts.find(x=>idOf(x)===id);
+      return s ? s.id : null;
+    }).filter(v=>v!==null);
+    $("saveBtn").disabled = true;
+    $("saveBtn").textContent = "Saving…";
+    try {
+      const result = await api("/set-ranks", {
+        method:"POST",
+        body:JSON.stringify({key:adminKey, ids})
+      });
+      if (!result || result.success !== true) throw new Error(result?.error || "The Worker did not confirm the update.");
+      showMessage(`Saved ${ids.length} ranking${ids.length===1?"":"s"} successfully.`);
+      await loadScripts();
+    } catch (e) {
+      showMessage(e.message + (e.message.includes("404") ? " Add the /set-ranks endpoint to your Worker first." : ""), "error");
+    } finally {
+      $("saveBtn").disabled = false;
+      $("saveBtn").textContent = "Save rankings";
+    }
+  });
+
+  $("reloadBtn").addEventListener("click", async () => {
+    $("reloadBtn").disabled = true;
+    try { await loadScripts(); }
+    catch(e) { showMessage(e.message, "error"); setStatus("Load failed", "bad"); }
+    finally { $("reloadBtn").disabled = false; }
+  });
+  $("clearBtn").addEventListener("click", () => {
+    if (!confirm("Remove every ranking? This will leave all scripts unranked after you save.")) return;
+    ranks.clear();
+    render();
+    showMessage("All rankings cleared locally. Click Save rankings to publish this change.");
+  });
+})();
+</script>
+</body>
+</html>
